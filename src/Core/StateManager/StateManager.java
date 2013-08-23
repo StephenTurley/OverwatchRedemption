@@ -12,12 +12,45 @@ public class StateManager {
 	
 	public void draw()
 	{
-		states.peek().draw();
+		if(!states.empty())
+		{
+			states.peek().draw();
+		}
 	}
 	
 	public void update()
 	{
-		states.peek().update();
+		if(!states.empty())
+		{
+			states.peek().update();
+		}
+	}
+	
+	public void push(GameState state)
+	{
+		if(!states.empty())
+		{
+			states.peek().pause();
+		}
+		states.push(state);
+		state.enter();
+	}
+	
+	public void pop()
+	{
+		if(!states.empty())
+		{
+			states.peek().exit();
+			states.pop();
+		}
+		if(!states.empty())
+		{
+			states.peek().resume();
+		}
+		else
+		{
+			//ToDo: exit game
+		}
 	}
 	
 }

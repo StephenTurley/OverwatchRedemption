@@ -17,7 +17,7 @@ public class GameStart implements GameState {
 	}
 
 	@Override
-	public void load() {
+	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
@@ -33,9 +33,15 @@ public class GameStart implements GameState {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
-	public void dispose() {
+	public void enter()
+	{
+		
+	}
+	
+	@Override
+	public void exit() {
 		// TODO Auto-generated method stub
 
 	}
