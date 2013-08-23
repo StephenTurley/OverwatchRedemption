@@ -3,4 +3,5 @@ target      # maven output
 \.classpath # eclipse
 \.project   # eclipse
 \.settings  # eclipse
+\bin			# eclipse
 test-output # eclipse junit/testng plugin output
