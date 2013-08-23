@@ -2,11 +2,11 @@ package Core.StateManager;
 
 public interface GameState {
 	
-	public void update();
-	public void draw();
-	public void load();
-	public void pause();
-	public void save();
-	public void dispose();
+	public abstract void update();
+	public abstract void draw();
+	public abstract void load();
+	public abstract void pause();
+	public abstract void save();
+	public abstract void dispose();
 
 }
