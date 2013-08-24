@@ -1,4 +1,5 @@
 import Core.*;
+import GameStates.*;
 
 public class PixelFighter {
 	
@@ -7,7 +8,7 @@ public class PixelFighter {
 	public static void main(String[] args)
 	{
 		game = new Game();
-		game.getStateManager();
+		game.start(new GameStart());
 	}
 	
 }

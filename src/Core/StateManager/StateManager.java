@@ -1,5 +1,6 @@
 package Core.StateManager;
 import java.util.*;
+import java.awt.*;
 
 public class StateManager {
 	
@@ -10,11 +11,17 @@ public class StateManager {
 		states = new Stack<GameState>();
 	}
 	
-	public void draw()
+	public StateManager(GameState startingState)
+	{
+		states = new Stack<GameState>();
+		states.push(startingState);
+		states.peek().enter();
+	}
+	public void draw(Graphics2D g2)
 	{
 		if(!states.empty())
 		{
-			states.peek().draw();
+			states.peek().draw(g2);
 		}
 	}
 	
