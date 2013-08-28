@@ -26,7 +26,6 @@ public class Game {
 	}
 	public void start(GameState startingState)
 	{
-		sm = new StateManager(startingState);
 		
 		try{
 			Display.setDisplayMode(new DisplayMode(800,600));
@@ -38,6 +37,7 @@ public class Game {
 			System.exit(0);
 		}
 		
+		sm = new StateManager(startingState);
 		loop = new GameLoop(sm);
 		
 		loop.run();

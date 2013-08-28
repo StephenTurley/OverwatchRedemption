@@ -1,6 +1,8 @@
 package Core.StateManager;
 import java.util.*;
 
+import org.lwjgl.opengl.Display;
+
 public class StateManager {
 	
 	private Stack<GameState> states;
@@ -22,6 +24,7 @@ public class StateManager {
 		{
 			states.peek().draw();
 		}
+		Display.update();
 	}
 	
 	public void update()
