@@ -20,12 +20,8 @@ public class GameLoop implements Runnable {
 	public void run() {
 		while(!Display.isCloseRequested())
 		{
-			try {
-				Thread.sleep(16);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Display.sync(60);	//60fps
+			
 			sm.draw();
 			sm.update();
 		}
