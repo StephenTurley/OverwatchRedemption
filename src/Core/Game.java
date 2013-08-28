@@ -1,22 +1,22 @@
 package Core;
 import Core.StateManager.*;
-import java.awt.*;
-import javax.swing.*;
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 
 public class Game {
 	
-	final boolean DEBUG_MODE;
+	private final boolean DEBUG_MODE;
 	private static StateManager sm;
-	private JFrame gameWindow;
-	private Graphics2D g2;
 	private GameLoop loop;
+	
 	
 	public Game()
 	{
 		DEBUG_MODE = true;
 		Debug.Trace("Game is running!");
-		
 	}
 	
 	
@@ -27,18 +27,20 @@ public class Game {
 	public void start(GameState startingState)
 	{
 		sm = new StateManager(startingState);
-		gameWindow = new JFrame();
-		gameWindow.setTitle("PixelFighter");
-		gameWindow.setSize(1440,900);
-		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameWindow.setVisible(true);
 		
-		g2 = (Graphics2D)gameWindow.getGraphics();
+		try{
+			Display.setDisplayMode(new DisplayMode(800,600));
+			Display.create();
+		}
+		catch (LWJGLException e)
+		{
+			e.printStackTrace();
+			System.exit(0);
+		}
 		
-		loop = new GameLoop(sm, g2);
+		loop = new GameLoop(sm);
 		
-		Thread t = new Thread(loop);
-		t.start();
+		loop.run();
 		
 	}
 

@@ -1,18 +1,17 @@
 package Core;
 
 import Core.StateManager.StateManager;
-import java.awt.*;
+
 
 public class GameLoop implements Runnable {
 	
 	private StateManager sm;
-	private Graphics2D g2;
+
 	
-	public GameLoop(StateManager sm, Graphics2D g2)
+	public GameLoop(StateManager sm)
 	{
 		super();
 		this.sm = sm;
-		this.g2 = g2;
 	}
 
 	@Override
@@ -20,12 +19,12 @@ public class GameLoop implements Runnable {
 		while(true)
 		{
 			try {
-				Thread.sleep(250);
+				Thread.sleep(16);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			sm.draw(g2);
+			sm.draw();
 			sm.update();
 		}
 	}

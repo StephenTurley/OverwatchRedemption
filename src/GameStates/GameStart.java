@@ -1,6 +1,6 @@
 package GameStates;
-import java.awt.*;
 
+import org.lwjgl.opengl.Display;
 
 import Core.Debug;
 import Core.StateManager.GameState;
@@ -14,9 +14,8 @@ public class GameStart implements GameState {
 	}
 
 	@Override
-	public void draw(Graphics2D g2) {
-		g2.fillRect(100, 100, 300, 300);
-
+	public void draw() {
+		Display.update();
 	}
 
 	@Override
