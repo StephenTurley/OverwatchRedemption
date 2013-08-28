@@ -1,5 +1,7 @@
 package Core;
 
+import org.lwjgl.opengl.Display;
+
 import Core.StateManager.StateManager;
 
 
@@ -16,7 +18,7 @@ public class GameLoop implements Runnable {
 
 	@Override
 	public void run() {
-		while(true)
+		while(!Display.isCloseRequested())
 		{
 			try {
 				Thread.sleep(16);
