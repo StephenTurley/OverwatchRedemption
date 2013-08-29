@@ -1,7 +1,14 @@
 package Core.StateManager;
 
 
-public interface GameState {
+public abstract class GameState {
+	private StateManager sm;
+	
+	public GameState(StateManager sm)
+	{
+		this.sm = sm;
+	}
+	
 	public abstract void update();
 	public abstract void draw();
 	public abstract void resume();

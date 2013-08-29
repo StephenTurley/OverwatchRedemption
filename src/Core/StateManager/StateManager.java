@@ -58,7 +58,8 @@ public class StateManager {
 		}
 		else
 		{
-			//ToDo: exit game
+			Display.destroy();
+			System.exit(0);
 		}
 	}
 	

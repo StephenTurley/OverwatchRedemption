@@ -4,25 +4,31 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
 
 import Core.Debug;
 import Core.StateManager.GameState;
+import Core.StateManager.StateManager;
 
-public class GameStart implements GameState {
+public class GameStart extends GameState {
 	
+	private StateManager sm;
 	private float xDelta = 0;
 	private float yDelta = 0;
 	private final float VELOCITY = 5;
 	private HashMap<String, Boolean> flags = new HashMap<String, Boolean>();
+	
+	public GameStart(StateManager sm)
+	{
+		super(sm);
+	}
 
-	@Override
+
 	public void update() {
 		handleInput();
 		moveQuad();
 	}
 
-	@Override
+
 	public void draw() {
 		// Clear the screen and depth buffer
 	
@@ -43,25 +49,24 @@ public class GameStart implements GameState {
 		glEnd();
 	}
 
-	@Override
+
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void pause() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void save() {
 		// TODO Auto-generated method stub
 
 	}
 	
-	@Override
 	public void enter()
 	{
 		flags.put("up", false);
@@ -79,7 +84,6 @@ public class GameStart implements GameState {
 		
 	}
 	
-	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
 
@@ -112,8 +116,7 @@ public class GameStart implements GameState {
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
 				{
-					Display.destroy();
-					System.exit(0);
+					sm.pop();
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
