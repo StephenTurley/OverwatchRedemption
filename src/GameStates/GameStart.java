@@ -11,9 +11,9 @@ import Core.StateManager.StateManager;
 
 public class GameStart extends GameState {
 	
-	private float xDelta = 0;
-	private float yDelta = 0;
-	private final float VELOCITY = 5;
+	private float xVector = 0;
+	private float yVector = 0;
+	private final float VELOCITY = 1;
 	private HashMap<String, Boolean> flags = new HashMap<String, Boolean>();
 	
 	public GameStart(StateManager sm)
@@ -22,9 +22,10 @@ public class GameStart extends GameState {
 	}
 
 
-	public void update() {
+	public void update(int delta) {
+		
 		handleInput();
-		moveQuad();
+		moveQuad(delta);
 	}
 
 
@@ -41,10 +42,10 @@ public class GameStart extends GameState {
 
 		// draw quad
 		glBegin(GL_QUADS);
-			glVertex2f(100 + xDelta,100 + yDelta);
-			glVertex2f(300 + xDelta,100 + yDelta);
-			glVertex2f(300 + xDelta,300 + yDelta);
-			glVertex2f(100 + xDelta,300 + yDelta);
+			glVertex2f(100 + xVector,100 + yVector);
+			glVertex2f(300 + xVector,100 + yVector);
+			glVertex2f(300 + xVector,300 + yVector);
+			glVertex2f(100 + xVector,300 + yVector);
 		glEnd();
 	}
 
@@ -88,23 +89,23 @@ public class GameStart extends GameState {
 
 	}
 	
-	private void moveQuad()
+	private void moveQuad(int delta)
 	{
 		if (flags.get("up"))
 		{
-			yDelta += VELOCITY;
+			yVector += VELOCITY * delta;
 		}
 		if (flags.get("down"))
 		{
-			yDelta -= VELOCITY;
+			yVector -= VELOCITY * delta;
 		}
 		if (flags.get("left"))
 		{
-			xDelta -= VELOCITY;
+			xVector -= VELOCITY * delta;
 		}
 		if (flags.get("right"))
 		{
-			xDelta += VELOCITY;
+			xVector += VELOCITY * delta;
 		}
 	}
 	

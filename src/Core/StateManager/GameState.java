@@ -9,7 +9,7 @@ public abstract class GameState {
 		this.sm = sm;
 	}
 	
-	public abstract void update();
+	public abstract void update(int delta);
 	public abstract void draw();
 	public abstract void resume();
 	public abstract void pause();

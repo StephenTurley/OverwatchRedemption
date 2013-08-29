@@ -27,11 +27,11 @@ public class StateManager {
 		Display.update();
 	}
 	
-	public void update()
+	public void update(int delta)
 	{
 		if(!states.empty())
 		{
-			states.peek().update();
+			states.peek().update(delta);
 		}
 	}
 	
