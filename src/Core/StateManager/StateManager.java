@@ -47,10 +47,14 @@ public class StateManager {
 	
 	public void pop()
 	{
+		if(!states.empty() && states.size() == 1)
+		{
+			Display.destroy();
+			System.exit(0);
+		}
 		if(!states.empty())
 		{
-			states.peek().exit();
-			states.pop();
+			
 		}
 		if(!states.empty())
 		{

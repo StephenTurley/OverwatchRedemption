@@ -2,7 +2,7 @@ package Core.StateManager;
 
 
 public abstract class GameState {
-	private StateManager sm;
+	protected StateManager sm;
 	
 	public GameState(StateManager sm)
 	{

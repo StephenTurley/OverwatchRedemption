@@ -11,7 +11,6 @@ import Core.StateManager.StateManager;
 
 public class GameStart extends GameState {
 	
-	private StateManager sm;
 	private float xDelta = 0;
 	private float yDelta = 0;
 	private final float VELOCITY = 5;
@@ -116,7 +115,7 @@ public class GameStart extends GameState {
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
 				{
-					sm.pop();
+					super.sm.pop();
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{

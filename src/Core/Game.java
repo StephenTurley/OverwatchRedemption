@@ -16,7 +16,7 @@ public class Game {
 	public Game(GameConfig config)
 	{
 		this.config = config;
-		
+		sm = new StateManager();
 		if(this.config.isDebugLogging())
 		{
 			Debug.Trace("Game initialized!");
@@ -63,7 +63,7 @@ public class Game {
 			System.exit(0);
 		}
 		
-		sm = new StateManager(startingState);
+		sm.push(startingState);
 		loop = new GameLoop(sm);
 		
 		loop.run();
