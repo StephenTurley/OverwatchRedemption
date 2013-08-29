@@ -25,6 +25,7 @@ public class GameLoop implements Runnable {
 			sm.draw();
 			sm.update();
 		}
+		Display.destroy();
 	}
 	
 	

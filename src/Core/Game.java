@@ -8,15 +8,19 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class Game {
 	
-	private final boolean DEBUG_MODE;
+	private GameConfig config;
 	private static StateManager sm;
 	private GameLoop loop;
 	
 	
-	public Game()
+	public Game(GameConfig config)
 	{
-		DEBUG_MODE = true;
-		Debug.Trace("Game is running!");
+		this.config = config;
+		
+		if(this.config.isDebugLogging())
+		{
+			Debug.Trace("Game initialized!");
+		}
 	}
 	
 	
@@ -28,7 +32,29 @@ public class Game {
 	{
 		
 		try{
-			Display.setDisplayMode(new DisplayMode(800,600));
+			
+			if (config.isFullScreen())
+			{
+				DisplayMode displayMode = null;
+		        DisplayMode[] modes = Display.getAvailableDisplayModes();
+
+		         for (int i = 0; i < modes.length; i++)
+		         {
+		             if (modes[i].getWidth() == config.getDisplayWidth()
+		             && modes[i].getHeight() == config.getDisplayHeight()
+		             && modes[i].isFullscreenCapable())
+		               {
+		                    displayMode = modes[i];
+		               }
+		         }
+		         Display.setDisplayMode(displayMode);
+		         Display.setFullscreen(true);
+			}
+			else{
+				Display.setDisplayMode(new DisplayMode(config.getDisplayWidth(),config.getDisplayHeight()));
+			}
+			
+			Display.setTitle(config.getDisplayName());
 			Display.create();
 		}
 		catch (LWJGLException e)
