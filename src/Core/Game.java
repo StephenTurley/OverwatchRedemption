@@ -8,16 +8,17 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class Game {
 	
-	private GameConfig config;
+	private static GameConfig config;
 	private static StateManager sm;
 	private GameLoop loop;
+
 	
 	
 	public Game(GameConfig config)
 	{
-		this.config = config;
+		Game.config = config;
 		sm = new StateManager();
-		if(this.config.isDebugLogging())
+		if(Game.config.isDebugLogging())
 		{
 			Debug.Trace("Game initialized!");
 		}
@@ -28,7 +29,11 @@ public class Game {
 	{
 		return sm;
 	}
-	public void start(GameState startingState)
+	public static GameConfig getGameConfig()
+	{
+		return config;
+	}
+ 	public void start(GameState startingState)
 	{
 		
 		try{

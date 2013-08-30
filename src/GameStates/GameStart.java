@@ -4,8 +4,11 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 
+import net.java.games.input.*;
 import Core.Debug;
+import Core.Game;
 import Core.StateManager.GameState;
 import Core.StateManager.StateManager;
 
@@ -13,8 +16,10 @@ public class GameStart extends GameState {
 	
 	private float xVector = 0;
 	private float yVector = 0;
+	private float deadZone = 0.05f;
 	private final float VELOCITY = 1;
 	private HashMap<String, Boolean> flags = new HashMap<String, Boolean>();
+	private Controller gamepad;
 	
 	public GameStart(StateManager sm)
 	{
@@ -24,7 +29,7 @@ public class GameStart extends GameState {
 
 	public void update(int delta) {
 		
-		handleInput();
+		handleInput(delta);
 		moveQuad(delta);
 	}
 
@@ -74,6 +79,17 @@ public class GameStart extends GameState {
 		flags.put("left", false);
 		flags.put("right", false);
 		
+		for (Controller c : ControllerEnvironment.getDefaultEnvironment().getControllers())
+		{
+			if(c.getType() == Controller.Type.GAMEPAD)
+			{
+				gamepad = c;
+				if(Game.getGameConfig().isDebugLogging())
+				{
+					Debug.Trace("Gamepad Detected: " + gamepad.getName());
+				}
+			}
+		}
 		
 		Debug.Trace("Start State has been entered!");
 		
@@ -109,7 +125,40 @@ public class GameStart extends GameState {
 		}
 	}
 	
-	private void handleInput(){
+	private void handleInput(int delta){
+		
+		if(gamepad != null)
+		{
+			gamepad.poll();
+			float x = 0;
+			float y = 0;
+			for(Component c : gamepad.getComponents())
+			{
+				//System.out.println(c.getName()+" : "+ c.getPollData());
+				if(c.getName().equals("x"))
+				{	
+					x = c.getPollData();
+				}
+				if(c.getName().equals("y"))
+				{
+					y=c.getPollData();
+				}
+				if(c.getName().equals("Select")||c.getName().equals("Unknown"))
+				{
+					if(c.getPollData() == 1.0)
+					{
+						super.sm.pop();
+					}
+				}
+			}
+			Vector2f leftStickInput = new Vector2f(x,y);
+			if(leftStickInput.lengthSquared() > deadZone)
+			{
+				xVector += VELOCITY * delta * leftStickInput.x;
+				yVector += VELOCITY * delta * leftStickInput.y * -1;
+			}
+		}
+		
 		while(Keyboard.next())
 		{
 			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())

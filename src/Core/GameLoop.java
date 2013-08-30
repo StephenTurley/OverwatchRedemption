@@ -40,7 +40,7 @@ public class GameLoop implements Runnable {
 			sm.update(delta);
 			
 			updateFPS();
-			Display.sync(30);	//60fps
+			Display.sync(120);	//60fps
 		}
 		Display.destroy();
 	}
