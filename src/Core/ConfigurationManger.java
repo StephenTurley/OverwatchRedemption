@@ -23,36 +23,52 @@ public class ConfigurationManger {
 			String line = null;
 			while((line = br.readLine()) != null)
 			{
-				String key = line.split("\\|")[0];
-				String value = line.split("\\|")[1];
+				String[] keyValue = line.split("\\|");
 				
-				switch (key)
+				if(keyValue.length == 2)
 				{
-					case "displayWidth" :
-						config.setDisplayWidth(Integer.parseInt(value));
-						break;
-					case "displayHeight" :
-						config.setDisplayHeight(Integer.parseInt(value));
-						break;
-					case "displayName" :
-						config.setDisplayName(value);
-						break;
-					case "fullScreen" :
-						config.setFullScreen(Boolean.parseBoolean(value));
-						break;
-					case "debugLogging" :
-						config.setDebugLogging(Boolean.parseBoolean(value));
-						break;
-					case "joyStickDeadZone":
-						config.setJoyStickDeadZone(Float.parseFloat(value));
-						break;
-					default: Debug.Trace("Invalid Config parameter: " + key);
+					
+					String key = keyValue[0];
+					String value = keyValue[1];
+					
+					switch (key)
+					{
+						case "displayWidth" :
+							config.setDisplayWidth(Integer.parseInt(value));
+							break;
+						case "displayHeight" :
+							config.setDisplayHeight(Integer.parseInt(value));
+							break;
+						case "displayName" :
+							config.setDisplayName(value);
+							break;
+						case "fullScreen" :
+							config.setFullScreen(Boolean.parseBoolean(value));
+							break;
+						case "debugLogging" :
+							config.setDebugLogging(Boolean.parseBoolean(value));
+							break;
+						case "joyStickDeadZone":
+							config.setJoyStickDeadZone(Float.parseFloat(value));
+							break;
+						default: Debug.Trace("Invalid Config parameter: " + key);
+					}
 				}
 			}
 			br.close();
 		}catch(IOException e)
 		{
 			e.printStackTrace();
+			System.exit(1);
+		}catch(NumberFormatException e)
+		{
+			e.printStackTrace();
+			Debug.Trace("Invalid GameConfig.cfg");
+			System.exit(1);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			Debug.Trace("Something bad went wrong parsing the GameConfig.cfg. Did you delete a line?");
 			System.exit(1);
 		}
 		
