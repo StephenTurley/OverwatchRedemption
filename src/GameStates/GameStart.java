@@ -16,7 +16,7 @@ public class GameStart extends GameState {
 	
 	private float xVector = 0;
 	private float yVector = 0;
-	private float deadZone = 0.05f;
+	private float deadZone;
 	private final float VELOCITY = 1;
 	private HashMap<String, Boolean> flags = new HashMap<String, Boolean>();
 	private Controller gamepad;
@@ -74,6 +74,8 @@ public class GameStart extends GameState {
 	
 	public void enter()
 	{
+		deadZone = Game.getGameConfig().getJoyStickDeadZone();
+		
 		flags.put("up", false);
 		flags.put("down", false);
 		flags.put("left", false);

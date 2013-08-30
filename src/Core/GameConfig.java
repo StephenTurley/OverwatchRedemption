@@ -32,6 +32,16 @@ public class GameConfig {
 	 */
 	private boolean debugLogging;
 	
+	private float joyStickDeadZone;
+	
+	public float getJoyStickDeadZone() {
+		return joyStickDeadZone;
+	}
+
+	public void setJoyStickDeadZone(float joyStickDeadZone) {
+		this.joyStickDeadZone = joyStickDeadZone;
+	}
+
 	public GameConfig()
 	{
 	}

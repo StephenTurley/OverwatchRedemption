@@ -43,6 +43,9 @@ public class ConfigurationManger {
 					case "debugLogging" :
 						config.setDebugLogging(Boolean.parseBoolean(value));
 						break;
+					case "joyStickDeadZone":
+						config.setJoyStickDeadZone(Float.parseFloat(value));
+						break;
 					default: Debug.Trace("Invalid Config parameter: " + key);
 				}
 			}
