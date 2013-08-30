@@ -1,4 +1,5 @@
 import Core.*;
+import Core.ConfigurationManager.ConfigurationManger;
 import GameStates.*;
 
 public class PixelFighter {

@@ -1,4 +1,5 @@
 package Core;
+import Core.ConfigurationManager.GameConfig;
 import Core.StateManager.*;
 
 import org.lwjgl.LWJGLException;
