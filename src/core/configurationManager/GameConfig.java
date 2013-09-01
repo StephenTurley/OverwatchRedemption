@@ -1,4 +1,4 @@
-package Core.ConfigurationManager;
+package core.configurationManager;
 
 /**
  * @author Stephen Turley

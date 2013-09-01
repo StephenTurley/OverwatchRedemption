@@ -1,4 +1,4 @@
-package Core.StateManager;
+package core.stateManager;
 import java.util.*;
 
 import org.lwjgl.opengl.Display;

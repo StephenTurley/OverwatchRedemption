@@ -1,6 +1,6 @@
-import Core.*;
-import Core.ConfigurationManager.ConfigurationManger;
-import GameStates.*;
+import gameStates.*;
+import core.*;
+import core.configurationManager.ConfigurationManger;
 
 public class PixelFighter {
 	

@@ -1,10 +1,11 @@
-package Core;
-import Core.ConfigurationManager.GameConfig;
-import Core.StateManager.*;
+package core;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+
+import core.configurationManager.GameConfig;
+import core.stateManager.*;
 
 
 public class Game {

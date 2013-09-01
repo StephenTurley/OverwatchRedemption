@@ -1,10 +1,11 @@
-package Core.ConfigurationManager;
+package core.configurationManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import Core.Debug;
+import core.Debug;
+
 
 public class ConfigurationManger {
 	

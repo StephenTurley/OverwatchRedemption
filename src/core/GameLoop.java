@@ -1,9 +1,10 @@
-package Core;
+package core;
 
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
-import Core.StateManager.StateManager;
+import core.stateManager.StateManager;
+
 
 
 public class GameLoop implements Runnable {

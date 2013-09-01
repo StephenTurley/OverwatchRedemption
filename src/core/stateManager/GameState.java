@@ -1,4 +1,4 @@
-package Core.StateManager;
+package core.stateManager;
 
 
 public abstract class GameState {

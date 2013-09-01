@@ -1,4 +1,4 @@
-package GameStates;
+package gameStates;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -6,11 +6,12 @@ import java.util.HashMap;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 
+import core.Debug;
+import core.Game;
+import core.stateManager.GameState;
+import core.stateManager.StateManager;
+
 import net.java.games.input.*;
-import Core.Debug;
-import Core.Game;
-import Core.StateManager.GameState;
-import Core.StateManager.StateManager;
 
 public class GameStart extends GameState {
 	
