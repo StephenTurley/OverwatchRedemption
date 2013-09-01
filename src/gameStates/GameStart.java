@@ -16,7 +16,13 @@ import java.awt.Font;
 
 public class GameStart extends GameState {
 	
-	private TrueTypeFont font;
+	private TrueTypeFont titleFont;
+	private String titleText = "OverWatch: Redemption";
+	private TrueTypeFont pressStartFont;
+	private String pressStartText = "Press start or enter to continue";
+	
+	private boolean showStartText = true;
+	private int timeStartTextShown = 0;
 	
 	public GameStart(StateManager sm)
 	{
@@ -25,14 +31,37 @@ public class GameStart extends GameState {
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
+		
+		
+		timeStartTextShown += delta;
+		
+		if(timeStartTextShown >= 250)
+		{
+			timeStartTextShown = 0;
+			if(showStartText)
+			{
+				showStartText = false;
+			}
+			else
+				showStartText = true;
+		}
 		
 	}
 
 	@Override
 	public void draw() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-		font.drawString(100, 100, "This is test test",Color.blue);
+		
+		titleFont.drawString((Game.getGameConfig().getDisplayWidth()/2)-(titleFont.getWidth(titleText)/2),
+				(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight()/2) ,
+				titleText,Color.orange);
+		
+		if(showStartText)
+		{
+			pressStartFont.drawString((Game.getGameConfig().getDisplayWidth()/2)-(pressStartFont.getWidth(pressStartText)/2),
+					(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight() - 100),
+					pressStartText, Color.orange);
+		}
 	}
 
 	@Override
@@ -55,6 +84,7 @@ public class GameStart extends GameState {
 
 	@Override
 	public void enter() {
+		System.out.println(Display.getHeight()/2);
 		if(Game.getGameConfig().isDebugLogging()){
 			Debug.Trace("Start State has been entered!");
 		}
@@ -71,13 +101,13 @@ public class GameStart extends GameState {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		 
-		glViewport(0,0,800,600);
+		glViewport(0,0,Game.getGameConfig().getDisplayWidth(),Game.getGameConfig().getDisplayHeight());
 		glMatrixMode(GL_MODELVIEW);
 
 		 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0,800,600, 0, 1, -1);
+		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		
 		try{
@@ -85,7 +115,9 @@ public class GameStart extends GameState {
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
 			unispace = unispace.deriveFont(48f);
-			font = new TrueTypeFont(unispace, true);
+			titleFont = new TrueTypeFont(unispace, true);
+			unispace = unispace.deriveFont(24f);
+			pressStartFont = new TrueTypeFont(unispace, true);
 		}catch(Exception e)
 		{
 			Debug.Trace(e.getMessage());
