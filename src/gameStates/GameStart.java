@@ -6,6 +6,7 @@ import core.Debug;
 import core.Game;
 import core.stateManager.*;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -32,6 +33,7 @@ public class GameStart extends GameState {
 	@Override
 	public void update(int delta) {
 		
+		handleInput();
 		
 		timeStartTextShown += delta;
 		
@@ -66,13 +68,13 @@ public class GameStart extends GameState {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		init();
 		
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		glDisable(GL_BLEND);
 		
 	}
 
@@ -88,6 +90,33 @@ public class GameStart extends GameState {
 		if(Game.getGameConfig().isDebugLogging()){
 			Debug.Trace("Start State has been entered!");
 		}
+		
+		init();
+		
+		try{
+			InputStream is = ResourceLoader.getResourceAsStream("res/fonts/unispace rg.ttf");
+			
+			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
+			unispace = unispace.deriveFont(48f);
+			titleFont = new TrueTypeFont(unispace, true);
+			unispace = unispace.deriveFont(24f);
+			pressStartFont = new TrueTypeFont(unispace, true);
+		}catch(Exception e)
+		{
+			Debug.Trace(e.getMessage());
+			Display.destroy();
+			System.exit(1);
+		}
+		
+	}
+
+	@Override
+	public void exit() {
+		glDisable(GL_BLEND);
+		
+	}
+	private void init()
+	{
 		glEnable(GL_TEXTURE_2D);
 		glShadeModel(GL_SMOOTH);       
 		glDisable(GL_DEPTH_TEST);
@@ -109,30 +138,24 @@ public class GameStart extends GameState {
 		glLoadIdentity();
 		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
-		
-		try{
-			InputStream is = ResourceLoader.getResourceAsStream("res/fonts/unispace rg.ttf");
-			
-			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
-			unispace = unispace.deriveFont(48f);
-			titleFont = new TrueTypeFont(unispace, true);
-			unispace = unispace.deriveFont(24f);
-			pressStartFont = new TrueTypeFont(unispace, true);
-		}catch(Exception e)
+	}
+	private void handleInput()
+	{
+		while(Keyboard.next())
 		{
-			Debug.Trace(e.getMessage());
-			Display.destroy();
-			System.exit(1);
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
+				{
+					super.sm.push(new MovementTest(super.sm));
+				}
+			}
 		}
-		
 	}
-
-	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 
 }

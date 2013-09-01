@@ -1,4 +1,5 @@
 package core.stateManager;
+
 import java.util.*;
 
 import org.lwjgl.opengl.Display;
@@ -54,7 +55,8 @@ public class StateManager {
 		}
 		if(!states.empty())
 		{
-			
+			states.peek().exit();
+			states.pop();
 		}
 		if(!states.empty())
 		{
