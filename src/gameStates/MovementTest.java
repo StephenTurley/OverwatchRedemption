@@ -80,19 +80,7 @@ public class MovementTest extends GameState {
 		flags.put("left", false);
 		flags.put("right", false);
 		
-		for (Controller c : ControllerEnvironment.getDefaultEnvironment().getControllers())
-		{
-			if(c.getType() == Controller.Type.GAMEPAD)
-			{
-				gamepad = c;
-				if(Game.getGameConfig().isDebugLogging())
-				{
-					Debug.Trace("Gamepad Detected: " + gamepad.getName());
-				}
-			}
-		}
-		
-		
+		gamepad = Game.getGamePad();
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -142,7 +130,7 @@ public class MovementTest extends GameState {
 				}
 				if(c.getName().equals("y"))
 				{
-					y=c.getPollData();
+					y = c.getPollData();
 				}
 				if(c.getName().equals("Select")||c.getName().equals("Unknown"))
 				{

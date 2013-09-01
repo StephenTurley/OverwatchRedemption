@@ -1,5 +1,8 @@
 package core;
 
+import net.java.games.input.Controller;
+import net.java.games.input.ControllerEnvironment;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -13,6 +16,7 @@ public class Game {
 	private static GameConfig config;
 	private static StateManager sm;
 	private GameLoop loop;
+	private static Controller gamepad;
 
 	
 	
@@ -37,6 +41,7 @@ public class Game {
 	}
  	public void start(GameState startingState)
 	{
+ 		loadGamepads();
 		
 		try{
 			
@@ -76,5 +81,24 @@ public class Game {
 		loop.run();
 		
 	}
-
+ 	
+ 	public static Controller getGamePad(){
+ 		return gamepad;
+ 	}
+ 	private void loadGamepads()
+ 	{
+ 		for (Controller c : ControllerEnvironment.getDefaultEnvironment().getControllers())
+		{
+			if(c.getType() == Controller.Type.GAMEPAD)
+			{
+				gamepad = c;
+				if(Game.getGameConfig().isDebugLogging())
+				{
+					Debug.Trace("Gamepad Detected: " + gamepad.getName());
+				}
+			}
+		}
+ 	}
+ 	
+ 
 }
