@@ -1,5 +1,5 @@
 package core.network;
 
-public class Client {
+public class GameClient {
 
 }
