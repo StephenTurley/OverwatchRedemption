@@ -92,7 +92,7 @@ public class MovementTest extends GameState {
 			}
 		}
 		
-		Debug.Trace("Start State has been entered!");
+		
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
