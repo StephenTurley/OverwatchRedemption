@@ -84,7 +84,7 @@ public class MovementTest extends GameState {
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, 800, 0, 600, 1, -1);
+		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		
 	}
@@ -98,11 +98,11 @@ public class MovementTest extends GameState {
 	{
 		if (flags.get("up"))
 		{
-			yVector += VELOCITY * delta;
+			yVector -= VELOCITY * delta;
 		}
 		if (flags.get("down"))
 		{
-			yVector -= VELOCITY * delta;
+			yVector += VELOCITY * delta;
 		}
 		if (flags.get("left"))
 		{
@@ -144,7 +144,7 @@ public class MovementTest extends GameState {
 			if(leftStickInput.lengthSquared() > deadZone)
 			{
 				xVector += VELOCITY * delta * leftStickInput.x;
-				yVector += VELOCITY * delta * leftStickInput.y * -1;
+				yVector += VELOCITY * delta * leftStickInput.y;
 			}
 		}
 		

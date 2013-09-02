@@ -75,7 +75,7 @@ public class GameStart extends GameState {
 	@Override
 	public void pause() {
 		glDisable(GL_BLEND);
-		
+		glDisable(GL_TEXTURE_2D);
 	}
 
 	@Override
@@ -86,7 +86,6 @@ public class GameStart extends GameState {
 
 	@Override
 	public void enter() {
-		System.out.println(Display.getHeight()/2);
 		if(Game.getGameConfig().isDebugLogging()){
 			Debug.Trace("Start State has been entered!");
 		}
@@ -113,7 +112,7 @@ public class GameStart extends GameState {
 	@Override
 	public void exit() {
 		glDisable(GL_BLEND);
-		
+		glDisable(GL_TEXTURE_2D);
 	}
 	private void init()
 	{
