@@ -10,6 +10,7 @@ public class PixelFighter {
 	{
 		game = new Game(ConfigurationManger.loadConfiguration());
 		game.start(new GameStart(game.getStateManager()));
+		
 	}
 	
 }
