@@ -2,7 +2,7 @@ import gameStates.*;
 import core.*;
 import core.configurationManager.ConfigurationManger;
 
-public class PixelFighter {
+public class Overwatch {
 	
 	private static Game game;
 	
