@@ -150,7 +150,7 @@ public class GameStart extends GameState {
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
 				{
-					super.sm.push(new MovementTest(super.sm));
+					super.sm.push(new startJoin(super.sm));
 				}
 			}
 		}
