@@ -1,5 +1,7 @@
 package gui;
 
+import core.Debug;
+import core.Game;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
@@ -22,12 +24,15 @@ public class StartJoinInterface extends Widget {
 			 renderer = new LWJGLRenderer();
 			 gui = new GUI(this, renderer);
 			 theme = ThemeManager.createThemeManager(
-					 StartJoinInterface.class.getResource("src/gui/StartJoinInterface.xml"), renderer);
+					 StartJoinInterface.class.getResource("StartJoinInterface.xml"), renderer);
 			 gui.applyTheme(theme);
 				
 		}catch(Exception e)
 		{
-			
+			if(Game.getGameConfig().isDebugLogging())
+			{
+				Debug.Trace(e.getMessage());
+			}
 		}
 		
 		
