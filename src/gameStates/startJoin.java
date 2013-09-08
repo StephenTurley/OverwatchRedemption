@@ -27,7 +27,6 @@ public class startJoin extends GameState {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		uiWidget.update();
 		Display.update();
-
 	}
 
 	@Override
