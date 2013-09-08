@@ -20,7 +20,7 @@
             <param name="font"><font>unispace</font></param>
         </theme>
     </theme>
-	<theme name="startjoininterface">
+	<theme name="mainmenuui">
 		<param name="background"><image>none</image></param>
         <param name="overlay"><image>none</image></param>
         <param name="font"><font>unispace</font></param>

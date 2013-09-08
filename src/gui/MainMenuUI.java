@@ -8,7 +8,7 @@ import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 import de.matthiasmann.twl.Label;
 
-public class StartJoinInterface extends Widget {
+public class MainMenuUI extends Widget {
 	
 	private Label hostGamelbl;
 	private Label joinGamelbl;
@@ -16,7 +16,7 @@ public class StartJoinInterface extends Widget {
 	private GUI gui;
 	private ThemeManager theme;
 	
-	public StartJoinInterface() 
+	public MainMenuUI() 
 	{
 		
 		try
@@ -24,7 +24,7 @@ public class StartJoinInterface extends Widget {
 			 renderer = new LWJGLRenderer();
 			 gui = new GUI(this, renderer);
 			 theme = ThemeManager.createThemeManager(
-					 StartJoinInterface.class.getResource("StartJoinInterface.xml"), renderer);
+					 MainMenuUI.class.getResource("MainMenuUI.xml"), renderer);
 			 gui.applyTheme(theme);
 				
 		}catch(Exception e)
