@@ -1,7 +1,9 @@
 package core.stateManager;
 
+import core.DrawableComponent;
 
-public abstract class GameState {
+
+public abstract class GameState implements DrawableComponent{
 	protected StateManager sm;
 	
 	public GameState(StateManager sm)

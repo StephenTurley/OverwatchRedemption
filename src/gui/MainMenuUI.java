@@ -46,8 +46,11 @@ public class MainMenuUI extends Widget {
 		add(hostGamelbl);
 		add(joinGamelbl);
 		
-		hostGamelbl.adjustSize();
+		
 		joinGamelbl.adjustSize();
+		
+		hostGamelbl.setSize(200, 200);
+		hostGamelbl.adjustSize();
 		
 		hostGamelbl.setPosition(100, 100);
 		joinGamelbl.setPosition(300, 100);

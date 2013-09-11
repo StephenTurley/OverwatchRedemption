@@ -4,7 +4,9 @@ import java.util.*;
 
 import org.lwjgl.opengl.Display;
 
-public class StateManager {
+import core.DrawableComponent;
+
+public class StateManager implements DrawableComponent {
 	
 	private Stack<GameState> states;
 	
