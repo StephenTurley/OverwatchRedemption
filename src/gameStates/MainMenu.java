@@ -1,43 +1,47 @@
 package gameStates;
 
+import static org.lwjgl.opengl.GL11.*;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import core.Debug;
+import core.Game;
+import core.MenuItem;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
-import gui.*;
 
 public class MainMenu extends GameState {
 	
-	private MainMenuUI uiWidget;
+	private MenuItem hostGame;
 
 	public MainMenu(StateManager sm) {
 		super(sm);
-		uiWidget = new MainMenuUI();
+		hostGame = new MenuItem("Host Game", 100, 100);
 	}
 
 	@Override
 	public void update(int delta) {
-		
-
+		hostGame.update(delta);
 	}
 
 	@Override
 	public void draw() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		uiWidget.update();
+		hostGame.draw();
 		Display.update();
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		init();
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		glDisable(GL_BLEND);
+		glDisable(GL_TEXTURE_2D);
 
 	}
 
@@ -49,14 +53,43 @@ public class MainMenu extends GameState {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
+		if(Game.getGameConfig().isDebugLogging()){
+			Debug.Trace("Start State has been entered!");
+		}
+		
+		init();
 
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
+		glDisable(GL_BLEND);
+		glDisable(GL_TEXTURE_2D);
 
+	}
+	private void init()
+	{
+		glEnable(GL_TEXTURE_2D);
+		glShadeModel(GL_SMOOTH);       
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_LIGHTING);                   
+
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);               
+		glClearDepth(1);                                      
+
+		 
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		 
+		glViewport(0,0,Game.getGameConfig().getDisplayWidth(),Game.getGameConfig().getDisplayHeight());
+		glMatrixMode(GL_MODELVIEW);
+
+		 
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
 	}
 
 }
