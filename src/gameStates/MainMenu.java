@@ -2,8 +2,6 @@ package gameStates;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import java.util.HashMap;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
