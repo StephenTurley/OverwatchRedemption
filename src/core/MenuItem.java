@@ -3,7 +3,6 @@ package core;
 import java.io.InputStream;
 
 import org.lwjgl.opengl.Display;
-import static org.lwjgl.opengl.GL11.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.util.ResourceLoader;
@@ -33,6 +32,29 @@ public class MenuItem implements DrawableComponent {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+	
+	public MenuItem(String text)
+	{
+		this.text =text;
+		this.locX = -1000;
+		this.locY = -1000;
+		loadFonts();
+	}
+	public int getLocX() {
+		return locX;
+	}
+
+	public void setLocX(int locX) {
+		this.locX = locX;
+	}
+
+	public int getLocY() {
+		return locY;
+	}
+
+	public void setLocY(int locY) {
+		this.locY = locY;
 	}
 
 	public MenuItem(String text, int locX, int locY) {

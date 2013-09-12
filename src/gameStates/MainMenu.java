@@ -2,38 +2,52 @@ package gameStates;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.HashMap;
+
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 import core.Debug;
 import core.Game;
+import core.Menu;
 import core.MenuItem;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
 public class MainMenu extends GameState {
 	
-	private MenuItem hostGame;
+	private Menu mainMenu;
+	
+	
 
 	public MainMenu(StateManager sm) {
 		super(sm);
-		hostGame = new MenuItem("Host Game", 100, 100);
+		mainMenu = new Menu(100,100,100);
+		
+		mainMenu.addItem("Host", new MenuItem("Host Game"));
+		mainMenu.addItem("Join", new MenuItem("Join Game"));
+		mainMenu.addItem("Options", new MenuItem("Options"));
+		mainMenu.addItem("Quit", new MenuItem("Quit to Desktop"));
+		
 	}
 
 	@Override
 	public void update(int delta) {
-		hostGame.update(delta);
+		mainMenu.update(delta);
+		handleInput();
 	}
 
 	@Override
 	public void draw() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		hostGame.draw();
+		mainMenu.draw();
 		Display.update();
 	}
 
 	@Override
 	public void resume() {
+		Keyboard.enableRepeatEvents(true);
 		init();
 
 	}
@@ -56,7 +70,7 @@ public class MainMenu extends GameState {
 		if(Game.getGameConfig().isDebugLogging()){
 			Debug.Trace("Start State has been entered!");
 		}
-		
+		Keyboard.enableRepeatEvents(true);
 		init();
 
 	}
@@ -90,6 +104,31 @@ public class MainMenu extends GameState {
 		glLoadIdentity();
 		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
+	}
+	private void handleInput()
+	{
+		while(Keyboard.next())
+		{
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
+				{
+					
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_DOWN)
+				{
+					mainMenu.selectPrevious();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_UP)
+				{
+					mainMenu.selectNext();
+				}
+			}
+		}
 	}
 
 }
