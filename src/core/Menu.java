@@ -2,22 +2,24 @@ package core;
 
 
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 
 public class Menu implements DrawableComponent {
 
-	private TreeMap<String,MenuItem> menu;
 	private LinkedList<MenuItem> selectedQueue;
+	
+	private float fontSize, SelectedFontSize;
 
 	private int verticalGap,x,y;
 	
-	public void addItem(String key, MenuItem item)
+	public void addItem(MenuItem item)
 	{
 		item.setLocX(this.x);
 		item.setLocY(this.y + (this.verticalGap * selectedQueue.size()));
-		menu.put(key, item);
+		item.setSelectedFontSize(this.SelectedFontSize);
+		item.setFontSize(this.fontSize);
 		selectedQueue.addFirst(item);
+		item.loadFonts();
 
 	}
 	
@@ -37,9 +39,14 @@ public class Menu implements DrawableComponent {
 		selectedQueue.addFirst(item);
 		
 	}
-	public String getSelectedKey()
+	public MenuItem getSelected()
 	{
-		return "";
+		for(MenuItem m : selectedQueue)
+		{
+			if (m.isSelected())
+				return m;
+		}
+		return null;
 	}
 	public int getVerticalGap() {
 		return verticalGap;
@@ -65,9 +72,10 @@ public class Menu implements DrawableComponent {
 		this.y = y;
 	}
 
-	public Menu(int x, int y, int verticleGap) {
-		menu = new TreeMap<String, MenuItem>();
-		selectedQueue = new LinkedList<MenuItem>();
+	public Menu(int x, int y, int verticleGap, float selectedFontSize, float fontSize) {
+		this.selectedQueue = new LinkedList<MenuItem>();
+		this.fontSize = fontSize;
+		this.SelectedFontSize = selectedFontSize;
 		this.x = x;
 		this.y = y;
 		this.verticalGap = verticleGap;
@@ -75,7 +83,7 @@ public class Menu implements DrawableComponent {
 
 	@Override
 	public void draw() {
-		for(MenuItem m : menu.values())
+		for(MenuItem m : selectedQueue)
 		{
 			m.draw();
 		}
@@ -84,7 +92,7 @@ public class Menu implements DrawableComponent {
 	@Override
 	public void update(int delta) {
 		int selected = 0;
-		for(MenuItem m : menu.values())
+		for(MenuItem m : selectedQueue)
 		{
 			if(m.isSelected())
 				selected++;

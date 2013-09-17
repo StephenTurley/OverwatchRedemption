@@ -3,13 +3,17 @@ package gameStates;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
-public class Lobby extends GameState {
+public class Options extends GameState {
 
-	public Lobby(StateManager sm) {
+	public Options(StateManager sm) {
 		super(sm);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	public Options()
+	{
+		
+	}
 	@Override
 	public void update(int delta) {
 		// TODO Auto-generated method stub

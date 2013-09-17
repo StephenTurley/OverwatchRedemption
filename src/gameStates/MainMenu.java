@@ -1,6 +1,7 @@
 package gameStates;
 
 import static org.lwjgl.opengl.GL11.*;
+import gui.*;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -21,12 +22,11 @@ public class MainMenu extends GameState {
 
 	public MainMenu(StateManager sm) {
 		super(sm);
-		mainMenu = new Menu(100,100,100);
-		
-		mainMenu.addItem("Host", new MenuItem("Host Game"));
-		mainMenu.addItem("Join", new MenuItem("Join Game"));
-		mainMenu.addItem("Options", new MenuItem("Options"));
-		mainMenu.addItem("Quit", new MenuItem("Quit to Desktop"));
+		mainMenu = new Menu(100,100,100, 48f, 24f);
+		mainMenu.addItem(new HostGameMenuItem());
+		mainMenu.addItem(new JoinGameMenuItem());
+		mainMenu.addItem(new OptionsMenuItem());
+		mainMenu.addItem(new QuitGameMenuItem());
 		
 	}
 
@@ -115,7 +115,10 @@ public class MainMenu extends GameState {
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
 				{
-					
+					MenuItem m = mainMenu.getSelected();
+					GameState gs = m.execute();
+					gs.setSm(sm);
+					sm.push(gs);
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_DOWN)
 				{

@@ -11,6 +11,19 @@ public abstract class GameState implements DrawableComponent{
 		this.sm = sm;
 	}
 	
+	public GameState()
+	{
+		
+	}
+	
+	public StateManager getSm() {
+		return sm;
+	}
+
+	public void setSm(StateManager sm) {
+		this.sm = sm;
+	}
+
 	public abstract void update(int delta);
 	public abstract void draw();
 	public abstract void resume();

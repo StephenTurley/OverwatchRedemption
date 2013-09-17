@@ -1,5 +1,6 @@
 package core;
 
+import core.stateManager.*;
 import java.io.InputStream;
 
 import org.lwjgl.opengl.Display;
@@ -8,14 +9,24 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.util.ResourceLoader;
 import java.awt.Font;
 
-public class MenuItem implements DrawableComponent {
+public abstract class MenuItem implements DrawableComponent {
 	
 	private final String FONT_PATH = "res/fonts/unispace rg.ttf";
 	private TrueTypeFont item;
 	private TrueTypeFont itemSelected;
-	private String text;
+	private float selectedFontSize;
+	private float fontSize;
+	protected String text;
 	private int locX, locY;
 	
+	public float getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(float fontSize) {
+		this.fontSize = fontSize;
+	}
+
 	private boolean selected;
 
 	public String getText() {
@@ -34,13 +45,6 @@ public class MenuItem implements DrawableComponent {
 		this.selected = selected;
 	}
 	
-	public MenuItem(String text)
-	{
-		this.text =text;
-		this.locX = -1000;
-		this.locY = -1000;
-		loadFonts();
-	}
 	public int getLocX() {
 		return locX;
 	}
@@ -56,12 +60,30 @@ public class MenuItem implements DrawableComponent {
 	public void setLocY(int locY) {
 		this.locY = locY;
 	}
+	
+	public MenuItem()
+	{
 
-	public MenuItem(String text, int locX, int locY) {
-		this.text = text;
+	}
+	public MenuItem( int locX, int locY) {
 		this.locX = locX;
 		this.locY = locY;
-		loadFonts();
+	}
+
+	public TrueTypeFont getItemSelected() {
+		return itemSelected;
+	}
+
+	public void setItemSelected(TrueTypeFont itemSelected) {
+		this.itemSelected = itemSelected;
+	}
+
+	public float getSelectedFontSize() {
+		return selectedFontSize;
+	}
+
+	public void setSelectedFontSize(float selectedFontSize) {
+		this.selectedFontSize = selectedFontSize;
 	}
 
 	@Override
@@ -81,20 +103,22 @@ public class MenuItem implements DrawableComponent {
 		
 	}
 	
+	public abstract GameState execute();
+	
 	private void renderFont(TrueTypeFont font)
 	{
 		font.drawString(locX, locY, text, Color.orange);
 	}
 	
-	private void loadFonts()
+	public void loadFonts()
 	{
 		try{
 			InputStream is = ResourceLoader.getResourceAsStream(FONT_PATH);
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
-			unispace = unispace.deriveFont(48f);
+			unispace = unispace.deriveFont(this.selectedFontSize);
 			itemSelected = new TrueTypeFont(unispace, true);
-			unispace = unispace.deriveFont(24f);
+			unispace = unispace.deriveFont(this.fontSize);
 			item = new TrueTypeFont(unispace, true);
 		}catch(Exception e)
 		{
