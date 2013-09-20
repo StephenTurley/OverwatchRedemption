@@ -11,6 +11,7 @@ import org.lwjgl.opengl.DisplayMode;
 import com.esotericsoftware.kryonet.Server;
 
 import core.configurationManager.GameConfig;
+import core.network.NetworkClassRegister;
 import core.stateManager.*;
 
 
@@ -93,6 +94,7 @@ public class Game {
  	public static void initializeServer()
  	{
  		server = new Server();
+ 		NetworkClassRegister.register(server);
  	}
  	public static void startServer()
  	{
@@ -108,6 +110,14 @@ public class Game {
  			}
  			System.exit(-1);
  		}
+ 	}
+ 	public static void killServer()
+ 	{
+ 		server.close();
+ 	}
+ 	public static Server getServer()
+ 	{
+ 		return server;
  	}
  	private void loadGamepads()
  	{
