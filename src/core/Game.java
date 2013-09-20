@@ -8,6 +8,8 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import com.esotericsoftware.kryonet.Server;
+
 import core.configurationManager.GameConfig;
 import core.stateManager.*;
 
@@ -17,7 +19,9 @@ public class Game {
 	private static GameConfig config;
 	private static StateManager sm;
 	private GameLoop loop;
+	private static Server server;
 	private static Controller gamepad;
+
 
 	
 	
@@ -85,6 +89,25 @@ public class Game {
  	
  	public static Controller getGamePad(){
  		return gamepad;
+ 	}
+ 	public static void initializeServer()
+ 	{
+ 		server = new Server();
+ 	}
+ 	public static void startServer()
+ 	{
+ 		server.start();
+ 		try
+ 		{
+ 			server.bind(config.getServerTCP(),config.getServerUDP());
+ 		}catch(Exception e)
+ 		{
+ 			if(config.isDebugLogging())
+ 			{
+ 				Debug.Trace(e.getMessage());
+ 			}
+ 			System.exit(-1);
+ 		}
  	}
  	private void loadGamepads()
  	{

@@ -1,5 +1,6 @@
 package gameStates;
 
+import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
@@ -46,8 +47,8 @@ public class HostGame extends GameState {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		Game.initializeServer();
+		Game.startServer();
 	}
 
 	@Override
