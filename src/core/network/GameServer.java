@@ -22,7 +22,6 @@ public class GameServer {
 		if(server != null)
 		{
 			serverThread.start();
-			server.start();
 		}
 		else
 		{

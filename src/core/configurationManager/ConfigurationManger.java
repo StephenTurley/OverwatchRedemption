@@ -54,6 +54,12 @@ public class ConfigurationManger {
 						case "joyStickDeadZone":
 							config.setJoyStickDeadZone(Float.parseFloat(value));
 							break;
+						case "serverUDP":
+							config.setServerUDP(Integer.parseInt(value));
+							break;
+						case "serverTCP" :
+							config.setServerTCP(Integer.parseInt(value));
+							break;
 						default: Debug.Trace("Invalid Config parameter: " + key);
 					}
 				}

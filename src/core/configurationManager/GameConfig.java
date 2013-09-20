@@ -34,6 +34,26 @@ public class GameConfig {
 	
 	private float joyStickDeadZone;
 	
+	private int serverUDP;
+	private int serverTCP;
+	
+	
+	public int getServerUDP() {
+		return serverUDP;
+	}
+
+	public void setServerUDP(int serverUDP) {
+		this.serverUDP = serverUDP;
+	}
+
+	public int getServerTCP() {
+		return serverTCP;
+	}
+
+	public void setServerTCP(int serverTCP) {
+		this.serverTCP = serverTCP;
+	}
+
 	public float getJoyStickDeadZone() {
 		return joyStickDeadZone;
 	}
