@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import core.Debug;
+import core.Game;
 
 
 public class ConfigurationManger {
@@ -68,17 +69,17 @@ public class ConfigurationManger {
 		}catch(IOException e)
 		{
 			e.printStackTrace();
-			System.exit(1);
+			Game.exit(1);
 		}catch(NumberFormatException e)
 		{
 			e.printStackTrace();
 			Debug.Trace("Invalid GameConfig.cfg");
-			System.exit(1);
+			Game.exit(1);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 			Debug.Trace("Something bad went wrong parsing the GameConfig.cfg. Did you delete a line?");
-			System.exit(1);
+			Game.exit(1);
 		}
 		
 		

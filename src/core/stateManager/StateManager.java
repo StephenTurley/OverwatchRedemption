@@ -5,6 +5,7 @@ import java.util.*;
 import org.lwjgl.opengl.Display;
 
 import core.DrawableComponent;
+import core.Game;
 
 public class StateManager implements DrawableComponent {
 	
@@ -53,7 +54,7 @@ public class StateManager implements DrawableComponent {
 		if(!states.empty() && states.size() == 1)
 		{
 			Display.destroy();
-			System.exit(0);
+			Game.exit(0);
 		}
 		if(!states.empty())
 		{
@@ -67,7 +68,7 @@ public class StateManager implements DrawableComponent {
 		else
 		{
 			Display.destroy();
-			System.exit(0);
+			Game.exit(0);
 		}
 	}
 	

@@ -78,7 +78,7 @@ public class Game {
 		catch (LWJGLException e)
 		{
 			e.printStackTrace();
-			System.exit(0);
+			Game.exit(0);
 		}
 		
 		sm.push(startingState);
@@ -108,7 +108,7 @@ public class Game {
  			{
  				Debug.Trace(e.getMessage());
  			}
- 			System.exit(-1);
+ 			Game.exit(-1);
  		}
  	}
  	public static void killServer()
@@ -118,6 +118,11 @@ public class Game {
  	public static Server getServer()
  	{
  		return server;
+ 	}
+ 	public static void exit(int status)
+ 	{
+ 		if(server != null) killServer();
+ 		System.exit(status);
  	}
  	private void loadGamepads()
  	{

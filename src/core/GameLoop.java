@@ -43,10 +43,9 @@ public class GameLoop implements Runnable {
 			updateFPS();
 			Display.sync(120);	//60fps
 		}
-		if(Game.getServer()!=null)
-		{
-			Game.killServer();
-		}
+
+		Game.exit(0);
+
 		Display.destroy();
 	}
 	

@@ -104,7 +104,7 @@ public class GameStart extends GameState {
 		{
 			Debug.Trace(e.getMessage());
 			Display.destroy();
-			System.exit(1);
+			Game.exit(1);
 		}
 		
 	}
