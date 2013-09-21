@@ -3,7 +3,7 @@ package core.network;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-
+import core.network.Network.SimpleMessage;
 import core.Debug;
 import core.Game;
 
@@ -14,11 +14,13 @@ public class GameServer {
 		public static void init()
 	 	{
 	 		server = new Server();
-	 		NetworkClassRegister.register(server);
+	 		Network.register(server);
 	 		server.addListener(new Listener(){
 	 			public void connected(Connection connection)
 	 			{
-	 				Debug.Trace("Client Connected!");
+	 				SimpleMessage msgPacket = new SimpleMessage();
+	 				msgPacket.msg = "Client Connected!";
+	 				server.sendToAllTCP(msgPacket);
 	 			}
 	 		});
 	 	}
