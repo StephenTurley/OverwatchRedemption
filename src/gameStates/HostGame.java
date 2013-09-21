@@ -12,7 +12,6 @@ import core.stateManager.StateManager;
 
 public class HostGame extends GameState {
 	
-	private Client client;
 
 	public HostGame(StateManager sm) {
 		super(sm);
