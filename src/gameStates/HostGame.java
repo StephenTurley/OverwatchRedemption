@@ -4,6 +4,8 @@ import com.esotericsoftware.kryonet.Client;
 
 import core.Debug;
 import core.Game;
+import core.network.GameClient;
+import core.network.GameServer;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
@@ -51,17 +53,9 @@ public class HostGame extends GameState {
 
 	@Override
 	public void enter() {
-		Game.initializeServer();
-		Game.startServer();
-		client = new Client();
-		client.start();
-		try{
-			client.connect(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
-		}catch(Exception e)
-		{
-			Debug.Trace(e.getMessage());
-			Game.exit(-1);
-		}
+		GameServer.init();
+		GameServer.start();
+		GameClient.init(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 	}
 
 	@Override

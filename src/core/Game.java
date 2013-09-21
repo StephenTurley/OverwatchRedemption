@@ -8,12 +8,9 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
 
 import core.configurationManager.GameConfig;
-import core.network.NetworkClassRegister;
+import core.network.GameServer;
 import core.stateManager.*;
 
 
@@ -22,7 +19,6 @@ public class Game {
 	private static GameConfig config;
 	private static StateManager sm;
 	private GameLoop loop;
-	private static Server server;
 	private static Controller gamepad;
 
 
@@ -93,40 +89,9 @@ public class Game {
  	public static Controller getGamePad(){
  		return gamepad;
  	}
- 	public static void initializeServer()
- 	{
- 		server = new Server();
- 		NetworkClassRegister.register(server);
- 		server.addListener(new Listener(){
- 			public void connected(Connection connection)
- 			{
- 				Debug.Trace("Client Connected!");
- 			}
- 		});
- 	}
- 	public static void startServer()
- 	{
- 		server.start();
- 		try
- 		{
- 			server.bind(config.getServerTCP(),config.getServerUDP());
- 		}catch(Exception e)
- 		{
-			Debug.Trace(e.getMessage());
- 			Game.exit(-1);
- 		}
- 	}
- 	public static void killServer()
- 	{
- 		server.close();
- 	}
- 	public static Server getServer()
- 	{
- 		return server;
- 	}
  	public static void exit(int status)
  	{
- 		if(server != null) killServer();
+ 		if(GameServer.getServer() != null) GameServer.kill();
  		System.exit(status);
  	}
  	private void loadGamepads()
