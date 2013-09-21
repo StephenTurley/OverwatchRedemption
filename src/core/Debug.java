@@ -4,6 +4,9 @@ public class Debug {
 
 	public static void Trace(String msg)
 	{
-		System.out.println(msg);
+		if(Game.getGameConfig().isDebugLogging())
+		{	
+			System.out.println(msg);
+		}
 	}
 }

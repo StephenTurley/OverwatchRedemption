@@ -59,10 +59,7 @@ public class HostGame extends GameState {
 			client.connect(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 		}catch(Exception e)
 		{
-			if(Game.getGameConfig().isDebugLogging())
-			{
-				Debug.Trace(e.getMessage());
-			}
+			Debug.Trace(e.getMessage());
 			Game.exit(-1);
 		}
 	}

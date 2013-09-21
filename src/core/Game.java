@@ -100,10 +100,7 @@ public class Game {
  		server.addListener(new Listener(){
  			public void connected(Connection connection)
  			{
- 				if(config.isDebugLogging())
- 				{
- 					Debug.Trace("Client Connected!");
- 				}
+ 				Debug.Trace("Client Connected!");
  			}
  		});
  	}
@@ -115,10 +112,7 @@ public class Game {
  			server.bind(config.getServerTCP(),config.getServerUDP());
  		}catch(Exception e)
  		{
- 			if(config.isDebugLogging())
- 			{
- 				Debug.Trace(e.getMessage());
- 			}
+			Debug.Trace(e.getMessage());
  			Game.exit(-1);
  		}
  	}

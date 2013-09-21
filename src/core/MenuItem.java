@@ -122,10 +122,7 @@ public abstract class MenuItem implements DrawableComponent {
 			item = new TrueTypeFont(unispace, true);
 		}catch(Exception e)
 		{
-			if(Game.getGameConfig().isDebugLogging())
-			{
-				Debug.Trace(e.getMessage());
-			}
+			Debug.Trace(e.getMessage());
 			Display.destroy();
 			Game.exit(1);
 		}

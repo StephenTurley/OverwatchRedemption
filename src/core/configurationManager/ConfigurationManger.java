@@ -72,12 +72,10 @@ public class ConfigurationManger {
 			Game.exit(1);
 		}catch(NumberFormatException e)
 		{
-			e.printStackTrace();
 			Debug.Trace("Invalid GameConfig.cfg");
 			Game.exit(1);
 		}catch(Exception e)
 		{
-			e.printStackTrace();
 			Debug.Trace("Something bad went wrong parsing the GameConfig.cfg. Did you delete a line?");
 			Game.exit(1);
 		}
