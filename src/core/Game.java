@@ -8,6 +8,8 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import core.configurationManager.GameConfig;
@@ -95,6 +97,15 @@ public class Game {
  	{
  		server = new Server();
  		NetworkClassRegister.register(server);
+ 		server.addListener(new Listener(){
+ 			public void connected(Connection connection)
+ 			{
+ 				if(config.isDebugLogging())
+ 				{
+ 					Debug.Trace("Client Connected!");
+ 				}
+ 			}
+ 		});
  	}
  	public static void startServer()
  	{
