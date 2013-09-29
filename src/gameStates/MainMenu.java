@@ -65,9 +65,8 @@ public class MainMenu extends GameState {
 
 	@Override
 	public void enter() {
-		if(Game.getGameConfig().isDebugLogging()){
-			Debug.Trace("Start State has been entered!");
-		}
+		Debug.Trace("Main Menu State has been entered!");
+
 		Keyboard.enableRepeatEvents(true);
 		init();
 

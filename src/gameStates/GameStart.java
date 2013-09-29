@@ -86,10 +86,8 @@ public class GameStart extends GameState {
 
 	@Override
 	public void enter() {
-		if(Game.getGameConfig().isDebugLogging()){
-			Debug.Trace("Start State has been entered!");
-		}
-		
+		Debug.Trace("Start State has been entered!");
+	
 		init();
 		
 		try{
