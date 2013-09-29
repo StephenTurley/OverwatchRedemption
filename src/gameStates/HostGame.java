@@ -56,6 +56,7 @@ public class HostGame extends GameState {
 		GameServer.init();
 		GameServer.start();
 		GameClient.init(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+		GameClient.Login("Player 1");
 	}
 
 	@Override
