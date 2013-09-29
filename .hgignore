@@ -1,6 +1,5 @@
 syntax: regexp
 target      # maven output
-\.classpath # eclipse
 \.settings  # eclipse
 ^bin$
 test-output # eclipse junit/testng plugin output
