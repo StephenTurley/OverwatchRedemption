@@ -20,6 +20,7 @@ public class Game {
 	private static StateManager sm;
 	private GameLoop loop;
 	private static Controller gamepad;
+	private static GameServer gameServer;
 
 
 	
@@ -91,8 +92,14 @@ public class Game {
  	}
  	public static void exit(int status)
  	{
- 		if(GameServer.getServer() != null) GameServer.kill();
+ 		if(gameServer != null) gameServer.kill();
  		System.exit(status);
+ 	}
+ 	public static void startServer()
+ 	{
+ 		gameServer = new GameServer();
+ 		gameServer.init();
+ 		gameServer.start();
  	}
  	private void loadGamepads()
  	{

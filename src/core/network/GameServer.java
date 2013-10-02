@@ -9,12 +9,12 @@ import core.network.Network.SimpleMessage;
 import core.Debug;
 import core.Game;
 
-public class GameServer {
+public class GameServer extends Listener{
 	
 		private static Server server;
 		private static Player[] players = new Player[2];
 
-		public static void init()
+		public void init()
 	 	{
 	 		server = new Server(){
 	 			protected Connection newConnection(){
@@ -22,41 +22,40 @@ public class GameServer {
 	 			}
 	 		};
 	 		Network.register(server);
-	 		server.addListener(new Listener(){
-	 			public void connected(Connection c)
-	 			{
-	 				
-	 			}
-	 			public void received (Connection c, Object object)
-	 			{
-	 				PlayerConnection pc = (PlayerConnection)c;
-	 				Player player = pc.player;
-	 				
-	 				if(object instanceof Login)
-	 				{
-	 					//ignore if already logged in
-	 					if(player != null) return;
-	 					
-	 					String name =  ((Login)object).name;
-	 					player = new Player(name);
-	 					
-	 					if(players.length == 0)
-	 						players[0] = player;
-	 					else
-	 						players[1] = player;
-	 					
-	 					//send connection message to clients
-	 					server.sendToAllTCP(new SimpleMessage(player.name+" has connected"));
-	 					
-	 					if(players.length == 2)
-	 					{
-	 						server.sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
-	 					}
-	 				}
-	 			}
-	 		});
+	 		server.addListener(this);
 	 	}
-	 	public static void start()
+		public void connected(Connection c)
+		{
+			
+		}
+		public void received (Connection c, Object object)
+		{
+			PlayerConnection pc = (PlayerConnection)c;
+			Player player = pc.player;
+			
+			if(object instanceof Login)
+			{
+				//ignore if already logged in
+				if(player != null) return;
+				
+				String name =  ((Login)object).name;
+				player = new Player(name);
+				
+				if(players.length == 0)
+					players[0] = player;
+				else
+					players[1] = player;
+				
+				//send connection message to clients
+				server.sendToAllTCP(new SimpleMessage(player.name+" has connected"));
+				
+				if(players.length == 2)
+				{
+					server.sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
+				}
+			}
+		}
+	 	public void start()
 	 	{
 	 		server.start();
 	 		try
@@ -72,11 +71,11 @@ public class GameServer {
 	 	{
 	 		public Player player; 
 	 	}
-	 	public static void kill()
+	 	public void kill()
 	 	{
 	 		server.close();
 	 	}
-	 	public static Server getServer()
+	 	public Server getServer()
 	 	{
 	 		return server;
 	 	}

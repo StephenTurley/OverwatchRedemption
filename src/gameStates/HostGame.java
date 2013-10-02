@@ -54,8 +54,7 @@ public class HostGame extends GameState {
 	@Override
 	public void enter() {
 		Debug.Trace("Host Game State has been entered!");
-		GameServer.init();
-		GameServer.start();
+		Game.startServer();
 		GameClient.init(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 		GameClient.Login("Player 1");
 	}
