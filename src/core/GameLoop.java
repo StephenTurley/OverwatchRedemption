@@ -41,7 +41,11 @@ public class GameLoop implements Runnable {
 			sm.update(delta);
 			
 			updateFPS();
-			Display.sync(120);	//60fps
+			Display.sync(120);
+			if(Game.isServer)
+			{
+				Game.updateServer(delta);
+			}
 		}
 
 		Game.exit(0);

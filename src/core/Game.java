@@ -21,6 +21,7 @@ public class Game {
 	private GameLoop loop;
 	private static Controller gamepad;
 	private static GameServer gameServer;
+	public static boolean isServer;
 
 
 	
@@ -29,6 +30,7 @@ public class Game {
 	{
 		Game.config = config;
 		sm = new StateManager();
+		isServer = false;
 		if(Game.config.isDebugLogging())
 		{
 			Debug.Trace("Game initialized!");
@@ -86,20 +88,21 @@ public class Game {
 		loop.run();
 		
 	}
- 	
- 	public static Controller getGamePad(){
- 		return gamepad;
- 	}
- 	public static void exit(int status)
- 	{
- 		if(gameServer != null) gameServer.kill();
- 		System.exit(status);
- 	}
  	public static void startServer()
  	{
  		gameServer = new GameServer();
  		gameServer.init();
  		gameServer.start();
+ 		isServer = true;
+ 	}
+ 	public static void killServer()
+ 	{
+ 		isServer = false;
+ 		gameServer.kill();
+ 	}
+ 	public static void updateServer(int delta)
+ 	{
+ 		gameServer.update(delta);
  	}
  	private void loadGamepads()
  	{
@@ -115,6 +118,15 @@ public class Game {
 			}
 		}
  	}
+ 	public static Controller getGamePad(){
+ 		return gamepad;
+ 	}
+ 	public static void exit(int status)
+ 	{
+ 		if(gameServer != null) gameServer.kill();
+ 		System.exit(status);
+ 	}
+ 	
  	
  
 }

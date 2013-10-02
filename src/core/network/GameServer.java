@@ -67,6 +67,10 @@ public class GameServer extends Listener{
 	 			Game.exit(-1);
 	 		}
 	 	}
+	 	public void update(int delta)
+	 	{
+	 		
+	 	}
 	 	static class PlayerConnection extends Connection
 	 	{
 	 		public Player player; 
