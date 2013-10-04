@@ -40,7 +40,7 @@ public class MainMenu extends GameState {
 	public void draw() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		mainMenu.draw();
-		Display.update();
+		//Display.update();
 	}
 
 	@Override
