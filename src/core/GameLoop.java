@@ -16,6 +16,8 @@ public class GameLoop implements Runnable {
 	/** frames per second */
 	private int fps;
 	
+	private int desiredFrameRate;
+	
 	/** last fps time */
 	private long lastFPS;
 
@@ -29,7 +31,9 @@ public class GameLoop implements Runnable {
 	@Override
 	public void run() {
 		getDelta(); // call once before loop to initialise lastFrame
-
+		
+		desiredFrameRate = Game.getGameConfig().getFrameRate();
+		
 		lastFPS = getTime(); // call before loop to initialise fps timer
 		
 		while(!Display.isCloseRequested())
@@ -41,7 +45,7 @@ public class GameLoop implements Runnable {
 			sm.update(delta);
 			
 			updateFPS();
-			Display.sync(120);
+			Display.sync(desiredFrameRate);
 			if(Game.isServer)
 			{
 				Game.updateServer(delta);

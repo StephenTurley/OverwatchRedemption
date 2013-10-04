@@ -36,8 +36,18 @@ public class GameConfig {
 	
 	private int serverUDP;
 	private int serverTCP;
+	private int frameRate;
 	
 	
+	public int getFrameRate() {
+		if(frameRate == 0) return 60;
+		return frameRate;
+	}
+
+	public void setFrameRate(int frameRate) {
+		this.frameRate = frameRate;
+	}
+
 	public int getServerUDP() {
 		return serverUDP;
 	}

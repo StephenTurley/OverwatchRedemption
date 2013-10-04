@@ -61,6 +61,9 @@ public class ConfigurationManger {
 						case "serverTCP" :
 							config.setServerTCP(Integer.parseInt(value));
 							break;
+						case "frameRate" :
+							config.setFrameRate(Integer.parseInt(value));
+							break;
 						default: Debug.Trace("Invalid Config parameter: " + key);
 					}
 				}
