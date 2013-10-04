@@ -8,9 +8,13 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Listener;
+
 
 import core.configurationManager.GameConfig;
 import core.network.GameServer;
+import core.network.Network;
 import core.stateManager.*;
 
 
@@ -21,6 +25,7 @@ public class Game {
 	private GameLoop loop;
 	private static Controller gamepad;
 	private static GameServer gameServer;
+	private static Client gameClient;
 	public static boolean isServer;
 
 
@@ -31,6 +36,9 @@ public class Game {
 		Game.config = config;
 		sm = new StateManager();
 		isServer = false;
+		gameClient = new Client();
+		Network.register(gameClient);
+		gameClient.start();
 		if(Game.config.isDebugLogging())
 		{
 			Debug.Trace("Game initialized!");
@@ -104,6 +112,44 @@ public class Game {
  	{
  		gameServer.update(delta);
  	}
+ 	public static void bindClient(int timeout, String host, int tcp, int udp)
+ 	{
+ 		try
+ 		{
+			gameClient.connect(timeout, host, tcp, udp);
+		}catch(Exception e)
+		{
+			Debug.Trace(e.getMessage());
+			Game.exit(-1);
+		}	
+ 	}
+ 	
+ 	public static void removeClientListener(Listener listener)
+ 	{
+ 		if(gameClient != null)
+ 		{
+ 			gameClient.removeListener(listener);
+ 		}
+ 	}
+ 	
+ 	public static void addClientListener(Listener listener)
+ 	{
+ 		if(gameClient != null)
+ 		{
+ 			gameClient.addListener(listener);
+ 		}
+ 	}
+ 	
+ 	public static void clientSendTCP(Object packet)
+ 	{
+ 		gameClient.sendTCP(packet);
+ 	}
+ 	
+ 	public static void clientSendUDP(Object packet)
+ 	{
+ 		gameClient.sendUDP(packet);
+ 	}
+ 	
  	private void loadGamepads()
  	{
  		for (Controller c : ControllerEnvironment.getDefaultEnvironment().getControllers())

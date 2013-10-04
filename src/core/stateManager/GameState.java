@@ -1,9 +1,11 @@
 package core.stateManager;
 
+import com.esotericsoftware.kryonet.Listener;
+
 import core.DrawableComponent;
 
 
-public abstract class GameState implements DrawableComponent{
+public abstract class GameState extends Listener implements DrawableComponent{
 	protected StateManager sm;
 	
 	public GameState(StateManager sm)

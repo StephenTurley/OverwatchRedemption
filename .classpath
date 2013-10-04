@@ -5,7 +5,11 @@
 	<classpathentry kind="lib" path="lib/jars/jinput.jar"/>
 	<classpathentry kind="lib" path="lib/jars/kryonet-2.18-all.jar"/>
 	<classpathentry kind="lib" path="lib/jars/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="lib/jars/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/jars/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Overwatch/lib/native/linux"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/jars/slick-util.jar"/>
 	<classpathentry kind="lib" path="lib/jars/TWL.jar"/>
 	<classpathentry kind="output" path="bin"/>

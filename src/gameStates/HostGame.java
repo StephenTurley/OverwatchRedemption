@@ -1,16 +1,15 @@
 package gameStates;
 
-import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
-import core.network.GameClient;
-import core.network.GameServer;
-
+import core.network.Network;
+import core.network.Network.SimpleMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
-public class HostGame extends GameState {
+public class HostGame extends GameState{
 	
 
 	public HostGame(StateManager sm) {
@@ -35,13 +34,13 @@ public class HostGame extends GameState {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		Game.addClientListener(this);
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		Game.removeClientListener(this);
 
 	}
 
@@ -55,14 +54,27 @@ public class HostGame extends GameState {
 	public void enter() {
 		Debug.Trace("Host Game State has been entered!");
 		Game.startServer();
-		GameClient.init(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
-		GameClient.Login("Player 1");
+		Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+		Game.addClientListener(this);
+		//login
+		Game.clientSendTCP(new Network.Login("Player 1"));
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-
+		Game.removeClientListener(this);
+	}
+	public void connected(Connection c)
+	{
+		
+	}
+	public void received (Connection c, Object object)
+	{
+		if(object instanceof SimpleMessage)
+		{
+			SimpleMessage msgPacket = (SimpleMessage)object;
+			System.out.println(msgPacket.msg);
+		}
 	}
 
 }
