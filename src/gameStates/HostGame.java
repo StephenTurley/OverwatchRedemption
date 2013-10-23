@@ -81,7 +81,7 @@ public class HostGame extends GameState{
 			uiWidget = new UI();
 			gui = new GUI(uiWidget, renderer);
 			ThemeManager theme = ThemeManager.createThemeManager(
-	                UI.class.getResource("res/gui/HostGameTheme.xml"), renderer);
+	                UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
 	        gui.applyTheme(theme);
 			
 			Debug.Trace("Host Game State has been entered!");
@@ -90,6 +90,7 @@ public class HostGame extends GameState{
 			Game.addClientListener(this);
 		}catch(Exception e)
 		{
+			e.printStackTrace();
 			Debug.Trace(e.getMessage());
 		}
 		//TODO: login in when when player hits start.
