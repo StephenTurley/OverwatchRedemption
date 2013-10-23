@@ -1,5 +1,6 @@
 package gameStates;
 
+
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
@@ -8,10 +9,31 @@ import core.network.Network;
 import core.network.Network.SimpleMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
+import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
+import de.matthiasmann.twl.theme.ThemeManager;
 
 public class HostGame extends GameState{
 	
-
+	private LWJGLRenderer renderer; 
+    private UI uiWidget;
+    private GUI gui;
+	
+	private class UI extends Widget
+	{
+		private Button startGameBtn;
+		
+		public UI()
+		{
+			
+		}
+		@Override
+		protected void layout() {
+		 
+		}
+	}
 	public HostGame(StateManager sm) {
 		super(sm);
 		// TODO Auto-generated constructor stub
@@ -52,11 +74,25 @@ public class HostGame extends GameState{
 
 	@Override
 	public void enter() {
-		Debug.Trace("Host Game State has been entered!");
-		Game.startServer();
-		Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
-		Game.addClientListener(this);
-		//login
+		try
+		{
+			//set up gui
+			renderer = new LWJGLRenderer();
+			uiWidget = new UI();
+			gui = new GUI(uiWidget, renderer);
+			ThemeManager theme = ThemeManager.createThemeManager(
+	                UI.class.getResource("res/gui/HostGameTheme.xml"), renderer);
+	        gui.applyTheme(theme);
+			
+			Debug.Trace("Host Game State has been entered!");
+			Game.startServer();
+			Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+			Game.addClientListener(this);
+		}catch(Exception e)
+		{
+			Debug.Trace(e.getMessage());
+		}
+		//TODO: login in when when player hits start.
 		Game.clientSendTCP(new Network.Login("Player 1"));
 	}
 
