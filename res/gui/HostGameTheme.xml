@@ -1,5 +1,15 @@
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
+	
+	<images file="btnChromeH.png">
+		<area name="btnChromeH" xywh="*"/>
+	</images>
+	<images file="btnChrome.png">
+		<select name="btnChrome">
+			<alias ref="btnChromeH" if="selected | armed"/>
+			<area xywh="*"/>
+		</select>
+	</images>
 	<fontDef name="normal" filename="font.fnt" color="white">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
@@ -27,6 +37,8 @@
       <param name="fadeInTime"><int>0</int></param>
     </theme>
     <theme name="ui" ref="-defaults">
-        
+        <theme name="button">
+                <param name="btn"><image>btnChrome</image></param>
+        </theme>
     </theme>
 </themes>

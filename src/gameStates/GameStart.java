@@ -52,7 +52,6 @@ public class GameStart extends GameState {
 
 	@Override
 	public void draw() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 		
 		titleFont.drawString((Game.getGameConfig().getDisplayWidth()/2)-(titleFont.getWidth(titleText)/2),
 				(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight()/2) ,

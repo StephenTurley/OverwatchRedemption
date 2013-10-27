@@ -1,5 +1,9 @@
 package core.stateManager;
 
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
+
 import java.util.*;
 
 import org.lwjgl.opengl.Display;
@@ -24,6 +28,7 @@ public class StateManager implements DrawableComponent {
 	}
 	public void draw()
 	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 		if(!states.empty())
 		{
 			states.peek().draw();

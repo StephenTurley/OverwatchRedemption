@@ -27,7 +27,9 @@ public class HostGame extends GameState{
 		
 		public UI()
 		{
-			
+			startGameBtn = new Button();
+			startGameBtn.setTheme("button");
+			add(startGameBtn);
 		}
 		@Override
 		protected void layout() {
@@ -50,8 +52,7 @@ public class HostGame extends GameState{
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-
+		gui.update();
 	}
 
 	@Override

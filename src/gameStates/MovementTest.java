@@ -34,12 +34,6 @@ public class MovementTest extends GameState {
 
 
 	public void draw() {
-		// Clear the screen and depth buffer
-	
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-
-		 
-
 		// set the color of the quad (R,G,B,A)
 	
 		glColor3f(0.5f,0.5f,1.0f);
