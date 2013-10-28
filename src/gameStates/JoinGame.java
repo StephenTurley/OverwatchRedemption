@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 
 import core.Debug;
 import core.Game;
+import core.network.Network;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.Button;
@@ -39,7 +40,7 @@ public class JoinGame extends GameState {
 			joinGameBtn.addCallback(new Runnable(){
 				public void run()
 				{
-					//startServer();
+					joinServer(hostNameEdf.getText(), Integer.parseInt(hostPortEdf.getText()));
 				}
 			});
 			add(joinGameBtn);
@@ -165,6 +166,12 @@ public class JoinGame extends GameState {
 	public void exit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void joinServer(String host, int port)
+	{
+		Game.bindClient(5000, host, port, port);
+		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 	}
 
 }
