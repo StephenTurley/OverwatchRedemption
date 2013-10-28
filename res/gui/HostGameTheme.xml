@@ -10,7 +10,7 @@
 			<area xywh="*"/>
 		</select>
 	</images>
-	<fontDef name="normal" filename="font.fnt" color="white">
+	<fontDef name="normal" filename="font.fnt" color="orange">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="blue"/>
@@ -37,8 +37,9 @@
       <param name="fadeInTime"><int>0</int></param>
     </theme>
     <theme name="ui" ref="-defaults">
-        <theme name="button">
-                <param name="btn"><image>btnChrome</image></param>
+        <theme name="button" ref="-defaults">
+                <param name="background"><image>btnChrome</image></param>
+                <param name="textAlignment"><enum type="alignment">center</enum></param>
         </theme>
     </theme>
 </themes>

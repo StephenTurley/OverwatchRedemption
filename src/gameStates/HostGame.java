@@ -29,11 +29,13 @@ public class HostGame extends GameState{
 		{
 			startGameBtn = new Button();
 			startGameBtn.setTheme("button");
+			startGameBtn.setText("Start Game");
 			add(startGameBtn);
 		}
 		@Override
 		protected void layout() {
-		 
+			startGameBtn.adjustSize();
+			startGameBtn.setPosition(100, 100);
 		}
 	}
 	public HostGame(StateManager sm) {
