@@ -2,9 +2,12 @@ package gameStates;
 
 import org.lwjgl.opengl.Display;
 
+import com.esotericsoftware.kryonet.Connection;
+
 import core.Debug;
 import core.Game;
 import core.network.Network;
+import core.network.Network.SimpleMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.Button;
@@ -171,7 +174,17 @@ public class JoinGame extends GameState {
 	private void joinServer(String host, int port)
 	{
 		Game.bindClient(5000, host, port, port);
+		Game.addClientListener(this);
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
+	}
+	
+	public void received (Connection c, Object object)
+	{
+		if(object instanceof SimpleMessage)
+		{
+			SimpleMessage msgPacket = (SimpleMessage)object;
+			System.out.println(msgPacket.msg);
+		}
 	}
 
 }

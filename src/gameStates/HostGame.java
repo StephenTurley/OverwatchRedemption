@@ -64,7 +64,7 @@ public class HostGame extends GameState{
 			nameLbl.adjustSize();
 			nameLbl.setPosition(50, 100);
 			
-			playerNameEdf.setSize(300, 50);
+			playerNameEdf.setSize(125, 25);
 			playerNameEdf.setPosition(nameLbl.getX() + nameLbl.getWidth() + 25, 100);
 		}
 		public String getPlayerName()
