@@ -10,6 +10,7 @@ import core.network.Network.SimpleMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.Button;
+import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.GUI;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
@@ -24,6 +25,7 @@ public class HostGame extends GameState{
 	private class UI extends Widget
 	{
 		private Button startGameBtn;
+		private EditField efPlayerName;
 		
 		public UI()
 		{
@@ -31,11 +33,19 @@ public class HostGame extends GameState{
 			startGameBtn.setTheme("button");
 			startGameBtn.setText("Start Game");
 			add(startGameBtn);
+			
+			efPlayerName = new EditField();
+			efPlayerName.setTheme("editField");
+			efPlayerName.setText("Player 1");
+			add(efPlayerName);
 		}
 		@Override
 		protected void layout() {
 			startGameBtn.adjustSize();
-			startGameBtn.setPosition(100, 100);
+			startGameBtn.setPosition(300, 100);
+			
+			efPlayerName.setSize(300, 50);
+			efPlayerName.setPosition(10, 100);
 		}
 	}
 	public HostGame(StateManager sm) {
@@ -103,6 +113,7 @@ public class HostGame extends GameState{
 	@Override
 	public void exit() {
 		Game.removeClientListener(this);
+		gui.destroy();
 	}
 	public void connected(Connection c)
 	{

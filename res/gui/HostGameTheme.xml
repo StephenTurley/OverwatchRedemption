@@ -6,11 +6,30 @@
 	</images>
 	<images file="btnChrome.png">
 		<select name="btnChrome">
-			<alias ref="btnChromeH" if="selected | armed"/>
+			<alias ref="btnChromeH" if="selected | armed | hover"/>
 			<area xywh="*"/>
 		</select>
 	</images>
-	<fontDef name="normal" filename="font.fnt" color="orange">
+	<images file="simple.png" format="RGBA">
+		<area name="-frameA" xywh="0,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameB" xywh="10,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameC" xywh="20,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameD" xywh="30,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameE" xywh="40,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameF" xywh="50,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameG" xywh="60,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		<area name="-frameH" xywh="70,0,9,9" splitx="L3,R3" splity="T3,B3"/>
+		
+		<alias ref="-frameH" name="editfield.background"></alias>
+		
+ 		<area name="-editField.cursor" xywh="60,5,1,1"/>
+        <animation name="editField.cursor" timeSource="keyboardFocus">
+            <frame ref="-editField.cursor" duration="500"/>
+            <frame ref="none" duration="500"/>
+        </animation>
+        <area name="editField.selection" tint="#E000FEFF" xywh="1,1,1,1"/>
+	</images>
+		<fontDef name="normal" filename="font.fnt" color="orange">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="blue"/>
@@ -40,6 +59,15 @@
         <theme name="button" ref="-defaults">
                 <param name="background"><image>btnChrome</image></param>
                 <param name="textAlignment"><enum type="alignment">center</enum></param>
+        </theme>
+        <theme name="editField" ref="-defaults" allowWildcard="true">
+                <param name=""><image>editField.*</image></param>
+         	    <param name="background"><image>editfield.background</image></param>
+		        <param name="passwordChar"><int>0x25CF</int></param>
+		        <param name="maxWidth"><int>32767</int></param>
+		        <param name="columns"><int>5</int></param>
+		        <theme name="renderer" ref="-defaults"/>
+		        <param name="autocompletion-height"><int>150</int></param>
         </theme>
     </theme>
 </themes>
