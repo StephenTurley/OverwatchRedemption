@@ -36,6 +36,12 @@ public class HostGame extends GameState{
 			startGameBtn = new Button();
 			startGameBtn.setTheme("button");
 			startGameBtn.setText("Start Game");
+			startGameBtn.addCallback(new Runnable(){
+				public void run()
+				{
+					startServer();
+				}
+			});
 			add(startGameBtn);
 			
 			playerNameEdf = new EditField();
@@ -60,6 +66,10 @@ public class HostGame extends GameState{
 			
 			playerNameEdf.setSize(300, 50);
 			playerNameEdf.setPosition(nameLbl.getX() + nameLbl.getWidth() + 25, 100);
+		}
+		public String getPlayerName()
+		{
+			return playerNameEdf.getText();
 		}
 	}
 	public HostGame(StateManager sm) {
@@ -112,16 +122,13 @@ public class HostGame extends GameState{
 	        gui.applyTheme(theme);
 			
 			Debug.Trace("Host Game State has been entered!");
-			Game.startServer();
-			Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
-			Game.addClientListener(this);
+			
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 			Debug.Trace(e.getMessage());
 		}
-		//TODO: login in when when player hits start.
-		Game.clientSendTCP(new Network.Login("Player 1"));
+		
 	}
 
 	@Override
@@ -132,6 +139,14 @@ public class HostGame extends GameState{
 	public void connected(Connection c)
 	{
 		
+	}
+	private void startServer()
+	{
+		Game.startServer();
+		Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+		Game.addClientListener(this);
+		//TODO: login in when when player hits start.
+		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 	}
 	public void received (Connection c, Object object)
 	{
