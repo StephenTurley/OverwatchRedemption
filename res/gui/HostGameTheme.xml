@@ -29,11 +29,12 @@
         </animation>
         <area name="editField.selection" tint="#E000FEFF" xywh="1,1,1,1"/>
 	</images>
-		<fontDef name="normal" filename="font.fnt" color="orange">
+	<fontDef name="normal" filename="font.fnt" color="orange">
         <fontParam if="error" color="red"/>
         <fontParam if="disabled" color="gray"/>
         <fontParam if="textSelection" color="blue"/>
     </fontDef>
+    <fontDef name="black" filename="font.fnt" color="black"/>
     <inputMapDef name="-defaultInputMap">
         <action name="selectAll">ctrl A</action>
         <action name="cut">ctrl X</action>
@@ -59,15 +60,22 @@
         <theme name="button" ref="-defaults">
                 <param name="background"><image>btnChrome</image></param>
                 <param name="textAlignment"><enum type="alignment">center</enum></param>
+                <param name="font"><font>black</font></param>
         </theme>
         <theme name="editField" ref="-defaults" allowWildcard="true">
+                
                 <param name=""><image>editField.*</image></param>
 		        <param name="passwordChar"><int>0x25CF</int></param>
 		        <param name="maxWidth"><int>32767</int></param>
 		        <param name="columns"><int>5</int></param>
-		        <theme name="renderer" ref="-defaults"/>
+		        <theme name="renderer" ref="-defaults">
+		        	<param name="font"><font>black</font></param>
+		        </theme>
 		        <param name="autocompletion-height"><int>150</int></param>
 		        <param name="border"><border>5</border></param>
+        </theme>
+        <theme name="label" ref="-defaults">
+     		       
         </theme>
     </theme>
 </themes>

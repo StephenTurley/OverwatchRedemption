@@ -1,6 +1,8 @@
 package gameStates;
 
 
+import org.lwjgl.opengl.Display;
+
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
@@ -12,6 +14,7 @@ import core.stateManager.StateManager;
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.GUI;
+import de.matthiasmann.twl.Label;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
@@ -25,7 +28,8 @@ public class HostGame extends GameState{
 	private class UI extends Widget
 	{
 		private Button startGameBtn;
-		private EditField efPlayerName;
+		private EditField playerNameEdf;
+		private Label nameLbl;
 		
 		public UI()
 		{
@@ -34,18 +38,28 @@ public class HostGame extends GameState{
 			startGameBtn.setText("Start Game");
 			add(startGameBtn);
 			
-			efPlayerName = new EditField();
-			efPlayerName.setTheme("editField");
-			efPlayerName.setText("Player 1");
-			add(efPlayerName);
+			playerNameEdf = new EditField();
+			playerNameEdf.setTheme("editField");
+			playerNameEdf.setText("Player 1");
+			add(playerNameEdf);
+			
+			nameLbl = new Label("Player's Name:");
+			nameLbl.setTheme("label");
+			add(nameLbl);
 		}
 		@Override
 		protected void layout() {
-			startGameBtn.adjustSize();
-			startGameBtn.setPosition(300, 100);
+			int width = Display.getWidth();
+			int height = Display.getHeight();
 			
-			efPlayerName.setSize(300, 50);
-			efPlayerName.setPosition(10, 100);
+			startGameBtn.adjustSize();
+			startGameBtn.setPosition((width - startGameBtn.getWidth()) - 50, height - 150);
+			
+			nameLbl.adjustSize();
+			nameLbl.setPosition(50, 100);
+			
+			playerNameEdf.setSize(300, 50);
+			playerNameEdf.setPosition(nameLbl.getX() + nameLbl.getWidth() + 25, 100);
 		}
 	}
 	public HostGame(StateManager sm) {
