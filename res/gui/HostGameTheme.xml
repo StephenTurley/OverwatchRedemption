@@ -20,7 +20,7 @@
 		<area name="-frameG" xywh="60,0,9,9" splitx="L3,R3" splity="T3,B3"/>
 		<area name="-frameH" xywh="70,0,9,9" splitx="L3,R3" splity="T3,B3"/>
 		
-		<alias ref="-frameH" name="editfield.background"></alias>
+		<alias ref="-frameC" name="editField.background"></alias>
 		
  		<area name="-editField.cursor" xywh="60,5,1,1"/>
         <animation name="editField.cursor" timeSource="keyboardFocus">
@@ -62,12 +62,12 @@
         </theme>
         <theme name="editField" ref="-defaults" allowWildcard="true">
                 <param name=""><image>editField.*</image></param>
-         	    <param name="background"><image>editfield.background</image></param>
 		        <param name="passwordChar"><int>0x25CF</int></param>
 		        <param name="maxWidth"><int>32767</int></param>
 		        <param name="columns"><int>5</int></param>
 		        <theme name="renderer" ref="-defaults"/>
 		        <param name="autocompletion-height"><int>150</int></param>
+		        <param name="border"><border>5</border></param>
         </theme>
     </theme>
 </themes>
