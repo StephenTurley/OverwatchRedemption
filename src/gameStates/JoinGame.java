@@ -1,5 +1,6 @@
 package gameStates;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -113,10 +114,18 @@ public class JoinGame extends GameState {
 		
 	}
 
+	public void received (Connection c, Object object)
+	{
+		if(object instanceof SimpleMessage)
+		{
+			SimpleMessage msgPacket = (SimpleMessage)object;
+			System.out.println(msgPacket.msg);
+		}
+	}
+
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-
+		handleInput();
 	}
 
 	@Override
@@ -177,14 +186,22 @@ public class JoinGame extends GameState {
 		Game.addClientListener(this);
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 	}
-	
-	public void received (Connection c, Object object)
+	private void handleInput()
 	{
-		if(object instanceof SimpleMessage)
+		while(Keyboard.next())
 		{
-			SimpleMessage msgPacket = (SimpleMessage)object;
-			System.out.println(msgPacket.msg);
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
+				{
+					joinServer(uiWidget.hostNameEdf.getText(),Integer.parseInt(uiWidget.hostPortEdf.getText()));
+				}
+			}
 		}
 	}
-
+	
 }

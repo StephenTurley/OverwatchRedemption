@@ -1,6 +1,7 @@
 package gameStates;
 
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -81,9 +82,19 @@ public class HostGame extends GameState{
 	{
 		
 	}
+	
+	public void received (Connection c, Object object)
+	{
+		if(object instanceof SimpleMessage)
+		{
+			SimpleMessage msgPacket = (SimpleMessage)object;
+			System.out.println(msgPacket.msg);
+		}
+	}
+	
 	@Override
 	public void update(int delta) {
-		
+		handleInput();
 	}
 
 	@Override
@@ -148,13 +159,23 @@ public class HostGame extends GameState{
 		//TODO: login in when when player hits start.
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 	}
-	public void received (Connection c, Object object)
+	private void handleInput()
 	{
-		if(object instanceof SimpleMessage)
+		while(Keyboard.next())
 		{
-			SimpleMessage msgPacket = (SimpleMessage)object;
-			System.out.println(msgPacket.msg);
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
+				{
+					startServer();
+				}
+			}
 		}
 	}
+	
 
 }

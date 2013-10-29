@@ -1,5 +1,6 @@
 package gameStates;
 
+import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
@@ -46,13 +47,11 @@ public class QuitGame extends GameState {
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		Game.exit(0);
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 
 	}
 

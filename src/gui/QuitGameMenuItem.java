@@ -3,7 +3,6 @@ package gui;
 import gameStates.QuitGame;
 import core.MenuItem;
 import core.stateManager.GameState;
-import core.stateManager.StateManager;
 
 public class QuitGameMenuItem extends MenuItem {
 	

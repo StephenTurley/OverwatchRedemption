@@ -4,8 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import gui.*;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 
 import core.Debug;
 import core.Game;

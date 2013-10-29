@@ -1,5 +1,7 @@
 package gameStates;
 
+import org.lwjgl.input.Keyboard;
+
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
@@ -16,8 +18,7 @@ public class Options extends GameState {
 	}
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-
+		handleInput();
 	}
 
 	@Override
@@ -54,6 +55,20 @@ public class Options extends GameState {
 	public void exit() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void handleInput()
+	{
+		while(Keyboard.next())
+		{
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+			}
+		}
 	}
 
 }
