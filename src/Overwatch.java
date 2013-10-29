@@ -1,3 +1,5 @@
+import java.io.File;
+
 import gameStates.*;
 import core.*;
 import core.configurationManager.ConfigurationManger;

@@ -147,7 +147,7 @@ public class HostGame extends GameState{
 	@Override
 	public void exit() {
 		Game.removeClientListener(this);
-		Game.killServer();
+		if(Game.isServer) Game.killServer();
 		gui.destroy();
 		uiWidget.destroy();
 	}

@@ -5,7 +5,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import static org.lwjgl.opengl.GL11.*;
 
-import core.Debug;
 import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
