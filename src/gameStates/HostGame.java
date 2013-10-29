@@ -53,6 +53,7 @@ public class HostGame extends GameState{
 			nameLbl = new Label("Player's Name:");
 			nameLbl.setTheme("label");
 			add(nameLbl);
+			
 		}
 		@Override
 		protected void layout() {
@@ -128,6 +129,7 @@ public class HostGame extends GameState{
 			renderer = new LWJGLRenderer();
 			uiWidget = new UI();
 			gui = new GUI(uiWidget, renderer);
+			uiWidget.playerNameEdf.requestKeyboardFocus();
 			ThemeManager theme = ThemeManager.createThemeManager(
 	                UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
 	        gui.applyTheme(theme);
@@ -145,7 +147,9 @@ public class HostGame extends GameState{
 	@Override
 	public void exit() {
 		Game.removeClientListener(this);
+		Game.killServer();
 		gui.destroy();
+		uiWidget.destroy();
 	}
 	public void connected(Connection c)
 	{

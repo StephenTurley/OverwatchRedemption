@@ -136,13 +136,13 @@ public class JoinGame extends GameState {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		Game.addClientListener(this);
 
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		Game.removeClientListener(this);
 
 	}
 
@@ -160,6 +160,7 @@ public class JoinGame extends GameState {
 			renderer = new LWJGLRenderer();
 			uiWidget = new UI();
 			gui = new GUI(uiWidget, renderer);
+			uiWidget.playerNameEdf.requestKeyboardFocus();
 			ThemeManager theme = ThemeManager.createThemeManager(
 	                UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
 	        gui.applyTheme(theme);
@@ -176,8 +177,9 @@ public class JoinGame extends GameState {
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-
+		Game.removeClientListener(this);
+		gui.destroy();
+		uiWidget.destroy();
 	}
 	
 	private void joinServer(String host, int port)
