@@ -174,6 +174,9 @@ public class HostGame extends GameState{
 					startServer();
 				}
 			}
+			gui.handleKey(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.getEventKeyState());
+			gui.handleKeyRepeat();
+			gui.clearKeyboardState();
 		}
 	}
 	

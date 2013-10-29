@@ -192,6 +192,7 @@ public class JoinGame extends GameState {
 		{
 			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
 			{
+				
 				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
 				{
 					super.sm.pop();
@@ -200,8 +201,12 @@ public class JoinGame extends GameState {
 				{
 					joinServer(uiWidget.hostNameEdf.getText(),Integer.parseInt(uiWidget.hostPortEdf.getText()));
 				}
+				gui.handleKey(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.getEventKeyState());
+				gui.handleKeyRepeat();
+				gui.clearKeyboardState();
 			}
 		}
+		
 	}
 	
 }
