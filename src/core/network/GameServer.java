@@ -71,10 +71,6 @@ public class GameServer extends Listener{
 	 	{
 	 		
 	 	}
-	 	static class PlayerConnection extends Connection
-	 	{
-	 		public Player player; 
-	 	}
 	 	public void kill()
 	 	{
 	 		server.close();
