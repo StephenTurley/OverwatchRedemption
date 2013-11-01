@@ -1,8 +1,6 @@
 package serverStates;
 
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Server;
-
 import core.Debug;
 import core.network.GameServer;
 import core.network.Player;
