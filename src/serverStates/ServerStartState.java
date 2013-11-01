@@ -3,6 +3,8 @@ package serverStates;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
 
+import core.Debug;
+import core.network.GameServer;
 import core.network.Player;
 import core.network.Network.Login;
 import core.network.Network.SimpleMessage;
@@ -15,27 +17,26 @@ public class ServerStartState extends ServerState {
 	private Player player1;
 	private Player player2;
 
-	public ServerStartState(Server server, Player player1, Player player2) {
-		super(server);
+	public ServerStartState(GameServer gameServer, Player player1, Player player2) {
+		super(gameServer);
 		this.player1 = player1;
 		this.player2 = player2;
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
+	public void update(int delta) {
 		
 	}
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
+		Debug.Trace("ServerStartState entered!");
 		
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
+		Debug.Trace("ServerStartState exited!");
 		
 	}
 
@@ -63,11 +64,12 @@ public class ServerStartState extends ServerState {
 			else return; //all players logged in
 			
 			//send connection message to clients
-			server.sendToAllTCP(new SimpleMessage(player.name+" has connected"));
+			gameServer.getServer().sendToAllTCP(new SimpleMessage(player.name+" has connected"));
 			
 			if(player1 != null && player2 != null)
 			{
-				server.sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
+				gameServer.getServer().sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
+				gameServer.changeState(new ServerLobbyState(gameServer));
 			}
 		}
 	}

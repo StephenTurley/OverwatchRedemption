@@ -2,17 +2,18 @@ package core.stateManager;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
+
+import core.network.GameServer;
 
 public abstract class ServerState extends Listener {
 
-	protected Server server;
+	protected GameServer gameServer;
 	
-	public ServerState(Server server) {
-		this.server = server;
+	public ServerState(GameServer gameServer) {
+		this.gameServer = gameServer;
 	}
 	
-	public abstract void update();
+	public abstract void update(int delta);
 	public abstract void enter();
 	public abstract void exit();
 	@Override

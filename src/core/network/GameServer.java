@@ -3,17 +3,18 @@ package core.network;
 import serverStates.ServerStartState;
 
 import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import core.Debug;
 import core.Game;
+import core.stateManager.ServerState;
 
-public class GameServer extends Listener{
+public class GameServer{
 	
 		private Server server;
 		private Player player1;
 		private Player player2;
+		private ServerState currentState;
 
 		public void init()
 	 	{
@@ -23,7 +24,9 @@ public class GameServer extends Listener{
 	 			}
 	 		};
 	 		Network.register(server);
-	 		server.addListener(new ServerStartState(server, player1, player2));
+	 		currentState = new ServerStartState(this, player1, player2);
+	 		currentState.enter();
+	 		server.addListener(currentState);
 	 	}
 	 	public void start()
 	 	{
@@ -39,7 +42,16 @@ public class GameServer extends Listener{
 	 	}
 	 	public void update(int delta)
 	 	{
-	 		
+	 		currentState.update(delta);
+	 	}
+	 	
+	 	public void changeState(ServerState state)
+	 	{
+	 		server.removeListener(currentState);
+	 		currentState.exit();
+	 		currentState = state;
+	 		currentState.enter();
+	 		server.addListener(state);
 	 	}
 	 	
 	 	public void kill()
