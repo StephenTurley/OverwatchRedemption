@@ -187,6 +187,8 @@ public class JoinGame extends GameState {
 		Game.bindClient(5000, host, port, port);
 		Game.addClientListener(this);
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
+		
+		sm.push(new Lobby(sm));
 	}
 	private void handleInput()
 	{

@@ -1,5 +1,7 @@
 package core.network;
 
+import java.util.HashMap;
+
 import serverStates.ServerStartState;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -12,12 +14,12 @@ import core.stateManager.ServerState;
 public class GameServer{
 	
 		private Server server;
-		private Player player1;
-		private Player player2;
+		private HashMap<Integer, Player> players;
 		private ServerState currentState;
 
 		public void init()
 	 	{
+			players = new HashMap<Integer, Player>();
 	 		server = new Server(){
 	 			protected Connection newConnection(){
 	 				return new PlayerConnection();
@@ -45,18 +47,6 @@ public class GameServer{
 	 		currentState.update(delta);
 	 	}
 	 	
-	 	public Player getPlayer1() {
-			return player1;
-		}
-		public void setPlayer1(Player player1) {
-			this.player1 = player1;
-		}
-		public Player getPlayer2() {
-			return player2;
-		}
-		public void setPlayer2(Player player2) {
-			this.player2 = player2;
-		}
 		public void changeState(ServerState state)
 	 	{
 			//ServerStartState initializes listeners that are common for all states. They shouldn't be removed. 
@@ -74,6 +64,23 @@ public class GameServer{
 	 	public Server getServer()
 	 	{
 	 		return server;
+	 	}
+	 	
+	 	public void addPlayer(int id,Player player)
+	 	{
+	 		players.put(id, player);
+	 	}
+	 	public Player removePlayer(int id)
+	 	{
+	 		return players.remove(id);
+	 	}
+	 	public Player getPlayer(int id)
+	 	{
+	 		return players.get(id);
+	 	}
+	 	public int getPlayerCount()
+	 	{
+	 		return players.size();
 	 	}
 
 }

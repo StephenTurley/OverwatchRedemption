@@ -131,7 +131,8 @@ public class HostGame extends GameState{
 			gui = new GUI(uiWidget, renderer);
 			uiWidget.playerNameEdf.requestKeyboardFocus();
 			ThemeManager theme = ThemeManager.createThemeManager(
-	                UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
+
+					UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
 	        gui.applyTheme(theme);
 			
 			Debug.Trace("Host Game State has been entered!");
@@ -158,10 +159,14 @@ public class HostGame extends GameState{
 	private void startServer()
 	{
 		Game.startServer();
+
 		Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 		Game.addClientListener(this);
-		//TODO: login in when when player hits start.
+		
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
+		
+		sm.push(new Lobby(sm));
+		
 	}
 	private void handleInput()
 	{

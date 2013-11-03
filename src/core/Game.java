@@ -105,8 +105,11 @@ public class Game {
  	}
  	public static void killServer()
  	{
- 		isServer = false;
- 		gameServer.kill();
+ 		if(isServer)
+ 		{
+ 			isServer = false;
+ 			gameServer.kill();
+ 		}
  	}
  	public static void updateServer(int delta)
  	{
@@ -123,7 +126,10 @@ public class Game {
 			Game.exit(-1);
 		}	
  	}
- 	
+ 	public static void disconnectClient()
+ 	{
+ 		gameClient.close();
+ 	}
  	public static void removeClientListener(Listener listener)
  	{
  		if(gameClient != null)

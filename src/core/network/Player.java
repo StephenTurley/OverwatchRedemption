@@ -4,6 +4,7 @@ public class Player {
 
 	public String name;
 	public boolean ready;
+	public int id;
 	
 	public Player() {
 		this.ready = false;
