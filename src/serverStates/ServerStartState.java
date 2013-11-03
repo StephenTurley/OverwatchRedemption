@@ -12,13 +12,10 @@ import core.stateManager.ServerState;
 
 public class ServerStartState extends ServerState {
 	
-	private Player player1;
-	private Player player2;
 
-	public ServerStartState(GameServer gameServer, Player player1, Player player2) {
+
+	public ServerStartState(GameServer gameServer) {
 		super(gameServer);
-		this.player1 = player1;
-		this.player2 = player2;
 	}
 
 	@Override
@@ -57,14 +54,14 @@ public class ServerStartState extends ServerState {
 			String name =  ((Login)object).name;
 			player = new Player(name);
 			
-			if (player1 == null) player1 = player;
-			else if (player2 == null) player2 = player;
+			if (gameServer.getPlayer1() == null) gameServer.setPlayer1(player);
+			else if (gameServer.getPlayer2() == null) gameServer.setPlayer2(player);
 			else return; //all players logged in
 			
 			//send connection message to clients
 			gameServer.getServer().sendToAllTCP(new SimpleMessage(player.name+" has connected"));
 			
-			if(player1 != null && player2 != null)
+			if(gameServer.getPlayer1() != null && gameServer.getPlayer2() != null)
 			{
 				gameServer.getServer().sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
 				gameServer.changeState(new ServerLobbyState(gameServer));

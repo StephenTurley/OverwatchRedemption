@@ -24,7 +24,7 @@ public class GameServer{
 	 			}
 	 		};
 	 		Network.register(server);
-	 		currentState = new ServerStartState(this, player1, player2);
+	 		currentState = new ServerStartState(this);
 	 		currentState.enter();
 	 		server.addListener(currentState);
 	 	}
@@ -45,7 +45,19 @@ public class GameServer{
 	 		currentState.update(delta);
 	 	}
 	 	
-	 	public void changeState(ServerState state)
+	 	public Player getPlayer1() {
+			return player1;
+		}
+		public void setPlayer1(Player player1) {
+			this.player1 = player1;
+		}
+		public Player getPlayer2() {
+			return player2;
+		}
+		public void setPlayer2(Player player2) {
+			this.player2 = player2;
+		}
+		public void changeState(ServerState state)
 	 	{
 	 		server.removeListener(currentState);
 	 		currentState.exit();
