@@ -170,6 +170,7 @@ public class Game {
  	public static void exit(int status)
  	{
  		if(gameServer != null) gameServer.kill();
+ 		if(gameClient != null) gameClient.stop();
  		Display.destroy();
  		System.exit(status);
  	}

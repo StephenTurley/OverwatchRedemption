@@ -59,7 +59,8 @@ public class GameServer{
 		}
 		public void changeState(ServerState state)
 	 	{
-	 		server.removeListener(currentState);
+			//ServerStartState initializes listeners that are common for all states. They shouldn't be removed. 
+			if(!(currentState instanceof ServerStartState)) server.removeListener(currentState);
 	 		currentState.exit();
 	 		currentState = state;
 	 		currentState.enter();
