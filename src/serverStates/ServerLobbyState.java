@@ -67,7 +67,6 @@ public class ServerLobbyState extends ServerState {
 			if(gameServer.getPlayer1() != null && gameServer.getPlayer2() != null)
 			{
 				gameServer.getServer().sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
-				gameServer.changeState(new ServerLobbyState(gameServer));
 			}
 		}
 	}
