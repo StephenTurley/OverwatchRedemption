@@ -3,8 +3,11 @@ package gameStates;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import com.esotericsoftware.kryonet.Connection;
+
 import core.Debug;
 import core.Game;
+import core.network.Network.SimpleMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -117,6 +120,7 @@ public class Lobby extends GameState {
 	public void enter() {
 		try
 		{
+			Game.addClientListener(this);
 			//set up gui
 			renderer = new LWJGLRenderer();
 			uiWidget = new UI();
@@ -139,6 +143,15 @@ public class Lobby extends GameState {
 		Game.removeClientListener(this);
 		gui.destroy();
 		uiWidget.destroy();
+	}
+	
+	public void received (Connection c, Object object)
+	{
+		if(object instanceof SimpleMessage)
+		{
+			SimpleMessage msgPacket = (SimpleMessage)object;
+			System.out.println(msgPacket.msg);
+		}
 	}
 	
 	private void handleInput()
