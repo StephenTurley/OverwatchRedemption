@@ -12,6 +12,7 @@ public class Network {
 		kryo.register(Login.class);
 		kryo.register(PlayersPacket.class);
 		kryo.register(Player.class);
+		kryo.register(PlayerReady.class);
 	}
 	public static class ServerMessage
 	{
@@ -53,5 +54,9 @@ public class Network {
 		public void setThatPlayer(Player thatPlayer) {
 			this.thatPlayer = thatPlayer.clone();
 		}
+	}
+	public static class PlayerReady
+	{
+		public boolean isReady;
 	}
 }

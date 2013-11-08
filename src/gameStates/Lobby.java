@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
+import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
 import core.network.Player;
@@ -43,6 +44,12 @@ public class Lobby extends GameState {
 			readyBtn = new ToggleButton();
 			readyBtn.setTheme("button");
 			readyBtn.setText("Not Ready");
+			readyBtn.addCallback(new Runnable(){
+				public void run()
+				{
+					sendReady(readyBtn.isActive());
+				}
+			});
 			add(readyBtn);
 			
 			serverMsgLbl = new Label("");
@@ -88,7 +95,7 @@ public class Lobby extends GameState {
 		
 		}
 	}
-
+	
 	public Lobby(StateManager sm) {
 		super(sm);
 		
@@ -101,7 +108,6 @@ public class Lobby extends GameState {
 	@Override
 	public void update(int delta) {
 		if(!connected) sm.pop();
-		
 		handleInput();
 		
 		uiWidget.serverMsgLbl.setText(serverMsgModel);
@@ -109,19 +115,29 @@ public class Lobby extends GameState {
 		if(thisPlayer == null)
 		{
 			uiWidget.clientNameLbl.setText("Not Connected");
+			uiWidget.readyBtn.setText("Not Ready");
 		}
 		else
 		{
 			uiWidget.clientNameLbl.setText(thisPlayer.getName());
+			if(thisPlayer.isReady())
+				uiWidget.readyBtn.setText("Ready");
+			else
+				uiWidget.readyBtn.setText("Not Ready");
 		}
 		
 		if(thatPlayer == null)
 		{
 			uiWidget.otherNameLbl.setText("Not Connected");
+			uiWidget.readyLbl.setText("Not Ready");
 		}
 		else
 		{
 			uiWidget.otherNameLbl.setText(thatPlayer.getName());
+			if(thatPlayer.isReady())
+				uiWidget.readyLbl.setText("Ready");
+			else
+				uiWidget.readyLbl.setText("Not Ready");
 		}
 	}
 
@@ -216,6 +232,12 @@ public class Lobby extends GameState {
 			}
 		}
 		
+	}
+	private void sendReady(boolean ready)
+	{
+		PlayerReady readyPacket = new PlayerReady();
+		readyPacket.isReady=ready;
+		Game.clientSendTCP(readyPacket);
 	}
 	
 

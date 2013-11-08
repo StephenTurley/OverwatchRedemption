@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.network.GameServer;
+import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Player;
 import core.stateManager.ServerState;
@@ -61,6 +62,11 @@ public class ServerLobbyState extends ServerState {
 	
 	@Override
 	public void received(Connection c, Object object) {
+		if(object instanceof PlayerReady)
+		{
+			PlayerReady readyPacket = (PlayerReady)object;
+			gameServer.getPlayer(c.getID()).setReady(readyPacket.isReady);
+		}
 	}
 	@Override
 	public void disconnected(Connection c) {
