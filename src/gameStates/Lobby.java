@@ -35,7 +35,7 @@ public class Lobby extends GameState {
 		{
 			readyBtn = new ToggleButton();
 			readyBtn.setTheme("button");
-			readyBtn.setText("Start Game");
+			readyBtn.setText("Not Ready");
 			add(readyBtn);
 			
 			systemMsgLbl = new Label("");

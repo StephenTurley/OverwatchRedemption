@@ -23,11 +23,17 @@
 		<alias ref="-frameC" name="editField.background"></alias>
 		
  		<area name="-editField.cursor" xywh="60,5,1,1"/>
+ 		
         <animation name="editField.cursor" timeSource="keyboardFocus">
             <frame ref="-editField.cursor" duration="500"/>
             <frame ref="none" duration="500"/>
         </animation>
         <area name="editField.selection" tint="#E000FEFF" xywh="1,1,1,1"/>
+        
+		<select name="btnDefault" inset="-5">
+			<alias ref="-frameE" if="selected | armed"/>
+			<alias ref="-frameA"/>
+		</select>
 	</images>
 	<fontDef name="normal" filename="font.fnt" color="orange">
         <fontParam if="error" color="red"/>
@@ -58,7 +64,7 @@
     </theme>
     <theme name="ui" ref="-defaults">
         <theme name="button" ref="-defaults">
-                <param name="background"><image>btnChrome</image></param>
+                <param name="background"><image>btnDefault</image></param>
                 <param name="textAlignment"><enum type="alignment">center</enum></param>
                 <param name="font"><font>black</font></param>
         </theme>
