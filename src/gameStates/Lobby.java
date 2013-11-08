@@ -7,7 +7,9 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
+import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
+import core.network.Player;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -24,6 +26,9 @@ public class Lobby extends GameState {
     private GUI gui;
     
     private String serverMsgModel;
+    private Player thisPlayer;
+    private Player thatPlayer;
+    private boolean connected; 
 	
 	private class UI extends Widget
 	{
@@ -95,9 +100,29 @@ public class Lobby extends GameState {
 
 	@Override
 	public void update(int delta) {
+		if(!connected) sm.pop();
+		
 		handleInput();
 		
 		uiWidget.serverMsgLbl.setText(serverMsgModel);
+		
+		if(thisPlayer == null)
+		{
+			uiWidget.clientNameLbl.setText("Not Connected");
+		}
+		else
+		{
+			uiWidget.clientNameLbl.setText(thisPlayer.getName());
+		}
+		
+		if(thatPlayer == null)
+		{
+			uiWidget.otherNameLbl.setText("Not Connected");
+		}
+		else
+		{
+			uiWidget.otherNameLbl.setText(thatPlayer.getName());
+		}
 	}
 
 	@Override
@@ -124,6 +149,7 @@ public class Lobby extends GameState {
 
 	@Override
 	public void enter() {
+		connected = true;
 		try
 		{
 			Game.addClientListener(this);
@@ -136,6 +162,7 @@ public class Lobby extends GameState {
 	        gui.applyTheme(theme);
 			
 			Debug.Trace("Lobby State has been entered!");
+			
 			
 		}catch(Exception e)
 		{
@@ -150,14 +177,23 @@ public class Lobby extends GameState {
 		gui.destroy();
 		uiWidget.destroy();
 	}
-	
+	public void disconnected(Connection c) {
+		connected = false;
+	}
 	public void received (Connection c, Object object)
 	{
+		
 		if(object instanceof ServerMessage)
 		{
 			ServerMessage msgPacket = (ServerMessage)object;
 			serverMsgModel = msgPacket.msg;
 			Debug.Trace("Server Message: "+ msgPacket.msg);
+		}
+		else if(object instanceof PlayersPacket)
+		{
+			PlayersPacket playerPacket = (PlayersPacket)object;
+			thisPlayer = playerPacket.getThisPlayer();
+			thatPlayer = playerPacket.getThatPlayer();
 		}
 	}
 	

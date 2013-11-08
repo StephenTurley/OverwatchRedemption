@@ -66,9 +66,9 @@ public class GameServer{
 	 		return server;
 	 	}
 	 	
-	 	public void addPlayer(int id,Player player)
+	 	public void addPlayer(Player player)
 	 	{
-	 		players.put(id, player);
+	 		players.put(player.getId(), player);
 	 	}
 	 	public Player removePlayer(int id)
 	 	{
@@ -77,6 +77,10 @@ public class GameServer{
 	 	public Player getPlayer(int id)
 	 	{
 	 		return players.get(id);
+	 	}
+	 	public HashMap<Integer, Player> getPlayers()
+	 	{
+	 		return players;
 	 	}
 	 	public int getPlayerCount()
 	 	{

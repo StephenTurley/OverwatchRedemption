@@ -52,21 +52,21 @@ public class ServerStartState extends ServerState {
 			
 			String name =  ((Login)object).name;
 			player = new Player(name);
-			player.id = pc.getID();
+			player.setId(pc.getID());
 			pc.player = player;
 			
-			if (gameServer.getPlayer(player.id) == null)
+			if (gameServer.getPlayer(player.getId()) == null)
 			{
-				gameServer.addPlayer(player.id, player);
+				gameServer.addPlayer(player);
 			}
-			else if (gameServer.getPlayer(player.id) == null)
+			else if (gameServer.getPlayer(player.getId()) == null)
 			{
-				gameServer.addPlayer(player.id,player);
+				gameServer.addPlayer(player);
 			}
 			else return; //all players logged in
 			
 			//send connection message to clients
-			gameServer.getServer().sendToAllTCP(new ServerMessage(player.name+" has connected"));
+			gameServer.getServer().sendToAllTCP(new ServerMessage(player.getName()+" has connected"));
 			
 			if(gameServer.getPlayerCount() == 2)
 			{
@@ -80,9 +80,9 @@ public class ServerStartState extends ServerState {
 		PlayerConnection pc = (PlayerConnection)c;
 		
 		Player player = gameServer.getPlayer(pc.getID());
-		gameServer.removePlayer(player.id);
+		gameServer.removePlayer(player.getId());
 		
-		Debug.Trace(player.name +" has disconnectd");
+		Debug.Trace(player.getName() +" has disconnectd");
 	}
 
 	@Override

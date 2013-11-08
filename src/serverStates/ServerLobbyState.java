@@ -1,9 +1,13 @@
 package serverStates;
 
+import java.util.HashMap;
+
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.network.GameServer;
+import core.network.Network.PlayersPacket;
+import core.network.Player;
 import core.stateManager.ServerState;
 
 public class ServerLobbyState extends ServerState {
@@ -15,8 +19,27 @@ public class ServerLobbyState extends ServerState {
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
 
+		for(Connection c : gameServer.getServer().getConnections())
+		{
+			PlayersPacket playersPacket = new PlayersPacket();
+
+			HashMap<Integer, Player> players = gameServer.getPlayers();
+			
+			for(Player p : players.values())
+			{
+				if(p.getId() == c.getID())
+				{
+					playersPacket.setThisPlayer(p.clone());
+				}
+				else
+				{
+					playersPacket.setThatPlayer(p.clone());
+				}
+			}
+			
+			gameServer.getServer().sendToTCP(c.getID(),playersPacket);
+		}
 	}
 
 	@Override
@@ -38,7 +61,6 @@ public class ServerLobbyState extends ServerState {
 	
 	@Override
 	public void received(Connection c, Object object) {
-		
 	}
 	@Override
 	public void disconnected(Connection c) {

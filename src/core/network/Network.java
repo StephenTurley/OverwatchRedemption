@@ -10,6 +10,8 @@ public class Network {
 		Kryo kryo = endPoint.getKryo();
 		kryo.register(ServerMessage.class);
 		kryo.register(Login.class);
+		kryo.register(PlayersPacket.class);
+		kryo.register(Player.class);
 	}
 	public static class ServerMessage
 	{
@@ -33,6 +35,23 @@ public class Network {
 		public Login(String name)
 		{
 			this.name = name;
+		}
+	}
+	public static class PlayersPacket
+	{
+		private Player thisPlayer;
+		private Player thatPlayer;
+		public Player getThisPlayer() {
+			return thisPlayer;
+		}
+		public void setThisPlayer(Player thisPlayer) {
+			this.thisPlayer = thisPlayer.clone();
+		}
+		public Player getThatPlayer() {
+			return thatPlayer;
+		}
+		public void setThatPlayer(Player thatPlayer) {
+			this.thatPlayer = thatPlayer.clone();
 		}
 	}
 }
