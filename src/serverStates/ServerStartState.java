@@ -6,7 +6,7 @@ import core.network.GameServer;
 import core.network.Player;
 import core.network.PlayerConnection;
 import core.network.Network.Login;
-import core.network.Network.SimpleMessage;
+import core.network.Network.ServerMessage;
 import core.stateManager.ServerState;
 
 
@@ -66,11 +66,11 @@ public class ServerStartState extends ServerState {
 			else return; //all players logged in
 			
 			//send connection message to clients
-			gameServer.getServer().sendToAllTCP(new SimpleMessage(player.name+" has connected"));
+			gameServer.getServer().sendToAllTCP(new ServerMessage(player.name+" has connected"));
 			
 			if(gameServer.getPlayerCount() == 2)
 			{
-				gameServer.getServer().sendToAllTCP(new SimpleMessage("All players have connected, are you ready?"));
+				gameServer.getServer().sendToAllTCP(new ServerMessage("All players have connected, are you ready?"));
 			}
 		}
 

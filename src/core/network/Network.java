@@ -8,17 +8,17 @@ public class Network {
 	public static void register(EndPoint endPoint)
 	{
 		Kryo kryo = endPoint.getKryo();
-		kryo.register(SimpleMessage.class);
+		kryo.register(ServerMessage.class);
 		kryo.register(Login.class);
 	}
-	public static class SimpleMessage
+	public static class ServerMessage
 	{
 		public String msg;
-		public SimpleMessage()
+		public ServerMessage()
 		{
 			
 		}
-		public SimpleMessage(String msg)
+		public ServerMessage(String msg)
 		{
 			this.msg = msg;
 		}
@@ -35,5 +35,4 @@ public class Network {
 			this.name = name;
 		}
 	}
-
 }

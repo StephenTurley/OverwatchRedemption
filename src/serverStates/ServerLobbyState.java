@@ -8,8 +8,8 @@ import core.stateManager.ServerState;
 
 public class ServerLobbyState extends ServerState {
 
-	public ServerLobbyState(GameServer server) {
-		super(server);
+	public ServerLobbyState(GameServer gameServer) {
+		super(gameServer);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,12 +22,12 @@ public class ServerLobbyState extends ServerState {
 	@Override
 	public void enter() {
 		Debug.Trace("ServerLobbyState entered!");
+		
 	}
 
 	@Override
 	public void exit() {
 		Debug.Trace("ServerLobbyState exited!");
-
 	}
 
 	@Override

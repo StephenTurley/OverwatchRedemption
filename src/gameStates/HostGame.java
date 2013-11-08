@@ -9,7 +9,7 @@ import com.esotericsoftware.kryonet.Connection;
 import core.Debug;
 import core.Game;
 import core.network.Network;
-import core.network.Network.SimpleMessage;
+import core.network.Network.ServerMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.Button;
@@ -86,9 +86,9 @@ public class HostGame extends GameState{
 	
 	public void received (Connection c, Object object)
 	{
-		if(object instanceof SimpleMessage)
+		if(object instanceof ServerMessage)
 		{
-			SimpleMessage msgPacket = (SimpleMessage)object;
+			ServerMessage msgPacket = (ServerMessage)object;
 			System.out.println(msgPacket.msg);
 		}
 	}

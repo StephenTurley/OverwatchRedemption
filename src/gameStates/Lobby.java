@@ -7,7 +7,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
-import core.network.Network.SimpleMessage;
+import core.network.Network.ServerMessage;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -22,11 +22,13 @@ public class Lobby extends GameState {
 	private LWJGLRenderer renderer; 
     private UI uiWidget;
     private GUI gui;
+    
+    private String serverMsgModel;
 	
 	private class UI extends Widget
 	{
 		private ToggleButton readyBtn;
-		private Label systemMsgLbl;
+		private Label serverMsgLbl;
 		private Label clientNameLbl;
 		private Label otherNameLbl;
 		private Label readyLbl;
@@ -38,9 +40,9 @@ public class Lobby extends GameState {
 			readyBtn.setText("Not Ready");
 			add(readyBtn);
 			
-			systemMsgLbl = new Label("");
-			systemMsgLbl.setTheme("label");
-			add(systemMsgLbl);
+			serverMsgLbl = new Label("");
+			serverMsgLbl.setTheme("label");
+			add(serverMsgLbl);
 
 			clientNameLbl = new Label("Not Connected");
 			clientNameLbl.setTheme("label");
@@ -62,6 +64,8 @@ public class Lobby extends GameState {
 			int rightColumn = width - 600;
 			
 			int rowCoord = 200;
+			
+			serverMsgLbl.setPosition(5, 10);
 			
 			clientNameLbl.adjustSize();
 			clientNameLbl.setPosition(leftColumn, rowCoord);
@@ -92,6 +96,8 @@ public class Lobby extends GameState {
 	@Override
 	public void update(int delta) {
 		handleInput();
+		
+		uiWidget.serverMsgLbl.setText(serverMsgModel);
 	}
 
 	@Override
@@ -147,10 +153,11 @@ public class Lobby extends GameState {
 	
 	public void received (Connection c, Object object)
 	{
-		if(object instanceof SimpleMessage)
+		if(object instanceof ServerMessage)
 		{
-			SimpleMessage msgPacket = (SimpleMessage)object;
-			System.out.println(msgPacket.msg);
+			ServerMessage msgPacket = (ServerMessage)object;
+			serverMsgModel = msgPacket.msg;
+			Debug.Trace("Server Message: "+ msgPacket.msg);
 		}
 	}
 	
