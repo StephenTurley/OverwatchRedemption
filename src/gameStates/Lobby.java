@@ -58,8 +58,8 @@ public class Lobby extends GameState {
 		protected void layout() {
 			int width = Display.getWidth();
 			
-			int leftColumn = 150;
-			int rightColumn = width - 200;
+			int leftColumn = 400;
+			int rightColumn = width - 600;
 			
 			int rowCoord = 200;
 			
