@@ -48,7 +48,14 @@ public class ServerStartState extends ServerState {
 		if(object instanceof Login)
 		{
 			//ignore if already logged in or two players are logged in. 
-			if(player != null || gameServer.getPlayerCount() == 2) return;
+			if(player != null || gameServer.getPlayerCount() == 2)
+			{
+				if(!gameServer.isPlayerAuthenticated(pc))
+				{
+					pc.close();
+				}
+				return;
+			}
 			
 			String name =  ((Login)object).name;
 			player = new Player(name);
@@ -59,18 +66,15 @@ public class ServerStartState extends ServerState {
 			{
 				gameServer.addPlayer(player);
 			}
-			else if (gameServer.getPlayer(player.getId()) == null)
-			{
-				gameServer.addPlayer(player);
-			}
 			else return; //all players logged in
+		
 			
 			//send connection message to clients
-			gameServer.getServer().sendToAllTCP(new ServerMessage(player.getName()+" has connected"));
+			gameServer.sendToAuthenticatedTCP(new ServerMessage(player.getName()+" has connected"));
 			
 			if(gameServer.getPlayerCount() == 2)
 			{
-				gameServer.getServer().sendToAllTCP(new ServerMessage("All players have connected, are you ready?"));
+				gameServer.sendToAuthenticatedTCP(new ServerMessage("All players have connected, are you ready?"));
 			}
 		}
 
@@ -79,10 +83,18 @@ public class ServerStartState extends ServerState {
 	public void disconnected(Connection c) {
 		PlayerConnection pc = (PlayerConnection)c;
 		
-		Player player = gameServer.getPlayer(pc.getID());
-		gameServer.removePlayer(player.getId());
-		
-		Debug.Trace(player.getName() +" has disconnectd");
+		if(gameServer.isPlayerAuthenticated(pc))
+		{
+			Player player = gameServer.getPlayer(pc.getID());
+			gameServer.removePlayer(player.getId());
+			
+			Debug.Trace(player.getName() +" has disconnectd");
+		}
+		else
+		{
+			Debug.Trace("Connection was rejected!");
+		}
+			
 	}
 
 	@Override

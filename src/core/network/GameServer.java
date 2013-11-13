@@ -128,5 +128,24 @@ public class GameServer{
 			}
 			server.sendToAllTCP(new Network.ServerMessage(player.getName() + msg) );
 		}
+		
+		public boolean isPlayerAuthenticated(PlayerConnection playerConnection)
+		{
+			return !(players.get(playerConnection.getID()) == null);
+		}
+		public void sendToAuthenticatedTCP(Object object)
+		{
+			for(int id : players.keySet())
+			{
+				server.sendToTCP(id, object);
+			}
+		}
+		public void sendToAuthenticatedUDP(Object object)
+		{
+			for(int id : players.keySet())
+			{
+				server.sendToUDP(id, object);
+			}
+		}
 
 }
