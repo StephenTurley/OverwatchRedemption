@@ -31,6 +31,7 @@ public class Lobby extends GameState {
     private Player thisPlayer;
     private Player thatPlayer;
     private boolean connected; 
+    private boolean startGame;
 	
 	private class UI extends Widget
 	{
@@ -109,6 +110,7 @@ public class Lobby extends GameState {
 	@Override
 	public void update(int delta) {
 		if(!connected) sm.pop();
+		if(startGame) sm.push(new MovementTest(sm));
 		handleInput();
 		
 		uiWidget.serverMsgLbl.setText(serverMsgModel);
@@ -155,6 +157,7 @@ public class Lobby extends GameState {
 	@Override
 	public void pause() {
 		Game.removeClientListener(this);
+		startGame = false;
 
 	}
 
@@ -167,6 +170,7 @@ public class Lobby extends GameState {
 	@Override
 	public void enter() {
 		connected = true;
+		startGame = false;
 		try
 		{
 			Game.addClientListener(this);
@@ -214,7 +218,7 @@ public class Lobby extends GameState {
 		}
 		else if(object instanceof StartGame)
 		{
-			sm.push(new MovementTest(sm));
+			startGame = true;
 		}
 	}
 	
