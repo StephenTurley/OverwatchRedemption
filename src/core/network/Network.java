@@ -13,6 +13,7 @@ public class Network {
 		kryo.register(PlayersPacket.class);
 		kryo.register(Player.class);
 		kryo.register(PlayerReady.class);
+		kryo.register(StartGame.class);
 	}
 	public static class ServerMessage
 	{
@@ -58,5 +59,9 @@ public class Network {
 	public static class PlayerReady
 	{
 		public boolean isReady;
+	}
+	public static class StartGame
+	{
+		
 	}
 }

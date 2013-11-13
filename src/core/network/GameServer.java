@@ -16,7 +16,9 @@ public class GameServer{
 		private Server server;
 		private HashMap<Integer, Player> players;
 		private ServerState currentState;
+		private boolean playersReady;
 
+		
 		public void init()
 	 	{
 			players = new HashMap<Integer, Player>();
@@ -45,6 +47,16 @@ public class GameServer{
 	 	public void update(int delta)
 	 	{
 	 		currentState.update(delta);
+	 		
+	 		if(players.size() >=2 )
+	 		{
+		 		boolean tempReady = true;
+		 		for(Player p : players.values())
+		 		{
+		 			tempReady = tempReady && p.isReady(); 
+		 		}
+		 		playersReady = tempReady;
+	 		}
 	 	}
 	 	
 		public void changeState(ServerState state)
@@ -86,5 +98,31 @@ public class GameServer{
 	 	{
 	 		return players.size();
 	 	}
+	 	public boolean isPlayersReady() {
+			return playersReady;
+		}
+		public void setPlayersReady(boolean playersReady) {
+			
+			for(Player p : players.values())
+			{
+				p.setReady(playersReady);
+			}
+			this.playersReady = playersReady;
+		}
+		public void setPlayerReady(int playerID, boolean playerReady)
+		{
+			Player player =  players.get(playerID);
+			player.setReady(playerReady);
+			String msg;
+			if(playerReady)
+			{
+				msg = " is ready!";
+			}
+			else 
+			{
+				msg = " is not ready!";
+			}
+			server.sendToAllTCP(new Network.ServerMessage(player.getName() + msg) );
+		}
 
 }
