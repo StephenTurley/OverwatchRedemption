@@ -27,17 +27,22 @@ public class ServerLobbyState extends ServerState {
 		
 		if(gameServer.getPlayerCount() == 2 && gameServer.isPlayersReady())
 		{
-			//System.out.println(gameServer.getPlayerCount() + "   "+ gameServer.isPlayersReady()+"  "+delta);
+			System.out.println(gameServer.getPlayerCount() + "   "+ gameServer.isPlayersReady()+"  "+delta);
 			countdownRemaining -= delta;
 			int seconds = countdownRemaining / 1000;
 			gameServer.getServer().sendToAllTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
 		}else
 		{
-			countdownRemaining = TIME_TO_START;
+			if(countdownRemaining != TIME_TO_START)//timer had started but was stopped. 
+			{
+				gameServer.getServer().sendToAllTCP(new Network.ServerMessage("Are you ready?"));
+				countdownRemaining = TIME_TO_START;
+			}
 		}
 		if( countdownRemaining <= 0)
 		{
 			gameServer.getServer().sendToAllTCP(new Network.StartGame());
+			gameServer.changeState(new ServerLoadLevelState(gameServer));
 		}
 
 		for(Connection c : gameServer.getServer().getConnections())
@@ -71,6 +76,7 @@ public class ServerLobbyState extends ServerState {
 	@Override
 	public void exit() {
 		Debug.Trace("ServerLobbyState exited!");
+		gameServer.setPlayersReady(false);
 	}
 
 	@Override

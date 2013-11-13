@@ -53,7 +53,11 @@ public class GameServer{
 		 		boolean tempReady = true;
 		 		for(Player p : players.values())
 		 		{
-		 			tempReady = tempReady && p.isReady(); 
+		 			if(!p.isReady())
+		 			{
+		 				tempReady = false;
+		 				break;
+		 			}
 		 		}
 		 		playersReady = tempReady;
 	 		}
