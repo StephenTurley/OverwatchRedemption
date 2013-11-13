@@ -1,6 +1,7 @@
 syntax: regexp
 target      # maven output
 \.settings  # eclipse
+\.classpath
 res/config/GameConfig.cfg
 ^bin$
 test-output # eclipse junit/testng plugin output
