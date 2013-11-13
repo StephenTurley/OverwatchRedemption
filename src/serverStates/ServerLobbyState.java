@@ -35,6 +35,10 @@ public class ServerLobbyState extends ServerState {
 		{
 			countdownRemaining = TIME_TO_START;
 		}
+		if( countdownRemaining <= 0)
+		{
+			gameServer.getServer().sendToAllTCP(new Network.StartGame());
+		}
 
 		for(Connection c : gameServer.getServer().getConnections())
 		{

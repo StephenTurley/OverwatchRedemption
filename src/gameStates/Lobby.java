@@ -10,6 +10,7 @@ import core.Game;
 import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
+import core.network.Network.StartGame;
 import core.network.Player;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
@@ -210,6 +211,10 @@ public class Lobby extends GameState {
 			PlayersPacket playerPacket = (PlayersPacket)object;
 			thisPlayer = playerPacket.getThisPlayer();
 			thatPlayer = playerPacket.getThatPlayer();
+		}
+		else if(object instanceof StartGame)
+		{
+			sm.push(new MovementTest(sm));
 		}
 	}
 	
