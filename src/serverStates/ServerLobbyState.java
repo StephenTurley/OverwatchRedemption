@@ -27,7 +27,6 @@ public class ServerLobbyState extends ServerState {
 		
 		if(gameServer.getPlayerCount() == 2 && gameServer.isPlayersReady())
 		{
-			System.out.println(gameServer.getPlayerCount() + "   "+ gameServer.isPlayersReady()+"  "+delta);
 			countdownRemaining -= delta;
 			int seconds = countdownRemaining / 1000;
 			gameServer.getServer().sendToAllTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
