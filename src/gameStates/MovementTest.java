@@ -98,7 +98,7 @@ public class MovementTest extends GameState {
 	
 
 	private void handleInput(int delta){
-		
+		Vector2f tempVector = new Vector2f(0,0);
 		if(gamepad != null)
 		{
 			gamepad.poll();
@@ -125,8 +125,13 @@ public class MovementTest extends GameState {
 			Vector2f leftStickInput = new Vector2f(x,y);
 			if(leftStickInput.lengthSquared() > deadZone)
 			{
-				movementVector.x = leftStickInput.x;
-				movementVector.y = leftStickInput.y;
+				tempVector.x = leftStickInput.x;
+				tempVector.y = leftStickInput.y;
+			}
+			else
+			{
+				tempVector.x = 0;
+				tempVector.y = 0;
 			}
 		}
 		
@@ -140,40 +145,41 @@ public class MovementTest extends GameState {
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
-					movementVector.x = -1.0f;
+					tempVector.x = -1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
-					movementVector.x = 1.0f;
+					tempVector.x = 1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_W)
 				{
-					movementVector.y = -1.0f;
+					tempVector.y = -1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_S)
 				{
-					movementVector.y = 1.0f;
+					tempVector.y = 1.0f;
 				}
 			}else
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
-					movementVector.x = 0;
+					tempVector.x = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
-					movementVector.x = 0;
+					tempVector.x = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_W)
 				{
-					movementVector.y = 0;
+					tempVector.y = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_S)
 				{
-					movementVector.y = 0;
+					tempVector.y = 0;
 				}
 			}
 		}
+		movementVector = tempVector;
 	}
 	@Override
 	public void disconnected(Connection c) {

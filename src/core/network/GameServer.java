@@ -169,7 +169,7 @@ public class GameServer{
 							playersPacket.setThatPlayer(p.clone());
 						}
 					}
-					server.sendToTCP(pc.getID(),playersPacket);
+					server.sendToUDP(pc.getID(),playersPacket);
 				}
 				
 			}

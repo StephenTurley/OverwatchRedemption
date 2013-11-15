@@ -10,7 +10,6 @@ import org.lwjgl.opengl.DisplayMode;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.minlog.Log;
 
 
 import core.configurationManager.GameConfig;
