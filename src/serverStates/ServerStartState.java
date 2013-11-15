@@ -58,7 +58,7 @@ public class ServerStartState extends ServerState {
 			}
 			
 			String name =  ((Login)object).name;
-			player = new Player(name);
+			player = new Player(100, 100, name);
 			player.setId(pc.getID());
 			pc.player = player;
 			

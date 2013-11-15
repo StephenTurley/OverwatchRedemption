@@ -1,24 +1,33 @@
 package core;
 
+
 public abstract class Entity implements DrawableComponent {
 	
-	//private int locX, locY, width, height;
-	//private float scale, rotation;
-
-	public Entity() {
-		// TODO Auto-generated constructor stub
+	protected int locX, locY, width, height;
+	protected float scale, rotation;
+	
+	public Entity()
+	{
+		
+	}
+	
+	public Entity(int startX, int startY, int width, int height, float scale, float rotation) {
+		this.locX = startX;
+		this.locY = startY;
+		this.width = width;
+		this.height = height;
+		this.scale = scale;
+		this.rotation = rotation;
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-
+		
 	}
 	 
 	public void collideWith(Entity entity)
