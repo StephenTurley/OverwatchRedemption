@@ -1,5 +1,7 @@
 package core.network;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 
@@ -14,6 +16,8 @@ public class Network {
 		kryo.register(Player.class);
 		kryo.register(PlayerReady.class);
 		kryo.register(StartGame.class);
+		kryo.register(MovePlayer.class);
+		kryo.register(Vector2f.class);
 	}
 	public static class ServerMessage
 	{
@@ -59,9 +63,22 @@ public class Network {
 	public static class PlayerReady
 	{
 		public boolean isReady;
+		
+		public PlayerReady()
+		{
+			
+		}
+		public PlayerReady(boolean isReady)
+		{
+			this.isReady = isReady;
+		}
 	}
 	public static class StartGame
 	{
 		
+	}
+	public static class MovePlayer
+	{
+		public Vector2f movementVector;
 	}
 }

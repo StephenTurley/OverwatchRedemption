@@ -1,8 +1,13 @@
 package serverStates;
 
+
 import com.esotericsoftware.kryonet.Connection;
 
+import core.Debug;
 import core.network.GameServer;
+import core.network.Network;
+import core.network.Player;
+import core.network.PlayerConnection;
 import core.stateManager.ServerState;
 
 public class ServerGamePlayState extends ServerState {
@@ -14,14 +19,12 @@ public class ServerGamePlayState extends ServerState {
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-
+		gameServer.sendPlayersPacket();
 	}
 
 	@Override
 	public void enter() {
-		// TODO Auto-generated method stub
-
+		Debug.Trace("ServerGamePlayState entered!");
 	}
 
 	@Override
@@ -38,7 +41,17 @@ public class ServerGamePlayState extends ServerState {
 
 	@Override
 	public void received(Connection c, Object object) {
-		// TODO Auto-generated method stub
+		PlayerConnection pc = (PlayerConnection)c;
+		if(gameServer.isPlayerAuthenticated(pc))
+		{
+			if(object instanceof Network.MovePlayer)
+			{
+				Player player = gameServer.getPlayer(pc.getID());
+				
+				player.setMovementVector(((Network.MovePlayer)object).movementVector);
+				
+			}
+		}
 
 	}
 

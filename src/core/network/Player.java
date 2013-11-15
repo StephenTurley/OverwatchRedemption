@@ -1,5 +1,13 @@
 package core.network;
 
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glColor3f;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glVertex2f;
+
+import org.lwjgl.util.vector.Vector2f;
+
 import core.Entity;
 
 public class Player extends Entity{
@@ -7,28 +15,43 @@ public class Player extends Entity{
 	private String name;
 	private boolean ready;
 	private int id;
+	private Vector2f movementVector;
 	
 	private static final int WIDTH = 50;
 	private static final int HEIGHT = 50;
+	private static final float VELOCITY = 1.0f;
 	
 	public Player()
 	{
-	
+		init();
 	}
 	
 	public Player(int startX, int startY) {
 		super(startX, startY, WIDTH, HEIGHT, 1.0f, 0.0f);
 		this.ready = false;
+		init();
 	}
 	public Player(int startX, int startY, String name)
 	{
 		super(startX, startY, WIDTH, HEIGHT, 1.0f, 0.0f);
 		this.name = name;
 		this.ready = false;
+		init();
+	}
+	public Player(String name)
+	{
+		super(WIDTH,HEIGHT);
+		this.name = name;
+		this.ready = false;
+		init();
+	}
+	private void init()
+	{
+		movementVector = new Vector2f(0,0);
 	}
 	public Player clone()
 	{
-		Player p = new Player(super.locX, super.locY, this.name);
+		Player p = new Player(super.posX, super.posY, this.name);
 		
 		p.setReady(this.isReady());
 		p.setId(this.getId());
@@ -53,6 +76,31 @@ public class Player extends Entity{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void setMovementVector(Vector2f movementVector)
+	{
+		//value copy... not sure if I have to do this but I don't want it getting changed. 
+		this.movementVector = new Vector2f(movementVector.x, movementVector.y);	
+	}
+	@Override
+	public void update(int delta)
+	{
+		posX += movementVector.x * VELOCITY * delta;
+		posY += movementVector.y * VELOCITY * delta;
+	}
+
+	@Override
+	public void draw()
+	{
+		glColor3f(0.5f,0.5f,1.0f);
+
+		// draw quad
+		glBegin(GL_QUADS);
+			glVertex2f(posX , posY);  					//TL
+			glVertex2f(posX + width , posY);			//TR
+			glVertex2f(posX + width , posY + height);	//BR
+			glVertex2f(posX , posY + height);			//BL
+		glEnd();
 	}
 
 }

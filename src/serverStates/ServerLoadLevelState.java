@@ -1,8 +1,11 @@
 package serverStates;
 
+import org.lwjgl.opengl.Display;
+
 import com.esotericsoftware.kryonet.Connection;
 
 import core.network.GameServer;
+import core.network.Player;
 import core.stateManager.ServerState;
 
 public class ServerLoadLevelState extends ServerState {
@@ -20,6 +23,14 @@ public class ServerLoadLevelState extends ServerState {
 
 	@Override
 	public void enter() {
+		//lets arbitrarily set the start position until we have it loaded via XML
+		int i = 1;
+		for(Player p : gameServer.getPlayers().values())
+		{
+			p.setPosX(200 * i);
+			p.setPosY(Display.getHeight() - 200);
+			i++;
+		}
 		gameServer.changeState(new ServerGamePlayState(gameServer));
 	}
 

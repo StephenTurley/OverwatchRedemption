@@ -1,16 +1,12 @@
 package serverStates;
 
-import java.util.HashMap;
+
 
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.network.GameServer;
 import core.network.Network;
-import core.network.PlayerConnection;
-import core.network.Network.PlayerReady;
-import core.network.Network.PlayersPacket;
-import core.network.Player;
 import core.stateManager.ServerState;
 
 public class ServerLobbyState extends ServerState {
@@ -45,31 +41,7 @@ public class ServerLobbyState extends ServerState {
 			gameServer.changeState(new ServerLoadLevelState(gameServer));
 		}
 
-		for(Connection c : gameServer.getServer().getConnections())
-		{
-			PlayerConnection pc = (PlayerConnection)c;
-			if(gameServer.isPlayerAuthenticated(pc))
-			{
-				PlayersPacket playersPacket = new PlayersPacket();
-	
-				HashMap<Integer, Player> players = gameServer.getPlayers();
-				
-				for(Player p : players.values())
-				{
-					if(p.getId() == pc.getID())
-					{
-						playersPacket.setThisPlayer(p.clone());
-					}
-					else
-					{
-						playersPacket.setThatPlayer(p.clone());
-					}
-				}
-				gameServer.getServer().sendToTCP(pc.getID(),playersPacket);
-			}
-			
-			
-		}
+		gameServer.sendPlayersPacket();
 	}
 
 	@Override
@@ -92,15 +64,7 @@ public class ServerLobbyState extends ServerState {
 	
 	@Override
 	public void received(Connection c, Object object) {
-		PlayerConnection pc = (PlayerConnection)c;
-		if(gameServer.isPlayerAuthenticated(pc))
-		{
-			if(object instanceof PlayerReady)
-			{
-				PlayerReady readyPacket = (PlayerReady)object;
-				gameServer.setPlayerReady(pc.getID(), readyPacket.isReady);
-			}
-		}
+		
 	}
 	@Override
 	public void disconnected(Connection c) {

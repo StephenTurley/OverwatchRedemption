@@ -9,6 +9,7 @@ import com.esotericsoftware.kryonet.Server;
 
 import core.Debug;
 import core.Game;
+import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
 
 public class GameServer{
@@ -53,6 +54,7 @@ public class GameServer{
 		 		boolean tempReady = true;
 		 		for(Player p : players.values())
 		 		{
+		 			p.update(delta);
 		 			if(!p.isReady())
 		 			{
 		 				tempReady = false;
@@ -145,6 +147,31 @@ public class GameServer{
 			for(int id : players.keySet())
 			{
 				server.sendToUDP(id, object);
+			}
+		}
+		public void sendPlayersPacket()
+		{
+			for(Connection c : server.getConnections())
+			{
+				PlayerConnection pc = (PlayerConnection)c;
+				if(isPlayerAuthenticated(pc))
+				{
+					PlayersPacket playersPacket = new PlayersPacket();
+					
+					for(Player p : players.values())
+					{
+						if(p.getId() == pc.getID())
+						{
+							playersPacket.setThisPlayer(p.clone());
+						}
+						else
+						{
+							playersPacket.setThatPlayer(p.clone());
+						}
+					}
+					server.sendToTCP(pc.getID(),playersPacket);
+				}
+				
 			}
 		}
 

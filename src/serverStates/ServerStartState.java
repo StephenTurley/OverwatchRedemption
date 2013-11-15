@@ -6,6 +6,7 @@ import core.network.GameServer;
 import core.network.Player;
 import core.network.PlayerConnection;
 import core.network.Network.Login;
+import core.network.Network.PlayerReady;
 import core.network.Network.ServerMessage;
 import core.stateManager.ServerState;
 
@@ -58,7 +59,7 @@ public class ServerStartState extends ServerState {
 			}
 			
 			String name =  ((Login)object).name;
-			player = new Player(100, 100, name);
+			player = new Player(name);
 			player.setId(pc.getID());
 			pc.player = player;
 			
@@ -75,6 +76,15 @@ public class ServerStartState extends ServerState {
 			if(gameServer.getPlayerCount() == 2)
 			{
 				gameServer.sendToAuthenticatedTCP(new ServerMessage("All players have connected, are you ready?"));
+			}
+		}
+		
+		if(gameServer.isPlayerAuthenticated(pc))
+		{
+			if(object instanceof PlayerReady)
+			{
+				PlayerReady readyPacket = (PlayerReady)object;
+				gameServer.setPlayerReady(pc.getID(), readyPacket.isReady);
 			}
 		}
 

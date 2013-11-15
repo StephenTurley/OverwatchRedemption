@@ -10,6 +10,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.minlog.Log;
 
 
 import core.configurationManager.GameConfig;
@@ -120,6 +121,7 @@ public class Game {
  		try
  		{
 			gameClient.connect(timeout, host, tcp, udp);
+			gameClient.setKeepAliveUDP(500);
 		}catch(Exception e)
 		{
 			Debug.Trace(e.getMessage());
