@@ -98,8 +98,7 @@ public class MovementTest extends GameState {
 	
 
 	private void handleInput(int delta){
-		Vector2f tempVector = new Vector2f(0,0);
-		if(gamepad != null)
+		/*if(gamepad != null)
 		{
 			gamepad.poll();
 			float x = 0;
@@ -133,7 +132,7 @@ public class MovementTest extends GameState {
 				tempVector.x = 0;
 				tempVector.y = 0;
 			}
-		}
+		}*/
 		
 		while(Keyboard.next())
 		{
@@ -145,41 +144,40 @@ public class MovementTest extends GameState {
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
-					tempVector.x = -1.0f;
+					movementVector.x = -1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
-					tempVector.x = 1.0f;
+					movementVector.x = 1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_W)
 				{
-					tempVector.y = -1.0f;
+					movementVector.y = -1.0f;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_S)
 				{
-					tempVector.y = 1.0f;
+					movementVector.y = 1.0f;
 				}
-			}else
+			}else 
 			{
 				if(Keyboard.getEventKey() == Keyboard.KEY_A)
 				{
-					tempVector.x = 0;
+					movementVector.x = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_D)
 				{
-					tempVector.x = 0;
+					movementVector.x = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_W)
 				{
-					tempVector.y = 0;
+					movementVector.y = 0;
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_S)
 				{
-					tempVector.y = 0;
+					movementVector.y = 0;
 				}
 			}
 		}
-		movementVector = tempVector;
 	}
 	@Override
 	public void disconnected(Connection c) {
