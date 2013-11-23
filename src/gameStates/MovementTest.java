@@ -11,7 +11,7 @@ import core.Debug;
 import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
-import net.java.games.input.*;
+//import net.java.games.input.*;
 import core.network.*;
 import core.network.Network.MovePlayer;
 import core.network.Network.PlayersPacket;
@@ -20,9 +20,9 @@ import core.network.Network.PlayersPacket;
 public class MovementTest extends GameState {
 
 
-	private float deadZone;
+	//private float deadZone;
 	private Vector2f movementVector;
-	private Controller gamepad;
+	//private Controller gamepad;
 	
 	private Player thisPlayer; 
 	private Player thatPlayer;
@@ -72,11 +72,11 @@ public class MovementTest extends GameState {
 	
 	public void enter()
 	{
-		deadZone = Game.getGameConfig().getJoyStickDeadZone();
+		//deadZone = Game.getGameConfig().getJoyStickDeadZone();
 		
 		movementVector = new Vector2f(0,0);
 		
-		gamepad = Game.getGamePad();
+		//gamepad = Game.getGamePad();
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
