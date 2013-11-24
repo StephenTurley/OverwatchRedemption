@@ -90,7 +90,7 @@ public class GameStart extends GameState {
 		init();
 		
 		try{
-			InputStream is = ResourceLoader.getResourceAsStream("res/fonts/unispace rg.ttf");
+			InputStream is = ResourceLoader.getResourceAsStream("fonts/unispace rg.ttf");
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
 			unispace = unispace.deriveFont(48f);

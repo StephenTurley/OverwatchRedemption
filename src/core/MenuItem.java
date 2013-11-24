@@ -11,7 +11,7 @@ import java.awt.Font;
 
 public abstract class MenuItem implements DrawableComponent {
 	
-	private final String FONT_PATH = "res/fonts/unispace rg.ttf";
+	private final String FONT_PATH = "fonts/unispace rg.ttf";
 	private TrueTypeFont item;
 	private TrueTypeFont itemSelected;
 	private float selectedFontSize;
