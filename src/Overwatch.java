@@ -1,4 +1,4 @@
-import com.esotericsoftware.minlog.Log;
+//import com.esotericsoftware.minlog.Log;
 
 import gameStates.*;
 import core.*;
@@ -10,7 +10,10 @@ public class Overwatch {
 	
 	public static void main(String[] args)
 	{
-		Log.set(Log.LEVEL_DEBUG);
+		//Log.set(Log.LEVEL_DEBUG);
+		//System.getProperties().list(System.out);
+		System.out.println("User operating system: " + System.getProperty("os.name"));
+		System.out.println("User home directory: " + System.getProperty("user.home"));
 		game = new Game(ConfigurationManger.loadConfiguration());
 		game.start(new GameStart(game.getStateManager()));
 	}

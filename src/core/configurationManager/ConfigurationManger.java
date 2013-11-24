@@ -3,17 +3,21 @@ package core.configurationManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import core.Debug;
 import core.Game;
 
 
 public class ConfigurationManger {
+
+	private static final String CONFIG_PATH = "/config/GameConfig.cfg";
 	
-	private static final String CONFIG_PATH = "res/config/GameConfig.cfg";
+	private static InputStreamReader sr;
 	
 	public static GameConfig loadConfiguration()
 	{
+		sr = new InputStreamReader(ConfigurationManger.class.getClass().getResourceAsStream(CONFIG_PATH));
 		GameConfig config = parseGameConfig();
 		
 		return config;
@@ -23,7 +27,7 @@ public class ConfigurationManger {
 	{
 		GameConfig config = new GameConfig();
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(CONFIG_PATH));
+			BufferedReader br = new BufferedReader(sr);
 			String line = null;
 			while((line = br.readLine()) != null)
 			{
