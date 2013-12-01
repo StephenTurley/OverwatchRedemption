@@ -1,0 +1,23 @@
+# The URL from which the client is downloaded
+appbase = http://overwatchredemption.com/update
+
+# UI Configuration
+ui.name = My Application
+
+# Application jar files
+code = overwatch.jar
+
+# The main entry point for the application
+class = Overwatch
+
+resource = [linux] native/liblwjgl64.so
+resource = [linux] native/liblwjgl.so
+resource = [linux] native/libopenal.so
+resource = [linux] native/libopenal64.so
+resource = [windows] native/lwjgl.dll
+resource = [windows] native/lwjgl64.dll
+resource = [windows] native/OpenAL32.dll
+resource = [windows] native/OpenAL64.dll
+resource = [mac os x] native/liblwjgl.jnilib
+resource = [mac os x] native/openal.dylib
+jvmarg = -Djava.library.path=%APPDIR%/native
