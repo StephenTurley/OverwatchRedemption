@@ -6,6 +6,12 @@
  ******************************************************************************/
 package core.level;
 
+import java.io.InputStream;
+
 public class ServerLevel {
+
+	public ServerLevel(InputStream fileStream) {
+		
+	}
 
 }

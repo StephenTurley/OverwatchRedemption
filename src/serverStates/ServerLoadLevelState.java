@@ -10,6 +10,9 @@ import org.lwjgl.opengl.Display;
 
 import com.esotericsoftware.kryonet.Connection;
 
+import core.Debug;
+import core.exception.LevelNotFoundException;
+import core.level.LevelManager;
 import core.network.GameServer;
 import core.network.Player;
 import core.stateManager.ServerState;
@@ -18,7 +21,6 @@ public class ServerLoadLevelState extends ServerState {
 
 	public ServerLoadLevelState(GameServer gameServer) {
 		super(gameServer);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -29,6 +31,14 @@ public class ServerLoadLevelState extends ServerState {
 
 	@Override
 	public void enter() {
+		try
+		{
+			gameServer.setCurrentLevel(LevelManager.loadServerLevel(0, 0));
+		}
+		catch (LevelNotFoundException e)
+		{
+			Debug.Trace("Level not found");
+		}
 		//lets arbitrarily set the start position until we have it loaded via XML
 		int i = 1;
 		for(Player p : gameServer.getPlayers().values())

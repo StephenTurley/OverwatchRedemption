@@ -15,6 +15,7 @@ import com.esotericsoftware.kryonet.Server;
 
 import core.Debug;
 import core.Game;
+import core.level.ServerLevel;
 import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
 
@@ -24,6 +25,7 @@ public class GameServer{
 		private HashMap<Integer, Player> players;
 		private ServerState currentState;
 		private boolean playersReady;
+		private ServerLevel currentLevel;
 
 		
 		public void init()
@@ -179,6 +181,12 @@ public class GameServer{
 				}
 				
 			}
+		}
+		public ServerLevel getCurrentLevel() {
+			return currentLevel;
+		}
+		public void setCurrentLevel(ServerLevel currentLevel) {
+			this.currentLevel = currentLevel;
 		}
 
 }

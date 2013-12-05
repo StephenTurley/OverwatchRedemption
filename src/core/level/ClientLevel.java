@@ -6,6 +6,12 @@
  ******************************************************************************/
 package core.level;
 
+import java.io.InputStream;
+
 public class ClientLevel {
+
+	public ClientLevel(InputStream fileStream) {
+		// TODO Auto-generated constructor stub
+	}
 
 }

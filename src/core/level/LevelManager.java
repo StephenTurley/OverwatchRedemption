@@ -6,6 +6,36 @@
  ******************************************************************************/
 package core.level;
 
-public class LevelManager {
+import java.io.InputStream;
 
+import core.exception.LevelNotFoundException;
+
+public class LevelManager {
+	
+	public static ServerLevel loadServerLevel(int stage, int level) throws LevelNotFoundException
+	{
+		ServerLevel	sl = new ServerLevel(getFileStream(stage,level));
+		return sl;
+	}
+	
+	public static ClientLevel loadClientLevel(int stage, int level) throws LevelNotFoundException
+	{
+		ClientLevel cl = new ClientLevel(getFileStream(stage,level));
+		return cl;
+	}
+	
+	private static InputStream getFileStream(int stage, int level) throws LevelNotFoundException
+	{
+		String filePath = String.format("/levels/Level%d-%d.tmx",stage,level);
+		InputStream levelStream = LevelManager.class.getResourceAsStream(filePath);
+		
+		if(levelStream == null)
+		{
+			throw new LevelNotFoundException();
+		}
+		
+		return levelStream;
+		
+	}
+	
 }
