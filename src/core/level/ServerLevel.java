@@ -9,9 +9,18 @@ package core.level;
 import java.io.InputStream;
 
 public class ServerLevel {
+	
+	private int mapWidth;
+	private int mapHeight;
+	private int tileWidth;
+	private int tileHeight;
+	
+	
 
 	public ServerLevel(InputStream fileStream) {
-		
+		MapParser mp = new MapParser(fileStream);
+	
 	}
+	
 
 }
