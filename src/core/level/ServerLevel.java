@@ -17,10 +17,63 @@ public class ServerLevel {
 	
 	
 
+
 	public ServerLevel(InputStream fileStream) {
 		MapParser mp = new MapParser(fileStream);
+		mapWidth = mp.getWidth();
+		mapHeight = mp.getHeight();
+		tileWidth = mp.getTileWidth();
+		tileHeight = mp.getTileHeight();
 	
 	}
 	
+	public int getMapWidth() {
+		return mapWidth;
+	}
+
+
+
+	public void setMapWidth(int mapWidth) {
+		this.mapWidth = mapWidth;
+	}
+
+
+
+	public int getMapHeight() {
+		return mapHeight;
+	}
+
+
+
+	public void setMapHeight(int mapHeight) {
+		this.mapHeight = mapHeight;
+	}
+
+
+
+	public int getTileWidth() {
+		return tileWidth;
+	}
+
+
+
+	public void setTileWidth(int tileWidth) {
+		this.tileWidth = tileWidth;
+	}
+
+
+
+	public int getTileHeight() {
+		return tileHeight;
+	}
+
+
+
+	public void setTileHeight(int tileHeight) {
+		this.tileHeight = tileHeight;
+	}
+
+
+
 
 }

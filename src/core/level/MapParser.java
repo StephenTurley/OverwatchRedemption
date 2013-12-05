@@ -12,8 +12,10 @@ import java.io.InputStream;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.Element;
 
 import core.Debug;
+
 
 public class MapParser {
 	
@@ -34,5 +36,25 @@ public class MapParser {
 			Debug.Trace(e.getMessage());
 		}
 	}
-
+	
+	public int getWidth()
+	{
+		Element map = mapData.getRootElement();
+		return Integer.parseInt(map.getAttribute("width").getValue());
+	}
+	public int getHeight()
+	{
+		Element map = mapData.getRootElement();
+		return Integer.parseInt(map.getAttribute("height").getValue());
+	}
+	public int getTileWidth()
+	{
+		Element map = mapData.getRootElement();
+		return Integer.parseInt(map.getAttribute("tilewidth").getValue());
+	}
+	public int getTileHeight()
+	{
+		Element map = mapData.getRootElement();
+		return Integer.parseInt(map.getAttribute("tileheight").getValue());
+	}
 }
