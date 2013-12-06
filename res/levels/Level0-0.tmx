@@ -113,8 +113,8 @@
   <object type="transition" x="5120" y="5888">
    <polyline points="0,0 256,0"/>
   </object>
-  <object type="startingPoint" gid="13" x="4352" y="9984"/>
-  <object type="startingPoint" gid="13" x="5632" y="9984"/>
+  <object type="startingPoint" gid="13" x="100" y="200"/>
+  <object type="startingPoint" gid="13" x="300" y="200"/>
   <object type="goal" x="4864" y="2048" width="512" height="256"/>
   <object type="collision" x="5119" y="5633">
    <polyline points="0,0 44,255"/>

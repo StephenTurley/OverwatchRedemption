@@ -8,13 +8,16 @@ package core.level;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.Element;
+import org.lwjgl.util.Point;
 
 import core.Debug;
+import core.exception.LevelComponentsNotSatisfiedException;
 
 
 public class MapParser {
@@ -57,4 +60,25 @@ public class MapParser {
 		Element map = mapData.getRootElement();
 		return Integer.parseInt(map.getAttribute("tileheight").getValue());
 	}
+	public ArrayList<Point>	getStartingPoints() throws LevelComponentsNotSatisfiedException
+	{
+		ArrayList<Point> startingPoints = new ArrayList<Point>();
+		
+		Element map = mapData.getRootElement();
+		for(Element og : map.getChildren("objectgroup"))
+		{
+			for(Element e : og.getChildren())
+			{
+				if (e.getAttributeValue("type").equals("startingPoint"))
+				{
+					startingPoints.add(new Point(Integer.parseInt(e.getAttributeValue("x")),
+												 Integer.parseInt(e.getAttributeValue("y"))));
+				}
+			}
+		}
+		if(startingPoints == null || startingPoints.size() < 2) 
+			throw new LevelComponentsNotSatisfiedException("A map must contain at least two startingPoints");
+		return startingPoints;
+	}
+	
 }

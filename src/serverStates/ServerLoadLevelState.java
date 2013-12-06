@@ -6,7 +6,7 @@
  ******************************************************************************/
 package serverStates;
 
-import org.lwjgl.opengl.Display;
+import org.lwjgl.util.Point;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -39,12 +39,12 @@ public class ServerLoadLevelState extends ServerState {
 		{
 			Debug.Trace("Level not found");
 		}
-		//lets arbitrarily set the start position until we have it loaded via XML
-		int i = 1;
+		int i = 0;
 		for(Player p : gameServer.getPlayers().values())
 		{
-			p.setPosX(200 * i);
-			p.setPosY(Display.getHeight() - 200);
+			Point startingPoint = gameServer.getCurrentLevel().getStartingPoints().get(i);
+			p.setPosX(startingPoint.getX());
+			p.setPosY(startingPoint.getY());
 			i++;
 		}
 		gameServer.changeState(new ServerGamePlayState(gameServer));

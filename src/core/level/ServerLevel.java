@@ -7,6 +7,13 @@
 package core.level;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+
+import org.lwjgl.util.Point;
+
+import core.Debug;
+import core.Game;
+import core.exception.LevelComponentsNotSatisfiedException;
 
 public class ServerLevel {
 	
@@ -14,16 +21,25 @@ public class ServerLevel {
 	private int mapHeight;
 	private int tileWidth;
 	private int tileHeight;
-	
+	private ArrayList<Point> startingPoints;
 	
 
 
 	public ServerLevel(InputStream fileStream) {
-		MapParser mp = new MapParser(fileStream);
-		mapWidth = mp.getWidth();
-		mapHeight = mp.getHeight();
-		tileWidth = mp.getTileWidth();
-		tileHeight = mp.getTileHeight();
+		try
+		{
+			MapParser mp = new MapParser(fileStream);
+			mapWidth = mp.getWidth();
+			mapHeight = mp.getHeight();
+			tileWidth = mp.getTileWidth();
+			tileHeight = mp.getTileHeight();
+			setStartingPoints(mp.getStartingPoints());
+		}
+		catch(LevelComponentsNotSatisfiedException e)
+		{
+			Debug.Trace(e.getMessage());
+			Game.exit(-1);
+		}
 	
 	}
 	
@@ -71,6 +87,14 @@ public class ServerLevel {
 
 	public void setTileHeight(int tileHeight) {
 		this.tileHeight = tileHeight;
+	}
+
+	public ArrayList<Point> getStartingPoints() {
+		return startingPoints;
+	}
+
+	public void setStartingPoints(ArrayList<Point> startingPoints) {
+		this.startingPoints = startingPoints;
 	}
 
 
