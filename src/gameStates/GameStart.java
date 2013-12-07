@@ -59,6 +59,7 @@ public class GameStart extends GameState {
 	@Override
 	public void draw() {
 		
+		
 		titleFont.drawString((Game.getGameConfig().getDisplayWidth()/2)-(titleFont.getWidth(titleText)/2),
 				(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight()/2) ,
 				titleText,Color.orange);

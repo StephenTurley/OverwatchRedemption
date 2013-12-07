@@ -9,14 +9,12 @@ package core;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
-
 
 import core.configurationManager.GameConfig;
 import core.network.GameServer;
@@ -63,7 +61,7 @@ public class Game {
  	public void start(GameState startingState)
 	{
  		loadGamepads();
-		
+ 		
 		try{
 			
 			if (config.isFullScreen())

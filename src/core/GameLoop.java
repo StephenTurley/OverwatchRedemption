@@ -36,6 +36,7 @@ public class GameLoop implements Runnable {
 
 	@Override
 	public void run() {
+		
 		getDelta(); // call once before loop to initialise lastFrame
 		
 		desiredFrameRate = Game.getGameConfig().getFrameRate();
