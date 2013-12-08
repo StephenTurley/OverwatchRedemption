@@ -24,6 +24,7 @@ public class Network {
 		kryo.register(StartGame.class);
 		kryo.register(MovePlayer.class);
 		kryo.register(Vector2f.class);
+		kryo.register(LoadLevel.class);
 	}
 	public static class ServerMessage
 	{
@@ -86,5 +87,10 @@ public class Network {
 	public static class MovePlayer
 	{
 		public Vector2f movementVector;
+	}
+	public static class LoadLevel
+	{
+		public int stage;
+		public int level;
 	}
 }

@@ -43,7 +43,6 @@ public class ServerLobbyState extends ServerState {
 		}
 		if( countdownRemaining <= 0)
 		{
-			gameServer.sendToAuthenticatedTCP(new Network.StartGame());
 			gameServer.changeState(new ServerLoadLevelState(gameServer));
 		}
 

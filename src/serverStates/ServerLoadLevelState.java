@@ -11,26 +11,47 @@ import org.lwjgl.util.Point;
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
+import core.Game;
 import core.exception.LevelNotFoundException;
 import core.level.LevelManager;
 import core.network.GameServer;
+import core.network.Network;
+import core.network.Network.LoadLevel;
 import core.network.Player;
 import core.stateManager.ServerState;
 
 public class ServerLoadLevelState extends ServerState {
+	private boolean levelLoaded;
 
 	public ServerLoadLevelState(GameServer gameServer) {
 		super(gameServer);
+		levelLoaded = false;
 	}
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
+		if(gameServer.isPlayersReady() && levelLoaded)
+		{
+			gameServer.changeState(new ServerGamePlayState(gameServer));
+			gameServer.sendToAuthenticatedTCP(new Network.StartGame());
+		}
+			
 
 	}
 
 	@Override
 	public void enter() {
+		//players will be ready after they load the level
+		gameServer.setPlayersReady(false);
+		
+		levelLoaded = false;
+		
+		LoadLevel loadLevelPkt = new LoadLevel();
+		loadLevelPkt.stage = 0;
+		loadLevelPkt.level = 0;
+		
+		gameServer.sendToAuthenticatedTCP(loadLevelPkt);
+		
 		try
 		{
 			gameServer.setCurrentLevel(LevelManager.loadServerLevel(0, 0));
@@ -38,6 +59,7 @@ public class ServerLoadLevelState extends ServerState {
 		catch (LevelNotFoundException e)
 		{
 			Debug.Trace("Level not found");
+			Game.exit(-1);
 		}
 		int i = 0;
 		for(Player p : gameServer.getPlayers().values())
@@ -47,12 +69,13 @@ public class ServerLoadLevelState extends ServerState {
 			p.setPosY(startingPoint.getY());
 			i++;
 		}
-		gameServer.changeState(new ServerGamePlayState(gameServer));
+		levelLoaded = true;
+		
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
+		
 
 	}
 

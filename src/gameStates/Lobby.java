@@ -13,10 +13,10 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
+import core.network.Network.LoadLevel;
 import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
-import core.network.Network.StartGame;
 import core.network.Player;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
@@ -37,7 +37,9 @@ public class Lobby extends GameState {
     private Player thisPlayer;
     private Player thatPlayer;
     private boolean connected; 
-    private boolean startGame;
+    
+    private LoadLevel loadLevel;
+
 	
 	private class UI extends Widget
 	{
@@ -116,7 +118,9 @@ public class Lobby extends GameState {
 	@Override
 	public void update(int delta) {
 		if(!connected) sm.pop();
-		if(startGame) sm.push(new MovementTest(sm));
+		
+		if(loadLevel != null) sm.push(new LevelLoading(sm,loadLevel.stage, loadLevel.level));
+		
 		handleInput();
 		
 		uiWidget.serverMsgLbl.setText(serverMsgModel);
@@ -163,8 +167,7 @@ public class Lobby extends GameState {
 	@Override
 	public void pause() {
 		Game.removeClientListener(this);
-		startGame = false;
-
+		loadLevel = null;
 	}
 
 	@Override
@@ -176,7 +179,7 @@ public class Lobby extends GameState {
 	@Override
 	public void enter() {
 		connected = true;
-		startGame = false;
+		
 		try
 		{
 			Game.addClientListener(this);
@@ -203,6 +206,7 @@ public class Lobby extends GameState {
 		Game.removeClientListener(this);
 		gui.destroy();
 		uiWidget.destroy();
+		loadLevel = null;
 	}
 	public void disconnected(Connection c) {
 		connected = false;
@@ -222,9 +226,9 @@ public class Lobby extends GameState {
 			thisPlayer = playerPacket.getThisPlayer();
 			thatPlayer = playerPacket.getThatPlayer();
 		}
-		else if(object instanceof StartGame)
+		else if(object instanceof LoadLevel)
 		{
-			startGame = true;
+			loadLevel = (LoadLevel)object; 
 		}
 	}
 	

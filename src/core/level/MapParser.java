@@ -17,6 +17,7 @@ import org.jdom2.Element;
 import org.lwjgl.util.Point;
 
 import core.Debug;
+import core.Game;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 
@@ -37,6 +38,7 @@ public class MapParser {
 		} catch (JDOMException | IOException e) {
 
 			Debug.Trace(e.getMessage());
+			Game.exit(-1);
 		}
 	}
 	
@@ -80,5 +82,26 @@ public class MapParser {
 			throw new LevelComponentsNotSatisfiedException("A map must contain at least two startingPoints");
 		return startingPoints;
 	}
-	
+
+	public ArrayList<TileSet> getTileSets()
+	{
+		ArrayList<TileSet> tileSets =  new ArrayList<TileSet>();
+		
+		Element map = mapData.getRootElement();
+		for(Element og : map.getChildren("tileset"))
+		{
+			int firstGID = Integer.parseInt(og.getAttributeValue("firstgid"));		
+			int tileWidth = Integer.parseInt(og.getAttributeValue("tilewidth"));
+			int tileHeight = Integer.parseInt(og.getAttributeValue("tileheight"));
+			
+			Element image = og.getChild("image");
+			
+			String path = image.getAttributeValue("source");
+			int width = Integer.parseInt(image.getAttributeValue("width"));
+			int height = Integer.parseInt(image.getAttributeValue("height"));
+			
+			tileSets.add(new TileSet(path,tileWidth,tileHeight, width, height, firstGID));
+		}
+		return tileSets;
+	}
 }
