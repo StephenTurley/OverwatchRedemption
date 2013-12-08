@@ -120,22 +120,12 @@ public class GameStart extends GameState {
 	}
 	private void init()
 	{
-		glEnable(GL_TEXTURE_2D);
-		glShadeModel(GL_SMOOTH);       
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_LIGHTING);                   
-
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);               
 		glClearDepth(1);                                      
 
 		 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		 
-		glViewport(0,0,Game.getGameConfig().getDisplayWidth(),Game.getGameConfig().getDisplayHeight());
-		glMatrixMode(GL_MODELVIEW);
-
 		 
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
