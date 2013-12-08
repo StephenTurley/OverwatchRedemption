@@ -8,6 +8,10 @@ package core.exception;
 
 public class InvalidLevelFormatException extends Exception {
 
+	public InvalidLevelFormatException(String msg) {
+		super(msg);
+	}
+
 	/**
 	 * 
 	 */

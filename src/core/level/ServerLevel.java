@@ -17,10 +17,7 @@ import core.exception.LevelComponentsNotSatisfiedException;
 
 public class ServerLevel {
 	
-	private int mapWidth;
-	private int mapHeight;
-	private int tileWidth;
-	private int tileHeight;
+	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
 	private ArrayList<Point> startingPoints;
 	
 

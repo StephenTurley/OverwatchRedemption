@@ -9,6 +9,7 @@ package core.level;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -18,6 +19,7 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
+import core.exception.InvalidLevelFormatException;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 
@@ -88,13 +90,13 @@ public class MapParser {
 		ArrayList<TileSet> tileSets =  new ArrayList<TileSet>();
 		
 		Element map = mapData.getRootElement();
-		for(Element og : map.getChildren("tileset"))
+		for(Element ts : map.getChildren("tileset"))
 		{
-			int firstGID = Integer.parseInt(og.getAttributeValue("firstgid"));		
-			int tileWidth = Integer.parseInt(og.getAttributeValue("tilewidth"));
-			int tileHeight = Integer.parseInt(og.getAttributeValue("tileheight"));
+			int firstGID = Integer.parseInt(ts.getAttributeValue("firstgid"));		
+			int tileWidth = Integer.parseInt(ts.getAttributeValue("tilewidth"));
+			int tileHeight = Integer.parseInt(ts.getAttributeValue("tileheight"));
 			
-			Element image = og.getChild("image");
+			Element image = ts.getChild("image");
 			
 			String path = image.getAttributeValue("source");
 			int width = Integer.parseInt(image.getAttributeValue("width"));
@@ -103,5 +105,29 @@ public class MapParser {
 			tileSets.add(new TileSet(path,tileWidth,tileHeight, width, height, firstGID));
 		}
 		return tileSets;
+	}
+	
+	public HashMap<Integer, Layer> getLayers() throws InvalidLevelFormatException
+	{
+		HashMap<Integer, Layer> layers = new HashMap<Integer, Layer>();
+		
+		Element map = mapData.getRootElement();
+		for(Element layer : map.getChildren("layer"))
+		{
+			try
+			{
+				int key = Integer.parseInt(layer.getAttributeValue("name"));
+				String data = layer.getChildText("data");
+				data = data.replace("\n", "").replace("\r", "");
+				
+				layers.put(key, new Layer(data));
+			}
+			catch(NumberFormatException e)
+			{
+				throw new InvalidLevelFormatException("Layer names must be an integer value. (The value should coorispond to they layer's depth)");
+			}
+				
+		}
+		return layers;
 	}
 }
