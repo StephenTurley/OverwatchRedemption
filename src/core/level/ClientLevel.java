@@ -126,10 +126,8 @@ public class ClientLevel {
 			for (int col = 0; col < columns; col++)
 			{
 				int index = startingIndex + col + (row * mapWidth);
-				System.out.print(index);
 				gids[row][col] = currentLayer.getGid(index);
 			}
-			System.out.print("\n");
 		}
 		
 		return gids;
