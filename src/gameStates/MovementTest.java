@@ -7,16 +7,20 @@
 package gameStates;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.esotericsoftware.kryonet.Connection;
 
 import static org.lwjgl.opengl.GL11.*;
-
+import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
 import core.Debug;
 import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
+import core.level.ClientLevel;
+import core.level.TileCoord;
 //import net.java.games.input.*;
 import core.network.*;
 import core.network.Network.MovePlayer;
@@ -30,11 +34,14 @@ public class MovementTest extends GameState {
 	private Vector2f movementVector;
 	//private Controller gamepad;
 	
+	private ClientLevel currentLevel;
+	
 	private Player thisPlayer; 
 	private Player thatPlayer;
 	
-	public MovementTest(StateManager sm) {
+	public MovementTest(StateManager sm, ClientLevel currentLevel) {
 		super(sm);
+		this.currentLevel = currentLevel;
 	}
 
 	
@@ -49,6 +56,42 @@ public class MovementTest extends GameState {
 
 
 	public void draw() {
+		
+		Point cameraPos = new Point(0,0);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		//lets try to draw layer one just for the hell of it
+		int displayWidth = Display.getWidth();
+		int displayHeight = Display.getHeight();
+		
+		int tileWidth = currentLevel.getTileWidth();
+		int tileHeight = currentLevel.getTileHeight();
+		
+		int[][] gids = currentLevel.getGidsInCamera(0, cameraPos.getX(), cameraPos.getY(), displayWidth, displayHeight);
+		
+		for(int y = 0;y <= displayHeight;y += tileHeight )
+		{
+			for (int x = 0;x <= displayWidth; x += tileWidth)
+			{
+				TileCoord t = currentLevel.getTileMap().getTileByGID(gids[y/tileHeight][x/tileWidth]);
+				
+				glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
+				
+				glBegin(GL_QUADS);
+		        glTexCoord2f(t.X, t.Y);
+		        glVertex2f(x, y);
+		        glTexCoord2f(t.X, t.Y2);
+		        glVertex2f(x, y + tileHeight);
+		        glTexCoord2f(t.X2, t.Y2);
+		        glVertex2f(x + tileWidth, y + tileHeight);
+		        glTexCoord2f(t.X2, t.Y);
+		        glVertex2f(x + tileWidth, y);
+		        glEnd();
+		        
+		        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
+			}
+		}
+		
+		
 		if(thisPlayer != null)
 		{
 			thisPlayer.draw();
@@ -89,6 +132,8 @@ public class MovementTest extends GameState {
 		glOrtho(0,Game.getGameConfig().getDisplayWidth(), Game.getGameConfig().getDisplayHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		
+		glEnable(GL_TEXTURE_RECTANGLE_ARB);
+
 		Game.addClientListener(this);
 		
 		Game.clientSendTCP(new Network.PlayerReady(true));

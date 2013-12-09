@@ -98,7 +98,7 @@ public class Player extends Entity{
 	@Override
 	public void draw()
 	{
-		glColor3f(0.5f,0.5f,1.0f);
+		glColor3f(0f,0f,0f);
 
 		// draw quad
 		glBegin(GL_QUADS);

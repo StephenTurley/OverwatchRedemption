@@ -103,5 +103,36 @@ public class ClientLevel {
 	public void setLayers(HashMap<Integer, Layer> layers) {
 		this.layers = layers;
 	}
+	
+	public int[][] getGidsInCamera(int layer, int posX, int posY, int cameraWidth, int cameraHeight)
+	{
+		int[][] gids;
+		Layer currentLayer = layers.get(layer);
+		
+		int columns = (cameraWidth / tileWidth) + 1;
+		int rows = (cameraHeight / tileHeight) + 1;
+		
+		gids = new int[rows][columns];
+		
+		int startingIndex;
+		
+		if(posX == 0)
+			startingIndex = 0;
+		else		
+			startingIndex = tileWidth / posX;
+		
+		for(int row = 0; row < rows; row ++)
+		{
+			for (int col = 0; col < columns; col++)
+			{
+				int index = startingIndex + col + (row * mapWidth);
+				System.out.print(index);
+				gids[row][col] = currentLayer.getGid(index);
+			}
+			System.out.print("\n");
+		}
+		
+		return gids;
+	}
 
 }

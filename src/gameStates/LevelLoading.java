@@ -31,7 +31,7 @@ public class LevelLoading extends GameState {
 		if(startGame)
 		{
 			sm.pop();
-			sm.push(new MovementTest(sm));
+			sm.push(new MovementTest(sm, clientLevel));
 		}
 		
 		if (clientLevel != null)

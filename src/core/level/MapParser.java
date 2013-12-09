@@ -119,7 +119,6 @@ public class MapParser {
 				int key = Integer.parseInt(layer.getAttributeValue("name"));
 				String data = layer.getChildText("data");
 				data = data.replace("\n", "").replace("\r", "");
-				
 				layers.put(key, new Layer(data));
 			}
 			catch(NumberFormatException e)
