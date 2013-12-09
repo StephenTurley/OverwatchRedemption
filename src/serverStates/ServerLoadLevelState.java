@@ -32,8 +32,9 @@ public class ServerLoadLevelState extends ServerState {
 	public void update(int delta) {
 		if(gameServer.isPlayersReady() && levelLoaded)
 		{
-			gameServer.changeState(new ServerGamePlayState(gameServer));
+			gameServer.setPlayersReady(false);
 			gameServer.sendToAuthenticatedTCP(new Network.StartGame());
+			gameServer.changeState(new ServerGamePlayState(gameServer));
 		}
 			
 

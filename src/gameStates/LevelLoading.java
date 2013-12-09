@@ -38,7 +38,7 @@ public class LevelLoading extends GameState {
 		{
 			PlayerReady readyPacket = new PlayerReady();
 			readyPacket.isReady=true;
-			Game.clientSendTCP(readyPacket);
+			Game.clientSendUDP(readyPacket);
 		}
 	}
 

@@ -25,7 +25,10 @@ public class ServerGamePlayState extends ServerState {
 
 	@Override
 	public void update(int delta) {
-		gameServer.sendPlayersPacket();
+		if(gameServer.isPlayersReady())
+		{
+			gameServer.sendPlayersPacket();
+		}
 	}
 
 	@Override

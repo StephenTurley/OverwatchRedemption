@@ -105,12 +105,13 @@ public class MovementTest extends GameState {
 
 	public void resume() {
 		Game.addClientListener(this);
+		glEnable(GL_TEXTURE_RECTANGLE_ARB);
 	}
 
 
 	public void pause() {
 		Game.removeClientListener(this);
-
+		glDisable(GL_TEXTURE_RECTANGLE_ARB);
 	}
 
 
@@ -143,7 +144,7 @@ public class MovementTest extends GameState {
 	}
 	
 	public void exit() {
-		// TODO Auto-generated method stub
+		glDisable(GL_TEXTURE_RECTANGLE_ARB);
 
 	}
 	
