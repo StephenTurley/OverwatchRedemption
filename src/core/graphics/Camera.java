@@ -45,11 +45,6 @@ public class Camera {
 		}
 		
 		colliding = tempColliding;
-		
-		if(colliding)
-		{
-			System.out.println("");
-		}
 
 		position.setLocation(x, y);
 	}
