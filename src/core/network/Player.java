@@ -26,7 +26,7 @@ public class Player extends Entity{
 	
 	private static final int WIDTH = 50;
 	private static final int HEIGHT = 50;
-	private static final float VELOCITY = 1.0f;
+	private static final float VELOCITY = 0.25f;
 	
 	public Player()
 	{
