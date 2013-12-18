@@ -6,23 +6,46 @@
  ******************************************************************************/
 package core.level;
 
+import core.exception.LevelFormatException;
+
 public class Layer {
-	private int[] gids;
+	private int[][] layerGids;
 	
-	public Layer(String gidCsv)
+	public Layer(String gidCsv, int width, int height) throws LevelFormatException
 	{
-		String[] layerData = gidCsv.split(",");
-		
-		gids = new int[layerData.length];
-		
-		for(int i = 0; i < layerData.length; i++)
-		{
-			gids[i] = Integer.parseInt(layerData[i]);
-		}
+		layerGids = parseGidData(gidCsv, width, height);
 	}
-	public int getGid(int index)
+	public int getGid(int indexX, int indexY)
 	{
-		return gids[index];
+		return layerGids[indexX][indexY];
+	}
+	
+	private int[][] parseGidData(String gidCsv, int width, int height) throws LevelFormatException
+	{
+		int[][] gids = new int[width][height];
+		String[] layerData = gidCsv.split(",");
+		int i = 0;
+		
+		if((width * height) != layerData.length)
+		{
+			throw new LevelFormatException("Level size does not equal layer data size");
+		}
+		try
+		{
+			for(int row = 0; row < height; row++)
+			{
+				for(int col = 0; col < width; col++)
+				{
+					gids[col][row] = Integer.parseInt(layerData[i]);
+					i++;
+				}
+			}
+		}
+		catch(NumberFormatException e)
+		{
+			throw new LevelFormatException("Invalid character in layer data. Must be integer values");
+		}
+		return gids;
 	}
 	
 }

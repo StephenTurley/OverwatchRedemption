@@ -170,11 +170,11 @@ public class GameServer{
 					{
 						if(p.getId() == pc.getID())
 						{
-							playersPacket.setThisPlayer(p.clone());
+							playersPacket.setThisPlayer(p);
 						}
 						else
 						{
-							playersPacket.setThatPlayer(p.clone());
+							playersPacket.setThatPlayer(p);
 						}
 					}
 					server.sendToUDP(pc.getID(),playersPacket);

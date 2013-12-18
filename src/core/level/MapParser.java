@@ -19,7 +19,7 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
-import core.exception.InvalidLevelFormatException;
+import core.exception.LevelFormatException;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 
@@ -107,7 +107,7 @@ public class MapParser {
 		return tileSets;
 	}
 	
-	public HashMap<Integer, Layer> getLayers() throws InvalidLevelFormatException
+	public HashMap<Integer, Layer> getLayers() throws LevelFormatException
 	{
 		HashMap<Integer, Layer> layers = new HashMap<Integer, Layer>();
 		
@@ -119,11 +119,11 @@ public class MapParser {
 				int key = Integer.parseInt(layer.getAttributeValue("name"));
 				String data = layer.getChildText("data");
 				data = data.replace("\n", "").replace("\r", "");
-				layers.put(key, new Layer(data));
+				layers.put(key, new Layer(data,getWidth(),getHeight()));
 			}
 			catch(NumberFormatException e)
 			{
-				throw new InvalidLevelFormatException("Layer names must be an integer value. (The value should coorispond to they layer's depth)");
+				throw new LevelFormatException("Layer names must be an integer value. (The value should coorispond to they layer's depth)");
 			}
 				
 		}

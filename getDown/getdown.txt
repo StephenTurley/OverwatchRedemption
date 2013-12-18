@@ -26,4 +26,5 @@ resource = [windows] native/OpenAL32.dll
 resource = [windows] native/OpenAL64.dll
 resource = [mac os x] native/liblwjgl.jnilib
 resource = [mac os x] native/openal.dylib
+resource = [mac os x] native/libjinput-osx.jnilib
 jvmarg = -Djava.library.path=%APPDIR%/native

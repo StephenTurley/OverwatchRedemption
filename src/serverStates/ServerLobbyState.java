@@ -18,7 +18,7 @@ import core.stateManager.ServerState;
 public class ServerLobbyState extends ServerState {
 	
 	private int countdownRemaining;
-	private final int TIME_TO_START = 5000; //seconds
+	private final int TIME_TO_START = 1000; //seconds
 
 	public ServerLobbyState(GameServer gameServer) {
 		super(gameServer);

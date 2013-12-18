@@ -49,13 +49,13 @@ public class ServerLoadLevelState extends ServerState {
 		
 		LoadLevel loadLevelPkt = new LoadLevel();
 		loadLevelPkt.stage = 0;
-		loadLevelPkt.level = 0;
+		loadLevelPkt.level = 1;
 		
 		gameServer.sendToAuthenticatedTCP(loadLevelPkt);
 		
 		try
 		{
-			gameServer.setCurrentLevel(LevelManager.loadServerLevel(0, 0));
+			gameServer.setCurrentLevel(LevelManager.loadServerLevel(loadLevelPkt.stage, loadLevelPkt.level));
 		}
 		catch (LevelNotFoundException e)
 		{

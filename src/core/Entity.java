@@ -6,10 +6,13 @@
  ******************************************************************************/
 package core;
 
+import org.lwjgl.util.Point;
 
-public abstract class Entity implements DrawableComponent {
+
+public abstract class Entity {
 	
-	protected int posX, posY, width, height;
+	protected Point location;
+	protected int  width, height;
 	protected float scale, rotation;
 	
 	public Entity()
@@ -19,24 +22,40 @@ public abstract class Entity implements DrawableComponent {
 	
 	public Entity(int width, int height)
 	{
+		this.location = new Point(0,0);
 		this.width =  width;
 		this.height = height;
 	}
 	
+	public Entity(int startX, int startY, int width, int height, float scale, float rotation) {
+		this.location = new Point(startX, startY);
+		this.width = width;
+		this.height = height;
+		this.scale = scale;
+		this.rotation = rotation;
+	}
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+
 	public int getPosX() {
-		return posX;
+		return location.getX();
 	}
 
 	public void setPosX(int locX) {
-		this.posX = locX;
+		location.setX(locX);
 	}
 
 	public int getPosY() {
-		return posY;
+		return location.getY();
 	}
 
 	public void setPosY(int locY) {
-		this.posY = locY;
+		location.setY(locY);
 	}
 
 	public int getWidth() {
@@ -71,21 +90,6 @@ public abstract class Entity implements DrawableComponent {
 		this.rotation = rotation;
 	}
 
-	public Entity(int startX, int startY, int width, int height, float scale, float rotation) {
-		this.posX = startX;
-		this.posY = startY;
-		this.width = width;
-		this.height = height;
-		this.scale = scale;
-		this.rotation = rotation;
-	}
-
-	@Override
-	public void draw() {
-
-	}
-
-	@Override
 	public void update(int delta) {
 		
 	}

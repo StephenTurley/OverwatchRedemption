@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import core.Debug;
 import core.Game;
+import core.graphics.Camera;
 import static org.lwjgl.opengl.GL11.*;
 
 public class ClientLevel {
@@ -87,6 +88,14 @@ public class ClientLevel {
 	public void setTileHeight(int tileHeight) {
 		this.tileHeight = tileHeight;
 	}
+	public int getPixelWidth()
+	{
+		return tileWidth * mapWidth;
+	}
+	public int getPixelHeight()
+	{
+		return tileHeight * mapHeight;
+	}
 
 	public void dispose()
 	{
@@ -104,29 +113,32 @@ public class ClientLevel {
 		this.layers = layers;
 	}
 	
-	public int[][] getGidsInCamera(int layer, int posX, int posY, int cameraWidth, int cameraHeight)
+	public int[][] getGidsInCamera(int layer, Camera camera)
 	{
 		int[][] gids;
 		Layer currentLayer = layers.get(layer);
 		
-		int columns = (cameraWidth / tileWidth) + 1;
-		int rows = (cameraHeight / tileHeight) + 1;
+		int columns = (camera.getWidth() / tileWidth);
+		int rows = (camera.getHeight() / tileHeight);
 		
-		gids = new int[rows][columns];
+		int startingGlobalX = camera.getX() / tileWidth;
+		int startingGlobalY = camera.getY() / tileHeight;
 		
-		int startingIndex;
+		//This will add the next partial tile to be drawn.. unless id doesn't exist
+		//It would be nice if the camera would stop moving before this happened.
+		if(startingGlobalX + columns + 1 < mapHeight) columns++;
+		if(startingGlobalY + rows + 1 < mapWidth) rows++;
 		
-		if(posX == 0)
-			startingIndex = 0;
-		else		
-			startingIndex = tileWidth / posX;
+		gids = new int[columns][rows];
 		
 		for(int row = 0; row < rows; row ++)
 		{
 			for (int col = 0; col < columns; col++)
 			{
-				int index = startingIndex + col + (row * mapWidth);
-				gids[row][col] = currentLayer.getGid(index);
+				int globalX = startingGlobalX + col;
+				int globalY = startingGlobalY + row;
+			
+				gids[col][row] = currentLayer.getGid(globalX, globalY);
 			}
 		}
 		

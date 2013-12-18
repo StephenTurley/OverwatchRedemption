@@ -6,6 +6,7 @@
  ******************************************************************************/
 package core.network;
 
+import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -25,6 +26,7 @@ public class Network {
 		kryo.register(MovePlayer.class);
 		kryo.register(Vector2f.class);
 		kryo.register(LoadLevel.class);
+		kryo.register(Point.class);
 	}
 	public static class ServerMessage
 	{
@@ -58,13 +60,13 @@ public class Network {
 			return thisPlayer;
 		}
 		public void setThisPlayer(Player thisPlayer) {
-			this.thisPlayer = thisPlayer.clone();
+			this.thisPlayer = thisPlayer;
 		}
 		public Player getThatPlayer() {
 			return thatPlayer;
 		}
 		public void setThatPlayer(Player thatPlayer) {
-			this.thatPlayer = thatPlayer.clone();
+			this.thatPlayer = thatPlayer;
 		}
 	}
 	public static class PlayerReady
