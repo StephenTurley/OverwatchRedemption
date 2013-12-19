@@ -1,6 +1,7 @@
 package core.graphics;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import core.Entity;
 
@@ -80,6 +81,30 @@ public class Camera {
 		
 		return new Point(xOffSet, yOffSet);
 	}
+	public Point computeScreenCoordinates(Point globalCoordinate)
+	{
+		return (new Point(globalCoordinate.getX() - position.getX(), globalCoordinate.getY() - position.getY()));
+	}
+	public boolean isVisible(Point globalCoordinate)
+	{
+		Rectangle cameraRect = getCameraRect();
+		
+		Point screenCoordinate = computeScreenCoordinates(globalCoordinate);
+		
+		return cameraRect.contains(screenCoordinate);
+	}
+	public boolean isVisible(Rectangle rectangle)
+	{
+		Rectangle cameraRect = getCameraRect();
+		
+		return cameraRect.contains(rectangle) || cameraRect.intersects(rectangle);
+	}
+	
+	public Rectangle getCameraRect() {
+		Rectangle cameraRect = new Rectangle(position.getX(), position.getY(), width, height);
+		return cameraRect;
+	}
+	
 	public int getX()
 	{
 		return position.getX();
