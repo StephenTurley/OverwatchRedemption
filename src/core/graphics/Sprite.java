@@ -1,13 +1,17 @@
 package core.graphics;
 
-import core.DrawableComponent;
-
-public class Sprite implements DrawableComponent {
+public abstract class Sprite implements DrawableComponent {
+	
+	private Camera camera;
+	
+	public Sprite(Camera camera)
+	{
+		this.camera = camera;
+	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

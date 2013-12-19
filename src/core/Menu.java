@@ -9,6 +9,8 @@ package core;
 
 import java.util.LinkedList;
 
+import core.graphics.DrawableComponent;
+
 
 public class Menu implements DrawableComponent {
 

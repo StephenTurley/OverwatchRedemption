@@ -14,8 +14,8 @@ import java.util.*;
 
 import org.lwjgl.opengl.Display;
 
-import core.DrawableComponent;
 import core.Game;
+import core.graphics.DrawableComponent;
 
 public class StateManager implements DrawableComponent {
 	
