@@ -1,12 +1,12 @@
 package core.graphics;
 
-public abstract class Sprite implements DrawableComponent {
+public class Sprite implements DrawableComponent {
 	
-	private Camera camera;
+	//private Camera camera;
 	
 	public Sprite(Camera camera)
 	{
-		this.camera = camera;
+		//this.camera = camera;
 	}
 
 	@Override

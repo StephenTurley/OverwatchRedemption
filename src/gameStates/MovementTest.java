@@ -25,8 +25,8 @@ import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import core.graphics.Camera;
+import core.graphics.TextureCoord;
 import core.level.ClientLevel;
-import core.level.TileCoord;
 //import net.java.games.input.*;
 import core.network.*;
 import core.network.Network.MovePlayer;
@@ -88,7 +88,7 @@ public class MovementTest extends GameState {
 			for (int tileX = 0;tileX < gids.length; tileX++)
 			{	
 				
-				TileCoord t = currentLevel.getTileMap().getTileByGID(gids[tileX][tileY]);
+				TextureCoord t = currentLevel.getTileMap().getTileByGID(gids[tileX][tileY]);
 				
 				int x = tileX * tileWidth;
 				int y = tileY * tileHeight;

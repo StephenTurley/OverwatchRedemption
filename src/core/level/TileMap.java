@@ -9,12 +9,14 @@ package core.level;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import core.graphics.TextureCoord;
+
 public class TileMap {
-	private HashMap<Integer, TileCoord> tiles;
+	private HashMap<Integer, TextureCoord> tiles;
 	
 	public TileMap(ArrayList<TileSet> tileSets)
 	{
-		tiles = new HashMap<Integer, TileCoord>();
+		tiles = new HashMap<Integer, TextureCoord>();
 		
 		for(TileSet ts : tileSets)
 		{
@@ -28,7 +30,7 @@ public class TileMap {
 		}
 	}
 	
-	public TileCoord getTileByGID(int gid)
+	public TextureCoord getTileByGID(int gid)
 	{
 		return tiles.get(gid);
 	}

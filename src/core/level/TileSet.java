@@ -6,6 +6,7 @@
  ******************************************************************************/
 package core.level;
 
+import core.graphics.TextureCoord;
 import core.utility.TextureLoader;
 
 public class TileSet {
@@ -68,7 +69,7 @@ public class TileSet {
 		this.glTextureID = glTextureID;
 	}
 	
-	public TileCoord getTileCoord(int GID)
+	public TextureCoord getTileCoord(int GID)
 	{
 		int localID = GID - firstGID;
 		
@@ -79,7 +80,7 @@ public class TileSet {
 		int x2 = x + tileWidth;
 		int y2 = y + tileHeight;
 		
-		return new TileCoord(glTextureID, x, y, x2, y2);	
+		return new TextureCoord(glTextureID, x, y, x2, y2);	
 	}
 
 	public TileSet(String filePath, int tileWidth, int tileHeight, int width, int height,int firstGID)
