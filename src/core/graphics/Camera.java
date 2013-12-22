@@ -89,9 +89,7 @@ public class Camera {
 	{
 		Rectangle cameraRect = getCameraRect();
 		
-		Point screenCoordinate = computeScreenCoordinates(globalCoordinate);
-		
-		return cameraRect.contains(screenCoordinate);
+		return cameraRect.contains(globalCoordinate);
 	}
 	public boolean isVisible(Rectangle rectangle)
 	{

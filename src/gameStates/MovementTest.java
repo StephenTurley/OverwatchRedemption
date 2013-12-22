@@ -113,11 +113,11 @@ public class MovementTest extends GameState {
 		
 		if(thisPlayer != null)
 		{
-			thisPlayer.draw();
+			thisPlayer.draw(camera);
 		}
 		if(thatPlayer != null)
 		{
-			thatPlayer.draw();
+			thatPlayer.draw(camera);
 		}
 	}
 

@@ -12,10 +12,11 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
-import org.lwjgl.opengl.Display;
+import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import core.Entity;
+import core.graphics.Camera;
 
 public class Player extends Entity{
 
@@ -86,19 +87,26 @@ public class Player extends Entity{
 		location.translate((int)(movementVector.x * VELOCITY * delta),(int)(movementVector.y * VELOCITY * delta));
 	}
 
-	public void draw()
+	public void draw(Camera camera)
 	{
-		int centerX = Display.getWidth()/2;
-		int centerY = Display.getHeight()/2;
-		glColor3f(0f,0f,0f);
+		
+		if(camera.isVisible(super.location))
+		{
+			Point screenCoord = camera.computeScreenCoordinates(super.location);
+			int x = screenCoord.getX();
+			int y = screenCoord.getY();
+			
+			glColor3f(0f,0f,0f);
 
-		// draw quad
-		glBegin(GL_QUADS);
-			glVertex2f(centerX - width , centerY - height);  					//TL
-			glVertex2f(centerX , centerY - height);			//TR
-			glVertex2f(centerX , centerY);	//BR
-			glVertex2f(centerX - width , centerY);			//BL
-		glEnd();
+			// draw quad
+			glBegin(GL_QUADS);
+				glVertex2f(x - width , y - height); //TL
+				glVertex2f(x , y - height);			//TR
+				glVertex2f(x , y);					//BR
+				glVertex2f(x - width , y);			//BL
+			glEnd();
+		}
+		
 	}
 
 }
