@@ -9,7 +9,6 @@ package core.level;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -107,9 +106,9 @@ public class MapParser {
 		return tileSets;
 	}
 	
-	public HashMap<Integer, Layer> getLayers() throws LevelFormatException
+	public ArrayList<Layer> getLayers() throws LevelFormatException
 	{
-		HashMap<Integer, Layer> layers = new HashMap<Integer, Layer>();
+		ArrayList<Layer> layers = new ArrayList<Layer>();
 		
 		Element map = mapData.getRootElement();
 		for(Element layer : map.getChildren("layer"))
@@ -119,7 +118,7 @@ public class MapParser {
 				int key = Integer.parseInt(layer.getAttributeValue("name"));
 				String data = layer.getChildText("data");
 				data = data.replace("\n", "").replace("\r", "");
-				layers.put(key, new Layer(data,getWidth(),getHeight()));
+				layers.add(key,new Layer(data,getWidth(),getHeight()));
 			}
 			catch(NumberFormatException e)
 			{

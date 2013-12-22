@@ -8,7 +8,6 @@ package core.level;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import core.Debug;
 import core.Game;
@@ -20,7 +19,7 @@ public class ClientLevel {
 	private ArrayList<TileSet> tileSets;
 	private TileMap tileMap;
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
-	private HashMap<Integer, Layer> layers;
+	private ArrayList<Layer> layers;
 
 	public ClientLevel(InputStream fileStream) {
 		try
@@ -105,11 +104,11 @@ public class ClientLevel {
 		}
 	}
 
-	public HashMap<Integer, Layer> getLayers() {
+	public ArrayList<Layer> getLayers() {
 		return layers;
 	}
 
-	public void setLayers(HashMap<Integer, Layer> layers) {
+	public void setLayers(ArrayList<Layer> layers) {
 		this.layers = layers;
 	}
 	
