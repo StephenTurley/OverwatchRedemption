@@ -1,0 +1,5 @@
+0.1.2
+Added a ChangeLog =)
+Added an outdoor test level
+Camera now follows your player around the map
+Reduced player speed
