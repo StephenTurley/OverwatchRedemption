@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
 import core.Entity;
@@ -90,7 +91,7 @@ public class Player extends Entity{
 	public void draw(Camera camera)
 	{
 		
-		if(camera.isVisible(super.location))
+		if(camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
 		{
 			Point screenCoord = camera.computeScreenCoordinates(super.location);
 			int x = screenCoord.getX();
