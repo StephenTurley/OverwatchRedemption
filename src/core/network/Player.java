@@ -100,10 +100,10 @@ public class Player extends Entity{
 
 			// draw quad
 			glBegin(GL_QUADS);
-				glVertex2f(x - width , y - height); //TL
-				glVertex2f(x , y - height);			//TR
-				glVertex2f(x , y);					//BR
-				glVertex2f(x - width , y);			//BL
+				glVertex2f(x , y);					//TL
+				glVertex2f(x + width, y);			//TR
+				glVertex2f(x + width, y + height);	//BR
+				glVertex2f(x, y + height);			//BL
 			glEnd();
 		}
 		

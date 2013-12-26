@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import core.Debug;
+import core.Entity;
 import core.Game;
 import core.graphics.Camera;
 import static org.lwjgl.opengl.GL11.*;
@@ -142,6 +143,10 @@ public class ClientLevel {
 		}
 		
 		return gids;
+	}
+	public void draw(Camera camera, ArrayList<Entity> entities)
+	{
+		
 	}
 
 }
