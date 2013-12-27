@@ -30,7 +30,10 @@ public class Player extends Entity{
 	private static final int HEIGHT = 50;
 	private static final float VELOCITY = 0.25f;
 	
-	
+	public Player()
+	{
+		super(0,0,WIDTH,HEIGHT,1.0f,1.0f,0);
+	}
 	public Player(int startX, int startY) {
 		super(startX, startY, WIDTH, HEIGHT, 1.0f, 0.0f,0);
 		this.ready = false;
