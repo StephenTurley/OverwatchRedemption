@@ -126,8 +126,8 @@ public class ClientLevel {
 		
 		//This will add the next partial tile to be drawn.. unless id doesn't exist
 		//It would be nice if the camera would stop moving before this happened.
-		if(startingGlobalX + columns + 1 < mapHeight) columns++;
-		if(startingGlobalY + rows + 1 < mapWidth) rows++;
+		if(startingGlobalX + columns + 1 < mapWidth) columns++;
+		if(startingGlobalY + rows + 2 < mapHeight) rows+=2;
 		
 		gids = new int[columns][rows];
 		
