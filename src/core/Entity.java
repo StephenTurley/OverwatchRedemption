@@ -12,27 +12,16 @@ import org.lwjgl.util.Point;
 public abstract class Entity {
 	
 	protected Point location;
-	protected int  width, height;
+	protected int  width, height, layer;
 	protected float scale, rotation;
 	
-	public Entity()
-	{
-		
-	}
-	
-	public Entity(int width, int height)
-	{
-		this.location = new Point(0,0);
-		this.width =  width;
-		this.height = height;
-	}
-	
-	public Entity(int startX, int startY, int width, int height, float scale, float rotation) {
+	public Entity(int startX, int startY, int width, int height, float scale, float rotation, int layer) {
 		this.location = new Point(startX, startY);
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
 		this.rotation = rotation;
+		this.layer = layer;
 	}
 	public Point getLocation() {
 		return location;
@@ -41,7 +30,13 @@ public abstract class Entity {
 	public void setLocation(Point location) {
 		this.location = location;
 	}
-
+	/*
+	 * useful for checking if an entity is 'standing' on a specific tile.
+	 */
+	public Point getBottomLocation()
+	{
+		return new Point(location.getX(), location.getY() + height);
+	}
 	public int getPosX() {
 		return location.getX();
 	}
