@@ -9,15 +9,17 @@ package core.level;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import org.lwjgl.util.Point;
+
 import core.Debug;
-import core.Entity;
 import core.Game;
 import core.graphics.Camera;
+import core.graphics.TextureCoord;
+import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
 import static org.lwjgl.opengl.GL11.*;
 
 public class ClientLevel {
 	
-	private ArrayList<TileSet> tileSets;
 	private TileMap tileMap;
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
 	private ArrayList<Layer> layers;
@@ -30,9 +32,8 @@ public class ClientLevel {
 			mapHeight = mp.getHeight();
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
-			tileSets = mp.getTileSets();
-			tileMap = new TileMap(tileSets);
 			layers = mp.getLayers();
+			tileMap = new TileMap(mp.getTileSets());
 		}
 		catch (Exception e)
 		{
@@ -41,13 +42,6 @@ public class ClientLevel {
 		}
 	}
 	
-	public ArrayList<TileSet> getTileSets() {
-		return tileSets;
-	}
-
-	public void setTileSets(ArrayList<TileSet> tileSets) {
-		this.tileSets = tileSets;
-	}
 
 	public TileMap getTileMap() {
 		return tileMap;
@@ -99,10 +93,7 @@ public class ClientLevel {
 
 	public void dispose()
 	{
-		for(TileSet ts : tileSets)
-		{
-			glDeleteTextures(ts.getGlTextureID());
-		}
+		tileMap.dispose();
 	}
 
 	public ArrayList<Layer> getLayers() {
@@ -113,10 +104,12 @@ public class ClientLevel {
 		this.layers = layers;
 	}
 	
-	public int[][] getGidsInCamera(int layer, Camera camera)
+	public void draw(Camera camera)
 	{
-		int[][] gids;
-		Layer currentLayer = layers.get(layer);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		
+		
+		Point offSet = camera.getTileOffset(tileWidth, tileHeight);
 		
 		int columns = (camera.getWidth() / tileWidth);
 		int rows = (camera.getHeight() / tileHeight);
@@ -124,28 +117,53 @@ public class ClientLevel {
 		int startingGlobalX = camera.getX() / tileWidth;
 		int startingGlobalY = camera.getY() / tileHeight;
 		
-		//This will add the next partial tile to be drawn.. unless id doesn't exist
-		//It would be nice if the camera would stop moving before this happened.
+		//buffer in the positive directions. Negative directions will be
+		//buffered because of integer division rounding.
 		if(startingGlobalX + columns + 1 < mapWidth) columns++;
 		if(startingGlobalY + rows + 2 < mapHeight) rows+=2;
 		
-		gids = new int[columns][rows];
 		
+		//draw each row layer by layer
+		//TODO: interpolate entities
 		for(int row = 0; row < rows; row ++)
 		{
 			for (int col = 0; col < columns; col++)
 			{
 				int globalX = startingGlobalX + col;
 				int globalY = startingGlobalY + row;
-			
-				gids[col][row] = currentLayer.getGid(globalX, globalY);
+				
+				for(Layer l : layers)
+				{
+					int currentGID = l.getGid(globalX, globalY);
+					
+					//no tile at this location
+					if(currentGID == 0) break;
+					
+					int y = row * tileHeight;
+					int x = col * tileWidth;
+					//draw this
+					TextureCoord t = tileMap.getTileByGID(currentGID);
+					
+
+					glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
+
+					
+					glBegin(GL_QUADS);
+			        glTexCoord2f(t.X, t.Y);
+			        glVertex2f(x - offSet.getX(), y - offSet.getY());
+			        glTexCoord2f(t.X, t.Y2);
+			        glVertex2f(x - offSet.getX(), y + tileHeight - offSet.getY());
+			        glTexCoord2f(t.X2, t.Y2);
+			        glVertex2f(x + tileWidth - offSet.getX(), y + tileHeight - offSet.getY());
+			        glTexCoord2f(t.X2, t.Y);
+			        glVertex2f(x + tileWidth - offSet.getX(), y - offSet.getY());
+			        glEnd();
+			        
+			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
+					
+				}
 			}
 		}
-		
-		return gids;
-	}
-	public void draw(Camera camera, ArrayList<Entity> entities)
-	{
 		
 	}
 

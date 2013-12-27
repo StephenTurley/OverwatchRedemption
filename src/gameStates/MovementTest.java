@@ -13,7 +13,6 @@ package gameStates;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.esotericsoftware.kryonet.Connection;
@@ -25,7 +24,6 @@ import core.Game;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import core.graphics.Camera;
-import core.graphics.TextureCoord;
 import core.level.ClientLevel;
 //import net.java.games.input.*;
 import core.network.*;
@@ -68,48 +66,8 @@ public class MovementTest extends GameState {
 	}
 
 	public void draw() {
-		//move all this to the ClientLevel class so it can draw itself.
-		//I can also do the draw loop a the same time I build the layer gids. 
-		//But, for now, I'll continue to hack this shitty code until it works.
-		//Don't judge me Seth.
-		glColor3f(1.0f, 1.0f, 1.0f);
 		
-		int tileWidth = currentLevel.getTileWidth();
-		int tileHeight = currentLevel.getTileHeight();
-		
-		int[][] gids = currentLevel.getGidsInCamera(0, camera);
-		
-		Point offSet = camera.getTileOffset(tileWidth, tileHeight);
-		int xOffSet = offSet.getX();
-		int yOffSet = offSet.getY();
-		
-		for(int tileY = 0;tileY < gids[0].length; tileY++ )
-		{
-			for (int tileX = 0;tileX < gids.length; tileX++)
-			{	
-				
-				TextureCoord t = currentLevel.getTileMap().getTileByGID(gids[tileX][tileY]);
-				
-				int x = tileX * tileWidth;
-				int y = tileY * tileHeight;
-				
-				glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
-				
-				glBegin(GL_QUADS);
-		        glTexCoord2f(t.X, t.Y);
-		        glVertex2f(x - xOffSet, y - yOffSet);
-		        glTexCoord2f(t.X, t.Y2);
-		        glVertex2f(x - xOffSet, y + tileHeight - yOffSet);
-		        glTexCoord2f(t.X2, t.Y2);
-		        glVertex2f(x + tileWidth - xOffSet, y + tileHeight - yOffSet);
-		        glTexCoord2f(t.X2, t.Y);
-		        glVertex2f(x + tileWidth - xOffSet, y - yOffSet);
-		        glEnd();
-		        
-		        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
-			}
-		}
-		
+		currentLevel.draw(camera);
 		
 		if(thisPlayer != null)
 		{
@@ -125,12 +83,14 @@ public class MovementTest extends GameState {
 	public void resume() {
 		Game.addClientListener(this);
 		glEnable(GL_TEXTURE_RECTANGLE_ARB);
+		glEnable( GL_BLEND );
 	}
 
 
 	public void pause() {
 		Game.removeClientListener(this);
 		glDisable(GL_TEXTURE_RECTANGLE_ARB);
+		glDisable(GL_BLEND);
 	}
 
 
@@ -153,6 +113,9 @@ public class MovementTest extends GameState {
 		glMatrixMode(GL_MODELVIEW);
 		
 		glEnable(GL_TEXTURE_RECTANGLE_ARB);
+		
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable( GL_BLEND );
 
 		Game.addClientListener(this);
 		
@@ -164,6 +127,7 @@ public class MovementTest extends GameState {
 	
 	public void exit() {
 		glDisable(GL_TEXTURE_RECTANGLE_ARB);
+		glDisable(GL_BLEND);
 
 	}
 	

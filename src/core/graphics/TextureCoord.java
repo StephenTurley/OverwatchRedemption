@@ -5,7 +5,11 @@
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
 package core.graphics;
-
+/**
+ * 
+ * A TextureCoord stores texture demensions and texture ID
+ * Useful for defining a specific sprite or tile within a TextureAtlas or TileSet
+ */
 public class TextureCoord {
 	
 	public final int X, Y, X2, Y2, glTextureID;

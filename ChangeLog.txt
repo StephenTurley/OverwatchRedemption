@@ -1,4 +1,4 @@
-0.1.3
+0.1.3 (26Dec2013)
 Fixed - Player will be drawn until they are out of view of the camera. 
 Fixed - Level tiles are now buffered to reduce black lines at the bottom and right of the camera
 Changed - default resolution is now 1280 x 720 

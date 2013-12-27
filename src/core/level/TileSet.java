@@ -9,6 +9,11 @@ package core.level;
 import core.graphics.TextureCoord;
 import core.utility.TextureLoader;
 
+/**
+ * 
+ * A TileSet defines a TileAtlas stored on an OpenGL device
+ *
+ */
 public class TileSet {
 	
 	private int tileWidth, tileHeight, width, height, firstGID, glTextureID, lastGID;
