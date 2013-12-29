@@ -14,13 +14,13 @@ import core.exception.EntityNotFoundException;
  */
 public class EntityRegistrar {
 	
-	private static HashMap<String, Class<Entity>> entityClasses;
+	private static HashMap<String, Class<? extends Entity>> entityClasses;
 	
-	public static void register(Class<Entity> entityClass)
+	public static void register(Class<? extends Entity> entityClass)
 	{
 		if(entityClasses == null)
 		{
-			entityClasses = new HashMap<String, Class<Entity>>();
+			entityClasses = new HashMap<String, Class<? extends Entity>>();
 		}
 		
 		entityClasses.put(entityClass.getSimpleName(), entityClass);
@@ -30,11 +30,11 @@ public class EntityRegistrar {
 	{
 		if(entityClasses == null) throw new EntityNotFoundException("No Entities have been registered!");
 		
-		Class<Entity> eClass = entityClasses.get(className);
+		Class<? extends Entity> eClass = entityClasses.get(className);
 		
 		if(eClass == null) throw new EntityNotFoundException(className + " doesn't exist! have you registered it?");
 		
-		Constructor<Entity> cstor;
+		Constructor<? extends Entity> cstor;
 		try {
 			cstor = eClass.getConstructor(Point.class,Integer.TYPE,Integer.TYPE, Integer.TYPE);
 			

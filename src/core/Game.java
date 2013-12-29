@@ -187,7 +187,7 @@ public class Game {
  		Display.destroy();
  		System.exit(status);
  	}
- 	public static void regiesterEntity(Class<Entity> entityClass)
+ 	public void regiesterEntity(Class<? extends Entity> entityClass)
  	{
  		EntityRegistrar.register(entityClass);
  	}

@@ -6,9 +6,11 @@
  ******************************************************************************/
 //import com.esotericsoftware.minlog.Log;
 
+
 import gameStates.*;
 import core.*;
 import core.configurationManager.ConfigurationManger;
+import entities.Player;
 
 public class Overwatch {
 	
@@ -17,6 +19,9 @@ public class Overwatch {
 	public static void main(String[] args)
 	{	
 		game = new Game(ConfigurationManger.loadConfiguration());
+		//register entities
+		game.regiesterEntity(Player.class);
+		
 		game.start(new GameStart(game.getStateManager()));
 	}
 	
