@@ -85,13 +85,8 @@ public abstract class Entity {
 		this.rotation = rotation;
 	}
 
-	public void update(int delta) {
-		
-	}
+	public abstract void update(int delta);
 	 
-	public void collideWith(Entity entity)
-	{
-		
-	}
+	public abstract void collideWith(Entity entity);
 
 }

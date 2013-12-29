@@ -108,5 +108,10 @@ public class Player extends Entity{
 		}
 		
 	}
+	@Override
+	public void collideWith(Entity entity) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
