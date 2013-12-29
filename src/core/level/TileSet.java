@@ -7,7 +7,7 @@
 package core.level;
 
 import core.graphics.TextureCoord;
-import core.utility.TextureLoader;
+import core.graphics.TextureLoader;
 
 /**
  * 
