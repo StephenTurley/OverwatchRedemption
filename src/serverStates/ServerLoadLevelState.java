@@ -17,8 +17,8 @@ import core.level.LevelManager;
 import core.network.GameServer;
 import core.network.Network;
 import core.network.Network.LoadLevel;
-import core.network.Player;
 import core.stateManager.ServerState;
+import entities.Player;
 
 public class ServerLoadLevelState extends ServerState {
 	private boolean levelLoaded;

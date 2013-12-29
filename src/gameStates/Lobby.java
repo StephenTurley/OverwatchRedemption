@@ -17,7 +17,6 @@ import core.network.Network.LoadLevel;
 import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
-import core.network.Player;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -26,6 +25,7 @@ import de.matthiasmann.twl.ToggleButton;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
+import entities.Player;
 
 public class Lobby extends GameState {
 	

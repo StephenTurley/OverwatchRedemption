@@ -12,6 +12,8 @@ import org.lwjgl.util.vector.Vector2f;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 
+import entities.Player;
+
 public class Network {
 
 	public static void register(EndPoint endPoint)

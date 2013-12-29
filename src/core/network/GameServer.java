@@ -18,6 +18,7 @@ import core.Game;
 import core.level.ServerLevel;
 import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
+import entities.Player;
 
 public class GameServer{
 	

@@ -12,9 +12,9 @@ import com.esotericsoftware.kryonet.Connection;
 import core.Debug;
 import core.network.GameServer;
 import core.network.Network;
-import core.network.Player;
 import core.network.PlayerConnection;
 import core.stateManager.ServerState;
+import entities.Player;
 
 public class ServerGamePlayState extends ServerState {
 

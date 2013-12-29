@@ -7,14 +7,15 @@
 package serverStates;
 
 import com.esotericsoftware.kryonet.Connection;
+
 import core.Debug;
 import core.network.GameServer;
-import core.network.Player;
 import core.network.PlayerConnection;
 import core.network.Network.Login;
 import core.network.Network.PlayerReady;
 import core.network.Network.ServerMessage;
 import core.stateManager.ServerState;
+import entities.Player;
 
 
 public class ServerStartState extends ServerState {

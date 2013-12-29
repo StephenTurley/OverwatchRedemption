@@ -29,6 +29,7 @@ import core.level.ClientLevel;
 import core.network.*;
 import core.network.Network.MovePlayer;
 import core.network.Network.PlayersPacket;
+import entities.Player;
 
 
 public class MovementTest extends GameState {
