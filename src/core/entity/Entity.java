@@ -8,6 +8,8 @@ package core.entity;
 
 import org.lwjgl.util.Point;
 
+import core.graphics.Camera;
+
 
 public abstract class Entity {
 	
@@ -84,6 +86,8 @@ public abstract class Entity {
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
+	
+	public abstract void draw(Camera camera);
 
 	public abstract void update(int delta);
 	 
