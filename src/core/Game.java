@@ -17,6 +17,8 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
 
 import core.configurationManager.GameConfig;
+import core.entity.Entity;
+import core.entity.EntityRegistrar;
 import core.network.GameServer;
 import core.network.Network;
 import core.stateManager.*;
@@ -184,6 +186,10 @@ public class Game {
  		if(gameClient != null) gameClient.stop();
  		Display.destroy();
  		System.exit(status);
+ 	}
+ 	public static void regiesterEntity(Class<Entity> entityClass)
+ 	{
+ 		EntityRegistrar.register(entityClass);
  	}
  	
  	
