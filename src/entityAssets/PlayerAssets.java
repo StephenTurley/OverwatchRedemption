@@ -6,7 +6,7 @@
  ******************************************************************************/
 package entityAssets;
 
-import core.EntityAssets;
+import core.entity.EntityAssets;
 
 public class PlayerAssets extends EntityAssets{
 	

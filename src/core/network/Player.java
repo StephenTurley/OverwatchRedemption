@@ -16,7 +16,7 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
-import core.Entity;
+import core.entity.Entity;
 import core.graphics.Camera;
 
 public class Player extends Entity{

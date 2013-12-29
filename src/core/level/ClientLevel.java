@@ -160,6 +160,8 @@ public class ClientLevel {
 			        glEnd();
 			        
 			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
+			        
+			        //find entities at this tile and level then draw them.
 					
 				}
 			}

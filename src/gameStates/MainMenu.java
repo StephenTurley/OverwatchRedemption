@@ -13,8 +13,8 @@ import org.lwjgl.input.Keyboard;
 
 import core.Debug;
 import core.Game;
-import core.Menu;
-import core.MenuItem;
+import core.gui.Menu;
+import core.gui.MenuItem;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 

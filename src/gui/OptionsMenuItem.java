@@ -7,7 +7,7 @@
 package gui;
 
 import gameStates.Options;
-import core.MenuItem;
+import core.gui.MenuItem;
 import core.stateManager.GameState;
 
 public class OptionsMenuItem extends MenuItem {

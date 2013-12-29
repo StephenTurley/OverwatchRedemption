@@ -7,7 +7,7 @@
 package gui;
 
 import gameStates.JoinGame;
-import core.MenuItem;
+import core.gui.MenuItem;
 import core.stateManager.GameState;
 
 public class JoinGameMenuItem extends MenuItem {

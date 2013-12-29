@@ -7,7 +7,7 @@
 package gui;
 
 import gameStates.HostGame;
-import core.MenuItem;
+import core.gui.MenuItem;
 import core.stateManager.GameState;
 
 

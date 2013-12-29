@@ -9,7 +9,7 @@ package core.graphics;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-import core.Entity;
+import core.entity.Entity;
 
 public class Camera {
 	private Point position;
