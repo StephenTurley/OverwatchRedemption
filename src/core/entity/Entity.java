@@ -15,12 +15,12 @@ public abstract class Entity {
 	protected int  width, height, layer;
 	protected float scale, rotation;
 	
-	public Entity(int startX, int startY, int width, int height, float scale, float rotation, int layer) {
-		this.location = new Point(startX, startY);
+	public Entity(Point location, int width, int height, int layer) {
+		this.location = location;
 		this.width = width;
 		this.height = height;
-		this.scale = scale;
-		this.rotation = rotation;
+		this.scale = 1.0f;
+		this.rotation = 0.0f;
 		this.layer = layer;
 	}
 	public Point getLocation() {

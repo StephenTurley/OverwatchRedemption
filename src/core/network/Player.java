@@ -32,23 +32,23 @@ public class Player extends Entity{
 	
 	public Player()
 	{
-		super(0,0,WIDTH,HEIGHT,1.0f,1.0f,0);
+		super(new Point(0,0), WIDTH,HEIGHT,0);
 	}
-	public Player(int startX, int startY) {
-		super(startX, startY, WIDTH, HEIGHT, 1.0f, 0.0f,0);
+	public Player(Point location) {
+		super(location, WIDTH, HEIGHT,0);
 		this.ready = false;
 		init();
 	}
-	public Player(int startX, int startY, String name)
+	public Player(Point location, String name)
 	{
-		super(startX, startY, WIDTH, HEIGHT, 1.0f, 0.0f, 0);
+		super(location, WIDTH, HEIGHT, 0);
 		this.name = name;
 		this.ready = false;
 		init();
 	}
 	public Player(String name)
 	{
-		super(0,0,WIDTH,HEIGHT,1.0f,1.0f,0);
+		super(new Point(0,0), WIDTH,HEIGHT,0);
 		this.name = name;
 		this.ready = false;
 		init();
