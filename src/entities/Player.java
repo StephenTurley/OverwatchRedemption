@@ -39,6 +39,13 @@ public class Player extends Entity{
 	{
 		super(ID, new Point(0,0), WIDTH,HEIGHT,0);
 	}
+	public Player(String name)
+	{
+		super(ID, new Point(0,0), WIDTH,HEIGHT,0);
+		this.name = name;
+		this.ready = false;
+		init();
+	}
 	public Player(Point location) {
 		super(ID, location, WIDTH, HEIGHT,0);
 		this.ready = false;
@@ -51,12 +58,9 @@ public class Player extends Entity{
 		this.ready = false;
 		init();
 	}
-	public Player(String name)
+	public Player(UUID id, Point location, int layer)
 	{
-		super(ID, new Point(0,0), WIDTH,HEIGHT,0);
-		this.name = name;
-		this.ready = false;
-		init();
+		super(id,location,WIDTH,HEIGHT,layer);
 	}
 	private void init()
 	{

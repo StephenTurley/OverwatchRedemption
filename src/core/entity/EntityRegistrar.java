@@ -2,6 +2,7 @@ package core.entity;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.lwjgl.util.Point;
 
@@ -26,7 +27,17 @@ public class EntityRegistrar {
 		entityClasses.put(entityClass.getSimpleName(), entityClass);
 	}
 	
-	public Entity createEntity(String className,Point location,int width, int height, int layer) throws EntityNotFoundException, EntityNotConstructedException
+	/**
+	 * This will create Entity classes if they have been registered
+	 * @param className the class name that implements Entity
+	 * @param uuid the unique identifier 
+	 * @param location the starting location
+	 * @param layer the starting layer
+	 * @return the new Entity
+	 * @throws EntityNotFoundException
+	 * @throws EntityNotConstructedException
+	 */
+	public Entity createEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
 	{
 		if(entityClasses == null) throw new EntityNotFoundException("No Entities have been registered!");
 		
@@ -36,9 +47,9 @@ public class EntityRegistrar {
 		
 		Constructor<? extends Entity> cstor;
 		try {
-			cstor = eClass.getConstructor(Point.class,Integer.TYPE,Integer.TYPE, Integer.TYPE);
+			cstor = eClass.getConstructor(UUID.class, Point.class, Integer.TYPE);
 			
-			Entity entity = cstor.newInstance(location,width,height,layer);
+			Entity entity = cstor.newInstance(uuid, location,layer);
 			
 			return entity;
 			
