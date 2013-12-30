@@ -14,9 +14,9 @@ public class EntityCollection {
 	
 	private HashMap<UUID, Entity> collection;
 	
-	public EntityCollection()
+	public EntityCollection(HashMap<UUID, Entity> entityMap)
 	{
-		collection = new HashMap<UUID, Entity>();
+		collection = entityMap;
 	}
 	
 	/**
