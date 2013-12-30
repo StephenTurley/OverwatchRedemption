@@ -1,6 +1,7 @@
 package core.entity;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import org.lwjgl.util.Rectangle;
 
@@ -11,23 +12,23 @@ import core.graphics.Camera;
  */
 public class EntityCollection {
 	
-	private ArrayList<Entity> collection;
+	private HashMap<UUID, Entity> collection;
 	
 	public EntityCollection()
 	{
-		collection = new ArrayList<Entity>();
+		collection = new HashMap<UUID, Entity>();
 	}
 	
 	/**
 	 * 
 	 * @param entity
-	 * @return returns the index of the entity. This is used to access the entity in the future
+	 * @return returns a unique identifier for the entity
 	 */
-	public int addEntity(Entity entity)
+	public UUID addEntity(UUID uuid, Entity entity)
 	{
-		collection.add(entity);
+		collection.put(uuid, entity);
 		
-		return collection.indexOf(entity);
+		return uuid;
 	}
 	
 	/**
@@ -38,7 +39,7 @@ public class EntityCollection {
  	 */
 	public void drawInArea(Camera camera, Rectangle globalArea, int layer)
 	{
-		for(Entity e : collection)
+		for(Entity e : collection.values())
 		{
 			if(globalArea.contains(e.location) && e.layer == layer)
 			{
