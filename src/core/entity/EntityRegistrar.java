@@ -43,7 +43,7 @@ public class EntityRegistrar {
 		
 		Class<? extends Entity> eClass = entityClasses.get(className);
 		
-		if(eClass == null) throw new EntityNotFoundException(className + " doesn't exist! have you registered it?");
+		if(eClass == null) throw new EntityNotFoundException(className + " doesn't exist! Have you registered it?");
 		
 		Constructor<? extends Entity> cstor;
 		try {
