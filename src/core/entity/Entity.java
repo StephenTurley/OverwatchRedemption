@@ -6,6 +6,8 @@
  ******************************************************************************/
 package core.entity;
 
+import java.util.UUID;
+
 import org.lwjgl.util.Point;
 
 import core.graphics.Camera;
@@ -16,8 +18,9 @@ public abstract class Entity {
 	protected Point location;
 	protected int  width, height, layer;
 	protected float scale, rotation;
+	protected UUID id;
 	
-	public Entity(Point location, int width, int height, int layer) {
+	public Entity(UUID uuid,Point location, int width, int height, int layer) {
 		this.location = location;
 		this.width = width;
 		this.height = height;
@@ -25,6 +28,7 @@ public abstract class Entity {
 		this.rotation = 0.0f;
 		this.layer = layer;
 	}
+	
 	public Point getLocation() {
 		return location;
 	}
@@ -85,6 +89,11 @@ public abstract class Entity {
 
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
+	}
+	
+	public UUID getID()
+	{
+		return id;
 	}
 	
 	public abstract void draw(Camera camera);

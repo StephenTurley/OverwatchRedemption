@@ -10,10 +10,12 @@ import core.exception.LevelFormatException;
 
 public class Layer {
 	private int[][] layerGids;
+	private int value;
 	
-	public Layer(String gidCsv, int width, int height) throws LevelFormatException
+	public Layer(String gidCsv, int width, int height, int value) throws LevelFormatException
 	{
 		layerGids = parseGidData(gidCsv, width, height);
+		this.value = value;
 	}
 	public int getGid(int indexX, int indexY)
 	{
@@ -46,6 +48,11 @@ public class Layer {
 			throw new LevelFormatException("Invalid character in layer data. Must be integer values");
 		}
 		return gids;
+	}
+	
+	public int getValue()
+	{
+		return value;
 	}
 	
 }

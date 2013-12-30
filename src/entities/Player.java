@@ -12,6 +12,8 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
+import java.util.UUID;
+
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
@@ -30,25 +32,28 @@ public class Player extends Entity{
 	private static final int HEIGHT = 50;
 	private static final float VELOCITY = 0.25f;
 	
+	//placeholder until this is parsed from map 
+	private static final UUID ID = UUID.fromString("083c3854-a2de-4c1d-a18c-9445dec51042");
+	
 	public Player()
 	{
-		super(new Point(0,0), WIDTH,HEIGHT,0);
+		super(ID, new Point(0,0), WIDTH,HEIGHT,0);
 	}
 	public Player(Point location) {
-		super(location, WIDTH, HEIGHT,0);
+		super(ID, location, WIDTH, HEIGHT,0);
 		this.ready = false;
 		init();
 	}
 	public Player(Point location, String name)
 	{
-		super(location, WIDTH, HEIGHT, 0);
+		super(ID, location, WIDTH, HEIGHT, 0);
 		this.name = name;
 		this.ready = false;
 		init();
 	}
 	public Player(String name)
 	{
-		super(new Point(0,0), WIDTH,HEIGHT,0);
+		super(ID, new Point(0,0), WIDTH,HEIGHT,0);
 		this.name = name;
 		this.ready = false;
 		init();

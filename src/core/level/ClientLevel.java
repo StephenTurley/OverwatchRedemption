@@ -10,9 +10,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import core.Debug;
 import core.Game;
+import core.entity.EntityCollection;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
 import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
@@ -23,6 +25,7 @@ public class ClientLevel {
 	private TileMap tileMap;
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
 	private ArrayList<Layer> layers;
+	private EntityCollection entityCollection;
 
 	public ClientLevel(InputStream fileStream) {
 		try
@@ -34,6 +37,8 @@ public class ClientLevel {
 			tileHeight = mp.getTileHeight();
 			layers = mp.getLayers();
 			tileMap = new TileMap(mp.getTileSets());
+			entityCollection = new EntityCollection(mp.getEntities());
+			entityCollection.loadAssets();
 		}
 		catch (Exception e)
 		{
@@ -161,7 +166,7 @@ public class ClientLevel {
 			        
 			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
 			        
-			        //find entities at this tile and level then draw them.
+			        entityCollection.drawInArea(camera, new Rectangle(x,y,tileWidth,tileHeight), l.getValue());
 					
 				}
 			}

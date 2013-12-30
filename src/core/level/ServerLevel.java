@@ -13,12 +13,14 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
+import core.entity.EntityCollection;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 public class ServerLevel {
 	
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
 	private ArrayList<Point> startingPoints;
+	private EntityCollection entityCollection;
 	
 
 
@@ -31,6 +33,7 @@ public class ServerLevel {
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
 			setStartingPoints(mp.getStartingPoints());
+			entityCollection = new EntityCollection(mp.getEntities());
 		}
 		catch(LevelComponentsNotSatisfiedException e)
 		{

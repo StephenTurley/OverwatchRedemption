@@ -18,6 +18,7 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
+import core.entity.Entity;
 import core.exception.LevelFormatException;
 import core.exception.LevelComponentsNotSatisfiedException;
 
@@ -118,7 +119,7 @@ public class MapParser {
 				int key = Integer.parseInt(layer.getAttributeValue("name"));
 				String data = layer.getChildText("data");
 				data = data.replace("\n", "").replace("\r", "");
-				layers.add(key,new Layer(data,getWidth(),getHeight()));
+				layers.add(new Layer(data,getWidth(),getHeight(),key));
 			}
 			catch(NumberFormatException e)
 			{
@@ -127,5 +128,9 @@ public class MapParser {
 				
 		}
 		return layers;
+	}
+	public ArrayList<Entity> getEntities()
+	{
+		return new ArrayList<Entity>();
 	}
 }

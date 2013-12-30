@@ -1,5 +1,6 @@
 package core.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -17,6 +18,16 @@ public class EntityCollection {
 	public EntityCollection(HashMap<UUID, Entity> entityMap)
 	{
 		collection = entityMap;
+	}
+	
+	public EntityCollection(ArrayList<Entity> entityList)
+	{
+		collection = new HashMap<UUID, Entity>();
+		
+		for(Entity e : entityList)
+		{
+			collection.put(e.getID(), e);
+		}
 	}
 	
 	/**
@@ -46,6 +57,14 @@ public class EntityCollection {
 				e.draw(camera);
 			}
 		}
+	}
+	/**
+	 * Load the assets for the Entities
+	 * This should only happen on the Client
+	 */
+	public void loadAssets()
+	{
+		
 	}
 
 }
