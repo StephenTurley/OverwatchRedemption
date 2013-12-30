@@ -6,6 +6,8 @@
  ******************************************************************************/
 package core.network;
 
+import java.util.UUID;
+
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -29,6 +31,7 @@ public class Network {
 		kryo.register(Vector2f.class);
 		kryo.register(LoadLevel.class);
 		kryo.register(Point.class);
+		kryo.register(UUID.class);
 	}
 	public static class ServerMessage
 	{
