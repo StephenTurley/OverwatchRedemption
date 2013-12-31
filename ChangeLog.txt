@@ -1,4 +1,6 @@
-0.1.4
+V Next
+Core engine is no longer coupled to specific Entity implementations. 
+Entities are now interpolated with tile layer. This gives the scene depth.
 Fixed - All level layers are now drawn
 Improved - performance boost in drawing
 0.1.3 (26Dec2013)
