@@ -6,15 +6,19 @@
  ******************************************************************************/
 package core.network;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.serializers.CollectionSerializer;
 import com.esotericsoftware.kryonet.EndPoint;
 
-import entities.Player;
+import core.entity.Entity;
+import core.entity.EntityRegistrar;
+import core.serializers.UUIDSerializer;
 
 public class Network {
 
@@ -24,14 +28,18 @@ public class Network {
 		kryo.register(ServerMessage.class);
 		kryo.register(Login.class);
 		kryo.register(PlayersPacket.class);
-		kryo.register(Player.class);
 		kryo.register(PlayerReady.class);
 		kryo.register(StartGame.class);
-		kryo.register(MovePlayer.class);
+		kryo.register(MovePlayer.class); //change to user input class
 		kryo.register(Vector2f.class);
 		kryo.register(LoadLevel.class);
 		kryo.register(Point.class);
-		kryo.register(UUID.class);
+		kryo.register(UUID.class, new UUIDSerializer());
+		kryo.register(ArrayList.class, new CollectionSerializer());
+		kryo.register(PlayerConnectionData.class);
+		kryo.register(Entity.class);
+		kryo.register(EntitiesPacket.class);
+		EntityRegistrar.kryoRegister(kryo);
 	}
 	public static class ServerMessage
 	{
@@ -59,20 +67,15 @@ public class Network {
 	}
 	public static class PlayersPacket
 	{
-		private Player thisPlayer;
-		private Player thatPlayer;
-		public Player getThisPlayer() {
-			return thisPlayer;
+		public PlayersPacket()
+		{
+			
 		}
-		public void setThisPlayer(Player thisPlayer) {
-			this.thisPlayer = thisPlayer;
-		}
-		public Player getThatPlayer() {
-			return thatPlayer;
-		}
-		public void setThatPlayer(Player thatPlayer) {
-			this.thatPlayer = thatPlayer;
-		}
+		public ArrayList<PlayerConnectionData> playerConnections;
+	}
+	public static class EntitiesPacket
+	{
+		public ArrayList<Entity> entities;
 	}
 	public static class PlayerReady
 	{

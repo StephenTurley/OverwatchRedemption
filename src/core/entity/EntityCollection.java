@@ -41,7 +41,49 @@ public class EntityCollection {
 		
 		return uuid;
 	}
+	/**
+	 * Will update existing entities and add new ones
+	 * @param entities The entities to be updated or added
+	 * @param loadNewAssets if true, entity assets will be loaded for new entities
+	 * @return List of new entities added
+	 */
+	public ArrayList<Entity> addUpdateEntities(ArrayList<Entity> entities, boolean loadNewAssets)
+	{
+		ArrayList<Entity> newEntities = new ArrayList<Entity>();
+		
+		for(Entity e: entities)
+		{
+			if(collection.get(e.id) == null && loadNewAssets) e.loadAssets() ;
+			collection.put(e.id, e);
+		}
+		
+		return newEntities;
+		
+	}
+	public Entity getEntity(UUID uuid)
+	{
+		return collection.get(uuid);
+	}
 	
+	public ArrayList<Entity> getEntities() 
+	{
+			return new ArrayList<Entity>(collection.values());
+	}
+			
+	public ArrayList<Entity> getEntities(Class<? extends Entity> entityClass)
+	{
+		ArrayList<Entity> entities = new ArrayList<Entity>();
+		
+		for(Entity e : collection.values())
+		{
+			if(e.getClass() == entityClass)
+			{
+				entities.add(e);
+			}
+		}
+		
+		return entities;
+	}
 	/**
 	 * This method will draw all the entities that are contained by the globalArea Rectangle and on the given layer
 	 * @param camera
@@ -52,7 +94,7 @@ public class EntityCollection {
 	{
 		for(Entity e : collection.values())
 		{
-			if(globalArea.contains(e.location) && e.layer == layer)
+			if(globalArea.contains(e.getBottomLocation()) && e.layer == layer)
 			{
 				e.draw(camera);
 			}
@@ -66,5 +108,25 @@ public class EntityCollection {
 	{
 		
 	}
+
+	public void update(int delta) {
+		for(Entity e : collection.values())
+		{
+			e.update(delta);
+		}
+	}
+
+	public void drawInCamera(Camera camera, int layer) {
+		for(Entity e : collection.values())
+		{
+			if(camera.getCameraRect().contains(e.getBottomLocation()) && e.layer == layer)
+			{
+				e.draw(camera);
+			}
+		}
+		
+	}
+
+	
 
 }

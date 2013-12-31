@@ -8,12 +8,13 @@ package core.level;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
 
 import core.Debug;
 import core.Game;
+import core.entity.Entity;
 import core.entity.EntityCollection;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
@@ -109,9 +110,19 @@ public class ClientLevel {
 		this.layers = layers;
 	}
 	
+	public Entity getEntity(UUID uuid)
+	{
+		return entityCollection.getEntity(uuid);
+	}
+	
+	public void addUpdateEntity(ArrayList<Entity> entities)
+	{
+		entityCollection.addUpdateEntities(entities, true);
+	}
+	
 	public void draw(Camera camera)
 	{
-		glColor3f(1.0f, 1.0f, 1.0f);
+		
 		
 		
 		Point offSet = camera.getTileOffset(tileWidth, tileHeight);
@@ -119,33 +130,34 @@ public class ClientLevel {
 		int columns = (camera.getWidth() / tileWidth);
 		int rows = (camera.getHeight() / tileHeight);
 		
-		int startingGlobalX = camera.getX() / tileWidth;
-		int startingGlobalY = camera.getY() / tileHeight;
+		int startingGlobalTileX = camera.getX() / tileWidth;
+		int startingGlobalTileY = camera.getY() / tileHeight;
 		
 		//buffer in the positive directions. Negative directions will be
 		//buffered because of integer division rounding.
-		if(startingGlobalX + columns + 1 < mapWidth) columns++;
-		if(startingGlobalY + rows + 2 < mapHeight) rows+=2;
+		if(startingGlobalTileX + columns + 1 < mapWidth) columns++;
+		if(startingGlobalTileY + rows + 2 < mapHeight) rows+=2;
 		
 		
-		//draw each row layer by layer
-		//TODO: interpolate entities
-		for(int row = 0; row < rows; row ++)
+		for(Layer l : layers)
 		{
-			for (int col = 0; col < columns; col++)
+			for(int row = 0; row < rows; row ++)
 			{
-				int globalX = startingGlobalX + col;
-				int globalY = startingGlobalY + row;
-				
-				for(Layer l : layers)
+				for (int col = 0; col < columns; col++)
 				{
-					int currentGID = l.getGid(globalX, globalY);
+					int globalTileX = startingGlobalTileX + col;
+					int globalTileY = startingGlobalTileY + row;
+					
+					int currentGID = l.getGid(globalTileX, globalTileY);
 					
 					//no tile at this location
-					if(currentGID == 0) break;
+					if(currentGID == 0) continue;
 					
 					int y = row * tileHeight;
 					int x = col * tileWidth;
+					
+					
+					glColor3f(1.0f, 1.0f, 1.0f);
 					//draw this
 					TextureCoord t = tileMap.getTileByGID(currentGID);
 					
@@ -164,12 +176,18 @@ public class ClientLevel {
 			        glVertex2f(x + tileWidth - offSet.getX(), y - offSet.getY());
 			        glEnd();
 			        
+
 			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
 			        
-			        entityCollection.drawInArea(camera, new Rectangle(x,y,tileWidth,tileHeight), l.getValue());
+
+			        //draw entities at current tile and layer
+			        //entityCollection.drawInArea(camera, new Rectangle(globalX * tileWidth,globalY * tileHeight,tileWidth,tileHeight), l.getValue());
 					
 				}
+				//Rectangle currentRow = new Rectangle(camera.getX(), row * tileHeight ,camera.getWidth(), tileHeight);
+				
 			}
+			entityCollection.drawInCamera(camera,l.getValue());
 		}
 		
 	}

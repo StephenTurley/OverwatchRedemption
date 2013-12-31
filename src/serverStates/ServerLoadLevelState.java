@@ -6,17 +6,19 @@
  ******************************************************************************/
 package serverStates;
 
-import org.lwjgl.util.Point;
+import java.util.ArrayList;
 
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
+import core.entity.Entity;
 import core.exception.LevelNotFoundException;
 import core.level.LevelManager;
 import core.network.GameServer;
 import core.network.Network;
 import core.network.Network.LoadLevel;
+import core.network.PlayerConnection;
 import core.stateManager.ServerState;
 import entities.Player;
 
@@ -33,7 +35,7 @@ public class ServerLoadLevelState extends ServerState {
 		if(gameServer.isPlayersReady() && levelLoaded)
 		{
 			gameServer.setPlayersReady(false);
-			gameServer.sendToAuthenticatedTCP(new Network.StartGame());
+			gameServer.sendToAllTCP(new Network.StartGame());
 			gameServer.changeState(new ServerGamePlayState(gameServer));
 		}
 			
@@ -51,7 +53,7 @@ public class ServerLoadLevelState extends ServerState {
 		loadLevelPkt.stage = 0;
 		loadLevelPkt.level = 1;
 		
-		gameServer.sendToAuthenticatedTCP(loadLevelPkt);
+		gameServer.sendToAllTCP(loadLevelPkt);
 		
 		try
 		{
@@ -62,13 +64,17 @@ public class ServerLoadLevelState extends ServerState {
 			Debug.Trace("Level not found");
 			Game.exit(-1);
 		}
-		int i = 0;
-		for(Player p : gameServer.getPlayers().values())
+		
+		//set connection uuid
+		for(PlayerConnection pc : gameServer.getPlayerConnections())
 		{
-			Point startingPoint = gameServer.getCurrentLevel().getStartingPoints().get(i);
-			p.setPosX(startingPoint.getX());
-			p.setPosY(startingPoint.getY());
-			i++;
+			ArrayList<Entity> players = gameServer.getCurrentLevel().getEntityCollection().getEntities(Player.class);
+			
+			//may want to check that the players are >= pc
+			Player p = (Player)players.get(pc.getID() - 1);
+			
+			pc.uuid = p.getID();
+			
 		}
 		levelLoaded = true;
 		

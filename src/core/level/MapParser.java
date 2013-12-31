@@ -9,6 +9,7 @@ package core.level;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -19,8 +20,9 @@ import org.lwjgl.util.Point;
 import core.Debug;
 import core.Game;
 import core.entity.Entity;
+import core.entity.EntityRegistrar;
 import core.exception.LevelFormatException;
-import core.exception.LevelComponentsNotSatisfiedException;
+import core.exception.TileSetLoadFailureException;
 
 
 public class MapParser {
@@ -64,28 +66,8 @@ public class MapParser {
 		Element map = mapData.getRootElement();
 		return Integer.parseInt(map.getAttribute("tileheight").getValue());
 	}
-	public ArrayList<Point>	getStartingPoints() throws LevelComponentsNotSatisfiedException
-	{
-		ArrayList<Point> startingPoints = new ArrayList<Point>();
-		
-		Element map = mapData.getRootElement();
-		for(Element og : map.getChildren("objectgroup"))
-		{
-			for(Element e : og.getChildren())
-			{
-				if (e.getAttributeValue("type").equals("startingPoint"))
-				{
-					startingPoints.add(new Point(Integer.parseInt(e.getAttributeValue("x")),
-												 Integer.parseInt(e.getAttributeValue("y"))));
-				}
-			}
-		}
-		if(startingPoints == null || startingPoints.size() < 2) 
-			throw new LevelComponentsNotSatisfiedException("A map must contain at least two startingPoints");
-		return startingPoints;
-	}
-
-	public ArrayList<TileSet> getTileSets()
+	
+	public ArrayList<TileSet> getTileSets() throws TileSetLoadFailureException
 	{
 		ArrayList<TileSet> tileSets =  new ArrayList<TileSet>();
 		
@@ -102,7 +84,13 @@ public class MapParser {
 			int width = Integer.parseInt(image.getAttributeValue("width"));
 			int height = Integer.parseInt(image.getAttributeValue("height"));
 			
-			tileSets.add(new TileSet(path,tileWidth,tileHeight, width, height, firstGID));
+			try{
+				tileSets.add(new TileSet(path,tileWidth,tileHeight, width, height, firstGID));
+			}
+			catch(Exception e)
+			{
+				throw new TileSetLoadFailureException("TileSet malformed or missing assets. Does this file exist?: " + path );
+			}
 		}
 		return tileSets;
 	}
@@ -129,8 +117,52 @@ public class MapParser {
 		}
 		return layers;
 	}
-	public ArrayList<Entity> getEntities()
+	public ArrayList<Entity> getEntities() throws Exception
 	{
-		return new ArrayList<Entity>();
+		ArrayList<Entity> entities = new ArrayList<Entity>();
+		
+		Element map = mapData.getRootElement();
+		
+
+		for(Element objectGroup : map.getChildren("objectgroup"))
+		{
+			if(objectGroup.getAttribute("name").getValue().equals("entity"))
+			{
+				for(Element object: objectGroup.getChildren("object"))
+				{
+					String className = object.getAttribute("type").getValue();
+					int x = object.getAttribute("x").getIntValue();
+					int y = object.getAttribute("y").getIntValue();
+					int layer = 9999;
+					UUID id = null;
+					
+					Element properties = object.getChild("properties");
+					
+					for(Element property: properties.getChildren())
+					{
+						if(property.getAttribute("name").getValue().equals("id"))
+						{
+							id = UUID.fromString(property.getAttribute("value").getValue());
+						}
+						else if(property.getAttribute("name").getValue().equals("layer"))
+						{
+							layer = property.getAttribute("value").getIntValue();
+						}
+					}
+					if(id != null || layer != 9999)
+					{
+						entities.add(EntityRegistrar.createEntity(className, id, new Point(x,y), layer));
+					}
+					else
+					{
+						throw new LevelFormatException("Entity properties are malformed");
+					}
+				}
+			}
+		}
+
+
+		
+		return entities;
 	}
 }

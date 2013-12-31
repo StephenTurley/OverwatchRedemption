@@ -43,8 +43,7 @@ public class Game {
 		sm = new StateManager();
 		isServer = false;
 		gameClient = new Client();
-		Network.register(gameClient);
-		gameClient.start();
+		
 		if(Game.config.isDebugLogging())
 		{
 			Debug.Trace("Game initialized!");
@@ -62,6 +61,8 @@ public class Game {
 	}
  	public void start(GameState startingState)
 	{
+ 		Network.register(gameClient);
+		gameClient.start();
  		loadGamepads();
  		
 		try{
@@ -119,6 +120,7 @@ public class Game {
  	}
  	public static void updateServer(int delta)
  	{
+ 		
  		gameServer.update(delta);
  	}
  	public static void bindClient(int timeout, String host, int tcp, int udp)
@@ -190,6 +192,10 @@ public class Game {
  	public void regiesterEntity(Class<? extends Entity> entityClass)
  	{
  		EntityRegistrar.register(entityClass);
+ 	}
+ 	public static int getClientID()
+ 	{
+ 		return gameClient.getID();
  	}
  	
  	

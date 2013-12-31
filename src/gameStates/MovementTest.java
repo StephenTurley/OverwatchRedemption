@@ -27,6 +27,7 @@ import core.graphics.Camera;
 import core.level.ClientLevel;
 //import net.java.games.input.*;
 import core.network.*;
+import core.network.Network.EntitiesPacket;
 import core.network.Network.MovePlayer;
 import core.network.Network.PlayersPacket;
 import entities.Player;
@@ -42,7 +43,6 @@ public class MovementTest extends GameState {
 	private ClientLevel currentLevel;
 	
 	private Player thisPlayer; 
-	private Player thatPlayer;
 	
 	private Camera camera;
 	
@@ -70,14 +70,6 @@ public class MovementTest extends GameState {
 		
 		currentLevel.draw(camera);
 		
-		if(thisPlayer != null)
-		{
-			thisPlayer.draw(camera);
-		}
-		if(thatPlayer != null)
-		{
-			thatPlayer.draw(camera);
-		}
 	}
 
 
@@ -224,9 +216,23 @@ public class MovementTest extends GameState {
 	{
 		if(object instanceof PlayersPacket)
 		{
+			
 			PlayersPacket playerPacket = (PlayersPacket)object;
-			thisPlayer = playerPacket.getThisPlayer();
-			thatPlayer = playerPacket.getThatPlayer();
+			
+			//replace this with an entity collection packet
+			for (PlayerConnectionData pcd : playerPacket.playerConnections)
+			{
+				if(Game.getClientID() == pcd.connectionID)
+				{
+					thisPlayer = (Player)currentLevel.getEntity(pcd.uuid);
+				}
+			}
+		}
+		if(object instanceof EntitiesPacket)
+		{
+			EntitiesPacket ep = (EntitiesPacket)object;
+			
+			currentLevel.addUpdateEntity(ep.entities);
 		}
 	}
 }

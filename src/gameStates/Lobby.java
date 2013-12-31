@@ -17,6 +17,7 @@ import core.network.Network.LoadLevel;
 import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
+import core.network.PlayerConnectionData;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -25,7 +26,6 @@ import de.matthiasmann.twl.ToggleButton;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
-import entities.Player;
 
 public class Lobby extends GameState {
 	
@@ -34,8 +34,8 @@ public class Lobby extends GameState {
     private GUI gui;
     
     private String serverMsgModel;
-    private Player thisPlayer;
-    private Player thatPlayer;
+    private PlayerConnectionData thisPlayer;
+    private PlayerConnectionData thatPlayer;
     private boolean connected; 
     
     private LoadLevel loadLevel;
@@ -132,8 +132,8 @@ public class Lobby extends GameState {
 		}
 		else
 		{
-			uiWidget.clientNameLbl.setText(thisPlayer.getName());
-			if(thisPlayer.isReady())
+			uiWidget.clientNameLbl.setText(thisPlayer.name);
+			if(thisPlayer.isReady)
 				uiWidget.readyBtn.setText("Ready");
 			else
 				uiWidget.readyBtn.setText("Not Ready");
@@ -146,8 +146,8 @@ public class Lobby extends GameState {
 		}
 		else
 		{
-			uiWidget.otherNameLbl.setText(thatPlayer.getName());
-			if(thatPlayer.isReady())
+			uiWidget.otherNameLbl.setText(thatPlayer.name);
+			if(thatPlayer.isReady)
 				uiWidget.readyLbl.setText("Ready");
 			else
 				uiWidget.readyLbl.setText("Not Ready");
@@ -223,8 +223,19 @@ public class Lobby extends GameState {
 		else if(object instanceof PlayersPacket)
 		{
 			PlayersPacket playerPacket = (PlayersPacket)object;
-			thisPlayer = playerPacket.getThisPlayer();
-			thatPlayer = playerPacket.getThatPlayer();
+			
+			for(PlayerConnectionData pcd : playerPacket.playerConnections)
+			{
+				if(pcd.connectionID == Game.getClientID())
+				{
+					thisPlayer = pcd;
+				}
+				else
+				{
+					thatPlayer = pcd;
+				}
+			}
+			
 		}
 		else if(object instanceof LoadLevel)
 		{

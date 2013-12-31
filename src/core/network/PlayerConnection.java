@@ -6,11 +6,30 @@
  ******************************************************************************/
 package core.network;
 
-import com.esotericsoftware.kryonet.Connection;
+import java.util.UUID;
 
-import entities.Player;
+import com.esotericsoftware.kryonet.Connection;
 
 public class PlayerConnection extends Connection {
 	
-	public Player player;
+	
+	public String name;
+	public boolean isReady;
+	public UUID uuid;
+	
+	public PlayerConnection()
+	{
+		super();
+	}
+	
+	public PlayerConnectionData getPlayerData()
+	{
+		PlayerConnectionData pcd = new PlayerConnectionData();
+		pcd.name = this.name;
+		pcd.connectionID = this.getID();
+		pcd.isReady = this.isReady;
+		pcd.uuid = this.uuid;
+		
+		return pcd;
+	}
 }

@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.lwjgl.util.Point;
 
+import com.esotericsoftware.kryo.Kryo;
+
 import core.exception.EntityNotConstructedException;
 import core.exception.EntityNotFoundException;
 
@@ -27,6 +29,14 @@ public class EntityRegistrar {
 		entityClasses.put(entityClass.getSimpleName(), entityClass);
 	}
 	
+	public static void kryoRegister(Kryo kryo)
+	{
+		for(Class<? extends Entity> eClass: entityClasses.values())
+		{
+			kryo.register(eClass);
+		}
+	}
+	
 	/**
 	 * This will create Entity classes if they have been registered
 	 * @param className the class name that implements Entity
@@ -37,7 +47,7 @@ public class EntityRegistrar {
 	 * @throws EntityNotFoundException
 	 * @throws EntityNotConstructedException
 	 */
-	public Entity createEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
+	public static Entity createEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
 	{
 		if(entityClasses == null) throw new EntityNotFoundException("No Entities have been registered!");
 		

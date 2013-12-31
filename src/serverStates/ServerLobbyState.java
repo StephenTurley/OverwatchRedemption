@@ -32,12 +32,12 @@ public class ServerLobbyState extends ServerState {
 		{
 			countdownRemaining -= delta;
 			int seconds = countdownRemaining / 1000;
-			gameServer.sendToAuthenticatedTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
+			gameServer.sendToAllTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
 		}else
 		{
 			if(countdownRemaining != TIME_TO_START)//timer had started but was stopped. 
 			{
-				gameServer.sendToAuthenticatedTCP(new Network.ServerMessage("Are you ready?"));
+				gameServer.sendToAllTCP(new Network.ServerMessage("Are you ready?"));
 				countdownRemaining = TIME_TO_START;
 			}
 		}

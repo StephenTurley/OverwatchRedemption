@@ -166,7 +166,7 @@ public class HostGame extends GameState{
 	{
 		Game.startServer();
 
-		Game.bindClient(5000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+		Game.bindClient(500000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 		Game.addClientListener(this);
 		
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));

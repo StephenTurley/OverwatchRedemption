@@ -27,6 +27,7 @@ public abstract class Entity {
 		this.scale = 1.0f;
 		this.rotation = 0.0f;
 		this.layer = layer;
+		this.id = uuid;
 	}
 	
 	public Point getLocation() {
@@ -101,5 +102,7 @@ public abstract class Entity {
 	public abstract void update(int delta);
 	 
 	public abstract void collideWith(Entity entity);
+	
+	public abstract void loadAssets();
 
 }

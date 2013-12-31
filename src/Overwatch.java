@@ -7,6 +7,8 @@
 //import com.esotericsoftware.minlog.Log;
 
 
+import com.esotericsoftware.minlog.Log;
+
 import gameStates.*;
 import core.*;
 import core.configurationManager.ConfigurationManger;
@@ -18,6 +20,8 @@ public class Overwatch {
 	
 	public static void main(String[] args)
 	{	
+		Log.set(Log.LEVEL_WARN);
+		
 		game = new Game(ConfigurationManger.loadConfiguration());
 		//register entities
 		game.regiesterEntity(Player.class);

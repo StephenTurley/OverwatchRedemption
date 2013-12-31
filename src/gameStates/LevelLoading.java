@@ -10,7 +10,6 @@ import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
-import core.exception.LevelNotFoundException;
 import core.level.ClientLevel;
 import core.network.Network.StartGame;
 import core.stateManager.GameState;
@@ -81,7 +80,7 @@ public class LevelLoading extends GameState {
 	
 		try {
 			clientLevel = LevelManager.loadClientLevel(stage, level);
-		} catch (LevelNotFoundException e) {
+		} catch (Exception e) {
 
 			Debug.Trace(e.getMessage());
 		}

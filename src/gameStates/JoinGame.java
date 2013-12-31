@@ -190,7 +190,7 @@ public class JoinGame extends GameState {
 	
 	private void joinServer(String host, int port)
 	{
-		Game.bindClient(5000, host, port, port);
+		Game.bindClient(500000, host, port, port);
 		Game.addClientListener(this);
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 		

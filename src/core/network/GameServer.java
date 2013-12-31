@@ -6,7 +6,7 @@
  ******************************************************************************/
 package core.network;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import serverStates.ServerStartState;
 
@@ -15,15 +15,15 @@ import com.esotericsoftware.kryonet.Server;
 
 import core.Debug;
 import core.Game;
+import core.entity.Entity;
 import core.level.ServerLevel;
+import core.network.Network.EntitiesPacket;
 import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
-import entities.Player;
 
 public class GameServer{
 	
 		private Server server;
-		private HashMap<Integer, Player> players;
 		private ServerState currentState;
 		private boolean playersReady;
 		private ServerLevel currentLevel;
@@ -31,23 +31,25 @@ public class GameServer{
 		
 		public void init()
 	 	{
-			players = new HashMap<Integer, Player>();
 	 		server = new Server(){
 	 			protected Connection newConnection(){
 	 				return new PlayerConnection();
 	 			}
 	 		};
+
 	 		Network.register(server);
 	 		currentState = new ServerStartState(this);
 	 		currentState.enter();
 	 		server.addListener(currentState);
+	 		
+	 		
 	 	}
 	 	public void start()
 	 	{
 	 		server.start();
 	 		try
 	 		{
-	 			server.bind(Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+	 			server.bind( Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
 	 		}catch(Exception e)
 	 		{
 				Debug.Trace(e.getMessage());
@@ -58,19 +60,26 @@ public class GameServer{
 	 	{
 	 		currentState.update(delta);
 	 		
-	 		if(players.size() >=2 )
+	 		Connection[] playerConnections = server.getConnections();
+	 		
+	 		if(playerConnections.length >=2 )
 	 		{
 		 		boolean tempReady = true;
-		 		for(Player p : players.values())
+		 		for(Connection c: playerConnections)
 		 		{
-		 			p.update(delta);
-		 			if(!p.isReady())
+		 			PlayerConnection pc = (PlayerConnection)c;
+
+		 			if(!pc.isReady)
 		 			{
 		 				tempReady = false;
 		 				break;
 		 			}
 		 		}
 		 		playersReady = tempReady;
+	 		}
+	 		if(playersReady && currentLevel != null)
+	 		{
+	 			currentLevel.update(delta);
 	 		}
 	 	}
 	 	
@@ -93,41 +102,27 @@ public class GameServer{
 	 		return server;
 	 	}
 	 	
-	 	public void addPlayer(Player player)
-	 	{
-	 		players.put(player.getId(), player);
-	 	}
-	 	public Player removePlayer(int id)
-	 	{
-	 		return players.remove(id);
-	 	}
-	 	public Player getPlayer(int id)
-	 	{
-	 		return players.get(id);
-	 	}
-	 	public HashMap<Integer, Player> getPlayers()
-	 	{
-	 		return players;
-	 	}
+	 	
 	 	public int getPlayerCount()
 	 	{
-	 		return players.size();
+	 		return server.getConnections().length;
 	 	}
 	 	public boolean isPlayersReady() {
 			return playersReady;
 		}
 		public void setPlayersReady(boolean playersReady) {
 			
-			for(Player p : players.values())
+			for(Connection c: server.getConnections())
 			{
-				p.setReady(playersReady);
+				PlayerConnection pc = (PlayerConnection)c;
+				pc.isReady = playersReady;
 			}
 			this.playersReady = playersReady;
 		}
 		public void setPlayerReady(int playerID, boolean playerReady)
 		{
-			Player player =  players.get(playerID);
-			player.setReady(playerReady);
+			PlayerConnection player =  getPlayerConnection(playerID);
+			player.isReady = playerReady;
 			String msg;
 			if(playerReady)
 			{
@@ -137,57 +132,68 @@ public class GameServer{
 			{
 				msg = " is not ready!";
 			}
-			server.sendToAllTCP(new Network.ServerMessage(player.getName() + msg) );
+			server.sendToAllTCP(new Network.ServerMessage(player.name + msg) );
 		}
 		
-		public boolean isPlayerAuthenticated(PlayerConnection playerConnection)
+		public void sendToAllTCP(Object object)
 		{
-			return !(players.get(playerConnection.getID()) == null);
+				server.sendToAllTCP(object);
 		}
-		public void sendToAuthenticatedTCP(Object object)
+		public void sendToAllUDP(Object object)
 		{
-			for(int id : players.keySet())
-			{
-				server.sendToTCP(id, object);
-			}
-		}
-		public void sendToAuthenticatedUDP(Object object)
-		{
-			for(int id : players.keySet())
-			{
-				server.sendToUDP(id, object);
-			}
+				server.sendToAllUDP(object);
 		}
 		public void sendPlayersPacket()
 		{
-			for(Connection c : server.getConnections())
-			{
-				PlayerConnection pc = (PlayerConnection)c;
-				if(isPlayerAuthenticated(pc))
-				{
-					PlayersPacket playersPacket = new PlayersPacket();
-					
-					for(Player p : players.values())
-					{
-						if(p.getId() == pc.getID())
-						{
-							playersPacket.setThisPlayer(p);
-						}
-						else
-						{
-							playersPacket.setThatPlayer(p);
-						}
-					}
-					server.sendToUDP(pc.getID(),playersPacket);
-				}
-				
+			PlayersPacket playersPacket = new PlayersPacket();
+			
+			playersPacket.playerConnections = new ArrayList<PlayerConnectionData>();
+			
+			for(PlayerConnection pc : getPlayerConnections())
+			{		
+				playersPacket.playerConnections.add(pc.getPlayerData());
 			}
+			
+			
+			
+			server.sendToAllUDP(playersPacket);
 		}
 		public ServerLevel getCurrentLevel() {
 			return currentLevel;
 		}
 		public void setCurrentLevel(ServerLevel currentLevel) {
 			this.currentLevel = currentLevel;
+		}
+		
+		public ArrayList<PlayerConnection> getPlayerConnections()
+		{
+			ArrayList<PlayerConnection> playerConnections = new ArrayList<PlayerConnection>();
+			
+			for(Connection c : server.getConnections())
+			{
+				playerConnections.add((PlayerConnection)c);
+			}
+			
+			return playerConnections;
+		}
+		
+		public PlayerConnection getPlayerConnection(int playerID)
+		{
+			for(Connection c: server.getConnections())
+			{
+				if(c.getID() == playerID) return (PlayerConnection)c;
+			}
+			return null;
+		}
+		public void updateEntity(Entity entity) {
+		
+			currentLevel.getEntityCollection().addEntity(entity.getID(), entity);
+		}
+		public void sendEntitiesPacket() {
+			EntitiesPacket ep = new EntitiesPacket();
+			ep.entities = currentLevel.getEntityCollection().getEntities();
+			
+			sendToAllUDP(ep);
 		}
 
 }

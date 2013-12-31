@@ -7,19 +7,17 @@
 package core.level;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-
-import org.lwjgl.util.Point;
+import java.util.UUID;
 
 import core.Debug;
 import core.Game;
+import core.entity.Entity;
 import core.entity.EntityCollection;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 public class ServerLevel {
 	
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
-	private ArrayList<Point> startingPoints;
 	private EntityCollection entityCollection;
 	
 
@@ -32,10 +30,14 @@ public class ServerLevel {
 			mapHeight = mp.getHeight();
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
-			setStartingPoints(mp.getStartingPoints());
 			entityCollection = new EntityCollection(mp.getEntities());
 		}
 		catch(LevelComponentsNotSatisfiedException e)
+		{
+			Debug.Trace(e.getMessage());
+			Game.exit(-1);
+		}
+		catch(Exception e)
 		{
 			Debug.Trace(e.getMessage());
 			Game.exit(-1);
@@ -89,15 +91,16 @@ public class ServerLevel {
 		this.tileHeight = tileHeight;
 	}
 
-	public ArrayList<Point> getStartingPoints() {
-		return startingPoints;
+	public EntityCollection getEntityCollection()
+	{
+		return entityCollection;
 	}
 
-	public void setStartingPoints(ArrayList<Point> startingPoints) {
-		this.startingPoints = startingPoints;
+	public Entity getEntity(UUID uuid) {
+		return entityCollection.getEntity(uuid);
 	}
 
-
-
-
+	public void update(int delta) {
+		entityCollection.update(delta);
+	}
 }

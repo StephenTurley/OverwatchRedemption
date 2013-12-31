@@ -15,7 +15,6 @@ import core.network.Network;
 import core.network.PlayerConnection;
 import core.stateManager.ServerState;
 import entities.Player;
-
 public class ServerGamePlayState extends ServerState {
 
 	public ServerGamePlayState(GameServer gameServer) {
@@ -28,6 +27,7 @@ public class ServerGamePlayState extends ServerState {
 		if(gameServer.isPlayersReady())
 		{
 			gameServer.sendPlayersPacket();
+			gameServer.sendEntitiesPacket();
 		}
 	}
 
@@ -51,16 +51,18 @@ public class ServerGamePlayState extends ServerState {
 	@Override
 	public void received(Connection c, Object object) {
 		PlayerConnection pc = (PlayerConnection)c;
-		if(gameServer.isPlayerAuthenticated(pc))
+
+		if(object instanceof Network.MovePlayer)
 		{
-			if(object instanceof Network.MovePlayer)
-			{
-				Player player = gameServer.getPlayer(pc.getID());
-				
-				player.setMovementVector(((Network.MovePlayer)object).movementVector);
-				
-			}
+			
+			Player player = (Player)gameServer.getCurrentLevel().getEntity(pc.uuid);
+			
+			player.setMovementVector(((Network.MovePlayer)object).movementVector);
+			
+			gameServer.updateEntity(player);
+			
 		}
+
 
 	}
 
