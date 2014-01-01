@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
 
 import core.Debug;
 import core.Game;
