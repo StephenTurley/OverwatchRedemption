@@ -1,3 +1,5 @@
+V Next
+Changed - Start screen now says Overwatch instead of Overwatch: Redemption
 0.1.4 (1Jan2013)
 Fixed - Camera shouldn't jitter as bad for client that isn't hosting the game. 
 Fixed - Entities are now interpolated with tile layer. This gives the scene depth.

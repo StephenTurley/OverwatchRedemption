@@ -24,7 +24,7 @@ import java.awt.Font;
 public class GameStart extends GameState {
 	
 	private TrueTypeFont titleFont;
-	private String titleText = "OverWatch: Redemption";
+	private String titleText = "OVERWATCH";
 	private TrueTypeFont pressStartFont;
 	private String pressStartText = "Press start or enter to continue";
 	
@@ -67,7 +67,7 @@ public class GameStart extends GameState {
 		if(showStartText)
 		{
 			pressStartFont.drawString((Game.getGameConfig().getDisplayWidth()/2)-(pressStartFont.getWidth(pressStartText)/2),
-					(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight() - 100),
+					(Game.getGameConfig().getDisplayHeight()/2) - (titleFont.getHeight() - 125),
 					pressStartText, Color.orange);
 		}
 	}
@@ -100,7 +100,7 @@ public class GameStart extends GameState {
 			InputStream is = ResourceLoader.getResourceAsStream("fonts/unispace rg.ttf");
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
-			unispace = unispace.deriveFont(48f);
+			unispace = unispace.deriveFont(64f);
 			titleFont = new TrueTypeFont(unispace, true);
 			unispace = unispace.deriveFont(24f);
 			pressStartFont = new TrueTypeFont(unispace, true);
