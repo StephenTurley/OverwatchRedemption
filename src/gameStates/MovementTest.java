@@ -233,6 +233,7 @@ public class MovementTest extends GameState {
 			EntitiesPacket ep = (EntitiesPacket)object;
 			
 			currentLevel.addUpdateEntity(ep.entities);
+			
 		}
 	}
 }

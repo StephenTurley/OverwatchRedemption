@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import core.Debug;
 import core.Game;
@@ -153,8 +154,8 @@ public class ClientLevel {
 					//no tile at this location
 					if(currentGID == 0) continue;
 					
-					int y = row * tileHeight;
-					int x = col * tileWidth;
+					int pixelY = row * tileHeight;
+					int pixelX = col * tileWidth;
 					
 					
 					glColor3f(1.0f, 1.0f, 1.0f);
@@ -167,13 +168,13 @@ public class ClientLevel {
 					
 					glBegin(GL_QUADS);
 			        glTexCoord2f(t.X, t.Y);
-			        glVertex2f(x - offSet.getX(), y - offSet.getY());
+			        glVertex2f(pixelX - offSet.getX(), pixelY - offSet.getY());
 			        glTexCoord2f(t.X, t.Y2);
-			        glVertex2f(x - offSet.getX(), y + tileHeight - offSet.getY());
+			        glVertex2f(pixelX - offSet.getX(), pixelY + tileHeight - offSet.getY());
 			        glTexCoord2f(t.X2, t.Y2);
-			        glVertex2f(x + tileWidth - offSet.getX(), y + tileHeight - offSet.getY());
+			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY + tileHeight - offSet.getY());
 			        glTexCoord2f(t.X2, t.Y);
-			        glVertex2f(x + tileWidth - offSet.getX(), y - offSet.getY());
+			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
 			        glEnd();
 			        
 
@@ -184,10 +185,13 @@ public class ClientLevel {
 			        //entityCollection.drawInArea(camera, new Rectangle(globalX * tileWidth,globalY * tileHeight,tileWidth,tileHeight), l.getValue());
 					
 				}
-				//Rectangle currentRow = new Rectangle(camera.getX(), row * tileHeight ,camera.getWidth(), tileHeight);
+				//Rectangle currentRow = new Rectangle(camera.getX(), (startingGlobalTileY + row) * tileHeight ,camera.getWidth(), tileHeight);
+
+				//entityCollection.drawInArea(camera, currentRow, l.getValue());
+				
 				
 			}
-			entityCollection.drawInCamera(camera,l.getValue());
+			entityCollection.drawVisible(camera,l.getValue());
 		}
 		
 	}

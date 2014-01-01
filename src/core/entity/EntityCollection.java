@@ -101,6 +101,22 @@ public class EntityCollection {
 		}
 	}
 	/**
+	 * Draws all entities that are in view of the camera at a given layer
+	 * @param camera
+	 * @param layer
+	 */
+	public void drawVisible(Camera camera, int layer) {
+		for(Entity e : collection.values())
+		{
+			if(camera.getCameraRect().contains(e.getBottomLocation()) && e.layer == layer)
+			{
+				e.draw(camera);
+			}
+		}
+		
+	}
+
+	/**
 	 * Load the assets for the Entities
 	 * This should only happen on the Client
 	 */
@@ -115,18 +131,5 @@ public class EntityCollection {
 			e.update(delta);
 		}
 	}
-
-	public void drawInCamera(Camera camera, int layer) {
-		for(Entity e : collection.values())
-		{
-			if(camera.getCameraRect().contains(e.getBottomLocation()) && e.layer == layer)
-			{
-				e.draw(camera);
-			}
-		}
-		
-	}
-
-	
 
 }
