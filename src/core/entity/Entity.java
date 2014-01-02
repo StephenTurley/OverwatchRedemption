@@ -9,6 +9,7 @@ package core.entity;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import core.graphics.Camera;
 
@@ -95,6 +96,11 @@ public abstract class Entity {
 	public UUID getID()
 	{
 		return id;
+	}
+	
+	public Rectangle getBoundingRect()
+	{
+		return new Rectangle(location.getX(),location.getY(), width,height);
 	}
 	
 	public abstract void draw(Camera camera);

@@ -107,8 +107,8 @@ public class EntityCollection {
 	 */
 	public void drawVisible(Camera camera, int layer) {
 		for(Entity e : collection.values())
-		{
-			if(camera.getCameraRect().contains(e.getBottomLocation()) && e.layer == layer)
+		{	
+			if(camera.isVisible(e.getBoundingRect()) && e.layer == layer)
 			{
 				e.draw(camera);
 			}
