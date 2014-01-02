@@ -20,7 +20,7 @@ import org.lwjgl.util.Point;
 import core.Debug;
 import core.Game;
 import core.entity.Entity;
-import core.entity.EntityRegistrar;
+import core.entity.EntityFactory;
 import core.exception.LevelFormatException;
 import core.exception.TileSetLoadFailureException;
 
@@ -151,7 +151,7 @@ public class MapParser {
 					}
 					if(id != null || layer != 9999)
 					{
-						entities.add(EntityRegistrar.createEntity(className, id, new Point(x,y), layer));
+						entities.add(EntityFactory.createEntity(className, id, new Point(x,y), layer));
 					}
 					else
 					{

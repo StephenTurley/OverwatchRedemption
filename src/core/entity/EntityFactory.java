@@ -15,7 +15,7 @@ import core.exception.EntityNotFoundException;
  * This class is used to define Entities at runtime. 
  * The core engine has no way of knowing what your Entity implementations are
  */
-public class EntityRegistrar {
+public class EntityFactory {
 	
 	private static HashMap<String, Class<? extends Entity>> entityClasses;
 	

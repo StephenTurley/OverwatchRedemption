@@ -17,7 +17,7 @@ import com.esotericsoftware.kryo.serializers.CollectionSerializer;
 import com.esotericsoftware.kryonet.EndPoint;
 
 import core.entity.Entity;
-import core.entity.EntityRegistrar;
+import core.entity.EntityFactory;
 import core.serializers.UUIDSerializer;
 
 public class Network {
@@ -39,7 +39,7 @@ public class Network {
 		kryo.register(PlayerConnectionData.class);
 		kryo.register(Entity.class);
 		kryo.register(EntitiesPacket.class);
-		EntityRegistrar.kryoRegister(kryo);
+		EntityFactory.kryoRegister(kryo);
 	}
 	public static class ServerMessage
 	{

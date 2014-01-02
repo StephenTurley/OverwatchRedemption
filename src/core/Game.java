@@ -18,7 +18,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import core.configurationManager.GameConfig;
 import core.entity.Entity;
-import core.entity.EntityRegistrar;
+import core.entity.EntityFactory;
 import core.network.GameServer;
 import core.network.Network;
 import core.stateManager.*;
@@ -191,7 +191,7 @@ public class Game {
  	}
  	public void regiesterEntity(Class<? extends Entity> entityClass)
  	{
- 		EntityRegistrar.register(entityClass);
+ 		EntityFactory.register(entityClass);
  	}
  	public static int getClientID()
  	{
