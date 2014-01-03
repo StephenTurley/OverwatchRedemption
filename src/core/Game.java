@@ -120,7 +120,6 @@ public class Game {
  	}
  	public static void updateServer(int delta)
  	{
- 		
  		gameServer.update(delta);
  	}
  	public static void bindClient(int timeout, String host, int tcp, int udp)

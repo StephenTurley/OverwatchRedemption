@@ -37,11 +37,11 @@ public class GameLoop implements Runnable {
 	@Override
 	public void run() {
 		
-		getDelta(); // call once before loop to initialise lastFrame
+		getDelta(); // call once before loop to initialize lastFrame
 		
 		desiredFrameRate = Game.getGameConfig().getFrameRate();
 		
-		lastFPS = getTime(); // call before loop to initialise fps timer
+		lastFPS = getTime(); // call before loop to initialize fps timer
 		
 		while(!Display.isCloseRequested())
 		{
@@ -62,6 +62,11 @@ public class GameLoop implements Runnable {
 		Game.exit(0);
 
 		Display.destroy();
+	}
+	
+	public void runServer()
+	{
+		
 	}
 	
 	 
