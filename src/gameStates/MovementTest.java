@@ -56,11 +56,14 @@ public class MovementTest extends GameState {
 	
 	public void update(int delta) {
 		
+		if(thisPlayer != null)
+		{
+			camera.setPosition(thisPlayer, currentLevel.getPixelWidth(), currentLevel.getPixelHeight());
+		}
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
 		movePkt.movementVector = movementVector;
 		Game.clientSendUDP(movePkt);
-
 	}
 
 	public void draw() {
@@ -222,7 +225,6 @@ public class MovementTest extends GameState {
 				if(Game.getClientID() == pcd.connectionID)
 				{
 					thisPlayer = (Player)currentLevel.getEntity(pcd.uuid);
-					camera.setPosition(thisPlayer, currentLevel.getPixelWidth(), currentLevel.getPixelHeight());
 				}
 			}
 		}
