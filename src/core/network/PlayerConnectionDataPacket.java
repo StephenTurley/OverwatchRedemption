@@ -2,7 +2,7 @@ package core.network;
 
 import java.util.UUID;
 
-public class PlayerConnectionData
+public class PlayerConnectionDataPacket
 {
 	public String name;
 	public int connectionID;

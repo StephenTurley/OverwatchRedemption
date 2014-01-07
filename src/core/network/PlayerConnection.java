@@ -22,9 +22,9 @@ public class PlayerConnection extends Connection {
 		super();
 	}
 	
-	public PlayerConnectionData getPlayerData()
+	public PlayerConnectionDataPacket getPlayerData()
 	{
-		PlayerConnectionData pcd = new PlayerConnectionData();
+		PlayerConnectionDataPacket pcd = new PlayerConnectionDataPacket();
 		pcd.name = this.name;
 		pcd.connectionID = this.getID();
 		pcd.isReady = this.isReady;

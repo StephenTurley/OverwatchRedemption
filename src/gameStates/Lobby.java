@@ -17,7 +17,7 @@ import core.network.Network.LoadLevel;
 import core.network.Network.PlayerReady;
 import core.network.Network.PlayersPacket;
 import core.network.Network.ServerMessage;
-import core.network.PlayerConnectionData;
+import core.network.PlayerConnectionDataPacket;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import de.matthiasmann.twl.GUI;
@@ -34,8 +34,8 @@ public class Lobby extends GameState {
     private GUI gui;
     
     private String serverMsgModel;
-    private PlayerConnectionData thisPlayer;
-    private PlayerConnectionData thatPlayer;
+    private PlayerConnectionDataPacket thisPlayer;
+    private PlayerConnectionDataPacket thatPlayer;
     private boolean connected; 
     
     private LoadLevel loadLevel;
@@ -224,7 +224,7 @@ public class Lobby extends GameState {
 		{
 			PlayersPacket playerPacket = (PlayersPacket)object;
 			
-			for(PlayerConnectionData pcd : playerPacket.playerConnections)
+			for(PlayerConnectionDataPacket pcd : playerPacket.playerConnections)
 			{
 				if(pcd.connectionID == Game.getClientID())
 				{

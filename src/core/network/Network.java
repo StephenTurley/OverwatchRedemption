@@ -6,18 +6,14 @@
  ******************************************************************************/
 package core.network;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryo.serializers.CollectionSerializer;
 import com.esotericsoftware.kryonet.EndPoint;
 
-import core.entity.Entity;
-import core.entity.EntityFactory;
 import core.serializers.UUIDSerializer;
 
 public class Network {
@@ -35,11 +31,11 @@ public class Network {
 		kryo.register(LoadLevel.class);
 		kryo.register(Point.class);
 		kryo.register(UUID.class, new UUIDSerializer());
-		kryo.register(ArrayList.class, new CollectionSerializer());
-		kryo.register(PlayerConnectionData.class);
-		kryo.register(Entity.class);
+		kryo.register(PlayerConnectionDataPacket.class);
+		kryo.register(PlayerConnectionDataPacket[].class);
 		kryo.register(EntitiesPacket.class);
-		EntityFactory.kryoRegister(kryo);
+		kryo.register(EntityDataPacket.class);
+		kryo.register(EntityDataPacket[].class);
 	}
 	public static class ServerMessage
 	{
@@ -71,11 +67,11 @@ public class Network {
 		{
 			
 		}
-		public ArrayList<PlayerConnectionData> playerConnections;
+		public PlayerConnectionDataPacket[] playerConnections;
 	}
 	public static class EntitiesPacket
 	{
-		public ArrayList<Entity> entities;
+		public EntityDataPacket[] entities;
 	}
 	public static class PlayerReady
 	{

@@ -105,6 +105,7 @@ public class Game {
 	}
  	public static void startServer()
  	{
+ 		
  		gameServer = new GameServer();
  		gameServer.init();
  		gameServer.start();

@@ -18,6 +18,7 @@ import core.entity.Entity;
 import core.entity.EntityCollection;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
+import core.network.EntityDataPacket;
 import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -115,7 +116,7 @@ public class ClientLevel {
 		return entityCollection.getEntity(uuid);
 	}
 	
-	public void addUpdateEntity(ArrayList<Entity> entities)
+	public void addUpdateEntity(EntityDataPacket[] entities)
 	{
 		entityCollection.addUpdateEntities(entities, true);
 	}

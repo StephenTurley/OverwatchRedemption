@@ -220,7 +220,7 @@ public class MovementTest extends GameState {
 			PlayersPacket playerPacket = (PlayersPacket)object;
 			
 			//replace this with an entity collection packet
-			for (PlayerConnectionData pcd : playerPacket.playerConnections)
+			for (PlayerConnectionDataPacket pcd : playerPacket.playerConnections)
 			{
 				if(Game.getClientID() == pcd.connectionID)
 				{

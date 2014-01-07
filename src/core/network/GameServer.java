@@ -147,14 +147,14 @@ public class GameServer{
 		{
 			PlayersPacket playersPacket = new PlayersPacket();
 			
-			playersPacket.playerConnections = new ArrayList<PlayerConnectionData>();
+			ArrayList<PlayerConnection> connections = getPlayerConnections();
 			
-			for(PlayerConnection pc : getPlayerConnections())
+			playersPacket.playerConnections = new PlayerConnectionDataPacket[connections.size()];
+			
+			for(int i = 0; i < connections.size(); i++)
 			{		
-				playersPacket.playerConnections.add(pc.getPlayerData());
+				playersPacket.playerConnections[i] = connections.get(i).getPlayerData();
 			}
-			
-			
 			
 			server.sendToAllUDP(playersPacket);
 		}
@@ -191,7 +191,15 @@ public class GameServer{
 		}
 		public void sendEntitiesPacket() {
 			EntitiesPacket ep = new EntitiesPacket();
-			ep.entities = currentLevel.getEntityCollection().getEntities();
+			
+			ArrayList<Entity> entities =  currentLevel.getEntityCollection().getEntities();
+			
+			ep.entities = new EntityDataPacket[entities.size()];
+			
+			for(int i = 0; i < entities.size(); i++)
+			{
+				ep.entities[i] = entities.get(i).getDataPacket();
+			}
 			
 			sendToAllUDP(ep);
 		}

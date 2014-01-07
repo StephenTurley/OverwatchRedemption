@@ -12,6 +12,7 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import core.graphics.Camera;
+import core.network.EntityDataPacket;
 
 
 public abstract class Entity {
@@ -103,6 +104,17 @@ public abstract class Entity {
 		return new Rectangle(location.getX(),location.getY(), width,height);
 	}
 	
+	public EntityDataPacket getDataPacket()
+	{
+		EntityDataPacket pkt = new EntityDataPacket();
+		
+		pkt.className = this.getClass().getSimpleName();
+		pkt.uuid = this.id;
+		pkt.position = this.location;
+		pkt.layer = this.layer;
+		
+		return pkt;
+	}
 	public abstract void draw(Camera camera);
 
 	public abstract void update(int delta);

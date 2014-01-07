@@ -6,7 +6,10 @@ import java.util.UUID;
 
 import org.lwjgl.util.Rectangle;
 
+import core.exception.EntityNotConstructedException;
+import core.exception.EntityNotFoundException;
 import core.graphics.Camera;
+import core.network.EntityDataPacket;
 /**
  * Stores and provides access to all the entities in a Level.
  * 
@@ -47,14 +50,27 @@ public class EntityCollection {
 	 * @param loadNewAssets if true, entity assets will be loaded for new entities
 	 * @return List of new entities added
 	 */
-	public ArrayList<Entity> addUpdateEntities(ArrayList<Entity> entities, boolean loadNewAssets)
+	public ArrayList<Entity> addUpdateEntities(EntityDataPacket[] entities, boolean loadNewAssets)
 	{
 		ArrayList<Entity> newEntities = new ArrayList<Entity>();
 		
-		for(Entity e: entities)
+		for(EntityDataPacket e: entities)
 		{
-			if(collection.get(e.id) == null && loadNewAssets) e.loadAssets() ;
-			collection.put(e.id, e);
+			Entity theEntity;
+			try {
+				theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
+				
+				if(collection.get(e.uuid) == null && loadNewAssets) theEntity.loadAssets() ;
+				collection.put(theEntity.getID(), theEntity);
+				
+			} catch (EntityNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (EntityNotConstructedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 		
 		return newEntities;
