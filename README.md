@@ -18,7 +18,7 @@ The file will download game data to one of three locations depending on your pla
 
 If you wish to remove the game, simply remove the directory for your platform.
 ___
-```This game is in very early development and I can't garantee that it will behave at all times.  While I don't think the game will do much    more than crash during a catastrophic failure, I cannot garantee that it won't harm your computer system.Please only run this software if you understand and accept the risks.```
+```This game is in very early development and I can't garantee that it will behave at all times.  While I don't think the game will do much    more than crash during a catastrophic failure, I cannot guarantee that it won't harm your computer system.Please only run this software if you understand and accept the risks.```
 ___ 
 Redistribution of this project (Overwatch-Redemption) in part or in whole is prohibited unless explicitly stated.
 All bundled packages and dependencies can be distributed based upon their respective licenses. 
