@@ -18,6 +18,7 @@ import core.entity.Entity;
 import core.entity.EntityCollection;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
+import core.graphics.TextureLoader;
 import core.network.EntityDataPacket;
 import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
 import static org.lwjgl.opengl.GL11.*;
@@ -100,7 +101,7 @@ public class ClientLevel {
 
 	public void dispose()
 	{
-		tileMap.dispose();
+		TextureLoader.deleteTextures();
 	}
 
 	public ArrayList<Layer> getLayers() {

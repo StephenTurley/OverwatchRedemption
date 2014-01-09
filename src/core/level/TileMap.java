@@ -7,7 +7,6 @@
 
 package core.level;
 
-import static org.lwjgl.opengl.GL11.glDeleteTextures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,17 +42,7 @@ public class TileMap {
 	}
 	public void dispose()
 	{
-		//should figure out how to get unique tileSets
-		for(TextureCoord tc : tiles.values())
-		{
-			try{
-				glDeleteTextures(tc.glTextureID);
-			}
-			catch(Exception e)
-			{
-				//this will happen if the texture is already been deleted. 
-			}
-		}
+		
 	}
 
 

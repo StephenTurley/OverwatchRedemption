@@ -96,7 +96,7 @@ public class TileSet {
 		this.height = height;
 		this.firstGID = firstGID;
 			
-		glTextureID = TextureLoader.glLoadLinearPNG(filePath);
+		glTextureID = TextureLoader.loadTexture(filePath);
 		
 		computeLastGID();
 		
