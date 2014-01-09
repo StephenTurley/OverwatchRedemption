@@ -164,7 +164,10 @@ public class ClientLevel {
 					TextureCoord t = tileMap.getTileByGID(currentGID);
 					
 
-					glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
+					if(glGetInteger(GL_TEXTURE_BINDING_2D) != t.glTextureID)
+					{
+						glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
+					}
 
 					
 					glBegin(GL_QUADS);
