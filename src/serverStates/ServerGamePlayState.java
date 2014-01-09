@@ -64,6 +64,8 @@ public class ServerGamePlayState extends ServerState {
 			
 			Player player = (Player)gameServer.getCurrentLevel().getEntity(pc.uuid);
 			
+			player.setState(Player.State.WALKING);
+			
 			player.setMovementVector(((Network.MovePlayer)object).movementVector);
 			
 			gameServer.updateEntity(player);

@@ -21,6 +21,7 @@ public abstract class Entity {
 	protected int  width, height, layer;
 	protected float scale, rotation;
 	protected UUID id;
+	protected EntityState entityState;
 	
 	public Entity(UUID uuid,Point location, int width, int height, int layer) {
 		this.location = location;
@@ -115,6 +116,17 @@ public abstract class Entity {
 		
 		return pkt;
 	}
+	
+	public void setState(EntityState state)
+	{
+		entityState = state;
+	}
+	
+	public EntityState getCurrentState()
+	{
+		return entityState;
+	}
+	
 	public abstract void draw(Camera camera);
 
 	public abstract void update(int delta);
@@ -122,5 +134,8 @@ public abstract class Entity {
 	public abstract void collideWith(Entity entity);
 	
 	public abstract void loadAssets();
+	
+	
+
 
 }

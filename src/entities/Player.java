@@ -19,6 +19,7 @@ import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
 import core.entity.Entity;
+import core.entity.EntityState;
 import core.graphics.Camera;
 
 public class Player extends Entity{
@@ -30,13 +31,32 @@ public class Player extends Entity{
 	private static final int HEIGHT = 32;
 	private static final float VELOCITY = 0.25f;
 	
+	public static enum State implements EntityState
+	{
+		IDLE,
+		WALKING,
+		RUNNING,
+		SHOOTING,
+		DYING,
+		DEAD;
+
+		@Override
+		public int getStateValue() {
+			return ordinal();
+		}
+		
+	}
+	
 	public Player()
 	{
 		super(UUID.randomUUID(), new Point(0,0),WIDTH,HEIGHT, 0);
+		super.entityState = State.IDLE;
 	}
 	public Player(UUID id, Point location, int layer)
 	{
 		super(id,location,WIDTH,HEIGHT,layer);
+		super.entityState = State.IDLE;
+		
 		movementVector = new Vector2f(0,0);
 	}
 
@@ -82,5 +102,16 @@ public class Player extends Entity{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void setState(EntityState state)
+	{
+		super.setState(state);
+	}
+	@Override
+	public State getCurrentState()
+	{
+		return (State)super.getCurrentState();
+	}
+	
 }
