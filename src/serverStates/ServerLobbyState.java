@@ -18,11 +18,13 @@ import core.stateManager.ServerState;
 public class ServerLobbyState extends ServerState {
 	
 	private int countdownRemaining;
+	private int previousCountDown;
 	private final int TIME_TO_START = 1000; //seconds
 
 	public ServerLobbyState(GameServer gameServer) {
 		super(gameServer);
 		countdownRemaining = TIME_TO_START;
+		previousCountDown = -1;
 	}
 
 	@Override
@@ -32,7 +34,11 @@ public class ServerLobbyState extends ServerState {
 		{
 			countdownRemaining -= delta;
 			int seconds = countdownRemaining / 1000;
-			gameServer.sendToAllTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
+			if(seconds != previousCountDown)
+			{
+				previousCountDown = seconds;
+				gameServer.sendToAllTCP(new Network.ServerMessage("The game will start in "+seconds+" seconds."));
+			}
 		}else
 		{
 			if(countdownRemaining != TIME_TO_START)//timer had started but was stopped. 
