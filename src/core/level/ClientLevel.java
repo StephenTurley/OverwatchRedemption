@@ -124,9 +124,6 @@ public class ClientLevel {
 	
 	public void draw(Camera camera)
 	{
-		
-		
-		
 		Point offSet = camera.getTileOffset(tileWidth, tileHeight);
 		
 		int columns = (camera.getWidth() / tileWidth);
@@ -135,8 +132,7 @@ public class ClientLevel {
 		int startingGlobalTileX = camera.getX() / tileWidth;
 		int startingGlobalTileY = camera.getY() / tileHeight;
 		
-		//buffer in the positive directions. Negative directions will be
-		//buffered because of integer division rounding.
+		//buffer in the positive directions.
 		if(startingGlobalTileX + columns + 1 < mapWidth) columns++;
 		if(startingGlobalTileY + rows + 2 < mapHeight) rows+=2;
 		
@@ -158,18 +154,15 @@ public class ClientLevel {
 					int pixelY = row * tileHeight;
 					int pixelX = col * tileWidth;
 					
-					
 					glColor3f(1.0f, 1.0f, 1.0f);
-					//draw this
-					TextureCoord t = tileMap.getTileByGID(currentGID);
 					
-
+					TextureCoord t = tileMap.getTileByGID(currentGID);
+				
 					if(glGetInteger(GL_TEXTURE_BINDING_2D) != t.glTextureID)
 					{
 						glBindTexture(GL_TEXTURE_RECTANGLE_ARB, t.glTextureID);
 					}
 
-					
 					glBegin(GL_QUADS);
 			        glTexCoord2f(t.X, t.Y);
 			        glVertex2f(pixelX - offSet.getX(), pixelY - offSet.getY());
@@ -181,7 +174,6 @@ public class ClientLevel {
 			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
 			        glEnd();
 			        
-
 			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
 			        
 
@@ -192,7 +184,6 @@ public class ClientLevel {
 				//Rectangle currentRow = new Rectangle(camera.getX(), (startingGlobalTileY + row) * tileHeight ,camera.getWidth(), tileHeight);
 
 				//entityCollection.drawInArea(camera, currentRow, l.getValue());
-				
 				
 			}
 			entityCollection.drawVisible(camera,l.getValue());
