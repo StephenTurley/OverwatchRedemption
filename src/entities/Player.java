@@ -41,9 +41,8 @@ public class Player extends Entity{
 	}
 
 	public void setMovementVector(Vector2f movementVector)
-	{
-		//value copy... not sure if I have to do this but I don't want it getting changed. 
-		this.movementVector = new Vector2f(movementVector.x, movementVector.y);	
+	{ 
+		this.movementVector = movementVector;
 	}
 	@Override
 	public void update(int delta)
