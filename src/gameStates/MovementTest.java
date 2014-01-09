@@ -11,6 +11,8 @@
  */
 package gameStates;
 
+import java.util.UUID;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -28,9 +30,9 @@ import core.level.ClientLevel;
 //import net.java.games.input.*;
 import core.network.*;
 import core.network.Network.EntitiesPacket;
+import core.network.Network.FocusOn;
 import core.network.Network.MovePlayer;
-import core.network.Network.PlayersPacket;
-import entities.Player;
+
 
 
 public class MovementTest extends GameState {
@@ -42,7 +44,7 @@ public class MovementTest extends GameState {
 	
 	private ClientLevel currentLevel;
 	
-	private Player thisPlayer; 
+	private UUID focusedEntityID; 
 	
 	private Camera camera;
 	
@@ -56,10 +58,6 @@ public class MovementTest extends GameState {
 	
 	public void update(int delta) {
 		
-		if(thisPlayer != null)
-		{
-			camera.setPosition(thisPlayer, currentLevel.getPixelWidth(), currentLevel.getPixelHeight());
-		}
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
 		movePkt.movementVector = movementVector;
@@ -67,9 +65,12 @@ public class MovementTest extends GameState {
 	}
 
 	public void draw() {
+		if(focusedEntityID != null)
+		{
+			camera.setPosition(currentLevel.getEntity(focusedEntityID), currentLevel.getPixelWidth(), currentLevel.getPixelHeight());
+		}
 		
 		currentLevel.draw(camera);
-		
 	}
 
 
@@ -214,19 +215,13 @@ public class MovementTest extends GameState {
 	@Override
 	public void received (Connection c, Object object)
 	{
-		if(object instanceof PlayersPacket)
+		if(object instanceof FocusOn)
 		{
 			
-			PlayersPacket playerPacket = (PlayersPacket)object;
+			FocusOn pkt = (FocusOn)object;
 			
-			//replace this with an entity collection packet
-			for (PlayerConnectionDataPacket pcd : playerPacket.playerConnections)
-			{
-				if(Game.getClientID() == pcd.connectionID)
-				{
-					thisPlayer = (Player)currentLevel.getEntity(pcd.uuid);
-				}
-			}
+			focusedEntityID = pkt.uuid;
+
 		}
 		if(object instanceof EntitiesPacket)
 		{

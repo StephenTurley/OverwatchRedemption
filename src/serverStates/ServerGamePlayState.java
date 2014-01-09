@@ -12,21 +12,28 @@ import com.esotericsoftware.kryonet.Connection;
 import core.Debug;
 import core.network.GameServer;
 import core.network.Network;
+import core.network.Network.FocusOn;
 import core.network.PlayerConnection;
 import core.stateManager.ServerState;
 import entities.Player;
 public class ServerGamePlayState extends ServerState {
 
+	private boolean playersFocused;
+	
 	public ServerGamePlayState(GameServer gameServer) {
 		super(gameServer);
-		// TODO Auto-generated constructor stub
+		
+		playersFocused = false;
 	}
 
 	@Override
 	public void update(int delta) {
 		if(gameServer.isPlayersReady())
 		{
-			gameServer.sendPlayersPacket();
+			if(!playersFocused)
+			{
+				focusOnPlayers();
+			}
 			gameServer.sendEntitiesPacket();
 		}
 	}
@@ -76,6 +83,18 @@ public class ServerGamePlayState extends ServerState {
 	public void idle(Connection c) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void focusOnPlayers()
+	{
+		for(PlayerConnection pc : gameServer.getPlayerConnections())
+		{
+			FocusOn focus = new FocusOn();
+			focus.uuid = pc.uuid;
+			
+			gameServer.sendPacketTcp(pc, focus);
+		}
+		playersFocused = true;
 	}
 
 }

@@ -143,6 +143,10 @@ public class GameServer{
 		{
 				server.sendToAllUDP(object);
 		}
+		public void sendPacketTcp(PlayerConnection playerConnection,Object object)
+		{
+			server.sendToTCP(playerConnection.getID(), object);
+		}
 		public void sendPlayersPacket()
 		{
 			PlayersPacket playersPacket = new PlayersPacket();

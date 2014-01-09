@@ -36,6 +36,7 @@ public class Network {
 		kryo.register(EntitiesPacket.class);
 		kryo.register(EntityDataPacket.class);
 		kryo.register(EntityDataPacket[].class);
+		kryo.register(FocusOn.class);
 	}
 	public static class ServerMessage
 	{
@@ -98,5 +99,9 @@ public class Network {
 	{
 		public int stage;
 		public int level;
+	}
+	public static class FocusOn
+	{
+		public UUID uuid;
 	}
 }
