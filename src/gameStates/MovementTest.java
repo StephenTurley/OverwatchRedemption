@@ -11,6 +11,7 @@
  */
 package gameStates;
 
+import java.util.LinkedList;
 import java.util.UUID;
 
 import org.lwjgl.input.Keyboard;
@@ -48,15 +49,20 @@ public class MovementTest extends GameState {
 	
 	private Camera camera;
 	
+	private LinkedList<EntityDataPacket[]> entityBuffer;
+	
 	public MovementTest(StateManager sm, ClientLevel currentLevel) {
 		super(sm);
 		this.currentLevel = currentLevel;
+		entityBuffer = new LinkedList<EntityDataPacket[]>();
 		camera = new Camera(Display.getWidth(),Display.getHeight()	);
 	}
 
 	
 	
 	public void update(int delta) {
+		
+		if(entityBuffer.size() >= 1) currentLevel.addUpdateEntity(entityBuffer.removeLast());
 		
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
@@ -227,7 +233,7 @@ public class MovementTest extends GameState {
 		{
 			EntitiesPacket ep = (EntitiesPacket)object;
 			
-			currentLevel.addUpdateEntity(ep.entities);
+			entityBuffer.add(ep.entities);
 			
 		}
 	}
