@@ -172,18 +172,8 @@ public class ClientLevel {
 			        glTexCoord2f(t.X2, t.Y);
 			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
 			        glEnd();
-			        
-			        //glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
-			        
-
-			        //draw entities at current tile and layer
-			        //entityCollection.drawInArea(camera, new Rectangle(globalX * tileWidth,globalY * tileHeight,tileWidth,tileHeight), l.getValue());
-					
 				}
-				//Rectangle currentRow = new Rectangle(camera.getX(), (startingGlobalTileY + row) * tileHeight ,camera.getWidth(), tileHeight);
 
-				//entityCollection.drawInArea(camera, currentRow, l.getValue());
-				
 			}
 			entityCollection.drawVisible(camera,l.getValue());
 		}

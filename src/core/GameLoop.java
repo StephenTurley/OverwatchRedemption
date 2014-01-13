@@ -47,15 +47,18 @@ public class GameLoop implements Runnable {
 		{
 			int delta = getDelta();
 				
+			
+			
+			sm.update(delta);
+			sm.draw();
+			updateFPS();
+			
 			if(Game.isServer)
 			{
 				Game.updateServer(delta);
 			}
 			
-			sm.update(delta);
-			sm.draw();
 			
-			updateFPS();
 			
 			Display.sync(desiredFrameRate);
 		}
