@@ -6,12 +6,6 @@
  ******************************************************************************/
 package entities;
 
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glVertex2f;
-
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
@@ -73,28 +67,10 @@ public class Player extends Entity{
 
 	public void draw(Camera camera)
 	{
-		if (assets != null)
+		if (assets != null && camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
 		{
 			assets.draw(camera, this.location);
 		}
-		
-		if(camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
-		{
-			Point screenCoord = camera.computeScreenCoordinates(super.location);
-			int x = screenCoord.getX();
-			int y = screenCoord.getY();
-			
-			glColor3f(0f,0f,0f);
-
-			// draw quad
-			glBegin(GL_QUADS);
-				glVertex2f(x , y);					//TL
-				glVertex2f(x + width, y);			//TR
-				glVertex2f(x + width, y + height);	//BR
-				glVertex2f(x, y + height);			//BL
-			glEnd();
-		}
-		
 	}
 	@Override
 	public void collideWith(Entity entity) {

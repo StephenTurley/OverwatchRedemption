@@ -50,7 +50,7 @@ public class SpriteLoader {
 				//int oW = Integer.parseInt(sprite.getAttributeValue("oW"));
 				//int oH = Integer.parseInt(sprite.getAttributeValue("oH"));
 				
-				TextureCoord texCoord = new TextureCoord(textureID, x,y,w,h);
+				TextureCoord texCoord = new TextureCoord(textureID, x,y,x + w, y + h);
 				
 				StaticSprite s = new StaticSprite(name, texCoord, oX, oY);
 				

@@ -1,5 +1,7 @@
 package core.graphics;
 
+import org.lwjgl.util.Point;
+
 public class AnimatedSprite implements Sprite {
 	
 	private String name;
@@ -9,7 +11,7 @@ public class AnimatedSprite implements Sprite {
 		name = null;
 	}
 
-	public void draw(Camera camera) {
+	public void draw(Camera camera, Point position) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -99,6 +99,13 @@ public abstract class Entity {
 	{
 		return id;
 	}
+	public void setLayer(int layer) {
+		this.layer = layer;
+	}
+	public int getLayer()
+	{
+		return this.layer;
+	}
 	
 	public Rectangle getBoundingRect()
 	{
@@ -134,6 +141,7 @@ public abstract class Entity {
 	public abstract void collideWith(Entity entity);
 	
 	public abstract void loadAssets();
+
 	
 	
 

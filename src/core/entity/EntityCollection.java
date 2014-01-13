@@ -62,13 +62,25 @@ public class EntityCollection {
 		
 		for(EntityDataPacket e: entities)
 		{
-			Entity theEntity;
-			try {
-				theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
+			
+			try 
+			{
 				
-				if(collection.get(e.uuid) == null && loadNewAssets) theEntity.loadAssets() ;
-				collection.put(theEntity.getID(), theEntity);
-				
+				if(collection.get(e.uuid) == null && loadNewAssets) 
+				{
+					Entity theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
+					theEntity.loadAssets() ;
+				}
+				else
+				{
+					Entity theEntity = collection.get(e.uuid);
+					
+					theEntity.setLocation(e.position);
+					theEntity.setLayer(e.layer);
+					
+					collection.put(theEntity.getID(), theEntity);
+				}
+					
 			} catch (EntityNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -24,7 +24,7 @@ public class PlayerAssets implements EntityAssets{
 
 	@Override
 	public void draw(Camera camera, Point position) {
-		spriteSheet.getStaticSprite("N_IDLE_1").draw(camera);	
+		spriteSheet.getStaticSprite("N_IDLE_1").draw(camera, position);	
 	}
 
 	@Override
