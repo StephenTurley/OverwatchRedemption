@@ -36,7 +36,6 @@ public class Player extends Entity{
 		IDLE,
 		WALKING,
 		RUNNING,
-		SHOOTING,
 		DYING,
 		DEAD;
 
