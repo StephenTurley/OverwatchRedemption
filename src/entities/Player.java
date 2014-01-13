@@ -21,15 +21,17 @@ import org.lwjgl.util.vector.Vector2f;
 import core.entity.Entity;
 import core.entity.EntityState;
 import core.graphics.Camera;
+import entities.entityAssets.PlayerAssets;
 
 public class Player extends Entity{
 
 	
 	private Vector2f movementVector;
+	private PlayerAssets assets;
 	
 	private static final int WIDTH = 32;
 	private static final int HEIGHT = 32;
-	private static final float VELOCITY = 0.25f;
+	private final float VELOCITY = 0.25f;
 	
 	public static enum State implements EntityState
 	{
@@ -71,6 +73,10 @@ public class Player extends Entity{
 
 	public void draw(Camera camera)
 	{
+		if (assets != null)
+		{
+			assets.draw(camera, this.location);
+		}
 		
 		if(camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
 		{
@@ -97,7 +103,7 @@ public class Player extends Entity{
 
 	@Override
 	public void loadAssets() {
-
+		assets = new PlayerAssets();
 	}
 	
 	@Override

@@ -6,15 +6,19 @@
  ******************************************************************************/
 package core.entity;
 
+import org.lwjgl.util.Point;
+
+import core.graphics.Camera;
 /*
  * This class will contain all sprites, animations, and sound effects
  * for the client. This class is used to separate features that are unique
  * to client entities, and not needed for server entities. 
  */
-import core.graphics.DrawableComponent;
 
-public interface EntityAssets extends DrawableComponent {
+public interface EntityAssets {
 	
+	public void draw(Camera camera, Point position);
+	public void update(int delta);
 	public void load();
 
 }

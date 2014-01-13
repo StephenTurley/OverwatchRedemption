@@ -8,22 +8,29 @@ package core.graphics;
 
 public class StaticSprite implements Sprite {
 	
-	//private Camera camera;
+	private String name;
 	
-	public StaticSprite(Camera camera)
+	public StaticSprite(String name,TextureCoord textureCoord)
 	{
-		//this.camera = camera;
+		this.name = name;
+	}
+	public StaticSprite(String name,TextureCoord textureCoord, int offSetX, int offSetY)
+	{
+		this.name = name;
 	}
 
-	@Override
-	public void draw() {
+	public void draw(Camera camera) {
 		
 	}
 
-	@Override
 	public void update(int delta) {
 		// TODO Auto-generated method stub
 
 	}
+	public String getName()
+	{
+		return name;
+	}
+
 
 }

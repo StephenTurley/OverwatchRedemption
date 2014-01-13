@@ -144,7 +144,10 @@ public class EntityCollection {
 	 */
 	public void loadAssets()
 	{
-		
+		for(Entity e : collection.values())
+		{
+			e.loadAssets();
+		}
 	}
 
 	public void update(int delta) {

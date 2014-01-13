@@ -2,21 +2,26 @@ package core.graphics;
 
 public class AnimatedSprite implements Sprite {
 	
+	private String name;
+	
 	public AnimatedSprite()
 	{
-		
+		name = null;
 	}
 
-	@Override
-	public void draw() {
+	public void draw(Camera camera) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void update(int delta) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String getName()
+	{
+		return name;
 	}
 
 }

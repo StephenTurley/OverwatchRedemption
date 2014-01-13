@@ -6,31 +6,35 @@
  ******************************************************************************/
 package entities.entityAssets;
 
+import org.lwjgl.util.Point;
+
 import core.entity.EntityAssets;
+import core.graphics.Camera;
+import core.graphics.SpriteLoader;
+import core.graphics.StaticSpriteSheet;
 
 public class PlayerAssets implements EntityAssets{
 	
+	private StaticSpriteSheet spriteSheet;
+	
 	public PlayerAssets()
 	{
-		
+		load();
 	}
 
 	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
+	public void draw(Camera camera, Point position) {
+		spriteSheet.getStaticSprite("N_IDLE_1").draw(camera);	
 	}
 
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void load() {
-		// TODO Auto-generated method stub
-		
+		spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
 	}
 
 }
