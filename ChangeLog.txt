@@ -4,12 +4,13 @@
 # This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
 # You may not reproduce any part of this work unless otherwise stated.
 #-------------------------------------------------------------------------------
-V Next
+0.1.5 (13Jan2014)
 Changed - Start screen now says Overwatch instead of Overwatch: Redemption
 Fixed - Entities rendered even when partially out of view of the camera.
 Fixed - Entity don't jitter when walking about
 Fixed - Screen jerks are gone
-0.1.4 (1Jan2013)
+Added - Player sprites are now drawn
+0.1.4 (1Jan2014)
 Fixed - Camera shouldn't jitter as bad for client that isn't hosting the game. 
 Fixed - Entities are now interpolated with tile layer. This gives the scene depth.
 Fixed - All level layers are now drawn
