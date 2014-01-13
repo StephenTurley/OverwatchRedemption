@@ -13,19 +13,8 @@ package core.entity;
  */
 import core.graphics.DrawableComponent;
 
-public abstract class EntityAssets implements DrawableComponent {
+public interface EntityAssets extends DrawableComponent {
 	
-
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(int delta) {
-		// TODO Auto-generated method stub
-
-	}
+	public void load();
 
 }

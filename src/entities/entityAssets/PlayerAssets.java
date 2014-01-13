@@ -8,10 +8,28 @@ package entities.entityAssets;
 
 import core.entity.EntityAssets;
 
-public class PlayerAssets extends EntityAssets{
+public class PlayerAssets implements EntityAssets{
 	
 	public PlayerAssets()
 	{
+		
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(int delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void load() {
+		// TODO Auto-generated method stub
 		
 	}
 

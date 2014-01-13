@@ -6,12 +6,18 @@
  ******************************************************************************/
 package core.graphics;
 
-public class Animation implements DrawableComponent {
+public class StaticSprite implements Sprite {
+	
+	//private Camera camera;
+	
+	public StaticSprite(Camera camera)
+	{
+		//this.camera = camera;
+	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
