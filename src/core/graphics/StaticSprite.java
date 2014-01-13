@@ -60,7 +60,6 @@ public class StaticSprite implements Sprite {
 			glVertex2f(x, y + h);					//BL
 		glEnd();
 		
-	glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
 	}
 
 	public void update(int delta) {

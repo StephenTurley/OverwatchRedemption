@@ -173,7 +173,7 @@ public class ClientLevel {
 			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
 			        glEnd();
 			        
-			        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
+			        //glBindTexture(GL_TEXTURE_RECTANGLE_ARB, 0);
 			        
 
 			        //draw entities at current tile and layer
