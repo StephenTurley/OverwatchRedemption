@@ -8,7 +8,7 @@ package core.network;
 
 import java.util.ArrayList;
 
-import serverStates.ServerStartState;
+import overwatch.serverStates.ServerStartState;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;

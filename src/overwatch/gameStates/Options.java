@@ -4,27 +4,27 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package gameStates;
+package overwatch.gameStates;
 
-import core.Game;
+import org.lwjgl.input.Keyboard;
+
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 
-public class QuitGame extends GameState {
+public class Options extends GameState {
 
-	public QuitGame(StateManager sm) {
+	public Options(StateManager sm) {
 		super(sm);
 		// TODO Auto-generated constructor stub
 	}
-
-	public QuitGame() {
-		// TODO Auto-generated constructor stub
+	
+	public Options()
+	{
+		
 	}
-
 	@Override
 	public void update(int delta) {
-		// TODO Auto-generated method stub
-
+		handleInput();
 	}
 
 	@Override
@@ -53,12 +53,28 @@ public class QuitGame extends GameState {
 
 	@Override
 	public void enter() {
-		Game.exit(0);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void exit() {
+		// TODO Auto-generated method stub
 
+	}
+	
+	private void handleInput()
+	{
+		while(Keyboard.next())
+		{
+			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
+			{
+				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
+				{
+					super.sm.pop();
+				}
+			}
+		}
 	}
 
 }

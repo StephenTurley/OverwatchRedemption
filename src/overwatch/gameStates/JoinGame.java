@@ -4,8 +4,7 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package gameStates;
-
+package overwatch.gameStates;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -26,70 +25,101 @@ import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
-public class HostGame extends GameState{
-	
+public class JoinGame extends GameState {
 	private LWJGLRenderer renderer; 
     private UI uiWidget;
     private GUI gui;
 	
 	private class UI extends Widget
 	{
-		private Button startGameBtn;
+		private Button joinGameBtn;
+		
 		private EditField playerNameEdf;
-		private Label nameLbl;
+		private EditField hostNameEdf;
+		private EditField hostPortEdf;
+		
+		private Label playerNameLbl;
+		private Label hostNameLbl;
+		
 		
 		public UI()
 		{
-			startGameBtn = new Button();
-			startGameBtn.setTheme("button");
-			startGameBtn.setText("Start Game");
-			startGameBtn.addCallback(new Runnable(){
+			joinGameBtn = new Button();
+			joinGameBtn.setTheme("button");
+			joinGameBtn.setText("Join Game");
+			joinGameBtn.addCallback(new Runnable(){
 				public void run()
 				{
-					startServer();
+					joinServer(hostNameEdf.getText(), Integer.parseInt(hostPortEdf.getText()));
 				}
 			});
-			add(startGameBtn);
+			add(joinGameBtn);
 			
 			playerNameEdf = new EditField();
 			playerNameEdf.setTheme("editField");
 			playerNameEdf.setText("Player 1");
 			add(playerNameEdf);
 			
-			nameLbl = new Label("Player's Name:");
-			nameLbl.setTheme("label");
-			add(nameLbl);
+			hostNameEdf = new EditField();
+			hostNameEdf.setTheme("editField");
+			add(hostNameEdf);
 			
+			hostPortEdf = new EditField();
+			hostPortEdf.setTheme("editField");
+			hostPortEdf.setText(String.valueOf(Game.getGameConfig().getServerTCP()));
+			add(hostPortEdf);
+			
+			playerNameLbl = new Label("Player's Name:");
+			playerNameLbl.setTheme("label");
+			add(playerNameLbl);
+			
+			hostNameLbl = new Label("Hostname:Port :");
+			hostNameLbl.setTheme("label");
+			add(hostNameLbl);
+					
 		}
 		@Override
 		protected void layout() {
 			int width = Display.getWidth();
 			int height = Display.getHeight();
 			
-			startGameBtn.adjustSize();
-			startGameBtn.setPosition((width - startGameBtn.getWidth()) - 50, height - 150);
+			final int gap = 25;
 			
-			nameLbl.adjustSize();
-			nameLbl.setPosition(50, 100);
+			joinGameBtn.adjustSize();
+			joinGameBtn.setPosition((width - joinGameBtn.getWidth()) - 50, height - 150);
+			
+			playerNameLbl.adjustSize();
+			playerNameLbl.setPosition(50, 100);
 			
 			playerNameEdf.setSize(125, 25);
-			playerNameEdf.setPosition(nameLbl.getX() + nameLbl.getWidth() + 25, 100);
+			playerNameEdf.setPosition(playerNameLbl.getX() + playerNameLbl.getWidth() + gap, 100);
+			
+			hostNameLbl.adjustSize();
+			hostNameLbl.setPosition(playerNameEdf.getX() + playerNameEdf.getWidth() + gap, 100);
+			
+			hostNameEdf.setSize(300, 25);
+			hostNameEdf.setPosition(hostNameLbl.getX() + hostNameLbl.getWidth() + gap, 100);
+			
+			hostPortEdf.setSize(50, 25);
+			hostPortEdf.setPosition(hostNameEdf.getX() + hostNameEdf.getWidth() + 10, 100);
+			
 		}
 		public String getPlayerName()
 		{
 			return playerNameEdf.getText();
 		}
 	}
-	public HostGame(StateManager sm) {
+
+	public JoinGame(StateManager sm) {
 		super(sm);
 		// TODO Auto-generated constructor stub
 	}
-
-	public HostGame()
+	
+	public JoinGame()
 	{
 		
 	}
-	
+
 	public void received (Connection c, Object object)
 	{
 		if(object instanceof ServerMessage)
@@ -98,7 +128,7 @@ public class HostGame extends GameState{
 			System.out.println(msgPacket.msg);
 		}
 	}
-	
+
 	@Override
 	public void update(int delta) {
 		handleInput();
@@ -107,6 +137,7 @@ public class HostGame extends GameState{
 	@Override
 	public void draw() {
 		gui.update();
+
 	}
 
 	@Override
@@ -137,8 +168,7 @@ public class HostGame extends GameState{
 			gui = new GUI(uiWidget, renderer);
 			uiWidget.playerNameEdf.requestKeyboardFocus();
 			ThemeManager theme = ThemeManager.createThemeManager(
-
-					UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
+	                UI.class.getResource("/gui/HostGameTheme.xml"), renderer);
 	        gui.applyTheme(theme);
 			
 			Debug.Trace("Host Game State has been entered!");
@@ -154,25 +184,17 @@ public class HostGame extends GameState{
 	@Override
 	public void exit() {
 		Game.removeClientListener(this);
-		if(Game.isServer) Game.killServer();
 		gui.destroy();
 		uiWidget.destroy();
 	}
-	public void connected(Connection c)
+	
+	private void joinServer(String host, int port)
 	{
-		
-	}
-	private void startServer()
-	{
-		Game.startServer();
-
-		Game.bindClient(500000,"localhost",Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+		Game.bindClient(500000, host, port, port);
 		Game.addClientListener(this);
-		
 		Game.clientSendTCP(new Network.Login(uiWidget.getPlayerName()));
 		
 		sm.push(new Lobby(sm));
-		
 	}
 	private void handleInput()
 	{
@@ -180,20 +202,21 @@ public class HostGame extends GameState{
 		{
 			if(Keyboard.getEventKeyState() || Keyboard.isRepeatEvent())
 			{
+				
 				if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE)
 				{
 					super.sm.pop();
 				}
 				if(Keyboard.getEventKey() == Keyboard.KEY_RETURN)
 				{
-					startServer();
+					joinServer(uiWidget.hostNameEdf.getText(),Integer.parseInt(uiWidget.hostPortEdf.getText()));
 				}
+				gui.handleKey(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.getEventKeyState());
+				gui.handleKeyRepeat();
+				gui.clearKeyboardState();
 			}
-			gui.handleKey(Keyboard.getEventKey(), Keyboard.getEventCharacter(), Keyboard.getEventKeyState());
-			gui.handleKeyRepeat();
-			gui.clearKeyboardState();
 		}
+		
 	}
 	
-
 }

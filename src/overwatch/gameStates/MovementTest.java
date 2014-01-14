@@ -9,7 +9,7 @@
  * I feel like this file should have a disclaimer. The code here is used soley for the purpose of hacking out ideas
  * This code will never go into a game in current form. ...don't judge me.
  */
-package gameStates;
+package overwatch.gameStates;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;

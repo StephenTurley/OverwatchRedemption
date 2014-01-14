@@ -14,7 +14,7 @@ ui.name = My Application
 code = overwatch.jar
 
 # The main entry point for the application
-class = Overwatch
+class = overwatch.Overwatch
 
 resource = [linux] native/liblwjgl64.so
 resource = [linux] native/liblwjgl.so

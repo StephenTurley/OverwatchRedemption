@@ -4,7 +4,7 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package entities;
+package overwatch.entities;
 
 import java.util.UUID;
 
@@ -12,10 +12,10 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
+import overwatch.entities.entityAssets.PlayerAssets;
 import core.entity.Entity;
 import core.entity.EntityState;
 import core.graphics.Camera;
-import entities.entityAssets.PlayerAssets;
 
 public class Player extends Entity{
 

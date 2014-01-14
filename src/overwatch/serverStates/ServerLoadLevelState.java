@@ -4,9 +4,11 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package serverStates;
+package overwatch.serverStates;
 
 import java.util.ArrayList;
+
+import overwatch.entities.Player;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -20,7 +22,6 @@ import core.network.Network;
 import core.network.Network.LoadLevel;
 import core.network.PlayerConnection;
 import core.stateManager.ServerState;
-import entities.Player;
 
 public class ServerLoadLevelState extends ServerState {
 	private boolean levelLoaded;

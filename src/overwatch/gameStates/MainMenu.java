@@ -4,13 +4,13 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package gameStates;
+package overwatch.gameStates;
 
 import static org.lwjgl.opengl.GL11.*;
-import gui.*;
 
 import org.lwjgl.input.Keyboard;
 
+import overwatch.gui.*;
 import core.Debug;
 import core.Game;
 import core.gui.Menu;

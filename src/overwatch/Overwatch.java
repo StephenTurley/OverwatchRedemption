@@ -1,3 +1,4 @@
+package overwatch;
 /*******************************************************************************
  * Copyright 2013 Stephen Turley
  * 
@@ -7,12 +8,13 @@
 //import com.esotericsoftware.minlog.Log;
 
 
+import overwatch.entities.Player;
+import overwatch.gameStates.*;
+
 import com.esotericsoftware.minlog.Log;
 
-import gameStates.*;
 import core.*;
 import core.configurationManager.ConfigurationManger;
-import entities.Player;
 
 public class Overwatch {
 	

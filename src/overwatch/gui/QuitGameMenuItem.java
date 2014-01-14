@@ -4,28 +4,27 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package gui;
+package overwatch.gui;
 
-import gameStates.JoinGame;
+import overwatch.gameStates.QuitGame;
 import core.gui.MenuItem;
 import core.stateManager.GameState;
 
-public class JoinGameMenuItem extends MenuItem {
-
-
-	public JoinGameMenuItem() {
-		super();
-		super.text = "Join Game";
-	}
-
-	public JoinGameMenuItem(int locX, int locY) {
-		super(locX, locY);
-		super.text = "Join Game";
-	}
+public class QuitGameMenuItem extends MenuItem {
 	
-	public GameState execute()
-	{
-		return new JoinGame();
+	public QuitGameMenuItem() {
+		super();
+		super.text = "Quit Game";
+	}
+
+	public QuitGameMenuItem(int locX, int locY) {
+		super(locX, locY);
+		super.text = "Quit Game";
+	}
+
+	@Override
+	public GameState execute() {
+		return new QuitGame();
 	}
 
 }
