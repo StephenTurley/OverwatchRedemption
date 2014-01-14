@@ -11,8 +11,8 @@
  */
 package gameStates;
 
-import java.util.LinkedList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
@@ -49,12 +49,12 @@ public class MovementTest extends GameState {
 	
 	private Camera camera;
 	
-	private LinkedList<EntityDataPacket[]> entityBuffer;
+	private ConcurrentLinkedQueue<EntityDataPacket[]> entityBuffer;
 	
 	public MovementTest(StateManager sm, ClientLevel currentLevel) {
 		super(sm);
 		this.currentLevel = currentLevel;
-		entityBuffer = new LinkedList<EntityDataPacket[]>();
+		entityBuffer = new ConcurrentLinkedQueue<EntityDataPacket[]>();
 		camera = new Camera(Display.getWidth(),Display.getHeight()	);
 	}
 
@@ -62,7 +62,7 @@ public class MovementTest extends GameState {
 	
 	public void update(int delta) {
 		
-		if(entityBuffer.size() >= 1) currentLevel.addUpdateEntity(entityBuffer.removeLast());
+		if(entityBuffer.size() >= 1) currentLevel.addUpdateEntity(entityBuffer.poll());
 		
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
@@ -233,7 +233,7 @@ public class MovementTest extends GameState {
 		{
 			EntitiesPacket ep = (EntitiesPacket)object;
 			
-			entityBuffer.add(ep.entities);
+			entityBuffer.offer(ep.entities);
 			
 		}
 	}
