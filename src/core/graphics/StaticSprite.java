@@ -62,10 +62,6 @@ public class StaticSprite implements Sprite {
 		
 	}
 
-	public void update(int delta) {
-		// TODO Auto-generated method stub
-
-	}
 	public String getName()
 	{
 		return name;

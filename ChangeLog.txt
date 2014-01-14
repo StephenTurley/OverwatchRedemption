@@ -1,5 +1,5 @@
 
-0.1.6
+0.1.6 (13Jan2014)
 Fixed - Fixed threading issue that caused screen flickers and players to jump around the map.
 0.1.5 (13Jan2014)
 Changed - Start screen now says Overwatch instead of Overwatch: Redemption
