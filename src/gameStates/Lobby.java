@@ -33,12 +33,11 @@ public class Lobby extends GameState {
     private UI uiWidget;
     private GUI gui;
     
-    private String serverMsgModel;
-    private PlayerConnectionDataPacket thisPlayer;
-    private PlayerConnectionDataPacket thatPlayer;
+    private volatile String serverMsgModel;
+    private volatile PlayerConnectionDataPacket thisPlayer, thatPlayer;
     private boolean connected; 
     
-    private LoadLevel loadLevel;
+    private volatile LoadLevel loadLevel;
 
 	
 	private class UI extends Widget

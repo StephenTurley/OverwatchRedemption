@@ -25,8 +25,8 @@ public class GameServer{
 	
 		private Server server;
 		private ServerState currentState;
-		private boolean playersReady;
-		private ServerLevel currentLevel;
+		private volatile boolean playersReady;
+		private volatile ServerLevel currentLevel;
 
 		
 		public void init()
@@ -103,14 +103,14 @@ public class GameServer{
 	 	}
 	 	
 	 	
-	 	public int getPlayerCount()
+	 	public synchronized int getPlayerCount()
 	 	{
 	 		return server.getConnections().length;
 	 	}
-	 	public boolean isPlayersReady() {
+	 	public synchronized boolean isPlayersReady() {
 			return playersReady;
 		}
-		public void setPlayersReady(boolean playersReady) {
+		public synchronized void setPlayersReady(boolean playersReady) {
 			
 			for(Connection c: server.getConnections())
 			{
@@ -119,7 +119,7 @@ public class GameServer{
 			}
 			this.playersReady = playersReady;
 		}
-		public void setPlayerReady(int playerID, boolean playerReady)
+		public synchronized void setPlayerReady(int playerID, boolean playerReady)
 		{
 			PlayerConnection player =  getPlayerConnection(playerID);
 			player.isReady = playerReady;
@@ -135,15 +135,15 @@ public class GameServer{
 			server.sendToAllTCP(new Network.ServerMessage(player.name + msg) );
 		}
 		
-		public void sendToAllTCP(Object object)
+		public synchronized void sendToAllTCP(Object object)
 		{
 				server.sendToAllTCP(object);
 		}
-		public void sendToAllUDP(Object object)
+		public synchronized void sendToAllUDP(Object object)
 		{
 				server.sendToAllUDP(object);
 		}
-		public void sendPacketTcp(PlayerConnection playerConnection,Object object)
+		public synchronized void sendPacketTcp(PlayerConnection playerConnection,Object object)
 		{
 			server.sendToTCP(playerConnection.getID(), object);
 		}
@@ -162,7 +162,7 @@ public class GameServer{
 			
 			server.sendToAllUDP(playersPacket);
 		}
-		public ServerLevel getCurrentLevel() {
+		public synchronized ServerLevel getCurrentLevel() {
 			return currentLevel;
 		}
 		public void setCurrentLevel(ServerLevel currentLevel) {
@@ -189,7 +189,7 @@ public class GameServer{
 			}
 			return null;
 		}
-		public void updateEntity(Entity entity) {
+		public synchronized void updateEntity(Entity entity) {
 		
 			currentLevel.getEntityCollection().addEntity(entity.getID(), entity);
 		}

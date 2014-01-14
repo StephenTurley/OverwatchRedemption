@@ -19,7 +19,7 @@ import core.network.Network.PlayerReady;
 
 public class LevelLoading extends GameState {
 	
-    private boolean startGame;
+    private volatile boolean startGame;
     private ClientLevel clientLevel;
     private int stage, level;
     
