@@ -5,28 +5,24 @@ import java.util.ArrayList;
 import org.lwjgl.util.Point;
 
 /**
- * @author stephen
- *
- */
-/**
- * @author stephen
+ * This class will draw a series of StaticSprites at a specified framerate and location. 
  *
  */
 public class AnimatedSprite implements Sprite {
 	
 	private String name;
-	private ArrayList<Sprite> frames;
+	private ArrayList<StaticSprite> frames;
 	private int fps, cycles, elapsed, currentFrame;
 	
 	public AnimatedSprite(String name, int fps)
 	{
 		this.name = name;
 		this.fps = fps;
-		frames = new ArrayList<Sprite>();
+		frames = new ArrayList<StaticSprite>();
 		reset();
 	}
 	
-	public AnimatedSprite(String name,int fps, ArrayList<Sprite> frames)
+	public AnimatedSprite(String name,int fps, ArrayList<StaticSprite> frames)
 	{
 		this.name = name;
 		this.frames = frames;
@@ -51,7 +47,7 @@ public class AnimatedSprite implements Sprite {
 		return name;
 	}
 
-	public void addFrame(Sprite frame)
+	public void addFrame(StaticSprite frame)
 	{
 		frames.add(frame);
 	}
