@@ -45,7 +45,7 @@ public class MovementTest extends GameState {
 	
 	private ClientLevel currentLevel;
 	
-	private UUID focusedEntityID; 
+	private volatile UUID focusedEntityID; 
 	
 	private Camera camera;
 	
