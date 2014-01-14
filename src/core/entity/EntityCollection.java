@@ -7,8 +7,8 @@
 package core.entity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.lwjgl.util.Rectangle;
 
@@ -22,16 +22,16 @@ import core.network.EntityDataPacket;
  */
 public class EntityCollection {
 	
-	private HashMap<UUID, Entity> collection;
+	private ConcurrentHashMap<UUID, Entity> collection;
 	
-	public EntityCollection(HashMap<UUID, Entity> entityMap)
+	public EntityCollection(ConcurrentHashMap<UUID, Entity> entityMap)
 	{
 		collection = entityMap;
 	}
 	
 	public EntityCollection(ArrayList<Entity> entityList)
 	{
-		collection = new HashMap<UUID, Entity>();
+		collection = new ConcurrentHashMap<UUID, Entity>();
 		
 		for(Entity e : entityList)
 		{
