@@ -19,11 +19,11 @@ public class AnimationMap {
 		animations.clear();
 	}
 
-	public boolean containsKey(EntityState entityState) {
+	public boolean containsState(EntityState entityState) {
 		return animations.containsKey(entityState);
 	}
 
-	public boolean containsValue(AnimatedSprite animatedSprite) {
+	public boolean containsAnimation(AnimatedSprite animatedSprite) {
 		return animations.containsValue(animatedSprite);
 	}
 
@@ -50,7 +50,7 @@ public class AnimationMap {
 		return animations.size();
 	}
 
-	public Collection<AnimatedSprite> values() {
+	public Collection<AnimatedSprite> animations() {
 		return animations.values();
 	}
 
