@@ -1,4 +1,8 @@
-
+0.1.7 (15Jan2014)
+Added - Entities are animated differently based on their direction of travel.
+Added - core engine can now parse texture atlases into sprite sheets
+Added - game can now parse animations from  sprite sheets
+Added - server now transmits entity direction and angle
 0.1.6 (13Jan2014)
 Fixed - Fixed threading issue that caused screen flickers and players to jump around the map.
 0.1.5 (13Jan2014)
