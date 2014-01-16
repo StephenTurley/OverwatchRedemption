@@ -1,4 +1,5 @@
 package core.graphics;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class StaticSpriteSheet {
@@ -20,9 +21,9 @@ public class StaticSpriteSheet {
 		return sprites.get(name);
 	}
 	
-	public StaticSprite[] getStaticSprites()
+	public Collection<StaticSprite> getStaticSprites()
 	{
-		return (StaticSprite[]) sprites.values().toArray();
+		return sprites.values();
 	}
 
 }

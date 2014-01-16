@@ -101,6 +101,6 @@ public class ServerLevel {
 	}
 
 	public void update(int delta) {
-		entityCollection.update(delta);
+		entityCollection.serverUpdate(delta);
 	}
 }

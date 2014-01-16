@@ -12,7 +12,10 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
+import overwatch.cardinality.Direction;
 import overwatch.entities.entityAssets.PlayerAssets;
+import core.Debug;
+import core.Game;
 import core.entity.Entity;
 import core.entity.EntityState;
 import core.graphics.Camera;
@@ -27,6 +30,7 @@ public class Player extends Entity{
 	private static final int HEIGHT = 32;
 	private final float VELOCITY = 0.25f;
 	
+	
 	public static enum State implements EntityState
 	{
 		IDLE,
@@ -39,18 +43,23 @@ public class Player extends Entity{
 		public int getStateValue() {
 			return ordinal();
 		}
+
+		@Override
+		public EntityState getState(String string) {
+			return State.valueOf(string);
+		}
 		
 	}
 	
 	public Player()
 	{
 		super(UUID.randomUUID(), new Point(0,0),WIDTH,HEIGHT, 0);
-		super.entityState = State.IDLE;
+		super.currentState = State.IDLE;
 	}
 	public Player(UUID id, Point location, int layer)
 	{
 		super(id,location,WIDTH,HEIGHT,layer);
-		super.entityState = State.IDLE;
+		super.currentState = State.IDLE;
 		
 		movementVector = new Vector2f(0,0);
 	}
@@ -60,11 +69,23 @@ public class Player extends Entity{
 		this.movementVector = movementVector;
 	}
 	@Override
-	public void update(int delta)
+	public void serverUpdate(int delta)
 	{
+		super.rotation = (float) Math.atan2(-movementVector.y,movementVector.x);
 		location.translate((int)(movementVector.x * VELOCITY * delta),(int)(movementVector.y * VELOCITY * delta));
 	}
-
+	
+	@Override
+	public void clientUpdate(int delta)
+	{
+		if(assets!= null)
+		{
+			assets.update(delta);
+			assets.setDirection(Direction.fromRadian(super.rotation));
+			assets.setState(State.IDLE);
+		}
+	}
+	@Override
 	public void draw(Camera camera)
 	{
 		if (assets != null && camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
@@ -79,7 +100,15 @@ public class Player extends Entity{
 
 	@Override
 	public void loadAssets() {
-		assets = new PlayerAssets();
+		try
+		{
+			assets = new PlayerAssets(super.currentState);
+		}
+		catch (Exception e)
+		{
+			Debug.Trace(e.getMessage());
+			Game.exit(-1);
+		}
 	}
 	
 	@Override

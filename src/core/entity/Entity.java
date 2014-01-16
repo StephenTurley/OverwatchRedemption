@@ -21,7 +21,7 @@ public abstract class Entity {
 	protected int  width, height, layer;
 	protected float scale, rotation;
 	protected UUID id;
-	protected EntityState entityState;
+	protected EntityState currentState;
 	
 	public Entity(UUID uuid,Point location, int width, int height, int layer) {
 		this.location = location;
@@ -120,23 +120,26 @@ public abstract class Entity {
 		pkt.uuid = this.id;
 		pkt.position = this.location;
 		pkt.layer = this.layer;
+		pkt.rotation = this.rotation;
 		
 		return pkt;
 	}
 	
 	public void setState(EntityState state)
 	{
-		entityState = state;
+		currentState = state;
 	}
 	
 	public EntityState getCurrentState()
 	{
-		return entityState;
+		return currentState;
 	}
 	
 	public abstract void draw(Camera camera);
 
-	public abstract void update(int delta);
+	public abstract void serverUpdate(int delta);
+	
+	public abstract void clientUpdate(int delta);
 	 
 	public abstract void collideWith(Entity entity);
 	

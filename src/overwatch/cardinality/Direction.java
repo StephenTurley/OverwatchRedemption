@@ -10,7 +10,7 @@ public enum Direction{
 	 
 	 
 	 /**
-	  * Returns a direction based off of index. Defaults to North
+	  * 
 	  * @param direction
 	  * @return returns the direction enum starting from E and going counter clockwise to SE (e.g. E = 0, NE = 1, N = 2, ..
 	  * 
@@ -40,14 +40,24 @@ public enum Direction{
 				 
 		 }
 	 }
-	 
+	 /**
+	  * 
+	  * @param vector 
+	  * @return returns the cardinal direction of the vector
+	  */
 	 public static Direction fromVector2f(Vector2f vector)
 	 {
 		 float angle = (float)Math.atan2(vector.getY(), vector.getX());
 		 
-		 int octant = Math.round(8 * angle / (2 * (float)Math.PI) + 8) % 8;
-		 
-		 return Direction.fromInteger(octant);
+		 return Direction.fromRadian(angle);
 	 }
+	 public static Direction fromRadian(float angle) {
+		
+		int octant = Math.round(8 * angle / (2 * (float)Math.PI) + 8) % 8;
+		 
+		return Direction.fromInteger(octant);
+	 }
+	 
+
 }
 

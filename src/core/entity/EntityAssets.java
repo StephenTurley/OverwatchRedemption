@@ -17,8 +17,7 @@ import core.graphics.Camera;
 
 public interface EntityAssets {
 	
+	public void setState(EntityState entityState);
 	public void draw(Camera camera, Point position);
 	public void update(int delta);
-	public void load();
-
 }

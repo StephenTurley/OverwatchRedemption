@@ -121,6 +121,10 @@ public class ClientLevel {
 	{
 		entityCollection.addUpdateEntities(entities, true);
 	}
+	public void update(int delta)
+	{
+		entityCollection.clientUpdate(delta);
+	}
 	public void draw(Camera camera)
 	{
 		Point offSet = camera.getTileOffset(tileWidth, tileHeight);

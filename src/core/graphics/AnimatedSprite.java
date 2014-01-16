@@ -47,9 +47,9 @@ public class AnimatedSprite implements Sprite {
 		return name;
 	}
 
-	public void addFrame(StaticSprite frame)
+	public void addFrame(int frameIdx, StaticSprite frame)
 	{
-		frames.add(frame);
+		frames.add(frameIdx, frame);
 	}
 
 	/**

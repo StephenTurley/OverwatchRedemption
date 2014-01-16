@@ -69,7 +69,10 @@ public class EntityCollection {
 				if(collection.get(e.uuid) == null && loadNewAssets) 
 				{
 					Entity theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
+					theEntity.setRotation(e.rotation);
 					theEntity.loadAssets() ;
+					
+					collection.put(e.uuid, theEntity);
 				}
 				else
 				{
@@ -77,6 +80,7 @@ public class EntityCollection {
 					
 					theEntity.setLocation(e.position);
 					theEntity.setLayer(e.layer);
+					theEntity.setRotation(e.rotation);
 					
 					collection.put(theEntity.getID(), theEntity);
 				}
@@ -162,10 +166,18 @@ public class EntityCollection {
 		}
 	}
 
-	public void update(int delta) {
+	public void serverUpdate(int delta) {
 		for(Entity e : collection.values())
 		{
-			e.update(delta);
+			e.serverUpdate(delta);
+		}
+	}
+	
+	public void clientUpdate(int delta)
+	{
+		for(Entity e : collection.values())
+		{
+			e.clientUpdate(delta);
 		}
 	}
 

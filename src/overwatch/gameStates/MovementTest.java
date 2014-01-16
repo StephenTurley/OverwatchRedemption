@@ -64,6 +64,8 @@ public class MovementTest extends GameState {
 		
 		if(entityBuffer.size() >= 1) currentLevel.addUpdateEntity(entityBuffer.poll());
 		
+		currentLevel.update(delta);
+		
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
 		movePkt.movementVector = movementVector;

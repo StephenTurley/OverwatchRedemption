@@ -8,33 +8,48 @@ package overwatch.entities.entityAssets;
 
 import org.lwjgl.util.Point;
 
+import overwatch.cardinality.Direction;
+import overwatch.cardinality.DirectionMap;
 import core.entity.EntityAssets;
+import core.entity.EntityState;
 import core.graphics.Camera;
 import core.graphics.SpriteLoader;
 import core.graphics.StaticSpriteSheet;
 
 public class PlayerAssets implements EntityAssets{
 	
-	private StaticSpriteSheet spriteSheet;
+	private DirectionMap directionMap;
+	private Direction currentDirection;
+	private EntityState currentState;
 	
-	public PlayerAssets()
+	public PlayerAssets(EntityState startingEntityState) throws Exception
 	{
-		load();
+		StaticSpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
+		directionMap = new DirectionMap(spriteSheet, startingEntityState);
+		currentDirection = Direction.N;
+		currentState = startingEntityState;
 	}
 
 	@Override
-	public void draw(Camera camera, Point position) {
-		spriteSheet.getStaticSprite("N_IDLE_1").draw(camera, position);	
+	public void draw(Camera camera, Point position) 
+	{
+		directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
 	}
 
 	@Override
 	public void update(int delta) {
-		
+		directionMap.update(delta, currentState);
 	}
 
 	@Override
-	public void load() {
-		spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
+	public void setState(EntityState entityState) 
+	{
+		currentState = entityState;
+	}
+	
+	public void setDirection(Direction direction)
+	{
+		currentDirection = direction;
 	}
 
 }

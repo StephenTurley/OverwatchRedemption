@@ -15,4 +15,5 @@ public class EntityDataPacket {
 	public UUID uuid;
 	public Point position;
 	public int layer;
+	public float rotation;
 }
