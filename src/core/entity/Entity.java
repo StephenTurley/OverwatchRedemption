@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
+import org.lwjgl.util.vector.Vector2f;
 
 import core.graphics.Camera;
 import core.network.EntityDataPacket;
@@ -20,6 +21,7 @@ public abstract class Entity {
 	protected Point location;
 	protected int  width, height, layer;
 	protected float scale, rotation;
+	protected Vector2f direction;
 	protected UUID id;
 	protected EntityState currentState;
 	
@@ -31,6 +33,7 @@ public abstract class Entity {
 		this.rotation = 0.0f;
 		this.layer = layer;
 		this.id = uuid;
+		this.direction = new Vector2f(0,0);
 	}
 	
 	public Point getLocation() {
@@ -94,7 +97,14 @@ public abstract class Entity {
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
-	
+	public Vector2f getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Vector2f direction) {
+		this.direction = direction;
+	}
+
 	public UUID getID()
 	{
 		return id;
@@ -121,6 +131,7 @@ public abstract class Entity {
 		pkt.position = this.location;
 		pkt.layer = this.layer;
 		pkt.rotation = this.rotation;
+		pkt.direction = this.direction;
 		
 		return pkt;
 	}

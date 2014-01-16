@@ -65,25 +65,27 @@ public class EntityCollection {
 			
 			try 
 			{
-				
+				Entity theEntity;
 				if(collection.get(e.uuid) == null && loadNewAssets) 
 				{
-					Entity theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
-					theEntity.setRotation(e.rotation);
+					theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
 					theEntity.loadAssets() ;
-					
-					collection.put(e.uuid, theEntity);
 				}
 				else
 				{
-					Entity theEntity = collection.get(e.uuid);
+					theEntity = collection.get(e.uuid);
 					
 					theEntity.setLocation(e.position);
 					theEntity.setLayer(e.layer);
-					theEntity.setRotation(e.rotation);
-					
-					collection.put(theEntity.getID(), theEntity);
 				}
+				
+				theEntity.setRotation(e.rotation);
+				if(e.direction != null)
+				{
+					theEntity.setDirection(e.direction);
+				}
+				
+				collection.put(theEntity.getID(), theEntity);
 					
 			} catch (EntityNotFoundException e1) {
 				// TODO Auto-generated catch block

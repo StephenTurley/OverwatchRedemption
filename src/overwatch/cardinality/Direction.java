@@ -47,7 +47,7 @@ public enum Direction{
 	  */
 	 public static Direction fromVector2f(Vector2f vector)
 	 {
-		 float angle = (float)Math.atan2(vector.getY(), vector.getX());
+		 float angle = (float)Math.atan2(-vector.getY(), vector.getX());
 		 
 		 return Direction.fromRadian(angle);
 	 }

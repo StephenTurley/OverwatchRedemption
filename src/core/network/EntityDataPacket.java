@@ -9,6 +9,7 @@ package core.network;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.vector.Vector2f;
 
 public class EntityDataPacket {
 	public String className;
@@ -16,4 +17,5 @@ public class EntityDataPacket {
 	public Point position;
 	public int layer;
 	public float rotation;
+	public Vector2f direction;
 }

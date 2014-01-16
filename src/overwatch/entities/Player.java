@@ -71,7 +71,7 @@ public class Player extends Entity{
 	@Override
 	public void serverUpdate(int delta)
 	{
-		super.rotation = (float) Math.atan2(-movementVector.y,movementVector.x);
+		super.direction = movementVector;
 		location.translate((int)(movementVector.x * VELOCITY * delta),(int)(movementVector.y * VELOCITY * delta));
 	}
 	
@@ -81,7 +81,7 @@ public class Player extends Entity{
 		if(assets!= null)
 		{
 			assets.update(delta);
-			assets.setDirection(Direction.fromRadian(super.rotation));
+			assets.setDirection(Direction.fromVector2f(super.direction));
 			assets.setState(State.IDLE);
 		}
 	}
