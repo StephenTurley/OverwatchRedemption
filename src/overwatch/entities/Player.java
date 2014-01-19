@@ -107,7 +107,7 @@ public class Player extends Entity{
 		catch (Exception e)
 		{
 			Debug.Trace(e.getMessage());
-			Game.exit(-1);
+			Game.exit(1);
 		}
 	}
 	
