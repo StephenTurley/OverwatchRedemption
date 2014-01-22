@@ -1,3 +1,5 @@
+vNext
+Improved - Core engine now uses a different class for Server entities and Client entities. This allows for cleaner code.
 0.1.7 (15Jan2014)
 Added - Entities are animated differently based on their direction of travel.
 Added - core engine can now parse texture atlases into sprite sheets
