@@ -21,21 +21,21 @@ import core.exception.EntityNotFoundException;
  */
 public class EntityFactory {
 	
-	private static HashMap<String, Class<? extends Entity>> entityClasses;
+	private static HashMap<String, Class<? extends EntityTemplate>> entityTemplates;
 	
-	public static void register(Class<? extends Entity> entityClass)
+	public static void register(Class<? extends EntityTemplate> entityClass)
 	{
-		if(entityClasses == null)
+		if(entityTemplates == null)
 		{
-			entityClasses = new HashMap<String, Class<? extends Entity>>();
+			entityTemplates = new HashMap<String, Class<? extends EntityTemplate>>();
 		}
 		
-		entityClasses.put(entityClass.getSimpleName(), entityClass);
+		entityTemplates.put(entityClass.getSimpleName(), entityClass);
 	}
 	
 	
 	/**
-	 * This will create Entity classes if they have been registered
+	 * This will create ServerEntity classes if the template has been registered
 	 * @param className the class name that implements Entity
 	 * @param uuid the unique identifier 
 	 * @param location the starting location
@@ -44,27 +44,51 @@ public class EntityFactory {
 	 * @throws EntityNotFoundException
 	 * @throws EntityNotConstructedException
 	 */
-	public static Entity createEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
+	public static ServerEntity createServerEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
+	{		
+		EntityTemplate template = getTemplate(className);
+		
+		return template.createServerEntity(uuid, location, layer);
+	}
+	
+	/**
+	 * This will create ClientEntity classes if the template has been registered
+	 * @param className the class name that implements Entity
+	 * @param uuid the unique identifier 
+	 * @param location the starting location
+	 * @param layer the starting layer
+	 * @return the new Entity
+	 * @throws EntityNotFoundException
+	 * @throws EntityNotConstructedException
+	 */
+	public static ClientEntity createClientEntity(String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
 	{
-		if(entityClasses == null) throw new EntityNotFoundException("No Entities have been registered!");
+		EntityTemplate template = getTemplate(className);
 		
-		Class<? extends Entity> eClass = entityClasses.get(className);
+		return template.createClientEntity(uuid, location,layer);
+	}
+	
+	private static EntityTemplate getTemplate(String className) throws EntityNotFoundException, EntityNotConstructedException
+	{
+
+		if(entityTemplates == null) throw new EntityNotFoundException("No Entities have been registered!");
 		
-		if(eClass == null) throw new EntityNotFoundException(className + " doesn't exist! Have you registered it?");
+		Class<? extends EntityTemplate> eTemplate = entityTemplates.get(className);
 		
-		Constructor<? extends Entity> cstor;
+		if(eTemplate == null) throw new EntityNotFoundException(className + " doesn't exist! Have you registered it?");
+		
+		Constructor<? extends EntityTemplate> cstor;
 		try {
-			cstor = eClass.getConstructor(UUID.class, Point.class, Integer.TYPE);
+			cstor = eTemplate.getConstructor();
 			
-			Entity entity = cstor.newInstance(uuid, location,layer);
+			EntityTemplate template = cstor.newInstance();
 			
-			return entity;
+			return template;
 			
-		} catch (Exception e) {
+		} catch (Exception e) 
+		{
 			throw new EntityNotConstructedException(e.getMessage());
 		} 
-		
-		
 	}
 
 }

@@ -8,7 +8,7 @@ package overwatch;
 //import com.esotericsoftware.minlog.Log;
 
 
-import overwatch.entities.Player;
+import overwatch.entities.player.Player;
 import overwatch.gameStates.*;
 
 import com.esotericsoftware.minlog.Log;

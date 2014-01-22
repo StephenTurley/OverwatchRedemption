@@ -10,7 +10,7 @@ import org.lwjgl.util.Point;
 
 public interface EntityTemplate {
 	
-	public ServerEntity createServerEntity(UUID uuid, Point location, int layer);
-	public ClientEntity createClientEntity(UUID uuid, Point location, int layer);
+	public abstract ServerEntity createServerEntity(UUID uuid, Point location, int layer);
+	public abstract ClientEntity createClientEntity(UUID uuid, Point location, int layer);
 
 }

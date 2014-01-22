@@ -11,8 +11,8 @@ import java.util.UUID;
 
 import core.Debug;
 import core.Game;
-import core.entity.Entity;
 import core.entity.EntityCollection;
+import core.entity.ServerEntity;
 import core.exception.LevelComponentsNotSatisfiedException;
 
 public class ServerLevel {
@@ -30,7 +30,7 @@ public class ServerLevel {
 			mapHeight = mp.getHeight();
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
-			entityCollection = new EntityCollection(mp.getEntities());
+			entityCollection = new EntityCollection(mp.getServerEntities());
 		}
 		catch(LevelComponentsNotSatisfiedException e)
 		{
@@ -96,11 +96,11 @@ public class ServerLevel {
 		return entityCollection;
 	}
 
-	public Entity getEntity(UUID uuid) {
-		return entityCollection.getEntity(uuid);
+	public ServerEntity getEntity(UUID uuid) {
+		return entityCollection.getServerEntity(uuid);
 	}
 
 	public void update(int delta) {
-		entityCollection.serverUpdate(delta);
+		entityCollection.update(delta);
 	}
 }

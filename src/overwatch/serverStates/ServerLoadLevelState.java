@@ -8,13 +8,13 @@ package overwatch.serverStates;
 
 import java.util.ArrayList;
 
-import overwatch.entities.Player;
+import overwatch.entities.player.ServerPlayer;
 
 import com.esotericsoftware.kryonet.Connection;
 
 import core.Debug;
 import core.Game;
-import core.entity.Entity;
+import core.entity.ServerEntity;
 import core.exception.LevelNotFoundException;
 import core.level.LevelManager;
 import core.network.GameServer;
@@ -69,12 +69,13 @@ public class ServerLoadLevelState extends ServerState {
 		//set connection uuid
 		for(PlayerConnection pc : gameServer.getPlayerConnections())
 		{
-			ArrayList<Entity> players = gameServer.getCurrentLevel().getEntityCollection().getEntities(Player.class);
+			ArrayList<ServerEntity> players = gameServer.getCurrentLevel().getEntityCollection().getServerEntities(ServerPlayer.class);
 			
-			//may want to check that the players are >= pc
-			Player p = (Player)players.get(pc.getID() - 1);
-			
-			pc.uuid = p.getID();
+			if(players.size() <= gameServer.getPlayerConnections().size())
+			{
+				ServerPlayer p = (ServerPlayer)players.get(pc.getID() - 1);
+				pc.uuid = p.getID();
+			}
 			
 		}
 		levelLoaded = true;

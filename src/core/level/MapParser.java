@@ -19,8 +19,9 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
-import core.entity.Entity;
+import core.entity.ClientEntity;
 import core.entity.EntityFactory;
+import core.entity.ServerEntity;
 import core.exception.LevelFormatException;
 import core.exception.TileSetLoadFailureException;
 
@@ -117,9 +118,9 @@ public class MapParser {
 		}
 		return layers;
 	}
-	public ArrayList<Entity> getEntities() throws Exception
+	public ArrayList<ServerEntity> getServerEntities() throws Exception
 	{
-		ArrayList<Entity> entities = new ArrayList<Entity>();
+		ArrayList<ServerEntity> entities = new ArrayList<ServerEntity>();
 		
 		Element map = mapData.getRootElement();
 		
@@ -151,7 +152,55 @@ public class MapParser {
 					}
 					if(id != null || layer != 9999)
 					{
-						entities.add(EntityFactory.createEntity(className, id, new Point(x,y), layer));
+						entities.add(EntityFactory.createServerEntity(className, id, new Point(x,y), layer));
+					}
+					else
+					{
+						throw new LevelFormatException("Entity properties are malformed");
+					}
+				}
+			}
+		}
+
+
+		
+		return entities;
+	}
+	public ArrayList<ClientEntity> getClientEntities() throws Exception
+	{
+		ArrayList<ClientEntity> entities = new ArrayList<ClientEntity>();
+		
+		Element map = mapData.getRootElement();
+		
+
+		for(Element objectGroup : map.getChildren("objectgroup"))
+		{
+			if(objectGroup.getAttribute("name").getValue().equals("entity"))
+			{
+				for(Element object: objectGroup.getChildren("object"))
+				{
+					String className = object.getAttribute("type").getValue();
+					int x = object.getAttribute("x").getIntValue();
+					int y = object.getAttribute("y").getIntValue();
+					int layer = 9999;
+					UUID id = null;
+					
+					Element properties = object.getChild("properties");
+					
+					for(Element property: properties.getChildren())
+					{
+						if(property.getAttribute("name").getValue().equals("id"))
+						{
+							id = UUID.fromString(property.getAttribute("value").getValue());
+						}
+						else if(property.getAttribute("name").getValue().equals("layer"))
+						{
+							layer = property.getAttribute("value").getIntValue();
+						}
+					}
+					if(id != null || layer != 9999)
+					{
+						entities.add(EntityFactory.createClientEntity(className, id, new Point(x,y), layer));
 					}
 					else
 					{

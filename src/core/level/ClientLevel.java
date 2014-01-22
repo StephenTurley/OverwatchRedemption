@@ -14,7 +14,7 @@ import org.lwjgl.util.Point;
 
 import core.Debug;
 import core.Game;
-import core.entity.Entity;
+import core.entity.ClientEntity;
 import core.entity.EntityCollection;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
@@ -40,13 +40,13 @@ public class ClientLevel {
 			tileHeight = mp.getTileHeight();
 			layers = mp.getLayers();
 			tileMap = new TileMap(mp.getTileSets());
-			entityCollection = new EntityCollection(mp.getEntities());
+			entityCollection = new EntityCollection(mp.getClientEntities());
 			entityCollection.loadAssets();
 		}
 		catch (Exception e)
 		{
 			Debug.Trace(e.getMessage());
-			Game.exit(-1);
+			Game.exit(1);
 		}
 	}
 	
@@ -112,9 +112,9 @@ public class ClientLevel {
 		this.layers = layers;
 	}
 	
-	public Entity getEntity(UUID uuid)
+	public ClientEntity getEntity(UUID uuid)
 	{
-		return entityCollection.getEntity(uuid);
+		return entityCollection.getClientEntity(uuid);
 	}
 	
 	public void addUpdateEntity(EntityDataPacket[] entities)
@@ -123,7 +123,7 @@ public class ClientLevel {
 	}
 	public void update(int delta)
 	{
-		entityCollection.clientUpdate(delta);
+		entityCollection.update(delta);
 	}
 	public void draw(Camera camera)
 	{

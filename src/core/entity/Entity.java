@@ -122,6 +122,17 @@ public abstract class Entity {
 		return new Rectangle(location.getX(),location.getY(), width,height);
 	}
 	
+	
+	public void setState(EntityState state)
+	{
+		currentState = state;
+	}
+	
+	public EntityState getCurrentState()
+	{
+		return currentState;
+	}
+	
 	public EntityDataPacket getDataPacket()
 	{
 		EntityDataPacket pkt = new EntityDataPacket();
@@ -136,28 +147,9 @@ public abstract class Entity {
 		return pkt;
 	}
 	
-	public void setState(EntityState state)
-	{
-		currentState = state;
-	}
-	
-	public EntityState getCurrentState()
-	{
-		return currentState;
-	}
-	
-	public abstract void draw(Camera camera);
-
-	public abstract void serverUpdate(int delta);
-	
-	public abstract void clientUpdate(int delta);
-	 
 	public abstract void collideWith(Entity entity);
-	
+	public abstract void draw(Camera camera);
+	public abstract void update(int delta);
 	public abstract void loadAssets();
-
 	
-	
-
-
 }

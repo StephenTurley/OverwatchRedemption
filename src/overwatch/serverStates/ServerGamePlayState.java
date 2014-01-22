@@ -7,7 +7,8 @@
 package overwatch.serverStates;
 
 
-import overwatch.entities.Player;
+import overwatch.entities.player.Player;
+import overwatch.entities.player.ServerPlayer;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -63,7 +64,7 @@ public class ServerGamePlayState extends ServerState {
 		if(object instanceof Network.MovePlayer)
 		{
 			
-			Player player = (Player)gameServer.getCurrentLevel().getEntity(pc.uuid);
+			ServerPlayer player = (ServerPlayer)gameServer.getCurrentLevel().getEntity(pc.uuid);
 			
 			player.setState(Player.State.WALKING);
 			

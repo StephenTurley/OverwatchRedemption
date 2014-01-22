@@ -4,7 +4,7 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package overwatch.entities.entityAssets;
+package overwatch.entities.player;
 
 import org.lwjgl.util.Point;
 

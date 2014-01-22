@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.lwjgl.util.Rectangle;
 
+import core.Debug;
 import core.exception.EntityNotConstructedException;
 import core.exception.EntityNotFoundException;
 import core.graphics.Camera;
@@ -22,14 +23,10 @@ import core.network.EntityDataPacket;
  */
 public class EntityCollection {
 	
-	private ConcurrentHashMap<UUID, Entity> collection;
+	private ConcurrentHashMap<UUID,Entity> collection;
 	
-	public EntityCollection(ConcurrentHashMap<UUID, Entity> entityMap)
-	{
-		collection = entityMap;
-	}
 	
-	public EntityCollection(ArrayList<Entity> entityList)
+	public EntityCollection(ArrayList<? extends Entity> entityList)
 	{
 		collection = new ConcurrentHashMap<UUID, Entity>();
 		
@@ -68,7 +65,7 @@ public class EntityCollection {
 				Entity theEntity;
 				if(collection.get(e.uuid) == null && loadNewAssets) 
 				{
-					theEntity = EntityFactory.createEntity(e.className, e.uuid, e.position, e.layer);
+					theEntity = EntityFactory.createClientEntity(e.className, e.uuid, e.position, e.layer);
 					theEntity.loadAssets() ;
 				}
 				else
@@ -88,11 +85,14 @@ public class EntityCollection {
 				collection.put(theEntity.getID(), theEntity);
 					
 			} catch (EntityNotFoundException e1) {
-				// TODO Auto-generated catch block
+				Debug.Trace("Entity not found!");
 				e1.printStackTrace();
 			} catch (EntityNotConstructedException e1) {
-				// TODO Auto-generated catch block
+				Debug.Trace("Entity not constructed!");
 				e1.printStackTrace();
+			} catch (Exception ex)
+			{
+				Debug.Trace(ex.getMessage());
 			}
 			
 		}
@@ -100,25 +100,59 @@ public class EntityCollection {
 		return newEntities;
 		
 	}
-	public Entity getEntity(UUID uuid)
+	public ServerEntity getServerEntity(UUID uuid)
 	{
-		return collection.get(uuid);
+		return (ServerEntity)collection.get(uuid);
 	}
 	
-	public ArrayList<Entity> getEntities() 
+	public ClientEntity getClientEntity(UUID uuid)
 	{
-			return new ArrayList<Entity>(collection.values());
+		return (ClientEntity)collection.get(uuid);
 	}
-			
-	public ArrayList<Entity> getEntities(Class<? extends Entity> entityClass)
+	public ArrayList<ServerEntity> getServerEntities() 
 	{
-		ArrayList<Entity> entities = new ArrayList<Entity>();
+		ArrayList<ServerEntity> serverEntities = new ArrayList<ServerEntity>();
+		for(Entity e : collection.values())
+		{
+			serverEntities.add((ServerEntity)e);
+		}
+		return serverEntities;
+	}
+	
+	public ArrayList<ClientEntity> getClientEntities() 
+	{
+		ArrayList<ClientEntity> serverEntities = new ArrayList<ClientEntity>();
+		for(Entity e : collection.values())
+		{
+			serverEntities.add((ClientEntity)e);
+		}
+		return serverEntities;
+	}
+	
+	public ArrayList<ClientEntity> getClientEntities(Class<? extends ClientEntity> entityClass)
+	{
+		ArrayList<ClientEntity> entities = new ArrayList<ClientEntity>();
 		
 		for(Entity e : collection.values())
 		{
 			if(e.getClass() == entityClass)
 			{
-				entities.add(e);
+				entities.add((ClientEntity)e);
+			}
+		}
+		
+		return entities;
+	}
+	
+	public ArrayList<ServerEntity> getServerEntities(Class<? extends ServerEntity> entityClass)
+	{
+		ArrayList<ServerEntity> entities = new ArrayList<ServerEntity>();
+		
+		for(Entity e : collection.values())
+		{
+			if(e.getClass() == entityClass)
+			{
+				entities.add((ServerEntity)e);
 			}
 		}
 		
@@ -168,19 +202,13 @@ public class EntityCollection {
 		}
 	}
 
-	public void serverUpdate(int delta) {
+	public void update(int delta) {
+		
 		for(Entity e : collection.values())
 		{
-			e.serverUpdate(delta);
+			e.update(delta);
 		}
 	}
 	
-	public void clientUpdate(int delta)
-	{
-		for(Entity e : collection.values())
-		{
-			e.clientUpdate(delta);
-		}
-	}
 
 }
