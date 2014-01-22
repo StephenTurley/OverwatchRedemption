@@ -19,6 +19,7 @@ import com.esotericsoftware.kryonet.Listener;
 import core.configurationManager.GameConfig;
 import core.entity.EntityFactory;
 import core.entity.EntityTemplate;
+import core.graphics.TextureLoader;
 import core.network.GameServer;
 import core.network.Network;
 import core.stateManager.*;
@@ -187,6 +188,7 @@ public class Game {
  		if(gameServer != null) gameServer.kill();
  		if(gameClient != null) gameClient.stop();
  		Display.destroy();
+ 		TextureLoader.deleteTextures();
  		System.exit(status);
  	}
  	public void regiesterEntity(Class<? extends EntityTemplate> entityTemplate)
