@@ -15,6 +15,7 @@ import core.stateManager.StateManager;
 
 public class GameLoop implements Runnable {
 	
+    
 	private StateManager sm;
 	/** time at last frame */
 	private long lastFrame;
