@@ -31,7 +31,7 @@ public class TextureLoader {
 	{
 		if(textureMap == null)
 		{
-			textureMap =  new HashMap<String, Integer>();
+			textureMap =  new HashMap<>();
 		}
 		
 		if(textureMap.get(path) == null)
@@ -86,10 +86,9 @@ public class TextureLoader {
 				catch(Exception e)
 				{
 					Debug.Trace(e.getMessage());
-					continue;
 				}
 			}
-			textureMap = new HashMap<String, Integer>();
+			textureMap = new HashMap<>();
 		}
 	}
 

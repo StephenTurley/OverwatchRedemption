@@ -19,19 +19,20 @@ import core.graphics.DrawableComponent;
 
 public class StateManager implements DrawableComponent {
 	
-	private Stack<GameState> states;
+	private final Stack<GameState> states;
 	
 	public StateManager()
 	{
-		states = new Stack<GameState>();
+		states = new Stack<>();
 	}
 	
 	public StateManager(GameState startingState)
 	{
-		states = new Stack<GameState>();
+		states = new Stack<>();
 		states.push(startingState);
 		states.peek().enter();
 	}
+	@Override
 	public void draw()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
@@ -42,6 +43,7 @@ public class StateManager implements DrawableComponent {
 		Display.update();
 	}
 	
+	@Override
 	public void update(int delta)
 	{
 		if(!states.empty())

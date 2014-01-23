@@ -30,7 +30,7 @@ public class ServerLevel {
 			mapHeight = mp.getHeight();
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
-			entityCollection = new EntityCollection<ServerEntity>(mp.getServerEntities());
+			entityCollection = new EntityCollection<>(mp.getServerEntities());
 		}
 		catch(LevelComponentsNotSatisfiedException e)
 		{

@@ -133,7 +133,6 @@ public abstract class MenuItem implements DrawableComponent {
 		}catch(Exception e)
 		{
 			Debug.Trace(e.getMessage());
-			Display.destroy();
 			Game.exit(1);
 		}
 	}

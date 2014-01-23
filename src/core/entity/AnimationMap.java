@@ -13,7 +13,7 @@ public class AnimationMap {
 
 	public AnimationMap()
 	{
-		animations = new HashMap<EntityState, AnimatedSprite>();
+		animations = new HashMap<>();
 	}
 	public void clear() {
 		animations.clear();

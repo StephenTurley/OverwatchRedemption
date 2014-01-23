@@ -81,7 +81,7 @@ public class Menu implements DrawableComponent {
 	}
 
 	public Menu(int x, int y, int verticleGap, float selectedFontSize, float fontSize) {
-		this.selectedQueue = new LinkedList<MenuItem>();
+		this.selectedQueue = new LinkedList<>();
 		this.fontSize = fontSize;
 		this.SelectedFontSize = selectedFontSize;
 		this.x = x;

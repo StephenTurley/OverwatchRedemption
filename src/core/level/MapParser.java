@@ -70,7 +70,7 @@ public class MapParser {
 	
 	public ArrayList<TileSet> getTileSets() throws TileSetLoadFailureException
 	{
-		ArrayList<TileSet> tileSets =  new ArrayList<TileSet>();
+		ArrayList<TileSet> tileSets =  new ArrayList<>();
 		
 		Element map = mapData.getRootElement();
 		for(Element ts : map.getChildren("tileset"))
@@ -98,7 +98,7 @@ public class MapParser {
 	
 	public ArrayList<Layer> getLayers() throws LevelFormatException
 	{
-		ArrayList<Layer> layers = new ArrayList<Layer>();
+		ArrayList<Layer> layers = new ArrayList<>();
 		
 		Element map = mapData.getRootElement();
 		for(Element layer : map.getChildren("layer"))
@@ -120,7 +120,7 @@ public class MapParser {
 	}
 	public ArrayList<ServerEntity> getServerEntities() throws Exception
 	{
-		ArrayList<ServerEntity> entities = new ArrayList<ServerEntity>();
+		ArrayList<ServerEntity> entities = new ArrayList<>();
 		
 		Element map = mapData.getRootElement();
 		
@@ -168,7 +168,7 @@ public class MapParser {
 	}
 	public ArrayList<ClientEntity> getClientEntities() throws Exception
 	{
-		ArrayList<ClientEntity> entities = new ArrayList<ClientEntity>();
+		ArrayList<ClientEntity> entities = new ArrayList<>();
 		
 		Element map = mapData.getRootElement();
 		

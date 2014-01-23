@@ -40,7 +40,7 @@ public class ClientLevel {
 			tileHeight = mp.getTileHeight();
 			layers = mp.getLayers();
 			tileMap = new TileMap(mp.getTileSets());
-			entityCollection = new EntityCollection<ClientEntity>(mp.getClientEntities());
+			entityCollection = new EntityCollection<>(mp.getClientEntities());
 			entityCollection.loadAssets();
 		}
 		catch (Exception e)

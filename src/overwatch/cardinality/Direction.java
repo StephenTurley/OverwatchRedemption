@@ -11,7 +11,7 @@ public enum Direction{
 	 
 	 /**
 	  * 
-	  * @param direction
+	  * @param directionIdx
 	  * @return returns the direction enum starting from E and going counter clockwise to SE (e.g. E = 0, NE = 1, N = 2, ..
 	  * 
 	  */

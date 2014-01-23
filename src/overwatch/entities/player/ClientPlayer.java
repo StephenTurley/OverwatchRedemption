@@ -36,10 +36,11 @@ public class ClientPlayer extends ClientEntity {
 	public void draw(Camera camera) {
 		if (assets != null && camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
 		{
-			assets.draw(camera, this.location);
+			assets.draw(camera, this.location);			
 		}
 	}
 
+	
 	@Override
 	public void loadAssets() {
 		try

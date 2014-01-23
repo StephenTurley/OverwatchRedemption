@@ -24,9 +24,9 @@ import java.awt.Font;
 public class GameStart extends GameState {
 	
 	private TrueTypeFont titleFont;
-	private String titleText = "OVERWATCH";
+	private final String titleText = "OVERWATCH";
 	private TrueTypeFont pressStartFont;
-	private String pressStartText = "Press start or enter to continue";
+	private final String pressStartText = "Press start or enter to continue";
 	
 	private boolean showStartText = true;
 	private int timeStartTextShown = 0;

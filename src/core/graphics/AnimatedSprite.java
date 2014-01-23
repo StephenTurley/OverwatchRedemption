@@ -11,14 +11,14 @@ import org.lwjgl.util.Point;
 public class AnimatedSprite implements Sprite {
 	
 	private String name;
-	private ArrayList<StaticSprite> frames;
+	private final ArrayList<StaticSprite> frames;
 	private int fps, cycles, elapsed, currentFrame;
 	
 	public AnimatedSprite(String name, int fps)
 	{
 		this.name = name;
 		this.fps = fps;
-		frames = new ArrayList<StaticSprite>();
+		frames = new ArrayList<>();
 		reset();
 	}
 	
@@ -42,6 +42,7 @@ public class AnimatedSprite implements Sprite {
 		this.name = name;
 	}
 	
+	@Override
 	public String getName()
 	{
 		return name;
@@ -59,12 +60,13 @@ public class AnimatedSprite implements Sprite {
 		return cycles;
 	}
 
-	public void reset()
+	private void reset()
 	{
 		cycles = 0;
 		elapsed = 0;
 		currentFrame = 0;
 	}
+	@Override
 	public void draw(Camera camera, Point position) {
 		if(elapsed >= fps/1000)
 		{

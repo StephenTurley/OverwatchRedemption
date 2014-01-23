@@ -32,7 +32,9 @@ public abstract class GameState extends Listener implements DrawableComponent{
 		this.sm = sm;
 	}
 
+	@Override
 	public abstract void update(int delta);
+	@Override
 	public abstract void draw();
 	public abstract void resume();
 	public abstract void pause();

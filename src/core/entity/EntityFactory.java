@@ -27,7 +27,7 @@ public class EntityFactory {
 	{
 		if(entityTemplates == null)
 		{
-			entityTemplates = new HashMap<String, Class<? extends EntityTemplate>>();
+			entityTemplates = new HashMap<>();
 		}
 		
 		entityTemplates.put(entityClass.getSimpleName(), entityClass);

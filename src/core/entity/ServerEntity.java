@@ -12,5 +12,6 @@ public abstract class ServerEntity extends Entity{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public abstract void update(int delta);
 }

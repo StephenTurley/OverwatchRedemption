@@ -8,7 +8,7 @@ public class StaticSpriteSheet {
 	
 	public StaticSpriteSheet()
 	{
-		sprites = new HashMap<String, StaticSprite>();
+		sprites = new HashMap<>();
 	}
 	
 	public void addStaticSprite(StaticSprite staticSprite)

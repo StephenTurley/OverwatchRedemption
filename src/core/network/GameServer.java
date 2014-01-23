@@ -32,6 +32,7 @@ public class GameServer{
 		public void init()
 	 	{
 	 		server = new Server(){
+				 @Override
 	 			protected Connection newConnection(){
 	 				return new PlayerConnection();
 	 			}
@@ -171,7 +172,7 @@ public class GameServer{
 		
 		public ArrayList<PlayerConnection> getPlayerConnections()
 		{
-			ArrayList<PlayerConnection> playerConnections = new ArrayList<PlayerConnection>();
+			ArrayList<PlayerConnection> playerConnections = new ArrayList<>();
 			
 			for(Connection c : server.getConnections())
 			{

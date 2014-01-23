@@ -20,15 +20,17 @@ import core.network.EntityDataPacket;
 /**
  * Stores and provides access to all the entities in a Level.
  * 
+ * @param <T> Entity subclass
+ * 
  */
 public class EntityCollection<T extends Entity> {
 	
-	private ConcurrentHashMap<UUID, T> collection;
+	private final ConcurrentHashMap<UUID, T> collection;
 	
 	
 	public EntityCollection(ArrayList<T> entityList)
 	{
-		collection = new ConcurrentHashMap<UUID, T>();
+		collection = new ConcurrentHashMap<>();
 		
 		for(T e : entityList)
 		{
@@ -50,13 +52,12 @@ public class EntityCollection<T extends Entity> {
 	/**
 	 * Will update existing entities and add new ones
 	 * @param entities The entities to be updated or added
-	 * @param loadNewAssets if true, entity assets will be loaded for new entities
 	 * @return List of new entities added
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<T> addUpdateEntities(EntityDataPacket[] entities, boolean isClient)
 	{
-		ArrayList<T> newEntities = new ArrayList<T>();
+		ArrayList<T> newEntities = new ArrayList<>();
 		
 		for(EntityDataPacket e: entities)
 		{
@@ -115,7 +116,7 @@ public class EntityCollection<T extends Entity> {
 	
 	public ArrayList<T> getEntities() 
 	{
-		ArrayList<T> entities = new ArrayList<T>();
+		ArrayList<T> entities = new ArrayList<>();
 		for(T e : collection.values())
 		{
 			entities.add(e);

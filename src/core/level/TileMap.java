@@ -22,7 +22,7 @@ public class TileMap {
 	
 	public TileMap(ArrayList<TileSet> tileSets)
 	{
-		tiles = new HashMap<Integer, TextureCoord>();
+		tiles = new HashMap<>();
 		
 		for(TileSet ts : tileSets)
 		{

@@ -16,11 +16,11 @@ public class DirectionMap {
 	
 	private final int FRAME_RATE = 5;
 	
-	private HashMap<Direction, AnimationMap> animations;
+	private final HashMap<Direction, AnimationMap> animations;
 	
 	public DirectionMap(StaticSpriteSheet spriteSheet, EntityState stateEnum) throws Exception
 	{
-		animations = new HashMap<Direction, AnimationMap>();
+		animations = new HashMap<>();
 		
 		parseSpriteSheet(spriteSheet, stateEnum);
 	}

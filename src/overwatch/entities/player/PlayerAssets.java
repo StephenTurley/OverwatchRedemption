@@ -18,7 +18,7 @@ import core.graphics.StaticSpriteSheet;
 
 public class PlayerAssets implements EntityAssets{
 	
-	private DirectionMap directionMap;
+	private final DirectionMap directionMap;
 	private Direction currentDirection;
 	private EntityState currentState;
 	
