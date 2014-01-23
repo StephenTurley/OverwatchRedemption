@@ -187,8 +187,9 @@ public class Game {
  	{
  		if(gameServer != null) gameServer.kill();
  		if(gameClient != null) gameClient.stop();
- 		Display.destroy();
  		TextureLoader.deleteTextures();
+ 		Display.destroy();
+ 		
  		System.exit(status);
  	}
  	public void regiesterEntity(Class<? extends EntityTemplate> entityTemplate)

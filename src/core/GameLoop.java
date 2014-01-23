@@ -65,7 +65,6 @@ public class GameLoop implements Runnable {
 
 		Game.exit(0);
 
-		Display.destroy();
 	}
 	
 	public void runServer()
