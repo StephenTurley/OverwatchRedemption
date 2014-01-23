@@ -69,7 +69,7 @@ public class ServerLoadLevelState extends ServerState {
 		//set connection uuid
 		for(PlayerConnection pc : gameServer.getPlayerConnections())
 		{
-			ArrayList<ServerEntity> players = gameServer.getCurrentLevel().getEntityCollection().getServerEntities(ServerPlayer.class);
+			ArrayList<ServerEntity> players = gameServer.getCurrentLevel().getEntityCollection().getEntities();
 			
 			if(players.size() <= gameServer.getPlayerConnections().size())
 			{

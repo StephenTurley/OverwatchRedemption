@@ -51,6 +51,20 @@ public class EntityFactory {
 		return template.createServerEntity(uuid, location, layer);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> T createEntity(Class<T> clazz, String className,UUID uuid, Point location, int layer) throws EntityNotFoundException, EntityNotConstructedException
+	{
+		if(clazz == ServerEntity.class)
+		{
+			return (T)createServerEntity(className, uuid, location, layer);
+		}
+		if(clazz == ClientEntity.class)
+		{
+			return (T)createClientEntity(className, uuid, location, layer);
+		}
+		throw new EntityNotConstructedException("Invalid Entity class type");
+	}
+	
 	/**
 	 * This will create ClientEntity classes if the template has been registered
 	 * @param className the class name that implements Entity

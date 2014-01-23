@@ -18,7 +18,7 @@ import core.exception.LevelComponentsNotSatisfiedException;
 public class ServerLevel {
 	
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
-	private EntityCollection entityCollection;
+	private EntityCollection<ServerEntity> entityCollection;
 	
 
 
@@ -30,7 +30,7 @@ public class ServerLevel {
 			mapHeight = mp.getHeight();
 			tileWidth = mp.getTileWidth();
 			tileHeight = mp.getTileHeight();
-			entityCollection = new EntityCollection(mp.getServerEntities());
+			entityCollection = new EntityCollection<ServerEntity>(mp.getServerEntities());
 		}
 		catch(LevelComponentsNotSatisfiedException e)
 		{
@@ -91,13 +91,13 @@ public class ServerLevel {
 		this.tileHeight = tileHeight;
 	}
 
-	public EntityCollection getEntityCollection()
+	public EntityCollection<ServerEntity> getEntityCollection()
 	{
 		return entityCollection;
 	}
 
 	public ServerEntity getEntity(UUID uuid) {
-		return entityCollection.getServerEntity(uuid);
+		return entityCollection.getEntity(uuid);
 	}
 
 	public void update(int delta) {

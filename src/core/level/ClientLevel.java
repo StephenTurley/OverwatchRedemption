@@ -28,7 +28,7 @@ public class ClientLevel {
 	private TileMap tileMap;
 	private int mapWidth ,mapHeight ,tileWidth ,tileHeight;
 	private ArrayList<Layer> layers;
-	private EntityCollection entityCollection;
+	private EntityCollection<ClientEntity> entityCollection;
 
 	public ClientLevel(InputStream fileStream) {
 		try
@@ -40,7 +40,7 @@ public class ClientLevel {
 			tileHeight = mp.getTileHeight();
 			layers = mp.getLayers();
 			tileMap = new TileMap(mp.getTileSets());
-			entityCollection = new EntityCollection(mp.getClientEntities());
+			entityCollection = new EntityCollection<ClientEntity>(mp.getClientEntities());
 			entityCollection.loadAssets();
 		}
 		catch (Exception e)
@@ -114,7 +114,7 @@ public class ClientLevel {
 	
 	public ClientEntity getEntity(UUID uuid)
 	{
-		return entityCollection.getClientEntity(uuid);
+		return entityCollection.getEntity(uuid);
 	}
 	
 	public void addUpdateEntity(EntityDataPacket[] entities)

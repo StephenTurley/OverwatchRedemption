@@ -21,16 +21,16 @@ import core.network.EntityDataPacket;
  * Stores and provides access to all the entities in a Level.
  * 
  */
-public class EntityCollection {
+public class EntityCollection<T extends Entity> {
 	
-	private ConcurrentHashMap<UUID,Entity> collection;
+	private ConcurrentHashMap<UUID, T> collection;
 	
 	
-	public EntityCollection(ArrayList<? extends Entity> entityList)
+	public EntityCollection(ArrayList<T> entityList)
 	{
-		collection = new ConcurrentHashMap<UUID, Entity>();
+		collection = new ConcurrentHashMap<UUID, T>();
 		
-		for(Entity e : entityList)
+		for(T e : entityList)
 		{
 			collection.put(e.getID(), e);
 		}
@@ -41,7 +41,7 @@ public class EntityCollection {
 	 * @param entity
 	 * @return returns a unique identifier for the entity
 	 */
-	public UUID addEntity(UUID uuid, Entity entity)
+	public UUID addEntity(UUID uuid, T entity)
 	{
 		collection.put(uuid, entity);
 		
@@ -53,9 +53,10 @@ public class EntityCollection {
 	 * @param loadNewAssets if true, entity assets will be loaded for new entities
 	 * @return List of new entities added
 	 */
-	public ArrayList<Entity> addUpdateEntities(EntityDataPacket[] entities, boolean loadNewAssets)
+	@SuppressWarnings("unchecked")
+	public ArrayList<T> addUpdateEntities(EntityDataPacket[] entities, boolean isClient)
 	{
-		ArrayList<Entity> newEntities = new ArrayList<Entity>();
+		ArrayList<T> newEntities = new ArrayList<T>();
 		
 		for(EntityDataPacket e: entities)
 		{
@@ -63,10 +64,17 @@ public class EntityCollection {
 			try 
 			{
 				Entity theEntity;
-				if(collection.get(e.uuid) == null && loadNewAssets) 
+				if(collection.get(e.uuid) == null ) 
 				{
-					theEntity = EntityFactory.createClientEntity(e.className, e.uuid, e.position, e.layer);
-					theEntity.loadAssets() ;
+					if(isClient)
+					{
+						theEntity = EntityFactory.createClientEntity(e.className, e.uuid, e.position, e.layer);
+						theEntity.loadAssets() ;
+					}
+					else
+					{
+						theEntity = EntityFactory.createServerEntity(e.className, e.uuid, e.position, e.layer);
+					}
 				}
 				else
 				{
@@ -82,7 +90,7 @@ public class EntityCollection {
 					theEntity.setDirection(e.direction);
 				}
 				
-				collection.put(theEntity.getID(), theEntity);
+				collection.put(theEntity.getID(), (T)theEntity);
 					
 			} catch (EntityNotFoundException e1) {
 				Debug.Trace("Entity not found!");
@@ -100,64 +108,21 @@ public class EntityCollection {
 		return newEntities;
 		
 	}
-	public ServerEntity getServerEntity(UUID uuid)
+	public T getEntity(UUID uuid)
 	{
-		return (ServerEntity)collection.get(uuid);
+		return collection.get(uuid);
 	}
 	
-	public ClientEntity getClientEntity(UUID uuid)
+	public ArrayList<T> getEntities() 
 	{
-		return (ClientEntity)collection.get(uuid);
-	}
-	public ArrayList<ServerEntity> getServerEntities() 
-	{
-		ArrayList<ServerEntity> serverEntities = new ArrayList<ServerEntity>();
-		for(Entity e : collection.values())
+		ArrayList<T> entities = new ArrayList<T>();
+		for(T e : collection.values())
 		{
-			serverEntities.add((ServerEntity)e);
+			entities.add(e);
 		}
-		return serverEntities;
-	}
-	
-	public ArrayList<ClientEntity> getClientEntities() 
-	{
-		ArrayList<ClientEntity> serverEntities = new ArrayList<ClientEntity>();
-		for(Entity e : collection.values())
-		{
-			serverEntities.add((ClientEntity)e);
-		}
-		return serverEntities;
-	}
-	
-	public ArrayList<ClientEntity> getClientEntities(Class<? extends ClientEntity> entityClass)
-	{
-		ArrayList<ClientEntity> entities = new ArrayList<ClientEntity>();
-		
-		for(Entity e : collection.values())
-		{
-			if(e.getClass() == entityClass)
-			{
-				entities.add((ClientEntity)e);
-			}
-		}
-		
 		return entities;
 	}
 	
-	public ArrayList<ServerEntity> getServerEntities(Class<? extends ServerEntity> entityClass)
-	{
-		ArrayList<ServerEntity> entities = new ArrayList<ServerEntity>();
-		
-		for(Entity e : collection.values())
-		{
-			if(e.getClass() == entityClass)
-			{
-				entities.add((ServerEntity)e);
-			}
-		}
-		
-		return entities;
-	}
 	/**
 	 * This method will draw all the entities that are contained by the globalArea Rectangle and on the given layer
 	 * @param camera
@@ -210,5 +175,5 @@ public class EntityCollection {
 		}
 	}
 	
-
+	
 }

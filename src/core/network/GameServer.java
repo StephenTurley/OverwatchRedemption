@@ -15,7 +15,6 @@ import com.esotericsoftware.kryonet.Server;
 
 import core.Debug;
 import core.Game;
-import core.entity.Entity;
 import core.entity.ServerEntity;
 import core.level.ServerLevel;
 import core.network.Network.EntitiesPacket;
@@ -190,14 +189,14 @@ public class GameServer{
 			}
 			return null;
 		}
-		public synchronized void updateEntity(Entity entity) {
+		public synchronized void updateEntity(ServerEntity entity) {
 		
 			currentLevel.getEntityCollection().addEntity(entity.getID(), entity);
 		}
 		public void sendEntitiesPacket() {
 			EntitiesPacket ep = new EntitiesPacket();
 			
-			ArrayList<ServerEntity> entities =  currentLevel.getEntityCollection().getServerEntities();
+			ArrayList<ServerEntity> entities =  currentLevel.getEntityCollection().getEntities();
 			
 			ep.entities = new EntityDataPacket[entities.size()];
 			
