@@ -23,6 +23,7 @@ import core.graphics.TextureLoader;
 import core.network.GameServer;
 import core.network.Network;
 import core.stateManager.*;
+import org.newdawn.slick.openal.SoundStore;
 
 
 public class Game {
@@ -189,7 +190,7 @@ public class Game {
  		if(gameClient != null) gameClient.stop();
  		TextureLoader.deleteTextures();
  		Display.destroy();
- 		
+ 		SoundStore.get().clear();
  		System.exit(status);
  	}
  	public void regiesterEntity(Class<? extends EntityTemplate> entityTemplate)

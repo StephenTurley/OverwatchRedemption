@@ -10,6 +10,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
 import core.stateManager.StateManager;
+import org.newdawn.slick.openal.SoundStore;
 
 
 
@@ -59,9 +60,9 @@ public class GameLoop implements Runnable {
 				Game.updateServer(delta);
 			}
 			
-			
-			
 			Display.sync(desiredFrameRate);
+			SoundStore.get().poll(delta);
+			
 		}
 
 		Game.exit(0);

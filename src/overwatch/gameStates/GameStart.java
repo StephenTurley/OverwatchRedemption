@@ -19,6 +19,9 @@ import static org.lwjgl.opengl.GL11.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.util.ResourceLoader;
 import java.awt.Font;
+import org.newdawn.slick.openal.Audio;
+import org.newdawn.slick.openal.AudioLoader;
+import org.newdawn.slick.openal.SoundStore;
 
 
 public class GameStart extends GameState {
@@ -27,6 +30,7 @@ public class GameStart extends GameState {
 	private final String titleText = "OVERWATCH";
 	private TrueTypeFont pressStartFont;
 	private final String pressStartText = "Press start or enter to continue";
+	private Audio gameIntroBGM;
 	
 	private boolean showStartText = true;
 	private int timeStartTextShown = 0;
@@ -98,6 +102,11 @@ public class GameStart extends GameState {
 		
 		try{
 			InputStream is = ResourceLoader.getResourceAsStream("fonts/unispace rg.ttf");
+			
+			gameIntroBGM = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("bgm/GameIntro.ogg"));
+			
+			gameIntroBGM.playAsMusic(1.0f,1.0f,true);
+			SoundStore.get().setCurrentMusicVolume(0.50f);
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
 			unispace = unispace.deriveFont(64f);

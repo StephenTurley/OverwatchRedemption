@@ -13,7 +13,6 @@ import core.stateManager.*;
 
 import java.io.InputStream;
 
-import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
 import org.newdawn.slick.util.ResourceLoader;
 
