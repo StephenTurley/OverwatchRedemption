@@ -1,4 +1,4 @@
-vNext
+0.1.8 (26Jan2014)
 Added - background music to menus
 Added - new level
 Improved - GameServer will now configure port forwarding automatically
