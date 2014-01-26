@@ -106,7 +106,7 @@ public class GameStart extends GameState {
 			gameIntroBGM = AudioLoader.getStreamingAudio("OGG", ResourceLoader.getResource("bgm/GameIntro.ogg"));
 			
 			gameIntroBGM.playAsMusic(1.0f,1.0f,true);
-			SoundStore.get().setCurrentMusicVolume(0.50f);
+			SoundStore.get().setCurrentMusicVolume(0.1f);
 			
 			Font unispace = Font.createFont(Font.TRUETYPE_FONT, is);
 			unispace = unispace.deriveFont(64f);

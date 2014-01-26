@@ -20,6 +20,13 @@ import core.level.ServerLevel;
 import core.network.Network.EntitiesPacket;
 import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import org.teleal.cling.UpnpService;
+import org.teleal.cling.UpnpServiceImpl;
+import org.teleal.cling.support.igd.PortMappingListener;
+import org.teleal.cling.support.model.PortMapping;
 
 public class GameServer{
 	
@@ -27,6 +34,11 @@ public class GameServer{
 		private ServerState currentState;
 		private volatile boolean playersReady;
 		private volatile ServerLevel currentLevel;
+		private int tcp, udp;
+		//private String publicIP;
+		private String privateIP;
+		
+		private UpnpService upnpService;
 
 		
 		public void init()
@@ -38,6 +50,17 @@ public class GameServer{
 	 			}
 	 		};
 
+			tcp = Game.getGameConfig().getServerTCP();
+			udp = Game.getGameConfig().getServerUDP();
+			try{
+				getPrivateIP();
+				Debug.Trace("Local ip is: " + privateIP.toString());
+			}
+			catch(IOException e)
+			{
+				Debug.Trace("Localhost lookup failed");
+				Game.exit(1);
+			}
 	 		Network.register(server);
 	 		currentState = new ServerStartState(this);
 	 		currentState.enter();
@@ -50,7 +73,32 @@ public class GameServer{
 	 		server.start();
 	 		try
 	 		{
-	 			server.bind( Game.getGameConfig().getServerTCP(),Game.getGameConfig().getServerUDP());
+	 			server.bind(tcp,udp);
+				
+				//config the router
+				
+				PortMapping tcpMap = new PortMapping(
+					tcp,
+					privateIP,
+					PortMapping.Protocol.TCP,
+					"tcpMap"
+				);
+				
+				PortMapping udpMap = new PortMapping(
+					udp,
+					privateIP,
+					PortMapping.Protocol.UDP,
+					"udpMap"
+				);
+				
+				PortMapping[] ports = {tcpMap,udpMap};
+				
+				upnpService = new UpnpServiceImpl(
+					new PortMappingListener(ports)
+				);
+				
+				upnpService.getControlPoint().search();
+				
 	 		}catch(Exception e)
 	 		{
 				Debug.Trace(e.getMessage());
@@ -96,6 +144,10 @@ public class GameServer{
 	 	
 	 	public void kill()
 	 	{
+			if(upnpService != null)
+			{
+				upnpService.shutdown();
+			}
 	 		server.close();
 	 	}
 	 	public Server getServer()
@@ -208,5 +260,24 @@ public class GameServer{
 			
 			sendToAllUDP(ep);
 		}
+		
+		public String getPrivateIP() throws UnknownHostException, IOException
+		{
+			if(privateIP == null)
+			{
+				//connect to web host to get the correct interface
+				Socket s = new Socket("www.overwatchredemption.com", 80);
+			
+				privateIP = s.getLocalAddress().getHostAddress();
+			}
+			
+			return privateIP;
+		}
+		
+		/*public String getPublicIP()
+		{
+			//TODO: create webservice for this. 
+			
+		}*/
 
 }
