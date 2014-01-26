@@ -1,3 +1,5 @@
+vNext
+fixed - player sprite will continue to face the previous direction until new direction is entered.
 0.1.8 (26Jan2014)
 Added - background music to menus
 Added - new level

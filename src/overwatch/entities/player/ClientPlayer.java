@@ -27,7 +27,11 @@ public class ClientPlayer extends ClientEntity {
 		if(assets!= null)
 		{
 			assets.update(delta);
-			assets.setDirection(Direction.fromVector2f(super.direction));
+			
+			if(!(super.direction.x == 0 && super.direction.y == 0))
+			{
+				assets.setDirection(Direction.fromVector2f(super.direction));
+			}
 			assets.setState(Player.State.IDLE);
 		}
 	}
