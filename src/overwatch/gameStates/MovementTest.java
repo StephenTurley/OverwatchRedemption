@@ -24,6 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
 import core.Debug;
 import core.Game;
+import core.audio.MusicMap;
 import core.stateManager.GameState;
 import core.stateManager.StateManager;
 import core.graphics.Camera;
@@ -33,6 +34,8 @@ import core.network.*;
 import core.network.Network.EntitiesPacket;
 import core.network.Network.FocusOn;
 import core.network.Network.MovePlayer;
+import java.io.IOException;
+import org.newdawn.slick.openal.SoundStore;
 
 
 
@@ -104,6 +107,11 @@ public class MovementTest extends GameState {
 	public void enter()
 	{
 		//deadZone = Game.getGameConfig().getJoyStickDeadZone();
+
+		MusicMap.add("GamePlay", "bgm/ARPCrazy.ogg");
+		MusicMap.play("GamePlay");
+		MusicMap.setVolume(0.1f);
+
 		
 		movementVector = new Vector2f(0,0);
 		
