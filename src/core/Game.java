@@ -73,16 +73,13 @@ public class Game {
 			{
 				DisplayMode displayMode = null;
 		        DisplayMode[] modes = Display.getAvailableDisplayModes();
-
-		         for (int i = 0; i < modes.length; i++)
-		         {
-		             if (modes[i].getWidth() == config.getDisplayWidth()
-		             && modes[i].getHeight() == config.getDisplayHeight()
-		             && modes[i].isFullscreenCapable())
-		               {
-		                    displayMode = modes[i];
-		               }
-		         }
+				for(DisplayMode mode : modes)
+				{
+					if (mode.getWidth() == config.getDisplayWidth() && mode.getHeight() == config.getDisplayHeight() && mode.isFullscreenCapable())
+					{
+						displayMode = mode;
+					}
+				}
 		         Display.setDisplayMode(displayMode);
 		         Display.setFullscreen(true);
 			}

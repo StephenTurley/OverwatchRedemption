@@ -40,6 +40,7 @@ public class EntityCollection<T extends Entity> {
 	
 	/**
 	 * 
+	 * @param uuid
 	 * @param entity
 	 * @return returns a unique identifier for the entity
 	 */
@@ -52,6 +53,7 @@ public class EntityCollection<T extends Entity> {
 	/**
 	 * Will update existing entities and add new ones
 	 * @param entities The entities to be updated or added
+	 * @param isClient
 	 * @return List of new entities added
 	 */
 	@SuppressWarnings("unchecked")
