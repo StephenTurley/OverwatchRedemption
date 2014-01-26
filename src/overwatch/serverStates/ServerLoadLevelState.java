@@ -52,7 +52,7 @@ public class ServerLoadLevelState extends ServerState {
 		
 		LoadLevel loadLevelPkt = new LoadLevel();
 		loadLevelPkt.stage = 0;
-		loadLevelPkt.level = 1;
+		loadLevelPkt.level = 2;
 		
 		gameServer.sendToAllTCP(loadLevelPkt);
 		

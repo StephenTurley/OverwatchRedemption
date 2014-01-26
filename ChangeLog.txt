@@ -1,5 +1,6 @@
 vNext
 Added - background music to menus
+Added - new level
 Improved - GameServer will now configure port forwarding automatically
 Improved - Core engine now uses a different class for Server entities and Client entities. This allows for cleaner code.
 0.1.7 (15Jan2014)
