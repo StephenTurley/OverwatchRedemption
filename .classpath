@@ -16,5 +16,10 @@
 	<classpathentry kind="lib" path="lib/jars/jdom-2.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/jars/kryonet-2.21-all.jar"/>
 	<classpathentry kind="lib" path="/home/stephen/dev/overwatch-redemption/lib/jars/slick.jar"/>
+	<classpathentry kind="lib" path="lib/jars/cling-core-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/jars/cling-support-1.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/jars/teleal-common-1.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/jars/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/jars/jorbis-0.0.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

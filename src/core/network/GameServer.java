@@ -20,9 +20,11 @@ import core.level.ServerLevel;
 import core.network.Network.EntitiesPacket;
 import core.network.Network.PlayersPacket;
 import core.stateManager.ServerState;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
 import org.teleal.cling.UpnpService;
 import org.teleal.cling.UpnpServiceImpl;
 import org.teleal.cling.support.igd.PortMappingListener;
@@ -266,6 +268,7 @@ public class GameServer{
 			if(privateIP == null)
 			{
 				//connect to web host to get the correct interface
+				@SuppressWarnings("resource")
 				Socket s = new Socket("www.overwatchredemption.com", 80);
 			
 				privateIP = s.getLocalAddress().getHostAddress();
