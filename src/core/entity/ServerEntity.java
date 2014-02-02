@@ -24,6 +24,9 @@ public abstract class ServerEntity extends Entity{
 		Rectangle thisRect = this.getBoundingRect();
 		Rectangle thatRect = entity.getBoundingRect();
 		
+		if(this.getLayer() != entity.getLayer())
+			return false;
+		
 		return (thisRect.intersects(thatRect) ||
 				thisRect.contains(thatRect) ||
 				thatRect.contains(thisRect));
