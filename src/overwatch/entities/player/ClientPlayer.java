@@ -57,11 +57,4 @@ public class ClientPlayer extends ClientEntity {
 			Game.exit(1);
 		}
 	}
-
-	@Override
-	public void collideWith(Entity entity) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

@@ -14,6 +14,7 @@ import core.Game;
 import core.entity.EntityCollection;
 import core.entity.ServerEntity;
 import core.exception.LevelComponentsNotSatisfiedException;
+import java.util.ArrayList;
 
 public class ServerLevel {
 	
@@ -102,5 +103,21 @@ public class ServerLevel {
 
 	public void update(int delta) {
 		entityCollection.update(delta);
+		
+		ArrayList<ServerEntity> entities = entityCollection.getEntities();
+		
+		for (int i = 0; i < entities.size(); i++)
+		{
+			for (int j =  i + 1; j < entities.size(); j++)
+			{
+				ServerEntity a = entities.get(i);
+				ServerEntity b = entities.get(j);
+				if(a.checkCollision(b))
+				{
+					a.collideWith(b);
+					b.collideWith(a);
+				}
+			}
+		}
 	}
 }

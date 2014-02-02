@@ -3,6 +3,7 @@ package core.entity;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 public abstract class ServerEntity extends Entity{
 	
@@ -14,4 +15,17 @@ public abstract class ServerEntity extends Entity{
 
 	@Override
 	public abstract void update(int delta);
+	
+	public abstract void collideWith(Entity entity);
+	
+	public boolean checkCollision(Entity entity)
+	{
+		
+		Rectangle thisRect = this.getBoundingRect();
+		Rectangle thatRect = entity.getBoundingRect();
+		
+		return (thisRect.intersects(thatRect) ||
+				thisRect.contains(thatRect) ||
+				thatRect.contains(thisRect));
+	}
 }
