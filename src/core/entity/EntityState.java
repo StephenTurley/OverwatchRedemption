@@ -10,4 +10,5 @@ public interface EntityState {
 
 	int getStateValue();
 	EntityState getState(String string);
+	EntityState getState(int ordinalValue);
 }

@@ -85,6 +85,8 @@ public class EntityCollection<T extends Entity> {
 					
 					theEntity.setLocation(e.position);
 					theEntity.setLayer(e.layer);
+					theEntity.setState(theEntity.currentState.getState(e.state));
+			
 				}
 				
 				theEntity.setRotation(e.rotation);

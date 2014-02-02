@@ -33,6 +33,12 @@ public class Player implements EntityTemplate {
 			return State.valueOf(string);
 		}
 		
+		@Override
+		public EntityState getState(int ordinalValue)
+		{
+			return State.values()[ordinalValue];
+		}
+		
 	}
 
 	@Override

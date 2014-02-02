@@ -15,7 +15,7 @@ public class EntityDataPacket {
 	public String className;
 	public UUID uuid;
 	public Point position;
-	public int layer;
+	public int layer, state;
 	public float rotation;
 	public Vector2f direction;
 }

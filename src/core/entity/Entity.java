@@ -141,6 +141,7 @@ public abstract class Entity {
 		pkt.layer = this.layer;
 		pkt.rotation = this.rotation;
 		pkt.direction = this.direction;
+		pkt.state = this.currentState.getStateValue();
 		
 		return pkt;
 	}
