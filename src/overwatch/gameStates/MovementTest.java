@@ -45,23 +45,24 @@ public class MovementTest extends GameState {
 	private Vector2f movementVector;
 	//private Controller gamepad;
 	
-	private ClientLevel currentLevel;
+	private final ClientLevel currentLevel;
 	
 	private volatile UUID focusedEntityID; 
 	
-	private Camera camera;
+	private final Camera camera;
 	
-	private ConcurrentLinkedQueue<EntityDataPacket[]> entityBuffer;
+	private final ConcurrentLinkedQueue<EntityDataPacket[]> entityBuffer;
 	
 	public MovementTest(StateManager sm, ClientLevel currentLevel) {
 		super(sm);
 		this.currentLevel = currentLevel;
-		entityBuffer = new ConcurrentLinkedQueue<EntityDataPacket[]>();
+		entityBuffer = new ConcurrentLinkedQueue<>();
 		camera = new Camera(Display.getWidth(),Display.getHeight()	);
 	}
 
 	
 	
+	@Override
 	public void update(int delta) {
 		
 		if(entityBuffer.size() >= 1) currentLevel.addUpdateEntity(entityBuffer.poll());
@@ -84,6 +85,7 @@ public class MovementTest extends GameState {
 	}
 
 
+	@Override
 	public void resume() {
 		Game.addClientListener(this);
 		glEnable(GL_TEXTURE_RECTANGLE_ARB);
@@ -91,6 +93,7 @@ public class MovementTest extends GameState {
 	}
 
 
+	@Override
 	public void pause() {
 		Game.removeClientListener(this);
 		glDisable(GL_TEXTURE_RECTANGLE_ARB);
@@ -98,11 +101,13 @@ public class MovementTest extends GameState {
 	}
 
 
+	@Override
 	public void save() {
 		// TODO Auto-generated method stub
 
 	}
 	
+	@Override
 	public void enter()
 	{
 		//deadZone = Game.getGameConfig().getJoyStickDeadZone();

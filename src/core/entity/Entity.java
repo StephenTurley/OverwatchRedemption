@@ -12,7 +12,6 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 import org.lwjgl.util.vector.Vector2f;
 
-import core.graphics.Camera;
 import core.network.EntityDataPacket;
 
 
@@ -24,8 +23,9 @@ public abstract class Entity {
 	protected Vector2f direction;
 	protected UUID id;
 	protected EntityState currentState;
+	private final String templateString;
 	
-	public Entity(UUID uuid,Point location, int width, int height, int layer) {
+	public Entity(UUID uuid,Point location, int width, int height, int layer, String templateString) {
 		this.location = location;
 		this.width = width;
 		this.height = height;
@@ -34,6 +34,7 @@ public abstract class Entity {
 		this.layer = layer;
 		this.id = uuid;
 		this.direction = new Vector2f(0,0);
+		this.templateString = templateString;
 	}
 	
 	public Point getLocation() {
@@ -135,9 +136,9 @@ public abstract class Entity {
 	{
 		EntityDataPacket pkt = new EntityDataPacket();
 		
-		pkt.className = this.getClass().getSimpleName();
+		pkt.className = this.templateString;
 		pkt.uuid = this.id;
-		pkt.position = this.location;
+		pkt.location = this.location;
 		pkt.layer = this.layer;
 		pkt.rotation = this.rotation;
 		pkt.direction = this.direction;
@@ -145,9 +146,6 @@ public abstract class Entity {
 		
 		return pkt;
 	}
-	
-	public abstract void draw(Camera camera);
 	public abstract void update(int delta);
-	public abstract void loadAssets();
 	
 }

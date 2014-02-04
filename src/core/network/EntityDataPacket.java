@@ -14,7 +14,7 @@ import org.lwjgl.util.vector.Vector2f;
 public class EntityDataPacket {
 	public String className;
 	public UUID uuid;
-	public Point position;
+	public Point location;
 	public int layer, state;
 	public float rotation;
 	public Vector2f direction;

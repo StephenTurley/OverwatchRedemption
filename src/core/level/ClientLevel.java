@@ -16,6 +16,7 @@ import core.Debug;
 import core.Game;
 import core.entity.ClientEntity;
 import core.entity.EntityCollection;
+import core.entity.EntityFactory;
 import core.graphics.Camera;
 import core.graphics.TextureCoord;
 import core.graphics.TextureLoader;
@@ -41,7 +42,12 @@ public class ClientLevel {
 			layers = mp.getLayers();
 			tileMap = new TileMap(mp.getTileSets());
 			entityCollection = new EntityCollection<>(mp.getClientEntities());
-			entityCollection.loadAssets();
+			
+			for(ClientEntity e : entityCollection.getEntities())
+			{
+				e.loadAssets();
+			}
+			
 		}
 		catch (Exception e)
 		{
@@ -119,7 +125,35 @@ public class ClientLevel {
 	
 	public void addUpdateEntity(EntityDataPacket[] entities)
 	{
-		entityCollection.addUpdateEntities(entities, true);
+		for(EntityDataPacket pkt : entities)
+		{
+			try
+			{
+				
+				ClientEntity entity = entityCollection.getEntity(pkt.uuid);
+				
+				if(entity == null)
+				{
+					entity = EntityFactory.createClientEntity(pkt.className, pkt.uuid, pkt.location, pkt.layer);
+					entity.loadAssets();
+
+				}
+				else
+				{
+					entity.setLayer(pkt.layer);
+					entity.setLocation(pkt.location);
+				}
+				entity.setDirection(pkt.direction);
+				entity.setState(entity.getCurrentState().getState(pkt.state));
+				entityCollection.addEntity(entity.getID(), entity);
+			}
+			catch(Exception e)
+			{
+				Debug.Trace(e.getMessage());
+				Game.exit(1);
+			}
+			
+		}
 	}
 	public void update(int delta)
 	{
@@ -179,7 +213,10 @@ public class ClientLevel {
 				}
 
 			}
-			entityCollection.drawVisible(camera,l.getValue());
+			for(ClientEntity e : entityCollection.getEntities())
+			{
+				camera.drawVisible(e, l.getValue());
+			}
 		}
 		
 	}

@@ -8,8 +8,8 @@ import org.lwjgl.util.Rectangle;
 public abstract class ServerEntity extends Entity{
 	
 	public ServerEntity(UUID uuid, Point location, int width, int height,
-			int layer) {
-		super(uuid, location, width, height, layer);
+			int layer, String templateClassString) {
+		super(uuid, location, width, height, layer,templateClassString);
 		// TODO Auto-generated constructor stub
 	}
 

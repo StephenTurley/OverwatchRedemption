@@ -9,7 +9,6 @@ import overwatch.cardinality.Direction;
 import core.Debug;
 import core.Game;
 import core.entity.ClientEntity;
-import core.entity.Entity;
 import core.graphics.Camera;
 
 public class ClientPlayer extends ClientEntity {
@@ -17,7 +16,7 @@ public class ClientPlayer extends ClientEntity {
 	private PlayerAssets assets;
 	
 	public ClientPlayer(UUID uuid, Point location,int width, int height, int layer) {
-		super(uuid, location, width, height, layer);
+		super(uuid, location, width, height, layer, "Player");
 		super.currentState = Player.State.IDLE;
 	}
 

@@ -22,6 +22,7 @@ public class Player implements EntityTemplate {
 		RUNNING,
 		DYING,
 		DEAD;
+		
 
 		@Override
 		public int getStateValue() {

@@ -7,7 +7,6 @@ import org.lwjgl.util.vector.Vector2f;
 
 import core.entity.Entity;
 import core.entity.ServerEntity;
-import core.graphics.Camera;
 
 public class ServerPlayer extends ServerEntity {
 	
@@ -17,7 +16,7 @@ public class ServerPlayer extends ServerEntity {
 
 	public ServerPlayer(UUID uuid, Point location, int width, int height, int layer) 
 	{
-		super(uuid, location, width, height, layer);
+		super(uuid, location, width, height, layer, "Player");
 		super.currentState = Player.State.IDLE;
 		
 		movementVector = new Vector2f(0,0);
@@ -36,20 +35,8 @@ public class ServerPlayer extends ServerEntity {
 
 	@Override
 	public void collideWith(Entity entity) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void draw(Camera camera) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void loadAssets() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

@@ -6,6 +6,7 @@
  ******************************************************************************/
 package core.graphics;
 
+import core.entity.ClientEntity;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
@@ -135,5 +136,17 @@ public class Camera {
 	public boolean isColliding()
 	{
 		return colliding;
+	}
+	
+	/**
+	 * Draws all entities that are in view of the camera at a given layer
+	 * @param e
+	 * @param layer
+	 */
+	public void drawVisible(ClientEntity e,  int layer) {
+		if(isVisible(e.getBoundingRect()) && e.getLayer() == layer)
+		{
+			e.draw(this);
+		}
 	}
 }
