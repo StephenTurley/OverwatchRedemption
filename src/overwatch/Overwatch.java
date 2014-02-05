@@ -13,6 +13,9 @@ import com.esotericsoftware.minlog.Log;
 
 import core.*;
 import core.configurationManager.ConfigurationManger;
+import overwatch.entities.bullet.Bullet;
+import overwatch.entities.goal.Goal;
+import overwatch.entities.turret.Turret;
 
 public class Overwatch {
 	
@@ -24,7 +27,10 @@ public class Overwatch {
 		
 		game = new Game(ConfigurationManger.loadConfiguration());
 		//register entities
-		game.regiesterEntity(Player.class);
+		game.registerEntity(Player.class);
+		game.registerEntity(Turret.class);
+		game.registerEntity(Bullet.class);
+		game.registerEntity(Goal.class);
 		
 		game.start(new GameStart(game.getStateManager()));
 	}

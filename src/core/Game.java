@@ -190,7 +190,7 @@ public class Game {
  		SoundStore.get().clear();
  		System.exit(status);
  	}
- 	public void regiesterEntity(Class<? extends EntityTemplate> entityTemplate)
+ 	public void registerEntity(Class<? extends EntityTemplate> entityTemplate)
  	{
  		EntityFactory.register(entityTemplate);
  	}
