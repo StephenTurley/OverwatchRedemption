@@ -18,13 +18,18 @@ import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.FocusOn;
 import com.starstuffgames.core.network.PlayerConnection;
 import com.starstuffgames.core.stateManager.ServerState;
+import java.util.ArrayList;
+import java.util.UUID;
 public class ServerGamePlayState extends ServerState {
 
 	private boolean playersFocused;
 	
+	private ArrayList<UUID> players;
+	
 	public ServerGamePlayState(GameServer gameServer) {
 		super(gameServer);
 		
+		players = new ArrayList<>();
 		playersFocused = false;
 	}
 
@@ -35,6 +40,15 @@ public class ServerGamePlayState extends ServerState {
 			if(!playersFocused)
 			{
 				focusOnPlayers();
+			}
+			
+			//keep track of player entities
+			if(players.isEmpty())
+			{
+				for(PlayerConnection p : gameServer.getPlayerConnections())
+				{
+					players.add(p.uuid);
+				}
 			}
 			gameServer.sendEntitiesPacket();
 			

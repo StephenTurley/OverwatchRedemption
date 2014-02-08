@@ -244,10 +244,12 @@ public class GameServer{
 			}
 			return null;
 		}
+		
 		public synchronized void updateEntity(ServerEntity entity) {
 		
 			currentLevel.getEntityCollection().addEntity(entity.getID(), entity);
 		}
+		
 		public void sendEntitiesPacket() {
 			EntitiesPacket ep = new EntitiesPacket();
 			
