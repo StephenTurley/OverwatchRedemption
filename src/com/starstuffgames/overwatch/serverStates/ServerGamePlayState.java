@@ -6,8 +6,6 @@
  ******************************************************************************/
 package com.starstuffgames.overwatch.serverStates;
 
-
-import com.starstuffgames.overwatch.entities.player.Player;
 import com.starstuffgames.overwatch.entities.player.ServerPlayer;
 
 import com.esotericsoftware.kryonet.Connection;
