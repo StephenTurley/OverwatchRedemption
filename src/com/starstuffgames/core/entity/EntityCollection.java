@@ -37,7 +37,7 @@ public class EntityCollection<T extends Entity> {
 	 * @param entity
 	 * @return returns a unique identifier for the entity
 	 */
-	public UUID addEntity(UUID uuid, T entity)
+	public UUID putEntity(UUID uuid, T entity)
 	{
 		collection.put(uuid, entity);
 		
@@ -55,6 +55,19 @@ public class EntityCollection<T extends Entity> {
 		for(T e : collection.values())
 		{
 			entities.add(e);
+		}
+		return entities;
+	}
+	public ArrayList<T> getEntities(Class<T> clazz)
+	{
+		ArrayList<T> entities = new ArrayList<>();
+		
+		for(T e : collection.values())
+		{
+			if(e.getClass() == clazz)
+			{
+				entities.add(e);
+			}
 		}
 		return entities;
 	}

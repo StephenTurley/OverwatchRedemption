@@ -102,6 +102,8 @@ public class ServerLevel {
 	}
 
 	public void update(int delta) {
+		
+		//update the entities then check collsion
 		entityCollection.update(delta);
 		
 		ArrayList<ServerEntity> entities = entityCollection.getEntities();
@@ -116,6 +118,9 @@ public class ServerLevel {
 				{
 					a.collideWith(b);
 					b.collideWith(a);
+					//update entities
+					entityCollection.putEntity(a.getID(), a);
+					entityCollection.putEntity(b.getID(), b);
 				}
 			}
 		}

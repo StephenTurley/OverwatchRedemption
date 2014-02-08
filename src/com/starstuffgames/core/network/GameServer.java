@@ -247,9 +247,8 @@ public class GameServer{
 		
 		public synchronized void updateEntity(ServerEntity entity) {
 		
-			currentLevel.getEntityCollection().addEntity(entity.getID(), entity);
+			currentLevel.getEntityCollection().putEntity(entity.getID(), entity);
 		}
-		
 		public void sendEntitiesPacket() {
 			EntitiesPacket ep = new EntitiesPacket();
 			

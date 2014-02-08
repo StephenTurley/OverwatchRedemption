@@ -145,7 +145,7 @@ public class ClientLevel {
 				}
 				entity.setDirection(pkt.direction);
 				entity.setState(entity.getCurrentState().getState(pkt.state));
-				entityCollection.addEntity(entity.getID(), entity);
+				entityCollection.putEntity(entity.getID(), entity);
 			}
 			catch(Exception e)
 			{

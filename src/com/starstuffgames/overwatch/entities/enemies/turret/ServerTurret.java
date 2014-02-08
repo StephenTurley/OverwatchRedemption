@@ -38,7 +38,7 @@ public class ServerTurret extends ServerEntity implements EntityObserver
 	}
 
 	@Override
-	public void update(int delta, ArrayList<Entity> players)
+	public void observe(ArrayList<Entity> players)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
