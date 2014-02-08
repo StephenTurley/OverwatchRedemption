@@ -23,6 +23,8 @@ import core.graphics.TextureLoader;
 import core.network.GameServer;
 import core.network.Network;
 import core.stateManager.*;
+import org.lwjgl.opengl.ContextAttribs;
+import org.lwjgl.opengl.PixelFormat;
 import org.newdawn.slick.openal.SoundStore;
 
 
@@ -88,7 +90,11 @@ public class Game {
 			}
 			
 			Display.setTitle(config.getDisplayName());
-			Display.create();
+			PixelFormat pf = new PixelFormat();
+			ContextAttribs contextAttribs = new ContextAttribs(3,2)
+				.withProfileCompatibility(true);
+			
+			Display.create(pf, contextAttribs);
 		}
 		catch (LWJGLException e)
 		{
