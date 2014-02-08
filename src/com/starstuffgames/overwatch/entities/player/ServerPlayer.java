@@ -31,6 +31,15 @@ public class ServerPlayer extends ServerEntity {
 	public void update(int delta) {
 		super.direction = movementVector;
 		location.translate((int)(movementVector.x * VELOCITY * delta),(int)(movementVector.y * VELOCITY * delta));
+		
+		if(this.movementVector.x == 0 && this.movementVector.y == 0)
+		{
+			this.currentState = Player.State.IDLE;
+		}
+		else
+		{
+			this.currentState = Player.State.WALKING;
+		}
 	}
 
 	@Override

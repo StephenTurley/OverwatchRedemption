@@ -31,7 +31,7 @@ public class ClientPlayer extends ClientEntity {
 			{
 				assets.setDirection(Direction.fromVector2f(super.direction));
 			}
-			assets.setState(Player.State.IDLE);
+			assets.setState(super.currentState);
 		}
 	}
 
