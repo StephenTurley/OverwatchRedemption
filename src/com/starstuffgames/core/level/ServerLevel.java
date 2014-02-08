@@ -100,6 +100,11 @@ public class ServerLevel {
 	public ServerEntity getEntity(UUID uuid) {
 		return entityCollection.getEntity(uuid);
 	}
+	
+	public void updateEntity(ServerEntity entity)
+	{
+		entityCollection.putEntity(entity.getID(), entity);
+	}
 
 	public void update(int delta) {
 		

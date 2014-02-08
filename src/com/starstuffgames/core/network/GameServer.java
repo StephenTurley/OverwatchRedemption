@@ -15,6 +15,7 @@ import com.esotericsoftware.kryonet.Server;
 
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
+import com.starstuffgames.core.entity.EntityCollection;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.Network.EntitiesPacket;
@@ -35,7 +36,6 @@ public class GameServer{
 		private Server server;
 		private ServerState currentState;
 		private volatile boolean playersReady;
-		private volatile ServerLevel currentLevel;
 		private int tcp, udp;
 		//private String publicIP;
 		private String privateIP;
@@ -128,10 +128,6 @@ public class GameServer{
 		 		}
 		 		playersReady = tempReady;
 	 		}
-	 		if(playersReady && currentLevel != null)
-	 		{
-	 			currentLevel.update(delta);
-	 		}
 	 	}
 	 	
 		public void changeState(ServerState state)
@@ -217,12 +213,6 @@ public class GameServer{
 			
 			server.sendToAllUDP(playersPacket);
 		}
-		public synchronized ServerLevel getCurrentLevel() {
-			return currentLevel;
-		}
-		public void setCurrentLevel(ServerLevel currentLevel) {
-			this.currentLevel = currentLevel;
-		}
 		
 		public ArrayList<PlayerConnection> getPlayerConnections()
 		{
@@ -245,14 +235,8 @@ public class GameServer{
 			return null;
 		}
 		
-		public synchronized void updateEntity(ServerEntity entity) {
-		
-			currentLevel.getEntityCollection().putEntity(entity.getID(), entity);
-		}
-		public void sendEntitiesPacket() {
+		public void sendEntitiesPacket(ArrayList<ServerEntity> entities) {
 			EntitiesPacket ep = new EntitiesPacket();
-			
-			ArrayList<ServerEntity> entities =  currentLevel.getEntityCollection().getEntities();
 			
 			ep.entities = new EntityDataPacket[entities.size()];
 			

@@ -58,7 +58,7 @@ public class EntityCollection<T extends Entity> {
 		}
 		return entities;
 	}
-	public ArrayList<T> getEntities(Class<T> clazz)
+	public ArrayList<T> getEntities(Class<? extends T> clazz)
 	{
 		ArrayList<T> entities = new ArrayList<>();
 		

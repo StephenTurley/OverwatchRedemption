@@ -11,6 +11,7 @@ import com.starstuffgames.overwatch.entities.player.ServerPlayer;
 import com.esotericsoftware.kryonet.Connection;
 
 import com.starstuffgames.core.Debug;
+import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.FocusOn;
@@ -23,11 +24,13 @@ public class ServerGamePlayState extends ServerState {
 	private boolean playersFocused;
 	
 	private ArrayList<UUID> players;
+	private ServerLevel currentLevel;
 	
-	public ServerGamePlayState(GameServer gameServer) {
+	public ServerGamePlayState(GameServer gameServer, ServerLevel currentLevel) {
 		super(gameServer);
 		
 		players = new ArrayList<>();
+		this.currentLevel = currentLevel;
 		playersFocused = false;
 	}
 
@@ -48,7 +51,9 @@ public class ServerGamePlayState extends ServerState {
 					players.add(p.uuid);
 				}
 			}
-			gameServer.sendEntitiesPacket();
+			
+			currentLevel.update(delta);
+			gameServer.sendEntitiesPacket(currentLevel.getEntityCollection().getEntities());
 			
 		}
 
@@ -78,12 +83,11 @@ public class ServerGamePlayState extends ServerState {
 		if(object instanceof Network.MovePlayer)
 		{
 			
-			ServerPlayer player = (ServerPlayer)gameServer.getCurrentLevel().getEntity(pc.uuid);
+			ServerPlayer player = (ServerPlayer)currentLevel.getEntity(pc.uuid);
 			
 			player.setMovementVector(((Network.MovePlayer)object).movementVector);
 			
-			gameServer.updateEntity(player);
-			
+			currentLevel.updateEntity(player);		
 		}
 
 

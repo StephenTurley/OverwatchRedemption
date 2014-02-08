@@ -17,6 +17,7 @@ import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.exception.LevelNotFoundException;
 import com.starstuffgames.core.level.LevelManager;
+import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.LoadLevel;
@@ -24,20 +25,20 @@ import com.starstuffgames.core.network.PlayerConnection;
 import com.starstuffgames.core.stateManager.ServerState;
 
 public class ServerLoadLevelState extends ServerState {
-	private boolean levelLoaded;
+	
+	private ServerLevel level;
 
 	public ServerLoadLevelState(GameServer gameServer) {
 		super(gameServer);
-		levelLoaded = false;
 	}
 
 	@Override
 	public void update(int delta) {
-		if(gameServer.isPlayersReady() && levelLoaded)
+		if(gameServer.isPlayersReady() && level != null)
 		{
 			gameServer.setPlayersReady(false);
 			gameServer.sendToAllTCP(new Network.StartGame());
-			gameServer.changeState(new ServerGamePlayState(gameServer));
+			gameServer.changeState(new ServerGamePlayState(gameServer, level));
 		}
 			
 
@@ -47,8 +48,7 @@ public class ServerLoadLevelState extends ServerState {
 	public void enter() {
 		//players will be ready after they load the level
 		gameServer.setPlayersReady(false);
-		
-		levelLoaded = false;
+		level = null;
 		
 		LoadLevel loadLevelPkt = new LoadLevel();
 		loadLevelPkt.stage = 0;
@@ -58,7 +58,7 @@ public class ServerLoadLevelState extends ServerState {
 		
 		try
 		{
-			gameServer.setCurrentLevel(LevelManager.loadServerLevel(loadLevelPkt.stage, loadLevelPkt.level));
+			level = LevelManager.loadServerLevel(loadLevelPkt.stage, loadLevelPkt.level);
 		}
 		catch (LevelNotFoundException e)
 		{
@@ -69,7 +69,8 @@ public class ServerLoadLevelState extends ServerState {
 		//set connection uuid
 		for(PlayerConnection pc : gameServer.getPlayerConnections())
 		{
-			ArrayList<ServerEntity> players = gameServer.getCurrentLevel().getEntityCollection().getEntities();
+			ArrayList<ServerEntity> players;
+			players = level.getEntityCollection().getEntities(ServerPlayer.class);
 			
 			if(players.size() <= gameServer.getPlayerConnections().size())
 			{
@@ -78,8 +79,6 @@ public class ServerLoadLevelState extends ServerState {
 			}
 			
 		}
-		levelLoaded = true;
-		
 	}
 
 	@Override
