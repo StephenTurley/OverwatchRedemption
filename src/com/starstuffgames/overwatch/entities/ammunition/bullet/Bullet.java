@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.goal;
+package com.starstuffgames.overwatch.entities.ammunition.bullet;
 
 import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.entity.EntityTemplate;
@@ -16,7 +16,7 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class Goal implements EntityTemplate
+public class Bullet implements EntityTemplate
 {
 
 	@Override

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.bullet;
+package com.starstuffgames.overwatch.entities.objects.goal;
 
 import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.graphics.Camera;
@@ -15,11 +15,10 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class ClientBullet extends ClientEntity
-
+public class ClientGoal extends ClientEntity
 {
 
-	public ClientBullet(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
+	public ClientGoal(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
 		super(uuid, location, width, height, layer, templateClassString);
 	}

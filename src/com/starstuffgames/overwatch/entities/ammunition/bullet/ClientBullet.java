@@ -4,34 +4,40 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.turret;
+package com.starstuffgames.overwatch.entities.ammunition.bullet;
 
-import com.starstuffgames.core.entity.EntityAssets;
-import com.starstuffgames.core.entity.EntityState;
+import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.graphics.Camera;
+import java.util.UUID;
 import org.lwjgl.util.Point;
 
 /**
  *
  * @author stephen
  */
-public class TurretAssets implements EntityAssets
+public class ClientBullet extends ClientEntity
+
 {
 
-	@Override
-	public void setState(EntityState entityState)
+	public ClientBullet(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public void draw(Camera camera, Point position)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		super(uuid, location, width, height, layer, templateClassString);
 	}
 
 	@Override
 	public void update(int delta)
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public void draw(Camera camera)
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public void loadAssets()
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}

@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.turret;
+package com.starstuffgames.overwatch.entities.enemies.turret;
 
-import com.starstuffgames.core.entity.Entity;
-import com.starstuffgames.core.entity.ServerEntity;
+import com.starstuffgames.core.entity.ClientEntity;
+import com.starstuffgames.core.graphics.Camera;
 import java.util.UUID;
 import org.lwjgl.util.Point;
 
@@ -15,10 +15,10 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class ServerTurret extends ServerEntity
+public class ClientTurret extends ClientEntity
 {
 
-	public ServerTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
+	public ClientTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
 		super(uuid, location, width, height, layer, templateClassString);
 	}
@@ -30,7 +30,13 @@ public class ServerTurret extends ServerEntity
 	}
 
 	@Override
-	public void collideWith(Entity entity)
+	public void draw(Camera camera)
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public void loadAssets()
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}

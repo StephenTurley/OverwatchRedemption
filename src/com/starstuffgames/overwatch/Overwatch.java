@@ -13,9 +13,9 @@ import com.starstuffgames.overwatch.entities.player.Player;
 import com.esotericsoftware.minlog.Log;
 
 import com.starstuffgames.core.configurationManager.ConfigurationManger;
-import com.starstuffgames.overwatch.entities.bullet.Bullet;
-import com.starstuffgames.overwatch.entities.goal.Goal;
-import com.starstuffgames.overwatch.entities.turret.Turret;
+import com.starstuffgames.overwatch.entities.ammunition.bullet.Bullet;
+import com.starstuffgames.overwatch.entities.objects.goal.Goal;
+import com.starstuffgames.overwatch.entities.enemies.turret.Turret;
 
 public class Overwatch {
 	

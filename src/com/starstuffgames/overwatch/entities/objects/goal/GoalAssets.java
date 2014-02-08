@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.goal;
+package com.starstuffgames.overwatch.entities.objects.goal;
 
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;

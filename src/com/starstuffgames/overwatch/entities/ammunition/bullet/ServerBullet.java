@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.goal;
+package com.starstuffgames.overwatch.entities.ammunition.bullet;
 
 import com.starstuffgames.core.entity.Entity;
 import com.starstuffgames.core.entity.ServerEntity;
@@ -15,10 +15,10 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class ServerGoal extends ServerEntity
+public class ServerBullet extends ServerEntity
 {
 
-	public ServerGoal(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
+	public ServerBullet(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
 		super(uuid, location, width, height, layer, templateClassString);
 	}

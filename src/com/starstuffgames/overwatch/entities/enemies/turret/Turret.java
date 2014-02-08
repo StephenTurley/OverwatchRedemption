@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package com.starstuffgames.overwatch.entities.bullet;
+package com.starstuffgames.overwatch.entities.enemies.turret;
 
-import com.starstuffgames.core.entity.Entity;
+import com.starstuffgames.core.entity.ClientEntity;
+import com.starstuffgames.core.entity.EntityTemplate;
 import com.starstuffgames.core.entity.ServerEntity;
 import java.util.UUID;
 import org.lwjgl.util.Point;
@@ -15,22 +16,17 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class ServerBullet extends ServerEntity
+public class Turret implements EntityTemplate
 {
 
-	public ServerBullet(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
-	{
-		super(uuid, location, width, height, layer, templateClassString);
-	}
-
 	@Override
-	public void update(int delta)
+	public ServerEntity createServerEntity(UUID uuid, Point location, int layer)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 	@Override
-	public void collideWith(Entity entity)
+	public ClientEntity createClientEntity(UUID uuid, Point location, int layer)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
