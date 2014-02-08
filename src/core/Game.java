@@ -91,8 +91,8 @@ public class Game {
 			
 			Display.setTitle(config.getDisplayName());
 			PixelFormat pf = new PixelFormat();
-			ContextAttribs contextAttribs = new ContextAttribs(3,2)
-				.withProfileCompatibility(true);
+			ContextAttribs contextAttribs = new ContextAttribs(2,1);
+
 			
 			Display.create(pf, contextAttribs);
 		}

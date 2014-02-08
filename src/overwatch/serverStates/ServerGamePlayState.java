@@ -37,7 +37,9 @@ public class ServerGamePlayState extends ServerState {
 				focusOnPlayers();
 			}
 			gameServer.sendEntitiesPacket();
+			
 		}
+
 	}
 
 	@Override
