@@ -39,7 +39,7 @@ import com.starstuffgames.core.network.Network.MovePlayer;
 
 
 
-public class MovementTest extends GameState {
+public class GamePlay extends GameState {
 
 
 	//private float deadZone;
@@ -54,7 +54,7 @@ public class MovementTest extends GameState {
 	
 	private final ConcurrentLinkedQueue<EntityDataPacket[]> entityBuffer;
 	
-	public MovementTest(StateManager sm, ClientLevel currentLevel) {
+	public GamePlay(StateManager sm, ClientLevel currentLevel) {
 		super(sm);
 		this.currentLevel = currentLevel;
 		entityBuffer = new ConcurrentLinkedQueue<>();
