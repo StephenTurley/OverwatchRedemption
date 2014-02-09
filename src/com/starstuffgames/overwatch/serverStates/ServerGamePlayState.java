@@ -81,13 +81,11 @@ public class ServerGamePlayState extends ServerState {
 		PlayerConnection pc = (PlayerConnection)c;
 
 		if(object instanceof Network.MovePlayer)
-		{
-			
+		{	
 			ServerPlayer player = (ServerPlayer)currentLevel.getEntity(pc.uuid);
 			
 			player.setMovementVector(((Network.MovePlayer)object).movementVector);
-			
-			//currentLevel.updateEntity(player);		
+
 		}
 
 

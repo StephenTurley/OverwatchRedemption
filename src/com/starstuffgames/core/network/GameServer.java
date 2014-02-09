@@ -15,9 +15,7 @@ import com.esotericsoftware.kryonet.Server;
 
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
-import com.starstuffgames.core.entity.EntityCollection;
 import com.starstuffgames.core.entity.ServerEntity;
-import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.Network.EntitiesPacket;
 import com.starstuffgames.core.network.Network.PlayersPacket;
 import com.starstuffgames.core.stateManager.ServerState;
@@ -214,7 +212,7 @@ public class GameServer{
 			server.sendToAllUDP(playersPacket);
 		}
 		
-		public ArrayList<PlayerConnection> getPlayerConnections()
+		public synchronized ArrayList<PlayerConnection> getPlayerConnections()
 		{
 			ArrayList<PlayerConnection> playerConnections = new ArrayList<>();
 			
@@ -226,7 +224,7 @@ public class GameServer{
 			return playerConnections;
 		}
 		
-		public PlayerConnection getPlayerConnection(int playerID)
+		public synchronized PlayerConnection getPlayerConnection(int playerID)
 		{
 			for(Connection c: server.getConnections())
 			{
