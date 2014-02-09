@@ -39,7 +39,7 @@ public class ServerPlayer extends ServerEntity {
 		else
 		{
 			this.currentState = Player.State.WALKING;
-		}*/
+		}*/ 
 	}
 
 	@Override

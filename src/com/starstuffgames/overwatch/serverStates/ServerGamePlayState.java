@@ -24,7 +24,7 @@ public class ServerGamePlayState extends ServerState {
 	private boolean playersFocused;
 	
 	private ArrayList<UUID> players;
-	private ServerLevel currentLevel;
+	private volatile ServerLevel currentLevel;
 	
 	public ServerGamePlayState(GameServer gameServer, ServerLevel currentLevel) {
 		super(gameServer);
@@ -87,7 +87,7 @@ public class ServerGamePlayState extends ServerState {
 			
 			player.setMovementVector(((Network.MovePlayer)object).movementVector);
 			
-			currentLevel.updateEntity(player);		
+			//currentLevel.updateEntity(player);		
 		}
 
 
