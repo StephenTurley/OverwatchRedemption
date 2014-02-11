@@ -73,6 +73,7 @@ public class GamePlay extends GameState {
 		handleInput(delta);
 		MovePlayer movePkt = new MovePlayer();
 		movePkt.movementVector = movementVector;
+		
 		Game.clientSendUDP(movePkt);
 	}
 

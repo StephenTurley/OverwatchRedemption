@@ -13,25 +13,33 @@ import com.esotericsoftware.kryonet.Connection;
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.GameServer;
-import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.FocusOn;
+import com.starstuffgames.core.network.Network.MovePlayer;
 import com.starstuffgames.core.network.PlayerConnection;
 import com.starstuffgames.core.stateManager.ServerState;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 public class ServerGamePlayState extends ServerState {
 
 	private boolean playersFocused;
 	
 	private ArrayList<UUID> players;
-	private volatile ServerLevel currentLevel;
+	private final ServerLevel currentLevel;
+	private volatile ConcurrentHashMap<UUID,MovePlayer> movementBuffer;
 	
+	/**
+	 *
+	 * @param gameServer
+	 * @param currentLevel
+	 */
 	public ServerGamePlayState(GameServer gameServer, ServerLevel currentLevel) {
 		super(gameServer);
 		
 		players = new ArrayList<>();
 		this.currentLevel = currentLevel;
 		playersFocused = false;
+		movementBuffer =  new ConcurrentHashMap<>(2);
 	}
 
 	@Override
@@ -56,6 +64,16 @@ public class ServerGamePlayState extends ServerState {
 			gameServer.sendEntitiesPacket(currentLevel.getEntityCollection().getEntities());
 			
 		}
+	
+		for(UUID uuid : movementBuffer.keySet())
+		{
+			MovePlayer pkt  = movementBuffer.remove(uuid);
+
+			ServerPlayer player = (ServerPlayer)currentLevel.getEntity(uuid);
+
+			player.setMovementVector(pkt.movementVector);
+		}
+
 
 	}
 
@@ -80,12 +98,11 @@ public class ServerGamePlayState extends ServerState {
 	public void received(Connection c, Object object) {
 		PlayerConnection pc = (PlayerConnection)c;
 
-		if(object instanceof Network.MovePlayer)
+		if(object instanceof MovePlayer)
 		{	
-			ServerPlayer player = (ServerPlayer)currentLevel.getEntity(pc.uuid);
-			
-			player.setMovementVector(((Network.MovePlayer)object).movementVector);
-
+			MovePlayer pkt = (MovePlayer)object;
+	
+			movementBuffer.putIfAbsent(pc.uuid, pkt);
 		}
 
 
