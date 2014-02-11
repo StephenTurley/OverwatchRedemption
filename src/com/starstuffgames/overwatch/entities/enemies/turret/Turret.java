@@ -19,6 +19,10 @@ import org.lwjgl.util.Point;
  */
 public class Turret implements EntityTemplate
 {
+
+	private final int WIDTH = 101;
+	private final int HEIGHT = 110;
+	
 	public static enum State implements EntityState
 	{
 		ARMED,
@@ -48,13 +52,13 @@ public class Turret implements EntityTemplate
 	@Override
 	public ServerEntity createServerEntity(UUID uuid, Point location, int layer)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return new ServerTurret(uuid, location, WIDTH, HEIGHT, layer, "Turret");
 	}
 
 	@Override
 	public ClientEntity createClientEntity(UUID uuid, Point location, int layer)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return new ClientTurret(uuid, location, WIDTH, HEIGHT, layer, "Turret");
 	}
 	
 }
