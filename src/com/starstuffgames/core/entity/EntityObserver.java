@@ -7,7 +7,6 @@
 package com.starstuffgames.core.entity;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  *
@@ -16,5 +15,4 @@ import java.util.UUID;
 public interface EntityObserver
 {
 	public void observe(ArrayList<Entity> entities);
-	public ArrayList<UUID> getObservedUUIDs();
 }
