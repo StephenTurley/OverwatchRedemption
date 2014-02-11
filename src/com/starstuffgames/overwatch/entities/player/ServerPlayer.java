@@ -11,6 +11,7 @@ import com.starstuffgames.core.entity.ServerEntity;
 public class ServerPlayer extends ServerEntity {
 	
 	private Vector2f movementVector;
+	private Point previousLocation;
 	
 	private final float VELOCITY = 0.25f;
 
@@ -40,6 +41,14 @@ public class ServerPlayer extends ServerEntity {
 		{
 			this.currentState = Player.State.WALKING;
 		}*/ 
+	}
+	
+	@Override
+	public void setLocation(Point location)
+	{
+		this.getLocation().getLocation(previousLocation);
+		
+		super.setLocation(location);
 	}
 
 	@Override
