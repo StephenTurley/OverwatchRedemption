@@ -7,6 +7,7 @@
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
 import com.starstuffgames.core.entity.ClientEntity;
+import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.entity.EntityTemplate;
 import com.starstuffgames.core.entity.ServerEntity;
 import java.util.UUID;
@@ -18,6 +19,31 @@ import org.lwjgl.util.Point;
  */
 public class Turret implements EntityTemplate
 {
+	public static enum State implements EntityState
+	{
+		ARMED,
+		OPENING,
+		CLOSING,
+		SUPPRESSED;
+		
+
+		@Override
+		public int getStateValue() {
+			return ordinal();
+		}
+
+		@Override
+		public EntityState getState(String string) {
+			return State.valueOf(string);
+		}
+		
+		@Override
+		public EntityState getState(int ordinalValue)
+		{
+			return State.values()[ordinalValue];
+		}
+		
+	}
 
 	@Override
 	public ServerEntity createServerEntity(UUID uuid, Point location, int layer)

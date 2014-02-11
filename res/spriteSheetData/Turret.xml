@@ -35,6 +35,9 @@ r => 'y' only set if sprite is rotated
     <sprite n="CLOSING_3.png" x="67" y="274" w="63" h="72" oX="19" oY="38" oW="101" oH="110"/>
     <sprite n="CLOSING_2.png" x="73" y="178" w="63" h="94" oX="19" oY="16" oW="101" oH="110"/>
     <sprite n="CLOSING_1.png" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+
+	 <sprite n="SUPPRESSED_1.png" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+
     <sprite n="SE_ARMED_1.png" x="79" y="90" w="75" h="86" oX="18" oY="24" oW="101" oH="110"/>
     <sprite n="SW_ARMED_1.png" x="2" y="90" w="75" h="86" oX="6" oY="24" oW="101" oH="110"/>
     <sprite n="S_ARMED_1.png" x="2" y="266" w="63" h="86" oX="18" oY="24" oW="101" oH="110"/>
