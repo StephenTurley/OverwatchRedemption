@@ -50,42 +50,61 @@ public class DirectionMap {
 		{
 			String[] name = s.getName().split("_");
 			
-			if(name.length != 3)
+			if(!(name.length == 3 || name.length == 2))
 			{
-				throw new Exception("Sprites must have names in this format 'Direction_EntityState_Frame' (e.g. 'N_WALKING_2')");
+				throw new Exception("Sprite names must be in the correct format: e.g. N_IDLE_! or OPENING_2");
 			}
 			
-			Direction d = Direction.valueOf(name[0]);
-			EntityState e = stateEnum.getState(name[1]);
-			int frameIdx = Integer.parseInt(name[2]);
+			EntityState e;
+			int frameIdx;
 			
-			if(animations.containsKey(d))
+			if(name.length == 3)
 			{
-				AnimationMap a = animations.get(d);
-				
-				if(a.containsState(e))
-				{
-					AnimatedSprite aSprite = a.get(e);
-					aSprite.addFrame(frameIdx, s);
-				}
-				else
-				{
-					AnimatedSprite aSprite = new AnimatedSprite(name[1], FRAME_RATE);
-					aSprite.addFrame(frameIdx, s);
-					a.put(e, aSprite);
-				}
-				
+				Direction d = Direction.valueOf(name[0]);
+				e = stateEnum.getState(name[1]);
+				frameIdx = Integer.parseInt(name[2]);
+				addAnimation(d, e, frameIdx, s, e.toString());
 			}
 			else
 			{
-				AnimationMap a = new AnimationMap();
-				
-				AnimatedSprite aSprite = new AnimatedSprite(name[1], FRAME_RATE);
+				e = stateEnum.getState(name[0]);
+				frameIdx = Integer.parseInt(name[1]);
+				for(Direction d : Direction.values())
+				{
+					addAnimation(d, e, frameIdx, s, e.toString());
+				}
+			}
+		}
+	}
+
+	private void addAnimation(Direction d, EntityState e, int frameIdx, StaticSprite s, String name)
+	{
+		if(animations.containsKey(d))
+		{
+			AnimationMap a = animations.get(d);
+			
+			if(a.containsState(e))
+			{
+				AnimatedSprite aSprite = a.get(e);
+				aSprite.addFrame(frameIdx, s);
+			}
+			else
+			{
+				AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE);
 				aSprite.addFrame(frameIdx, s);
 				a.put(e, aSprite);
-				
-				animations.put(d, a);
 			}
+			
+		}
+		else
+		{
+			AnimationMap a = new AnimationMap();
+			
+			AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE);
+			aSprite.addFrame(frameIdx, s);
+			a.put(e, aSprite);
+			
+			animations.put(d, a);
 		}
 	}
 }
