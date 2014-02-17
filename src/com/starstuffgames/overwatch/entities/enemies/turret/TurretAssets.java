@@ -30,25 +30,30 @@ public class TurretAssets implements EntityAssets
         StaticSpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/Turret.xml");
         directionMap = new DirectionMap(spriteSheet, startingEntityState);
         currentDirection = Direction.N;
-        currentState = startingEntityState;
+        currentState = startingEntityState; 
     }
 
 	@Override
 	public void setState(EntityState entityState)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.currentState = entityState;
 	}
+        
+        public void setDirection(Direction direction)
+        {
+            this.currentDirection = direction;
+        }
 
 	@Override
 	public void draw(Camera camera, Point position)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
 	}
 
 	@Override
 	public void update(int delta)
 	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		directionMap.update(delta, currentState);
 	}
 	
 }
