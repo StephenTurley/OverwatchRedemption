@@ -6,10 +6,14 @@
 
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
+import com.starstuffgames.core.Debug;
+import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.graphics.Camera;
+import com.starstuffgames.overwatch.cardinality.Direction;
 import java.util.UUID;
 import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 /**
  *
@@ -18,27 +22,50 @@ import org.lwjgl.util.Point;
 public class ClientTurret extends ClientEntity
 {
 
-	public ClientTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
-	{
-		super(uuid, location, width, height, layer, templateClassString);
-	}
+    private TurretAssets assets;
+    
+    public ClientTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
+    {
+        super(uuid, location, width, height, layer, templateClassString);
+        currentState = Turret.State.SUPPRESSED;
+    }
 
-	@Override
-	public void update(int delta)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    @Override
+    public void update(int delta)
+    {
+        if(assets!= null)
+        {
+            assets.update(delta);
 
-	@Override
-	public void draw(Camera camera)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+            if(!(super.direction.x == 0 && super.direction.y == 0))
+            {
+                    assets.setDirection(Direction.fromVector2f(super.direction));
+            }
+            assets.setState(super.currentState);
+        }
+    }
 
-	@Override
-	public void loadAssets()
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+    @Override
+    public void draw(Camera camera)
+    {
+        if (assets != null && camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
+        {
+                assets.draw(camera, this.location);			
+        }
+    }
+
+    @Override
+    public void loadAssets()
+    {
+        try
+        {
+                assets = new TurretAssets(super.currentState);
+        }
+        catch (Exception e)
+        {
+                Debug.Trace("Turret assets failed to load");
+                Game.exit(1);
+        }
+    }
 	
 }
