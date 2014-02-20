@@ -161,6 +161,15 @@ public class ClientLevel {
 	}
 	public void draw(Camera camera)
 	{
+		drawImmediate(camera);
+	}
+	
+	private void drawNonImmediate(Camera camera)
+	{
+		
+	}
+
+	private void drawImmediate(Camera camera) {
 		Point offSet = camera.getTileOffset(tileWidth, tileHeight);
 		
 		int columns = (camera.getWidth() / tileWidth);
@@ -201,15 +210,15 @@ public class ClientLevel {
 					}
 
 					glBegin(GL_QUADS);
-			        glTexCoord2f(t.X, t.Y);
-			        glVertex2f(pixelX - offSet.getX(), pixelY - offSet.getY());
-			        glTexCoord2f(t.X, t.Y2);
-			        glVertex2f(pixelX - offSet.getX(), pixelY + tileHeight - offSet.getY());
-			        glTexCoord2f(t.X2, t.Y2);
-			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY + tileHeight - offSet.getY());
-			        glTexCoord2f(t.X2, t.Y);
-			        glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
-			        glEnd();
+					glTexCoord2f(t.X, t.Y);
+					glVertex2f(pixelX - offSet.getX(), pixelY - offSet.getY());
+					glTexCoord2f(t.X, t.Y2);
+					glVertex2f(pixelX - offSet.getX(), pixelY + tileHeight - offSet.getY());
+					glTexCoord2f(t.X2, t.Y2);
+					glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY + tileHeight - offSet.getY());
+					glTexCoord2f(t.X2, t.Y);
+					glVertex2f(pixelX + tileWidth - offSet.getX(), pixelY - offSet.getY());
+					glEnd();
 				}
 
 			}
@@ -218,7 +227,6 @@ public class ClientLevel {
 				camera.drawVisible(e, l.getValue());
 			}
 		}
-		
 	}
 
 }
