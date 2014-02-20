@@ -9,8 +9,8 @@ package com.starstuffgames.core.level;
 import com.starstuffgames.core.exception.LevelFormatException;
 
 public class Layer {
-	private int[][] layerGids;
-	private int value;
+	private final int[][] layerGids;
+	private final int value;
 	
 	public Layer(String gidCsv, int width, int height, int value) throws LevelFormatException
 	{

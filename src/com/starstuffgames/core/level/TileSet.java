@@ -18,6 +18,20 @@ public class TileSet {
 	
 	private int tileWidth, tileHeight, width, height, firstGID, glTextureID, lastGID;
 	
+	public TileSet(String filePath, int tileWidth, int tileHeight, int width, int height,int firstGID)
+	{
+		this.tileWidth = tileWidth;
+		this.tileHeight = tileHeight;
+		this.width = width;
+		this.height = height;
+		this.firstGID = firstGID;
+			
+		glTextureID = TextureLoader.loadTexture(filePath);
+		
+		computeLastGID();
+		
+	}
+	
 	public int getLastGID() {
 		return lastGID;
 	}
@@ -86,20 +100,6 @@ public class TileSet {
 		int y2 = y + tileHeight;
 		
 		return new TextureCoord(glTextureID, x, y, x2, y2);	
-	}
-
-	public TileSet(String filePath, int tileWidth, int tileHeight, int width, int height,int firstGID)
-	{
-		this.tileWidth = tileWidth;
-		this.tileHeight = tileHeight;
-		this.width = width;
-		this.height = height;
-		this.firstGID = firstGID;
-			
-		glTextureID = TextureLoader.loadTexture(filePath);
-		
-		computeLastGID();
-		
 	}
 	
 	private void computeLastGID()
