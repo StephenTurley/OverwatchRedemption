@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="/art/RedGuy.png" width="226" height="64">
+    <sprite n="E_IDLE_0" x="118" y="2" w="18" h="58" oX="22" oY="1" oW="64" oH="64"/>
+    <sprite n="NE_IDLE_0" x="202" y="2" w="22" h="56" oX="22" oY="0" oW="64" oH="64"/>
+    <sprite n="NW_IDLE_0" x="178" y="2" w="22" h="56" oX="20" oY="0" oW="64" oH="64"/>
+    <sprite n="N_IDLE_0" x="138" y="2" w="38" h="56" oX="13" oY="0" oW="64" oH="64"/>
+    <sprite n="SE_IDLE_0" x="28" y="2" w="24" h="60" oX="21" oY="0" oW="64" oH="64"/>
+    <sprite n="SW_IDLE_0" x="2" y="2" w="24" h="60" oX="19" oY="0" oW="64" oH="64"/>
+    <sprite n="S_IDLE_0" x="54" y="2" w="42" h="58" oX="9" oY="2" oW="64" oH="64"/>
+    <sprite n="W_IDLE_0" x="98" y="2" w="18" h="58" oX="23" oY="1" oW="64" oH="64"/>
+</TextureAtlas>
