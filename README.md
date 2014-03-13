@@ -25,9 +25,9 @@ Please only run this software if you understand and accept the risks.
 
 ## Building
 
-        $ cd {overwatch-redemption}
-        
-        $ gradle jar
+    $ cd {overwatch-redemption}
+    
+    $ gradle jar
 
 
 ## License
