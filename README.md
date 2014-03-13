@@ -23,11 +23,12 @@ I cannot guarantee that it won't harm your computer system.
 Please only run this software if you understand and accept the risks.
 ```
 
-## Building
+
+## Running
 
     $ cd {overwatch-redemption}
     
-    $ gradle jar
+    $ gradle run
 
 
 ## License

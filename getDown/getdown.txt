@@ -11,10 +11,10 @@ appbase = http://overwatchredemption.com/update
 ui.name = My Application
 
 # Application jar files
-code = overwatch.jar
+code = overwatch-redemption.jar
 
 # The main entry point for the application
-class = overwatch.Overwatch
+class = com.starstuffgames.overwatch.Overwatch
 
 resource = [linux] native/liblwjgl64.so
 resource = [linux] native/liblwjgl.so
@@ -33,4 +33,5 @@ resource = [windows] native/jinput-raw_64.dll
 resource = [mac os x] native/liblwjgl.jnilib
 resource = [mac os x] native/openal.dylib
 resource = [mac os x] native/libjinput-osx.jnilib
+
 jvmarg = -Djava.library.path=%APPDIR%/native

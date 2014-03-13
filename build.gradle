@@ -1,0 +1,46 @@
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: "eclipse"
+
+sourceCompatibility = 1.7
+
+mainClassName = "com.starstuffgames.overwatch.Overwatch"
+
+repositories {
+    mavenCentral()
+    
+    maven {
+        url "http://teleal.org/m2"
+    }
+}
+
+dependencies {
+    compile group: "com.esotericsoftware.kryo", name: "kryo", version: "2.23.0"
+    compile group: "net.java.jinput", name: "jinput", version: "2.0.5"
+    compile group: "org.jcraft", name: "jorbis", version: "0.0.17"
+    compile group: "org.jdom", name: "jdom2", version: "2.0.5"
+    compile group: "org.lwjgl.lwjgl", name: "lwjgl", version: "2.9.1"
+    compile group: "org.lwjgl.lwjgl", name: "lwjgl_util", version: "2.9.1"
+    compile group: "org.teleal.cling", name: "cling-core", version: "1.0.5"
+    compile group: "org.teleal.cling", name: "cling-support", version: "1.0.5"
+    
+    compile files("./lib/jars/kryonet-2.21.jar")
+    compile files("./lib/jars/slick.jar")
+    compile files("./lib/jars/slick-util.jar")
+    compile files("./lib/jars/TWL.jar")
+}
+
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    manifest {
+        attributes "Main-Class": project.mainClassName
+    }
+}
+
+run {
+    systemProperty "java.library.path", "./lib/native"
+}

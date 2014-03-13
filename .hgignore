@@ -1,6 +1,7 @@
-syntax: regexp
+syntax: glob
 
 .classpath
+.gradle
 .project
 .settings
 
