@@ -1,0 +1,34 @@
+vNext
+fixed - player sprite will continue to face the previous direction until new direction is entered.
+0.1.8 (26Jan2014)
+Added - background music to menus
+Added - new level
+Improved - GameServer will now configure port forwarding automatically
+Improved - Core engine now uses a different class for Server entities and Client entities. This allows for cleaner code.
+0.1.7 (15Jan2014)
+Added - Entities are animated differently based on their direction of travel.
+Added - core engine can now parse texture atlases into sprite sheets
+Added - game can now parse animations from  sprite sheets
+Added - server now transmits entity direction and angle
+0.1.6 (13Jan2014)
+Fixed - Fixed threading issue that caused screen flickers and players to jump around the map.
+0.1.5 (13Jan2014)
+Changed - Start screen now says Overwatch instead of Overwatch: Redemption
+Fixed - Entities rendered even when partially out of view of the camera.
+Fixed - Entity don't jitter when walking about
+Fixed - Screen jerks are gone
+Added - Player sprites are now drawn
+0.1.4 (1Jan2014)
+Fixed - Camera shouldn't jitter as bad for client that isn't hosting the game. 
+Fixed - Entities are now interpolated with tile layer. This gives the scene depth.
+Fixed - All level layers are now drawn
+Improved - performance boost in drawing
+0.1.3 (26Dec2013)
+Fixed - Player will be drawn until they are out of view of the camera. 
+Fixed - Level tiles are now buffered to reduce black lines at the bottom and right of the camera
+Changed - default resolution is now 1280 x 720 
+0.1.2
+Added a ChangeLog =)
+Added an outdoor test level
+Camera now follows your player around the map
+Reduced player speed
