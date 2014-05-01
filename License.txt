@@ -1,0 +1,10 @@
+#-------------------------------------------------------------------------------
+# Copyright 2013 Stephen Turley
+# 
+# This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
+# You may not reproduce any part of this work unless otherwise stated.
+#-------------------------------------------------------------------------------
+Redistribution of this project (Overwatch-Redemption) in part or in whole is prohibited unless explicitly stated.
+All bundled packages and dependencies can be distributed based upon their respective licenses. 
+
+(c)2013 Stephen Turley

@@ -1,0 +1,11 @@
+syntax: glob
+
+.classpath
+.gradle
+.project
+.settings
+
+bin
+build
+
+test-output
