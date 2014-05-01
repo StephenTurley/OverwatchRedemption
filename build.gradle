@@ -19,8 +19,8 @@ dependencies {
     compile group: "net.java.jinput", name: "jinput", version: "2.0.5"
     compile group: "org.jcraft", name: "jorbis", version: "0.0.17"
     compile group: "org.jdom", name: "jdom2", version: "2.0.5"
-    compile group: "org.lwjgl.lwjgl", name: "lwjgl", version: "2.9.1"
-    compile group: "org.lwjgl.lwjgl", name: "lwjgl_util", version: "2.9.1"
+    compile group: "org.lwjgl.lwjgl", name: "lwjgl", version: "2.9.0"
+    compile group: "org.lwjgl.lwjgl", name: "lwjgl_util", version: "2.9.0"
     compile group: "org.teleal.cling", name: "cling-core", version: "1.0.5"
     compile group: "org.teleal.cling", name: "cling-support", version: "1.0.5"
     compile group: "xpp3", name: "xpp3", version: "1.1.4c"
@@ -43,5 +43,5 @@ jar {
 }
 
 run {
-    systemProperty "java.library.path", "./lib/native"
+    systemProperty "java.library.path", "./lib/native/"
 }
