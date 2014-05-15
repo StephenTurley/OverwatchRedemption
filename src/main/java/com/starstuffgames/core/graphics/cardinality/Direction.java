@@ -1,4 +1,4 @@
-package com.starstuffgames.overwatch.cardinality;
+package com.starstuffgames.core.graphics.cardinality;
 
 import org.lwjgl.util.vector.Vector2f;
 

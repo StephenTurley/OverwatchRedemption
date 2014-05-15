@@ -163,11 +163,6 @@ public class ClientLevel {
 	{
 		drawImmediate(camera);
 	}
-	
-	private void drawNonImmediate(Camera camera)
-	{
-		
-	}
 
 	private void drawImmediate(Camera camera) {
 		Point offSet = camera.getTileOffset(tileWidth, tileHeight);

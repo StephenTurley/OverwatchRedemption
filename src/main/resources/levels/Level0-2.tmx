@@ -289,5 +289,11 @@
     <property name="layer" value="0"/>
    </properties>
   </object>
+  <object type="Turret" gid="364" x="641" y="2976">
+   <properties>
+    <property name="id" value="fae1a560-d18e-11e3-9c1a-0800200c9a66"/>
+    <property name="layer" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -5,11 +5,11 @@ import java.util.UUID;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-import com.starstuffgames.overwatch.cardinality.Direction;
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.graphics.Camera;
+import com.starstuffgames.core.graphics.cardinality.Direction;
 
 public class ClientPlayer extends ClientEntity {
 

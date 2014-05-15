@@ -6,6 +6,10 @@ sourceCompatibility = 1.7
 
 mainClassName = "com.starstuffgames.overwatch.Overwatch"
 
+if (!project.hasProperty('mainClass')) {
+    ext.mainClass = mainClassName
+}
+
 repositories {
     mavenCentral()
     
@@ -43,5 +47,15 @@ jar {
 }
 
 run {
-    systemProperty "java.library.path", "./lib/native/"
+    configureRun(it)
+}
+
+task(debug, dependsOn: 'classes', type: JavaExec) {
+    configureRun(it)
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+void configureRun (def task){
+    main = ext.mainClass
+    task.systemProperty "java.library.path", "./lib/native/"
 }

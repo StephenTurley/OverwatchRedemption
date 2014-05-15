@@ -1,45 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:acafc294a313bcf91d2df3dda5c811e1:c48dfed1857782914ea0ae3a38790fbe:c65c37f3375d1c87ba8d7c84e18da8b8$ -->
-<!--Format:
-n  => name of the sprite
-x  => sprite x pos in texture
-y  => sprite y pos in texture
-w  => sprite width (may be trimmed)
-h  => sprite height (may be trimmed)
-oX => sprite's x-corner offset (only available if trimmed)
-oY => sprite's y-corner offset (only available if trimmed)
-oW => sprite's original width (only available if trimmed)
-oH => sprite's original height (only available if trimmed)
-r => 'y' only set if sprite is rotated
--->
+
+
 <TextureAtlas imagePath="/art/Turret.png" width="256" height="512">
-    <sprite n="E_ARMED_1.png" x="2" y="2" w="83" h="86" oX="18" oY="24" oW="101" oH="110"/>
-    <sprite n="NE_ARMED_1.png" x="2" y="178" w="69" h="86" oX="18" oY="24" oW="101" oH="110"/>
-    <sprite n="NW_ARMED_1.png" x="156" y="102" w="75" h="86" oX="6" oY="24" oW="101" oH="110"/>
-    <sprite n="N_ARMED_1.png" x="138" y="190" w="63" h="86" oX="18" oY="24" oW="101" oH="110"/>
-    <sprite n="OPENING_1.png" x="2" y="364" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
-    <sprite n="OPENING_2.png" x="2" y="354" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
-    <sprite n="OPENING_3.png" x="67" y="348" w="63" h="34" oX="18" oY="76" oW="101" oH="110"/>
-    <sprite n="OPENING_4.png" x="132" y="340" w="63" h="58" oX="18" oY="52" oW="101" oH="110"/>
-    <sprite n="OPENING_5.png" x="132" y="278" w="63" h="60" oX="19" oY="50" oW="101" oH="110"/>
-    <sprite n="OPENING_6.png" x="67" y="274" w="63" h="72" oX="19" oY="38" oW="101" oH="110"/>
-    <sprite n="OPENING_7.png" x="73" y="178" w="63" h="94" oX="19" oY="16" oW="101" oH="110"/>
-    <sprite n="OPENING_8.png" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
-	 
-	 <sprite n="CLOSING_8.png" x="2" y="364" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
-    <sprite n="CLOSING_7.png" x="2" y="354" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
-    <sprite n="CLOSING_6.png" x="67" y="348" w="63" h="34" oX="18" oY="76" oW="101" oH="110"/>
-    <sprite n="CLOSING_5.png" x="132" y="340" w="63" h="58" oX="18" oY="52" oW="101" oH="110"/>
-    <sprite n="CLOSING_4.png" x="132" y="278" w="63" h="60" oX="19" oY="50" oW="101" oH="110"/>
-    <sprite n="CLOSING_3.png" x="67" y="274" w="63" h="72" oX="19" oY="38" oW="101" oH="110"/>
-    <sprite n="CLOSING_2.png" x="73" y="178" w="63" h="94" oX="19" oY="16" oW="101" oH="110"/>
-    <sprite n="CLOSING_1.png" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+	
+	<sprite n="N_ARMED_0" frameIdx="0" x="138" y="190" w="63" h="86" oX="18" oY="24" oW="101" oH="110"/>
+	<sprite n="S_ARMED_0" frameIdx="0" x="2" y="266" w="63" h="86" oX="18" oY="24" oW="101" oH="110"/>
+	<sprite n="E_ARMED_0" frameIdx="0" x="2" y="2" w="83" h="86" oX="18" oY="24" oW="101" oH="110"/>
+	<sprite n="NE_ARMED_0" frameIdx="0" x="2" y="178" w="69" h="86" oX="18" oY="24" oW="101" oH="110"/>
+	<sprite n="W_ARMED_0" frameIdx="0" x="87" y="2" w="81" h="86" oX="0" oY="24" oW="101" oH="110"/>
+	<sprite n="NW_ARMED_0" frameIdx="0" x="156" y="102" w="75" h="86" oX="6" oY="24" oW="101" oH="110"/>
+	<sprite n="SE_ARMED_0" frameIdx="0" x="79" y="90" w="75" h="86" oX="18" oY="24" oW="101" oH="110"/>
+	<sprite n="SW_ARMED_0" frameIdx="0" x="2" y="90" w="75" h="86" oX="6" oY="24" oW="101" oH="110"/>
 
-	 <sprite n="SUPPRESSED_1.png" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+	<sprite n="OPENING_0" frameIdx="0" x="2" y="364" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
+    <sprite n="OPENING_1" frameIdx="1" x="2" y="354" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
+    <sprite n="OPENING_2" frameIdx="2" x="67" y="348" w="63" h="34" oX="18" oY="76" oW="101" oH="110"/>
+    <sprite n="OPENING_3" frameIdx="3" x="132" y="340" w="63" h="58" oX="18" oY="52" oW="101" oH="110"/>
+    <sprite n="OPENING_4" frameIdx="4" x="132" y="278" w="63" h="60" oX="19" oY="50" oW="101" oH="110"/>
+    <sprite n="OPENING_5" frameIdx="5" x="67" y="274" w="63" h="72" oX="19" oY="38" oW="101" oH="110"/>
+    <sprite n="OPENING_6" frameIdx="6" x="73" y="178" w="63" h="94" oX="19" oY="16" oW="101" oH="110"/>
+    <sprite n="OPENING_7" frameIdx="7" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
 
-    <sprite n="SE_ARMED_1.png" x="79" y="90" w="75" h="86" oX="18" oY="24" oW="101" oH="110"/>
-    <sprite n="SW_ARMED_1.png" x="2" y="90" w="75" h="86" oX="6" oY="24" oW="101" oH="110"/>
-    <sprite n="S_ARMED_1.png" x="2" y="266" w="63" h="86" oX="18" oY="24" oW="101" oH="110"/>
-    <sprite n="W_ARMED_1.png" x="87" y="2" w="81" h="86" oX="0" oY="24" oW="101" oH="110"/>
+	<sprite n="SUPPRESSED_0" frameIdx="0" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+
+	<Animations>
+		<direction name="N">
+			<animation name="ARMED" frameCount="1">
+				<frame n="N_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="S">
+			<animation name="ARMED" frameCount="1">
+				<frame n="S_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="E">
+			<animation name="ARMED" frameCount="1">
+				<frame n="E_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="W">
+			<animation name="ARMED" frameCount="1">
+				<frame n="W_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="NE">
+			<animation name="ARMED" frameCount="1">
+				<frame n="NE_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="NW">
+			<animation name="ARMED" frameCount="1">
+				<frame n="NW_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="SW">
+			<animation name="ARMED" frameCount="1">
+				<frame n="SW_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="SE">
+			<animation name="ARMED" frameCount="1">
+				<frame n="SE_ARMED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+		<direction name="OMNI">
+			<animation name="OPENING" frameCount="8">
+				<frame n="OPENING_0" frameIdx="0"/>
+				<frame n="OPENING_1" frameIdx="1"/>
+				<frame n="OPENING_2" frameIdx="2"/>
+				<frame n="OPENING_3" frameIdx="3"/>
+				<frame n="OPENING_4" frameIdx="4"/>
+				<frame n="OPENING_5" frameIdx="5"/>
+				<frame n="OPENING_6" frameIdx="6"/>
+				<frame n="OPENING_7" frameIdx="7"/>   
+			</animation>
+			<animation name="CLOSING" frameCount="8">
+				<frame n="OPENING_0" frameIdx="7"/>
+				<frame n="OPENING_1" frameIdx="6"/>
+				<frame n="OPENING_2" frameIdx="5"/>
+				<frame n="OPENING_3" frameIdx="4"/>
+				<frame n="OPENING_4" frameIdx="3"/>
+				<frame n="OPENING_5" frameIdx="2"/>
+				<frame n="OPENING_6" frameIdx="1"/>
+				<frame n="OPENING_7" frameIdx="0"/>
+			</animation>
+			<animation name="SUPPRESSED" frameCount="1">
+				<frame n="SUPPRESSED_0" frameIdx="0"/>
+			</animation>
+		</direction>
+	</Animations>
 </TextureAtlas>
+
+

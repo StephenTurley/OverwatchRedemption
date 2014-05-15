@@ -10,9 +10,10 @@ import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.graphics.Camera;
 import com.starstuffgames.core.graphics.SpriteLoader;
-import com.starstuffgames.core.graphics.StaticSpriteSheet;
-import com.starstuffgames.overwatch.cardinality.Direction;
-import com.starstuffgames.overwatch.cardinality.DirectionMap;
+import com.starstuffgames.core.graphics.SpriteSheet;
+import com.starstuffgames.core.graphics.cardinality.Direction;
+import com.starstuffgames.core.graphics.cardinality.DirectionMap;
+
 import org.lwjgl.util.Point;
 
 /**
@@ -27,33 +28,34 @@ public class TurretAssets implements EntityAssets
     
     public TurretAssets(EntityState startingEntityState) throws Exception
     {
-        StaticSpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/Turret.xml");
+        SpriteSheet spriteSheet;
+        spriteSheet = SpriteLoader.load("/spriteSheetData/Turret.xml");
         directionMap = new DirectionMap(spriteSheet, startingEntityState);
         currentDirection = Direction.N;
         currentState = startingEntityState; 
     }
 
-	@Override
-	public void setState(EntityState entityState)
-	{
-		this.currentState = entityState;
-	}
-        
-        public void setDirection(Direction direction)
-        {
-            this.currentDirection = direction;
-        }
+    @Override
+    public void setState(EntityState entityState)
+    {
+        this.currentState = entityState;
+    }
 
-	@Override
-	public void draw(Camera camera, Point position)
-	{
-		directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
-	}
+    public void setDirection(Direction direction)
+    {
+        this.currentDirection = direction;
+    }
 
-	@Override
-	public void update(int delta)
-	{
-		directionMap.update(delta, currentState);
-	}
+    @Override
+    public void draw(Camera camera, Point position)
+    {
+        directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
+    }
+
+    @Override
+    public void update(int delta)
+    {
+        directionMap.update(delta, currentState);
+    }
 	
 }

@@ -10,8 +10,10 @@ import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ClientEntity;
 import com.starstuffgames.core.graphics.Camera;
-import com.starstuffgames.overwatch.cardinality.Direction;
+import com.starstuffgames.core.graphics.cardinality.Direction;
+
 import java.util.UUID;
+
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
@@ -50,7 +52,7 @@ public class ClientTurret extends ClientEntity
     {
         if (assets != null && camera.isVisible(new Rectangle(location.getX(), location.getY(), width, height)))
         {
-                assets.draw(camera, this.location);			
+            assets.draw(camera, this.location);			
         }
     }
 
@@ -59,12 +61,12 @@ public class ClientTurret extends ClientEntity
     {
         try
         {
-                assets = new TurretAssets(super.currentState);
+            assets = new TurretAssets(super.currentState);
         }
         catch (Exception e)
         {
-                Debug.Trace("Turret assets failed to load");
-                Game.exit(1);
+            Debug.Trace("Turret assets failed to load");
+            Game.exit(1);
         }
     }
 	
