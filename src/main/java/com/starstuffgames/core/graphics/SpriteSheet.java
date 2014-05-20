@@ -2,13 +2,23 @@ package com.starstuffgames.core.graphics;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class StaticSpriteSheet {
+public class SpriteSheet {
 
 	private HashMap<String, StaticSprite> sprites;
-	
-	public StaticSpriteSheet()
+	private String filePath;
+
+	public HashMap<String, StaticSprite> getSprites() {
+		return sprites;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public SpriteSheet(String filePath)
 	{
 		sprites = new HashMap<>();
+		this.filePath = filePath;
 	}
 	
 	public void addStaticSprite(StaticSprite staticSprite)

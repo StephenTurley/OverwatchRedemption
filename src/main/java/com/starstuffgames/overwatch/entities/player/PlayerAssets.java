@@ -8,13 +8,13 @@ package com.starstuffgames.overwatch.entities.player;
 
 import org.lwjgl.util.Point;
 
-import com.starstuffgames.overwatch.cardinality.Direction;
-import com.starstuffgames.overwatch.cardinality.DirectionMap;
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.graphics.Camera;
 import com.starstuffgames.core.graphics.SpriteLoader;
-import com.starstuffgames.core.graphics.StaticSpriteSheet;
+import com.starstuffgames.core.graphics.SpriteSheet;
+import com.starstuffgames.core.graphics.cardinality.Direction;
+import com.starstuffgames.core.graphics.cardinality.DirectionMap;
 
 public class PlayerAssets implements EntityAssets{
 	
@@ -24,7 +24,7 @@ public class PlayerAssets implements EntityAssets{
 	
 	public PlayerAssets(EntityState startingEntityState) throws Exception
 	{
-		StaticSpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
+		SpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
 		directionMap = new DirectionMap(spriteSheet, startingEntityState);
 		currentDirection = Direction.N;
 		currentState = startingEntityState;

@@ -1,13 +1,13 @@
-package com.starstuffgames.overwatch.cardinality;
+package com.starstuffgames.core.graphics.cardinality;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.starstuffgames.core.entity.AnimationMap;
+import com.starstuffgames.core.graphics.AnimationMap;
 import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.graphics.AnimatedSprite;
 import com.starstuffgames.core.graphics.StaticSprite;
-import com.starstuffgames.core.graphics.StaticSpriteSheet;
+import com.starstuffgames.core.graphics.SpriteSheet;
 
 /*
  * Class that maps Direction to Animation Map
@@ -18,7 +18,7 @@ public class DirectionMap {
 	
 	private final HashMap<Direction, AnimationMap> animations;
 	
-	public DirectionMap(StaticSpriteSheet spriteSheet, EntityState stateEnum) throws Exception
+	public DirectionMap(SpriteSheet spriteSheet, EntityState stateEnum) throws Exception
 	{
 		animations = new HashMap<>();
 		
@@ -43,7 +43,7 @@ public class DirectionMap {
 		}
 	}
 
-	private void parseSpriteSheet(StaticSpriteSheet spriteSheet, EntityState stateEnum) throws Exception {
+	private void parseSpriteSheet(SpriteSheet spriteSheet, EntityState stateEnum) throws Exception {
 		Collection<StaticSprite> sprites = spriteSheet.getStaticSprites();
 		
 		for(StaticSprite s : sprites)
@@ -52,7 +52,7 @@ public class DirectionMap {
 			
 			if(!(name.length == 3 || name.length == 2))
 			{
-				throw new Exception("Sprite names must be in the correct format: e.g. N_IDLE_! or OPENING_2");
+				throw new Exception("Sprite names must be in the correct format: e.g. N_IDLE_1 or OPENING_2");
 			}
 			
 			EntityState e;
@@ -90,7 +90,7 @@ public class DirectionMap {
 			}
 			else
 			{
-				AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE);
+				AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE, 10);
 				aSprite.addFrame(frameIdx, s);
 				a.put(e, aSprite);
 			}
@@ -100,7 +100,7 @@ public class DirectionMap {
 		{
 			AnimationMap a = new AnimationMap();
 			
-			AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE);
+			AnimatedSprite aSprite = new AnimatedSprite(name, FRAME_RATE, 10);
 			aSprite.addFrame(frameIdx, s);
 			a.put(e, aSprite);
 			

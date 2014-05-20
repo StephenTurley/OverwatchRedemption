@@ -1,11 +1,11 @@
-package com.starstuffgames.core.entity;
+package com.starstuffgames.core.graphics;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.starstuffgames.core.graphics.AnimatedSprite;
+import com.starstuffgames.core.entity.EntityState;
 
 public class AnimationMap {
 	

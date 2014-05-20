@@ -43,5 +43,6 @@ jar {
 }
 
 run {
-    systemProperty "java.library.path", "./lib/native/"
+	systemProperty "java.library.path", "./lib/native/"
 }
+

@@ -16,16 +16,16 @@ import com.starstuffgames.core.Game;
 
 public class SpriteLoader {
 	
-	public static StaticSpriteSheet load(String filePath)
+	public static SpriteSheet load(String filePath)
 	{
-		InputStream inputStream = SpriteLoader.class.getResourceAsStream(filePath);
-		
-		return parseSpriteXML(inputStream);
+		return parseSpriteXML(filePath);
 	}
 	
-	private static StaticSpriteSheet parseSpriteXML(InputStream inputStream)
+	private static SpriteSheet parseSpriteXML(String filePath)
 	{
-		StaticSpriteSheet staticSpriteSheet =  new StaticSpriteSheet();
+		InputStream inputStream = SpriteLoader.class.getResourceAsStream(filePath);
+		SpriteSheet staticSpriteSheet =  new SpriteSheet(filePath);
+		
 		Document spriteDoc;
 		SAXBuilder sb = new SAXBuilder();
 		
