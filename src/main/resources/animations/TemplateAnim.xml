@@ -1,0 +1,30 @@
+<Animations>
+		<direction name="N">
+			<animation name="AnimationName" frameCount="1">
+				<frame n="SpriteName" frameIdx="0"/> <!-- SpriteName == n from spriteSheet- -->
+			</animation>
+		</direction>
+		<direction name="S">
+
+		</direction>
+		<direction name="E">
+
+		</direction>
+		<direction name="W">
+
+		</direction>
+		<direction name="NE">
+
+		</direction>
+		<direction name="NW">
+
+		</direction>
+		<direction name="SW">
+
+		</direction>
+		<direction name="SE">
+
+		</direction>
+		<direction name="OMNI">
+		</direction>
+	</Animations>

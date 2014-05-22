@@ -14,35 +14,4 @@ r => 'y' only set if sprite is rotated
 -->
 <TextureAtlas imagePath="/art/FileName.png" width="226" height="64">
     <sprite n="SpriteName" x="118" y="2" w="18" h="58" oX="22" oY="1" oW="64" oH="64"/>
-  
-	<Animations>
-		<direction name="N">
-			<animation name="AnimationName" frameCount="1">
-				<frame n="SpriteName" frameIdx="0"/>
-			</animation>
-		</direction>
-		<direction name="S">
-
-		</direction>
-		<direction name="E">
-
-		</direction>
-		<direction name="W">
-
-		</direction>
-		<direction name="NE">
-
-		</direction>
-		<direction name="NW">
-
-		</direction>
-		<direction name="SW">
-
-		</direction>
-		<direction name="SE">
-
-		</direction>
-		<direction name="OMNI">
-		</direction>
-	</Animations>
 </TextureAtlas>
