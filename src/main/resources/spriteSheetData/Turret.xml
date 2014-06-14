@@ -21,7 +21,7 @@
     <sprite n="OPENING_6" frameIdx="6" x="73" y="178" w="63" h="94" oX="19" oY="16" oW="101" oH="110"/>
     <sprite n="OPENING_7" frameIdx="7" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
 
-	<sprite n="SUPPRESSED_0" frameIdx="0" x="170" y="2" w="77" h="98" oX="4" oY="12" oW="101" oH="110"/>
+	<sprite n="SUPPRESSED_0" frameIdx="0" x="2" y="364" w="63" h="8" oX="18" oY="102" oW="101" oH="110"/>
 	
 </TextureAtlas>
 
