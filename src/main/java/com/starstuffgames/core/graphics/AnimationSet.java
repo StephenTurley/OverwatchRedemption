@@ -1,5 +1,6 @@
 package com.starstuffgames.core.graphics;
 
+import java.io.InputStream;
 import java.util.HashMap;
 
 import org.lwjgl.util.Point;
@@ -14,11 +15,19 @@ public class AnimationSet {
 	//this will replace direction map
 	private HashMap<Direction, AnimationMap> animations;
 	
-	public AnimationSet(String spriteSheet, String animationDefinition, EntityState stateEnum)
+	private class Animation
 	{
-		sprites = SpriteLoader.load(spriteSheet);
+		public Direction direction;
+		public EntityState state;
+		public int frameCount;
+		public AnimatedSprite animatedSprite;
+	}
+	
+	public AnimationSet(String spriteFilePath, String animationFilePath, EntityState stateEnum)
+	{
+		sprites = new SpriteSheet(spriteFilePath);
 		animations = new HashMap<>();
-		parseAnimations(stateEnum);
+		parseAnimations(animationFilePath, stateEnum);
 	}
 	
 	public void draw(Direction direction, EntityState entityState, Camera camera, Point position)
@@ -36,9 +45,11 @@ public class AnimationSet {
 			}
 		}
 	}
-	private void parseAnimations(EntityState stateEnum)
+	private void parseAnimations(String filePath, EntityState stateEnum)
 	{
-		//TODO : parse animation data
+		InputStream inputStream = AnimationSet.class.getResourceAsStream(filePath);
+		
+		
 	}
 
 }

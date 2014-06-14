@@ -11,7 +11,6 @@ import org.lwjgl.util.Point;
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.graphics.Camera;
-import com.starstuffgames.core.graphics.SpriteLoader;
 import com.starstuffgames.core.graphics.SpriteSheet;
 import com.starstuffgames.core.graphics.cardinality.Direction;
 import com.starstuffgames.core.graphics.cardinality.DirectionMap;
@@ -24,7 +23,7 @@ public class PlayerAssets implements EntityAssets{
 	
 	public PlayerAssets(EntityState startingEntityState) throws Exception
 	{
-		SpriteSheet spriteSheet = SpriteLoader.load("/spriteSheetData/RedGuy.xml");
+		SpriteSheet spriteSheet = new SpriteSheet("/spriteSheetData/RedGuy.xml");
 		directionMap = new DirectionMap(spriteSheet, startingEntityState);
 		currentDirection = Direction.N;
 		currentState = startingEntityState;

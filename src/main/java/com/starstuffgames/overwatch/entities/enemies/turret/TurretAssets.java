@@ -9,7 +9,6 @@ package com.starstuffgames.overwatch.entities.enemies.turret;
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.graphics.Camera;
-import com.starstuffgames.core.graphics.SpriteLoader;
 import com.starstuffgames.core.graphics.SpriteSheet;
 import com.starstuffgames.core.graphics.cardinality.Direction;
 import com.starstuffgames.core.graphics.cardinality.DirectionMap;
@@ -29,7 +28,7 @@ public class TurretAssets implements EntityAssets
     public TurretAssets(EntityState startingEntityState) throws Exception
     {
         SpriteSheet spriteSheet;
-        spriteSheet = SpriteLoader.load("/spriteSheetData/Turret.xml");
+        spriteSheet = new SpriteSheet("/spriteSheetData/Turret.xml");
         directionMap = new DirectionMap(spriteSheet, startingEntityState);
         currentDirection = Direction.N;
         currentState = startingEntityState; 
