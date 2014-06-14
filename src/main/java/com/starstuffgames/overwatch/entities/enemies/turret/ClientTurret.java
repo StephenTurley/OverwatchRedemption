@@ -29,7 +29,7 @@ public class ClientTurret extends ClientEntity
     public ClientTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
     {
         super(uuid, location, width, height, layer, templateClassString);
-        currentState = Turret.State.SUPPRESSED;
+        super.currentState = Turret.State.SUPPRESSED;
     }
 
     @Override
