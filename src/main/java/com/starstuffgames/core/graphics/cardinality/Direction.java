@@ -6,7 +6,8 @@ public enum Direction{
 	 E , NE ,
 	 N , NW ,
      W , SW ,
-     S , SE ;
+     S , SE ,
+     OMNI; //not returned from number value
 	 
 	 
 	 /**

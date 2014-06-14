@@ -10,21 +10,22 @@ import org.lwjgl.util.Point;
 
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
+import com.starstuffgames.core.graphics.AnimationSet;
 import com.starstuffgames.core.graphics.Camera;
-import com.starstuffgames.core.graphics.SpriteSheet;
 import com.starstuffgames.core.graphics.cardinality.Direction;
-import com.starstuffgames.core.graphics.cardinality.DirectionMap;
 
-public class PlayerAssets implements EntityAssets{
-	
-	private final DirectionMap directionMap;
+public class PlayerAssets implements EntityAssets
+{	
+	private final String SPRITE_PATH = "/spriteSheetData/RedGuy.xml";
+	private final String ANIMATION_PATH = "/animations/RedGuyAnim.xml";
+	private AnimationSet animations;
 	private Direction currentDirection;
 	private EntityState currentState;
 	
 	public PlayerAssets(EntityState startingEntityState) throws Exception
 	{
-		SpriteSheet spriteSheet = new SpriteSheet("/spriteSheetData/RedGuy.xml");
-		directionMap = new DirectionMap(spriteSheet, startingEntityState);
+		animations = new AnimationSet(SPRITE_PATH, ANIMATION_PATH , startingEntityState);
+		
 		currentDirection = Direction.N;
 		currentState = startingEntityState;
 	}
@@ -32,12 +33,12 @@ public class PlayerAssets implements EntityAssets{
 	@Override
 	public void draw(Camera camera, Point position) 
 	{
-		directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
+		animations.draw(currentDirection, currentState, camera, position);
 	}
 
 	@Override
 	public void update(int delta) {
-		directionMap.update(delta, currentState);
+		animations.update(delta);
 	}
 
 	@Override

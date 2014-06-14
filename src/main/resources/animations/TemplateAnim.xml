@@ -1,6 +1,6 @@
 <Animations>
 		<direction name="N">
-			<animation name="AnimationName" frameCount="1">
+			<animation name="AnimationName" frameCount="1" fps="5">
 				<frame n="SpriteName" frameIdx="0"/> <!-- SpriteName == n from spriteSheet- -->
 			</animation>
 		</direction>

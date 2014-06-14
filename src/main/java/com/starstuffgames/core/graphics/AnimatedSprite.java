@@ -19,7 +19,6 @@ public class AnimatedSprite implements Sprite {
 		frames = new StaticSprite[frameCount];
 		reset();
 	}
-
 	public int getFps() {
 		return fps;
 	}

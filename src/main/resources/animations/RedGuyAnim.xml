@@ -1,41 +1,41 @@
  <Animations>
 		<direction name="N">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="N_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="S">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="S_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="E">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="E_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="W">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="W_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="NE">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="NE_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="NW">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="NW_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="SW">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="SW_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="SE">
-			<animation name="IDLE" frameCount="1">
+			<animation name="IDLE" frameCount="1" fps="5">
 				<frame n="SE_IDLE_0" frameIdx="0"/>
 			</animation>
 		</direction>

@@ -1,46 +1,46 @@
 <Animations>
 		<direction name="N">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="N_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="S">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="S_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="E">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="E_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="W">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="W_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="NE">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="NE_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="NW">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="NW_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="SW">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="SW_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="SE">
-			<animation name="ARMED" frameCount="1">
+			<animation name="ARMED" frameCount="1" fps="5">
 				<frame n="SE_ARMED_0" frameIdx="0"/>
 			</animation>
 		</direction>
 		<direction name="OMNI">
-			<animation name="OPENING" frameCount="8">
+			<animation name="OPENING" frameCount="8" fps="5">
 				<frame n="OPENING_0" frameIdx="0"/>
 				<frame n="OPENING_1" frameIdx="1"/>
 				<frame n="OPENING_2" frameIdx="2"/>
@@ -50,7 +50,7 @@
 				<frame n="OPENING_6" frameIdx="6"/>
 				<frame n="OPENING_7" frameIdx="7"/>   
 			</animation>
-			<animation name="CLOSING" frameCount="8">
+			<animation name="CLOSING" frameCount="8" fps="5">
 				<frame n="OPENING_0" frameIdx="7"/>
 				<frame n="OPENING_1" frameIdx="6"/>
 				<frame n="OPENING_2" frameIdx="5"/>
@@ -60,7 +60,7 @@
 				<frame n="OPENING_6" frameIdx="1"/>
 				<frame n="OPENING_7" frameIdx="0"/>
 			</animation>
-			<animation name="SUPPRESSED" frameCount="1">
+			<animation name="SUPPRESSED" frameCount="1" fps="5">
 				<frame n="SUPPRESSED_0" frameIdx="0"/>
 			</animation>
 		</direction>

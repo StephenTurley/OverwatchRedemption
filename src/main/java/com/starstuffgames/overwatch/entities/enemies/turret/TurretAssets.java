@@ -8,10 +8,9 @@ package com.starstuffgames.overwatch.entities.enemies.turret;
 
 import com.starstuffgames.core.entity.EntityAssets;
 import com.starstuffgames.core.entity.EntityState;
+import com.starstuffgames.core.graphics.AnimationSet;
 import com.starstuffgames.core.graphics.Camera;
-import com.starstuffgames.core.graphics.SpriteSheet;
 import com.starstuffgames.core.graphics.cardinality.Direction;
-import com.starstuffgames.core.graphics.cardinality.DirectionMap;
 
 import org.lwjgl.util.Point;
 
@@ -21,15 +20,15 @@ import org.lwjgl.util.Point;
  */
 public class TurretAssets implements EntityAssets
 {
-    private final DirectionMap directionMap;
+	private final String SPRITE_PATH = "/spriteSheetData/Turret.xml";
+	private final String ANIMATION_PATH = "/animations/TurretAnim.xml";
+    private AnimationSet animations;
     private Direction currentDirection;
     private EntityState currentState;
     
     public TurretAssets(EntityState startingEntityState) throws Exception
     {
-        SpriteSheet spriteSheet;
-        spriteSheet = new SpriteSheet("/spriteSheetData/Turret.xml");
-        directionMap = new DirectionMap(spriteSheet, startingEntityState);
+        animations = new AnimationSet(SPRITE_PATH, ANIMATION_PATH, startingEntityState);
         currentDirection = Direction.N;
         currentState = startingEntityState; 
     }
@@ -48,13 +47,13 @@ public class TurretAssets implements EntityAssets
     @Override
     public void draw(Camera camera, Point position)
     {
-        directionMap.getAnimation(currentDirection, currentState).draw(camera, position);
+        animations.draw(currentDirection, currentState ,camera, position);
     }
 
     @Override
     public void update(int delta)
     {
-        directionMap.update(delta, currentState);
+        animations.update(delta);
     }
 	
 }
