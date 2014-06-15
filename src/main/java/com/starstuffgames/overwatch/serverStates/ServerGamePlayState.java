@@ -73,7 +73,7 @@ public class ServerGamePlayState extends ServerState {
 
 			player.setMovementVector(pkt.movementVector);
 		}
-
+		
 
 	}
 

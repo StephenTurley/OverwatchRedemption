@@ -8,7 +8,10 @@ package com.starstuffgames.overwatch.entities.ammunition.bullet;
 
 import com.starstuffgames.core.entity.Entity;
 import com.starstuffgames.core.entity.ServerEntity;
+
+import java.util.ArrayList;
 import java.util.UUID;
+
 import org.lwjgl.util.Point;
 
 /**
@@ -33,6 +36,12 @@ public class ServerBullet extends ServerEntity
 	public void collideWith(Entity entity)
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public void observe(ArrayList<ServerEntity> entities) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-public abstract class ServerEntity extends Entity{
+public abstract class ServerEntity extends Entity implements EntityObserver{
 	
 	public ServerEntity(UUID uuid, Point location, int width, int height,
 			int layer, String templateClassString) {

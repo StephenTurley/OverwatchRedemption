@@ -14,5 +14,5 @@ import java.util.ArrayList;
  */
 public interface EntityObserver
 {
-	public void observe(ArrayList<Entity> entities);
+	public void observe(ArrayList<ServerEntity> entities);
 }

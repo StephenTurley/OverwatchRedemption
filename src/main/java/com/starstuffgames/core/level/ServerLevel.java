@@ -115,6 +115,7 @@ public class ServerLevel {
 		
 		for (int i = 0; i < entities.size(); i++)
 		{
+			entities.get(i).observe(entities);
 			for (int j =  i + 1; j < entities.size(); j++)
 			{
 				ServerEntity a = entities.get(i);

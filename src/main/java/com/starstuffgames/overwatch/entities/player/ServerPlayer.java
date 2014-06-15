@@ -1,5 +1,6 @@
 package com.starstuffgames.overwatch.entities.player;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
@@ -54,6 +55,12 @@ public class ServerPlayer extends ServerEntity {
 	@Override
 	public void collideWith(Entity entity) {
 
+	}
+
+	@Override
+	public void observe(ArrayList<ServerEntity> entities) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

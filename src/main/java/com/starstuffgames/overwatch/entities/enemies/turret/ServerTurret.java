@@ -7,7 +7,6 @@
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
 import com.starstuffgames.core.entity.Entity;
-import com.starstuffgames.core.entity.EntityObserver;
 import com.starstuffgames.core.entity.ServerEntity;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import org.lwjgl.util.Point;
  *
  * @author stephen
  */
-public class ServerTurret extends ServerEntity implements EntityObserver
+public class ServerTurret extends ServerEntity
 {
 
 	public ServerTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
@@ -41,7 +40,7 @@ public class ServerTurret extends ServerEntity implements EntityObserver
 	}
 
 	@Override
-	public void observe(ArrayList<Entity> players)
+	public void observe(ArrayList<ServerEntity> players)
 	{
 		
 	}
