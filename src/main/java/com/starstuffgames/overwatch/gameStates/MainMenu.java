@@ -10,6 +10,7 @@ import com.starstuffgames.overwatch.gui.HostGameMenuItem;
 import com.starstuffgames.overwatch.gui.OptionsMenuItem;
 import com.starstuffgames.overwatch.gui.QuitGameMenuItem;
 import com.starstuffgames.overwatch.gui.JoinGameMenuItem;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.input.Keyboard;
@@ -18,8 +19,8 @@ import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.gui.Menu;
 import com.starstuffgames.core.gui.MenuItem;
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
 
 public class MainMenu extends GameState {
 	

@@ -4,7 +4,7 @@
  * This software is part of the Overwatch-Redemption and is not licensed for redistribution. 
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
-package com.starstuffgames.core.configurationManager;
+package com.starstuffgames.core.config;
 
 import java.io.BufferedReader;
 import java.io.IOException;

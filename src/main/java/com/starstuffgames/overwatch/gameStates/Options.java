@@ -8,8 +8,8 @@ package com.starstuffgames.overwatch.gameStates;
 
 import org.lwjgl.input.Keyboard;
 
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
 
 public class Options extends GameState {
 

@@ -6,7 +6,7 @@
  ******************************************************************************/
 package com.starstuffgames.core.gui;
 
-import com.starstuffgames.core.stateManager.GameState;
+import com.starstuffgames.core.state.GameState;
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.graphics.DrawableComponent;

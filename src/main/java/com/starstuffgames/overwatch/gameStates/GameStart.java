@@ -6,8 +6,9 @@
  ******************************************************************************/
 package com.starstuffgames.overwatch.gameStates;
 
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
+
 import java.io.InputStream;
 
 import com.starstuffgames.core.Debug;
@@ -16,10 +17,12 @@ import com.starstuffgames.core.audio.MusicMap;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.util.ResourceLoader;
+
 import java.awt.Font;
 
 public class GameStart extends GameState {

@@ -7,14 +7,13 @@
 package com.starstuffgames.overwatch.serverStates;
 
 import com.esotericsoftware.kryonet.Connection;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.PlayerConnection;
 import com.starstuffgames.core.network.Network.Login;
 import com.starstuffgames.core.network.Network.PlayerReady;
 import com.starstuffgames.core.network.Network.ServerMessage;
-import com.starstuffgames.core.stateManager.ServerState;
+import com.starstuffgames.core.state.ServerState;
 
 
 public class ServerStartState extends ServerState {

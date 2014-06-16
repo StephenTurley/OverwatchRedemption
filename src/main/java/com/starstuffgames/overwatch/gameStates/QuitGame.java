@@ -7,8 +7,8 @@
 package com.starstuffgames.overwatch.gameStates;
 
 import com.starstuffgames.core.Game;
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
 
 public class QuitGame extends GameState {
 

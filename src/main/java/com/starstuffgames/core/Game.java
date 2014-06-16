@@ -6,8 +6,9 @@
  ******************************************************************************/
 package com.starstuffgames.core;
 
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
+
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 
@@ -17,13 +18,13 @@ import org.lwjgl.opengl.DisplayMode;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
-
-import com.starstuffgames.core.configurationManager.GameConfig;
+import com.starstuffgames.core.config.GameConfig;
 import com.starstuffgames.core.entity.EntityFactory;
 import com.starstuffgames.core.entity.EntityTemplate;
 import com.starstuffgames.core.graphics.TextureLoader;
 import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.Network;
+
 import org.lwjgl.opengl.ContextAttribs;
 import org.lwjgl.opengl.PixelFormat;
 import org.newdawn.slick.openal.SoundStore;

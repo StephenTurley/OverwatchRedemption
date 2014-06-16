@@ -11,13 +11,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import com.esotericsoftware.kryonet.Connection;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.ServerMessage;
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
+
 import de.matthiasmann.twl.Button;
 import de.matthiasmann.twl.EditField;
 import de.matthiasmann.twl.GUI;

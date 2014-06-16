@@ -13,6 +13,7 @@ package com.starstuffgames.overwatch.gameStates;
 
 import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.EntityDataPacket;
+
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -24,11 +25,12 @@ import com.esotericsoftware.kryonet.Connection;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.ARBTextureRectangle.GL_TEXTURE_RECTANGLE_ARB;
+
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.audio.MusicMap;
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
 import com.starstuffgames.core.graphics.Camera;
 import com.starstuffgames.core.level.ClientLevel;
 //import net.java.games.input.*;

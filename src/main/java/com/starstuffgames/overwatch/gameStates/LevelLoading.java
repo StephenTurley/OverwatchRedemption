@@ -7,13 +7,12 @@
 package com.starstuffgames.overwatch.gameStates;
 
 import com.esotericsoftware.kryonet.Connection;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.level.ClientLevel;
 import com.starstuffgames.core.network.Network.StartGame;
-import com.starstuffgames.core.stateManager.GameState;
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.GameState;
+import com.starstuffgames.core.state.StateManager;
 import com.starstuffgames.core.level.LevelManager;
 import com.starstuffgames.core.network.Network.PlayerReady;
 

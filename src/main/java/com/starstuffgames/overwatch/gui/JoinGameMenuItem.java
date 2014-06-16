@@ -8,7 +8,7 @@ package com.starstuffgames.overwatch.gui;
 
 import com.starstuffgames.overwatch.gameStates.JoinGame;
 import com.starstuffgames.core.gui.MenuItem;
-import com.starstuffgames.core.stateManager.GameState;
+import com.starstuffgames.core.state.GameState;
 
 public class JoinGameMenuItem extends MenuItem {
 

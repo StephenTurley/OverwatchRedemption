@@ -9,9 +9,7 @@ package com.starstuffgames.overwatch.serverStates;
 import java.util.ArrayList;
 
 import com.starstuffgames.overwatch.entities.player.ServerPlayer;
-
 import com.esotericsoftware.kryonet.Connection;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ServerEntity;
@@ -22,7 +20,7 @@ import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.Network;
 import com.starstuffgames.core.network.Network.LoadLevel;
 import com.starstuffgames.core.network.PlayerConnection;
-import com.starstuffgames.core.stateManager.ServerState;
+import com.starstuffgames.core.state.ServerState;
 
 public class ServerLoadLevelState extends ServerState {
 	

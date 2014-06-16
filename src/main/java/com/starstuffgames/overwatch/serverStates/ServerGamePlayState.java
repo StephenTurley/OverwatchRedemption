@@ -7,16 +7,15 @@
 package com.starstuffgames.overwatch.serverStates;
 
 import com.starstuffgames.overwatch.entities.player.ServerPlayer;
-
 import com.esotericsoftware.kryonet.Connection;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.level.ServerLevel;
 import com.starstuffgames.core.network.GameServer;
 import com.starstuffgames.core.network.Network.FocusOn;
 import com.starstuffgames.core.network.Network.MovePlayer;
 import com.starstuffgames.core.network.PlayerConnection;
-import com.starstuffgames.core.stateManager.ServerState;
+import com.starstuffgames.core.state.ServerState;
+
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

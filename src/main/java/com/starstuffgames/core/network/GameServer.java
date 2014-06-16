@@ -9,16 +9,14 @@ package com.starstuffgames.core.network;
 import java.util.ArrayList;
 
 import com.starstuffgames.overwatch.serverStates.ServerStartState;
-
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
-
 import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.Game;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.network.Network.EntitiesPacket;
 import com.starstuffgames.core.network.Network.PlayersPacket;
-import com.starstuffgames.core.stateManager.ServerState;
+import com.starstuffgames.core.state.ServerState;
 
 import java.io.IOException;
 import java.net.Socket;

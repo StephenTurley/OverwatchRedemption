@@ -9,7 +9,8 @@ package com.starstuffgames.core;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
-import com.starstuffgames.core.stateManager.StateManager;
+import com.starstuffgames.core.state.StateManager;
+
 import org.newdawn.slick.openal.SoundStore;
 
 
