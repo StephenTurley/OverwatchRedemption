@@ -11,11 +11,13 @@ public class AnimatedSprite implements Sprite {
 	private String name;
 	private final StaticSprite frames[];
 	private int fps, cycles, elapsed, currentFrame;
+	private boolean looping;
 	
-	public AnimatedSprite(String name, int fps, int frameCount)
+	public AnimatedSprite(String name, int fps, int frameCount, boolean looping)
 	{
 		this.name = name;
 		this.fps = fps;
+		this.looping = looping;
 		frames = new StaticSprite[frameCount];
 		reset();
 	}
@@ -64,10 +66,15 @@ public class AnimatedSprite implements Sprite {
 			{
 				currentFrame++;
 			}
-			else
+			else if (looping)
 			{
 				currentFrame = 0;
 				cycles++;
+			}
+			else //not looping, stop on last frame
+			{
+				currentFrame = frames.length - 1;
+				cycles = 1;
 			}
 		}
 		frames[currentFrame].draw(camera, position);

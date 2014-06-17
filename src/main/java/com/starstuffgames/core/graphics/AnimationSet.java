@@ -84,7 +84,7 @@ public class AnimationSet {
 					EntityState currentState = stateEnum.getState(animation.getAttributeValue("name"));
 					
 					AnimatedSprite sprite = new AnimatedSprite(currentState.toString(), Integer.parseInt(animation.getAttributeValue("fps"))
-							, Integer.parseInt(animation.getAttributeValue("frameCount")));
+							, Integer.parseInt(animation.getAttributeValue("frameCount")), Boolean.parseBoolean(animation.getAttributeValue("looping")));
 					
 					for(Element frame : animation.getChildren())
 					{
