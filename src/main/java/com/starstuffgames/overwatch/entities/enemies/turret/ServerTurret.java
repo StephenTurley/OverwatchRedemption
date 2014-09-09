@@ -6,8 +6,11 @@
 
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
+import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.entity.Entity;
 import com.starstuffgames.core.entity.ServerEntity;
+import com.starstuffgames.core.math.MathHelper;
+import com.starstuffgames.overwatch.entities.player.ServerPlayer;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -21,6 +24,8 @@ import org.lwjgl.util.Point;
 public class ServerTurret extends ServerEntity
 {
 
+	private final int ARM_RADIUS = 250;
+	
 	public ServerTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
 		super(uuid, location, width, height, layer, templateClassString);
@@ -40,9 +45,21 @@ public class ServerTurret extends ServerEntity
 	}
 
 	@Override
-	public void observe(ArrayList<ServerEntity> players)
+	public void observe(ArrayList<ServerEntity> entities)
 	{
-		
+		for(ServerEntity entity: entities)
+		{
+			if(entity instanceof ServerPlayer)
+			{
+				double distance = MathHelper.distance(this.location, entity.getLocation());
+			
+				Debug.Trace("distance : " + distance +"\n");
+				if( MathHelper.distance(this.location, entity.getLocation()) < ARM_RADIUS)
+				{
+					this.currentState = Turret.State.ARMED;
+				}
+			}
+		}
 	}
 	
 }
