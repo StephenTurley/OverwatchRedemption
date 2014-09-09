@@ -53,7 +53,6 @@ public class ServerTurret extends ServerEntity
 			{
 				double distance = MathHelper.distance(this.location, entity.getLocation());
 			
-				Debug.Trace("distance : " + distance +"\n");
 				if( MathHelper.distance(this.location, entity.getLocation()) < ARM_RADIUS)
 				{
 					this.currentState = Turret.State.ARMED;
