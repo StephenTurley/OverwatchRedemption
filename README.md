@@ -36,4 +36,4 @@ Please only run this software if you understand and accept the risks.
 Redistribution of this project (Overwatch) in part or in whole is prohibited unless explicitly stated.
 All bundled packages and dependencies can be distributed based upon their respective licenses. 
 
-(c)2014 Stephen Turley
+(c)2013 - 2014 Stephen Turley
