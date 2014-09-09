@@ -6,7 +6,6 @@
 
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
-import com.starstuffgames.core.Debug;
 import com.starstuffgames.core.entity.Entity;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.math.MathHelper;
@@ -53,7 +52,7 @@ public class ServerTurret extends ServerEntity
 			{
 				double distance = MathHelper.distance(this.location, entity.getLocation());
 			
-				if( MathHelper.distance(this.location, entity.getLocation()) < ARM_RADIUS)
+				if( distance < ARM_RADIUS)
 				{
 					this.currentState = Turret.State.ARMED;
 				}
