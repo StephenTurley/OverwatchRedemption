@@ -51,7 +51,7 @@ public class AnimatedSprite implements Sprite {
 		return cycles;
 	}
 
-	private void reset()
+	public void reset()
 	{
 		cycles = 0;
 		elapsed = 0;
@@ -59,6 +59,17 @@ public class AnimatedSprite implements Sprite {
 	}
 	@Override
 	public void draw(Camera camera, Point position) {
+		
+		frames[currentFrame].draw(camera, position);
+	}
+
+	/**
+	 * This method must be called each GameLoop cycle for the animation to work
+	 * @param delta time elapsed in milliseconds
+	 */
+	public void update(int delta) {
+		elapsed += delta;
+		
 		if(elapsed  >= 1000/fps)
 		{
 			elapsed = 0;
@@ -76,21 +87,6 @@ public class AnimatedSprite implements Sprite {
 				currentFrame = frames.length - 1;
 				cycles = 1;
 			}
-		}
-		frames[currentFrame].draw(camera, position);
-	}
-
-	/**
-	 * This method must be called each GameLoop cycle for the animation to work
-	 * @param delta time elapsed in milliseconds
-	 */
-	public void update(int delta) {
-		elapsed += delta;
-		
-		//if draw has stopped being called, reset animation
-		if(elapsed > 2000 / fps)
-		{
-			reset();
 		}
 		
 	}

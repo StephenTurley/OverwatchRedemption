@@ -52,6 +52,17 @@ public class AnimationSet {
 			}
 		}
 	}
+	
+	public void resetAnimation()
+	{
+		for(AnimationMap amp : animations.values())
+		{
+			for(AnimatedSprite ams : amp.animations())
+			{
+				ams.reset();
+			}
+		}
+	}
 	private void parseAnimations(String filePath, EntityState stateEnum)
 	{
 		InputStream inputStream = AnimationSet.class.getResourceAsStream(filePath);

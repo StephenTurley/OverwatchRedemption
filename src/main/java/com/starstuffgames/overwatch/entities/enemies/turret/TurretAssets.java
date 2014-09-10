@@ -36,7 +36,11 @@ public class TurretAssets implements EntityAssets
     @Override
     public void setState(EntityState entityState)
     {
-        this.currentState = entityState;
+    	if(currentState != null && currentState != entityState)
+    	{
+    		animations.resetAnimation();
+    	}
+        currentState = entityState;
     }
 
     public void setDirection(Direction direction)

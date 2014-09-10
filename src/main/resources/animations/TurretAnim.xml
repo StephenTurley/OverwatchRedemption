@@ -40,7 +40,7 @@
 			</animation>
 		</direction>
 		<direction name="OMNI">
-			<animation name="OPENING" frameCount="8" fps="3" looping="false">
+			<animation name="OPENING" frameCount="8" fps="15" looping="false">
 				<frame n="OPENING_0" frameIdx="0"/>
 				<frame n="OPENING_1" frameIdx="1"/>
 				<frame n="OPENING_2" frameIdx="2"/>
@@ -50,7 +50,7 @@
 				<frame n="OPENING_6" frameIdx="6"/>
 				<frame n="OPENING_7" frameIdx="7"/>   
 			</animation>
-			<animation name="CLOSING" frameCount="8" fps="3" looping="false">
+			<animation name="CLOSING" frameCount="8" fps="15" looping="false">
 				<frame n="OPENING_0" frameIdx="7"/>
 				<frame n="OPENING_1" frameIdx="6"/>
 				<frame n="OPENING_2" frameIdx="5"/>
