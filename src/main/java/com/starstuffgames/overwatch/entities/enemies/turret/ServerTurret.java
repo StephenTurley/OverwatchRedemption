@@ -7,6 +7,7 @@
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
 import com.starstuffgames.core.entity.Entity;
+import com.starstuffgames.core.entity.EntityState;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.math.MathHelper;
 import com.starstuffgames.overwatch.entities.player.ServerPlayer;
@@ -23,12 +24,14 @@ import org.lwjgl.util.Point;
 public class ServerTurret extends ServerEntity
 {
 
-	private final int ARM_RADIUS = 250;
+	private final int ARM_RADIUS = 500;
+	EntityState nextState;
 	
 	public ServerTurret(UUID uuid, Point location, int width, int height, int layer, String templateClassString)
 	{
 		super(uuid, location, width, height, layer, templateClassString);
 		super.currentState = Turret.State.SUPPRESSED;
+		nextState = currentState;
 	}
 
 	@Override
@@ -46,6 +49,8 @@ public class ServerTurret extends ServerEntity
 	@Override
 	public void observe(ArrayList<ServerEntity> entities)
 	{
+		nextState = Turret.State.SUPPRESSED;
+		
 		for(ServerEntity entity: entities)
 		{
 			if(entity instanceof ServerPlayer)
@@ -54,10 +59,11 @@ public class ServerTurret extends ServerEntity
 			
 				if( distance < ARM_RADIUS)
 				{
-					this.currentState = Turret.State.ARMED;
+					nextState = Turret.State.OPENING;
 				}
 			}
 		}
+		super.currentState = nextState;
 	}
 	
 }

@@ -59,7 +59,7 @@ public class AnimatedSprite implements Sprite {
 	}
 	@Override
 	public void draw(Camera camera, Point position) {
-		if(elapsed >= fps/1000)
+		if(elapsed  >= 1000/fps)
 		{
 			elapsed = 0;
 			if(currentFrame < frames.length - 1)
