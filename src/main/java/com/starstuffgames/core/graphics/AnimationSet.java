@@ -28,6 +28,7 @@ public class AnimationSet {
 		parseAnimations(animationFilePath, stateEnum);
 	}
 	
+	
 	public void draw(Direction direction, EntityState entityState, Camera camera, Point position)
 	{
 		AnimationMap map = animations.get(direction);

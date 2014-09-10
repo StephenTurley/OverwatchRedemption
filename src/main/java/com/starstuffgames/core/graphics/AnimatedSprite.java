@@ -86,7 +86,12 @@ public class AnimatedSprite implements Sprite {
 	 */
 	public void update(int delta) {
 		elapsed += delta;
+		
+		//if draw has stopped being called, reset animation
+		if(elapsed > 2000 / fps)
+		{
+			reset();
+		}
+		
 	}
-	
-	
 }
