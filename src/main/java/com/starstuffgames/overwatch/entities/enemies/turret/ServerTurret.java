@@ -49,7 +49,7 @@ public class ServerTurret extends ServerEntity
 	@Override
 	public void observe(ArrayList<ServerEntity> entities)
 	{
-		nextState = Turret.State.SUPPRESSED;
+		nextState = Turret.State.CLOSING;
 		
 		for(ServerEntity entity: entities)
 		{
