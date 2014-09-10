@@ -25,6 +25,8 @@ public class ServerTurret extends ServerEntity
 {
 
 	private final int ARM_RADIUS = 500;
+	private final int ARM_TIME = 2000;
+	private int openingElapsed;
 	private ServerEntity target;
 
 	
@@ -32,6 +34,7 @@ public class ServerTurret extends ServerEntity
 	{
 		super(uuid, location, width, height, layer, templateClassString);
 		super.currentState = Turret.State.SUPPRESSED;
+		openingElapsed = 0;
 
 	}
 
@@ -39,6 +42,7 @@ public class ServerTurret extends ServerEntity
 	public void update(int delta)
 	{
 		direction = getTargetDirection();
+		armTurret(delta);
 	}
 
 	@Override
@@ -77,11 +81,29 @@ public class ServerTurret extends ServerEntity
 		}
 		if(!visibleTarget) removeTarget();
 	}
-	
+	private void armTurret(int delta)
+	{
+		if(target != null)
+		{
+			openingElapsed += delta;
+		}
+		else
+		{
+			openingElapsed = 0;
+		}
+		if(openingElapsed >= ARM_TIME)
+		{
+			openingElapsed = 0;
+			currentState = Turret.State.ARMED;
+		}
+	}
 	private void setTarget(ServerEntity entity)
 	{
 		target = entity;
-		currentState = Turret.State.OPENING;
+		if(currentState != Turret.State.ARMED)
+		{
+			currentState = Turret.State.OPENING;
+		}
 	}
 	
 	private void removeTarget()
@@ -113,5 +135,6 @@ public class ServerTurret extends ServerEntity
 			return new Vector2f();
 		}
 	}
+	
 	
 }
