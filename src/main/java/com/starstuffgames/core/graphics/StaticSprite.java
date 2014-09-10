@@ -35,8 +35,8 @@ public class StaticSprite implements Sprite {
 
 	public void draw(Camera camera, Point position) {
 		Point screenCoord = camera.computeScreenCoordinates(position);
-		int x = screenCoord.getX() - offSetX;
-		int y = screenCoord.getY() - offSetY;
+		int x = screenCoord.getX() + offSetX;
+		int y = screenCoord.getY() + offSetY;
 		
 		int w = texCoord.X2 - texCoord.X;
 		int h = texCoord.Y2 - texCoord.Y;
