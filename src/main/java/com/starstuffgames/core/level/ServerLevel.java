@@ -101,11 +101,11 @@ public class ServerLevel {
 		return entityCollection.getEntity(uuid);
 	}
 	
-	public void updateEntity(ServerEntity entity)
+	public void addEntity(ServerEntity entity)
 	{
 		entityCollection.putEntity(entity.getID(), entity);
 	}
-
+	
 	public void update(int delta) {
 		
 		//update the entities then check collsion
@@ -115,7 +115,7 @@ public class ServerLevel {
 		
 		for (int i = 0; i < entities.size(); i++)
 		{
-			entities.get(i).observe(entities);
+			entities.get(i).observe(entityCollection);
 			for (int j =  i + 1; j < entities.size(); j++)
 			{
 				ServerEntity a = entities.get(i);

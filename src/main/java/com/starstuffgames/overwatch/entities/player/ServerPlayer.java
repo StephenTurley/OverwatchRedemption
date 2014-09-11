@@ -1,12 +1,12 @@
 package com.starstuffgames.overwatch.entities.player;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.starstuffgames.core.entity.Entity;
+import com.starstuffgames.core.entity.EntityCollection;
 import com.starstuffgames.core.entity.ServerEntity;
 
 public class ServerPlayer extends ServerEntity {
@@ -58,7 +58,7 @@ public class ServerPlayer extends ServerEntity {
 	}
 
 	@Override
-	public void observe(ArrayList<ServerEntity> entities) {
+	public void observe(EntityCollection<ServerEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}

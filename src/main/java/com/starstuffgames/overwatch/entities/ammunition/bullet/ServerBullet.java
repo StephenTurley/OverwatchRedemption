@@ -7,9 +7,9 @@
 package com.starstuffgames.overwatch.entities.ammunition.bullet;
 
 import com.starstuffgames.core.entity.Entity;
+import com.starstuffgames.core.entity.EntityCollection;
 import com.starstuffgames.core.entity.ServerEntity;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
@@ -39,7 +39,7 @@ public class ServerBullet extends ServerEntity
 	}
 
 	@Override
-	public void observe(ArrayList<ServerEntity> entities) {
+	public void observe(EntityCollection<ServerEntity> entities) {
 		// TODO Auto-generated method stub
 		
 	}

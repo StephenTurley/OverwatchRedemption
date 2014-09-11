@@ -6,7 +6,6 @@
 
 package com.starstuffgames.core.entity;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,5 +13,5 @@ import java.util.ArrayList;
  */
 public interface EntityObserver
 {
-	public void observe(ArrayList<ServerEntity> entities);
+	public void observe(EntityCollection<ServerEntity> entities);
 }

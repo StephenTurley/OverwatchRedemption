@@ -7,11 +7,11 @@
 package com.starstuffgames.overwatch.entities.enemies.turret;
 
 import com.starstuffgames.core.entity.Entity;
+import com.starstuffgames.core.entity.EntityCollection;
 import com.starstuffgames.core.entity.ServerEntity;
 import com.starstuffgames.core.math.MathHelper;
 import com.starstuffgames.overwatch.entities.player.ServerPlayer;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import org.lwjgl.util.Point;
@@ -52,12 +52,12 @@ public class ServerTurret extends ServerEntity
 	}
 
 	@Override
-	public void observe(ArrayList<ServerEntity> entities)
+	public void observe(EntityCollection<ServerEntity> entities)
 	{
 	
 		boolean visibleTarget = false;
 		
-		for(ServerEntity entity: entities)
+		for(ServerEntity entity: entities.getEntities())
 		{
 			
 			if(entity instanceof ServerPlayer)
