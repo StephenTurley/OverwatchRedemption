@@ -3,6 +3,8 @@
 .nb-gradle
 .project
 .settings
+.idea/
+OverwatchRedemption.iml
 
 bin
 build
