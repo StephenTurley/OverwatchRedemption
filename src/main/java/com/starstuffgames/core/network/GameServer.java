@@ -250,7 +250,7 @@ public class GameServer{
 			{
 				//connect to web host to get the correct interface
 				@SuppressWarnings("resource")
-				Socket s = new Socket("www.overwatchredemption.com", 80);
+				Socket s = new Socket("www.google.com", 80);
 			
 				privateIP = s.getLocalAddress().getHostAddress();
 			}
