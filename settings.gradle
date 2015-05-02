@@ -1,0 +1,3 @@
+rootProject.name = 'OverwatchRedemption'
+include ':overwatch-core',
+        ':overwatch-game'

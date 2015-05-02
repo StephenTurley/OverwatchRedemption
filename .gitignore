@@ -4,7 +4,7 @@
 .project
 .settings
 .idea/
-OverwatchRedemption.iml
+*.iml
 
 bin
 build
