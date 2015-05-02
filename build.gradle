@@ -2,7 +2,7 @@ apply plugin: "java"
 apply plugin: "application"
 apply plugin: "eclipse"
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
 mainClassName = "com.starstuffgames.overwatch.Overwatch"
 
@@ -15,18 +15,19 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.esotericsoftware.kryo", name: "kryo", version: "2.23.0"
-    compile group: "net.java.jinput", name: "jinput", version: "2.0.5"
-    compile group: "org.jcraft", name: "jorbis", version: "0.0.17"
-    compile group: "org.jdom", name: "jdom2", version: "2.0.5"
-    compile group: "org.lwjgl.lwjgl", name: "lwjgl", version: "2.9.0"
-    compile group: "org.lwjgl.lwjgl", name: "lwjgl_util", version: "2.9.0"
-    compile group: "org.teleal.cling", name: "cling-core", version: "1.0.5"
-    compile group: "org.teleal.cling", name: "cling-support", version: "1.0.5"
-    compile group: "xpp3", name: "xpp3", version: "1.1.4c"
-    
-    compile files("./lib/jars/kryonet-2.21.jar")
-    compile files("./lib/jars/slick.jar")
+    compile "com.esotericsoftware.kryo:kryo:2.23.0"
+    compile "net.java.jinput:jinput:2.0.5"
+    compile "org.jcraft:jorbis:0.0.17"
+    compile "org.jdom:jdom2:2.0.5"
+    compile "org.lwjgl.lwjgl:lwjgl:2.9.0"
+    compile "org.lwjgl.lwjgl:lwjgl_util:2.9.0"
+    compile "org.teleal.cling:cling-core:1.0.5"
+    compile "org.teleal.cling:cling-support:1.0.5"
+    compile "xpp3:xpp3:1.1.4c"
+    compile "com.esotericsoftware:kryonet:2.22.0-RC1"
+    compile "org.slick2d:slick2d-parent:1.0.1"
+
+
     compile files("./lib/jars/slick-util.jar")
     compile files("./lib/jars/TWL.jar")
 }
