@@ -6,14 +6,15 @@ package com.starstuffgames.overwatch;
  * You may not reproduce any part of this work unless otherwise stated.
  ******************************************************************************/
 
-import com.starstuffgames.overwatch.gameStates.GameStart;
-import com.starstuffgames.core.Game;
-import com.starstuffgames.overwatch.entities.player.Player;
 import com.esotericsoftware.minlog.Log;
+import com.starstuffgames.core.Game;
 import com.starstuffgames.core.config.ConfigurationManger;
 import com.starstuffgames.overwatch.entities.ammunition.bullet.Bullet;
-import com.starstuffgames.overwatch.entities.objects.goal.Goal;
 import com.starstuffgames.overwatch.entities.enemies.turret.Turret;
+import com.starstuffgames.overwatch.entities.objects.goal.Goal;
+import com.starstuffgames.overwatch.entities.player.Player;
+import com.starstuffgames.overwatch.gameStates.GameStart;
+
 
 public class Overwatch {
 	

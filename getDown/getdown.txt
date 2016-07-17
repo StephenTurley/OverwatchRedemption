@@ -14,7 +14,7 @@ ui.name = My Application
 code = overwatch-redemption.jar
 
 # The main entry point for the application
-class = com.starstuffgames.overwatch.Overwatch
+class = com.starstuffgames.Overwatch
 
 resource = [linux] native/liblwjgl64.so
 resource = [linux] native/liblwjgl.so
